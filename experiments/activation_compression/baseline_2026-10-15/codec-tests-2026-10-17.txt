@@ -1,0 +1,14 @@
+Verifica durante il consolidamento del 17 ottobre 2026.
+Comando: python -m unittest discover -s experiments/activation_compression -p 'test_*.py' -v
+
+test_all_methods_preserve_float_bits_across_refreshes (test_compare.CodecTests.test_all_methods_preserve_float_bits_across_refreshes) ... ok
+test_corrupted_tensor_is_rejected (test_compare.CodecTests.test_corrupted_tensor_is_rejected) ... ok
+test_duplicate_and_truncated_packets_are_rejected (test_compare.CodecTests.test_duplicate_and_truncated_packets_are_rejected) ... ok
+test_float64_delta_falls_back_when_signed_zero_would_be_lost (test_compare.CodecTests.test_float64_delta_falls_back_when_signed_zero_would_be_lost) ... ok
+test_missing_delta_is_rejected_until_complete_refresh (test_compare.CodecTests.test_missing_delta_is_rejected_until_complete_refresh) ... ok
+test_shuffle_preserves_every_bit_pattern (test_compare.CodecTests.test_shuffle_preserves_every_bit_pattern) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.010s
+
+OK

@@ -1,0 +1,47 @@
+{
+  "video": "VideoWithCan.mp4",
+  "video_sha256": "03cfb29be68c4a57aa19c567e2576617f35828b700efd8d2388a4110cf26017e",
+  "model_sha256": "35ef2c4d89e65e85a37676148e4cde1ff72384c479dbb9ca2d7fda55d0cb0184",
+  "video_duration_seconds": 29.259989,
+  "original_size_wh": [
+    474,
+    850
+  ],
+  "original_average_fps": 29.42584849466412,
+  "original_frame_count": 861,
+  "preprocessing": {
+    "sampling_fps": 5,
+    "sampling": "ffmpeg fps filter; times are nominal sampling-grid times",
+    "crop_xywh": [
+      0,
+      188,
+      474,
+      474
+    ],
+    "resize": "96x96, FFmpeg Lanczos; pixel parity with Studio not established",
+    "grayscale": "BT.601 .299 .587 .114, float32 in [0,1]"
+  },
+  "split": {
+    "layer": "block_2_add",
+    "keras_layer_index_including_input": 26,
+    "boundary_tensors": [
+      "block_2_add"
+    ],
+    "activation_shape_without_batch": [
+      24,
+      24,
+      8
+    ],
+    "dtype": "float32",
+    "values_per_frame": 4608,
+    "raw_tensor_bytes_per_frame": 18432
+  },
+  "verification": {
+    "frames_checked": 146,
+    "full_vs_split_max_absolute_error": 0.0,
+    "rtol": 1e-05,
+    "atol": 1e-06,
+    "passed": true,
+    "scope": "Keras float32 on CPU, one process; no TFLite/network/ESP32 verification"
+  }
+}

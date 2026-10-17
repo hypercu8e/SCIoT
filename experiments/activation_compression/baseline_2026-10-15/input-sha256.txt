@@ -1,0 +1,3 @@
+03cfb29be68c4a57aa19c567e2576617f35828b700efd8d2388a4110cf26017e  VideoWithCan.mp4
+2903d74219817b9f829a654aa4c9a89b6f6a33ebed43afc11dfb765e088f0c79  canCoke.jpeg
+28ad0ad292032d9d4a5484d1dd4f77ab01898ce08fac75de13378187fc9324cc  ei-object-detection-with-fomo---bottles-vs.-cans-object-detection-keras-h5-model-model.5.zip

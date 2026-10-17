@@ -1,0 +1,59 @@
+{
+  "python": "3.11.17",
+  "packages": {
+    "tensorflow": "2.15.0",
+    "keras": "2.15.0",
+    "numpy": "1.26.4",
+    "h5py": "3.11.0",
+    "scipy": "1.14.1",
+    "pytest": "7.2.1"
+  },
+  "imported_modules": [
+    "fastapi",
+    "ntplib",
+    "numpy",
+    "paho.mqtt.client",
+    "yaml",
+    "tensorflow",
+    "ruff",
+    "flask",
+    "flask_smorest",
+    "pandas",
+    "tqdm",
+    "scipy",
+    "h5py",
+    "PIL",
+    "uvicorn",
+    "streamlit",
+    "streamlit_autorefresh",
+    "websockets",
+    "watchdog",
+    "pytest"
+  ],
+  "model_check": {
+    "archive": "ei-object-detection-with-fomo---bottles-vs.-cans-object-detection-keras-h5-model-model.5.zip",
+    "layers_including_input": 60,
+    "parameters": 20499,
+    "input_shape": [
+      null,
+      96,
+      96,
+      1
+    ],
+    "output_shape": [
+      null,
+      12,
+      12,
+      3
+    ],
+    "synthetic_output_shape": [
+      1,
+      12,
+      12,
+      3
+    ],
+    "finite_output": true,
+    "class_probability_sums_close_to_one": true,
+    "input_used": "synthetic zeros; no detection accuracy evaluation"
+  }
+}

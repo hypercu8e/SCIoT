@@ -1,0 +1,344 @@
+{
+  "input_activation_file_sha256": "243e5358b1f20dcd257c679228a7a8c2d7bc73135696af3c30b59043147ecdb1",
+  "input_video_sha256": "03cfb29be68c4a57aa19c567e2576617f35828b700efd8d2388a4110cf26017e",
+  "model_sha256": "35ef2c4d89e65e85a37676148e4cde1ff72384c479dbb9ca2d7fda55d0cb0184",
+  "split": {
+    "layer": "block_2_add",
+    "keras_layer_index_including_input": 26,
+    "boundary_tensors": [
+      "block_2_add"
+    ],
+    "activation_shape_without_batch": [
+      24,
+      24,
+      8
+    ],
+    "dtype": "float32",
+    "values_per_frame": 4608,
+    "raw_tensor_bytes_per_frame": 18432
+  },
+  "platform": {
+    "python": "3.11.17",
+    "machine": "x86_64",
+    "numpy": "1.26.4",
+    "zlib": "1.3.2"
+  },
+  "rounds": 3,
+  "results": [
+    {
+      "method": "raw",
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 239,
+      "frame_header_bytes": 24,
+      "payload_bytes": 2691072,
+      "total_bytes": 2694815,
+      "mean_bytes_per_frame_including_session": 18457.63698630137,
+      "saving_vs_raw_percent": 0.0,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 146,
+      "candidate_delta_frames": 0,
+      "mean_candidate_delta_bytes": null,
+      "kind_counts": {
+        "0": 146
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.005902301369863014,
+      "decoder_ms_per_frame_median_round_mean": 0.005873739726027397,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "full_zlib",
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 239,
+      "frame_header_bytes": 24,
+      "payload_bytes": 2505094,
+      "total_bytes": 2508837,
+      "mean_bytes_per_frame_including_session": 17183.81506849315,
+      "saving_vs_raw_percent": 6.901327178303518,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 146,
+      "candidate_delta_frames": 0,
+      "mean_candidate_delta_bytes": null,
+      "kind_counts": {
+        "1": 146
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.43829501369863016,
+      "decoder_ms_per_frame_median_round_mean": 0.08170662328767123,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "delta64_zlib",
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 239,
+      "frame_header_bytes": 24,
+      "payload_bytes": 2505094,
+      "total_bytes": 2508837,
+      "mean_bytes_per_frame_including_session": 17183.81506849315,
+      "saving_vs_raw_percent": 6.901327178303518,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 146,
+      "candidate_delta_frames": 140,
+      "mean_candidate_delta_bytes": 20567.071428571428,
+      "kind_counts": {
+        "1": 146
+      },
+      "encoder_ms_per_frame_median_round_mean": 1.06473448630137,
+      "decoder_ms_per_frame_median_round_mean": 0.08213703424657536,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "xor_zlib",
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 239,
+      "frame_header_bytes": 24,
+      "payload_bytes": 2397506,
+      "total_bytes": 2401249,
+      "mean_bytes_per_frame_including_session": 16446.91095890411,
+      "saving_vs_raw_percent": 10.893734820386559,
+      "selected_delta_frames": 138,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 8,
+      "candidate_delta_frames": 140,
+      "mean_candidate_delta_bytes": 16390.957142857143,
+      "kind_counts": {
+        "1": 8,
+        "3": 138
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.8846888904109589,
+      "decoder_ms_per_frame_median_round_mean": 0.09183461643835616,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "full_shuffle_zlib",
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 239,
+      "frame_header_bytes": 24,
+      "payload_bytes": 2426632,
+      "total_bytes": 2430375,
+      "mean_bytes_per_frame_including_session": 16646.404109589042,
+      "saving_vs_raw_percent": 9.812918512031443,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 146,
+      "candidate_delta_frames": 0,
+      "mean_candidate_delta_bytes": null,
+      "kind_counts": {
+        "4": 146
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.33367523287671236,
+      "decoder_ms_per_frame_median_round_mean": 0.10560174657534246,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "xor_shuffle_zlib",
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 239,
+      "frame_header_bytes": 24,
+      "payload_bytes": 2287819,
+      "total_bytes": 2291562,
+      "mean_bytes_per_frame_including_session": 15695.630136986301,
+      "saving_vs_raw_percent": 14.964032781471081,
+      "selected_delta_frames": 137,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 9,
+      "candidate_delta_frames": 140,
+      "mean_candidate_delta_bytes": 15634.7,
+      "kind_counts": {
+        "4": 9,
+        "5": 137
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.5833366232876712,
+      "decoder_ms_per_frame_median_round_mean": 0.10007388356164383,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "raw",
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 238,
+      "frame_header_bytes": 24,
+      "payload_bytes": 552960,
+      "total_bytes": 553918,
+      "mean_bytes_per_frame_including_session": 18463.933333333334,
+      "saving_vs_raw_percent": 0.0,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 30,
+      "candidate_delta_frames": 0,
+      "mean_candidate_delta_bytes": null,
+      "kind_counts": {
+        "0": 30
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.005198,
+      "decoder_ms_per_frame_median_round_mean": 0.005344733333333334,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "full_zlib",
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 238,
+      "frame_header_bytes": 24,
+      "payload_bytes": 514802,
+      "total_bytes": 515760,
+      "mean_bytes_per_frame_including_session": 17192.0,
+      "saving_vs_raw_percent": 6.888745265544715,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 30,
+      "candidate_delta_frames": 0,
+      "mean_candidate_delta_bytes": null,
+      "kind_counts": {
+        "1": 30
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.40379703333333333,
+      "decoder_ms_per_frame_median_round_mean": 0.07539286666666667,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "delta64_zlib",
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 238,
+      "frame_header_bytes": 24,
+      "payload_bytes": 514802,
+      "total_bytes": 515760,
+      "mean_bytes_per_frame_including_session": 17192.0,
+      "saving_vs_raw_percent": 6.888745265544715,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 30,
+      "candidate_delta_frames": 24,
+      "mean_candidate_delta_bytes": 21262,
+      "kind_counts": {
+        "1": 30
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.8959399,
+      "decoder_ms_per_frame_median_round_mean": 0.07592086666666667,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "xor_zlib",
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 238,
+      "frame_header_bytes": 24,
+      "payload_bytes": 503381,
+      "total_bytes": 504339,
+      "mean_bytes_per_frame_including_session": 16811.3,
+      "saving_vs_raw_percent": 8.950602796803864,
+      "selected_delta_frames": 23,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 7,
+      "candidate_delta_frames": 24,
+      "mean_candidate_delta_bytes": 16689.833333333332,
+      "kind_counts": {
+        "1": 7,
+        "3": 23
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.7410758666666667,
+      "decoder_ms_per_frame_median_round_mean": 0.08175089999999999,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "full_shuffle_zlib",
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 238,
+      "frame_header_bytes": 24,
+      "payload_bytes": 498649,
+      "total_bytes": 499607,
+      "mean_bytes_per_frame_including_session": 16653.566666666666,
+      "saving_vs_raw_percent": 9.804880866843103,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 30,
+      "candidate_delta_frames": 0,
+      "mean_candidate_delta_bytes": null,
+      "kind_counts": {
+        "4": 30
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.3073703333333333,
+      "decoder_ms_per_frame_median_round_mean": 0.0989138,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "xor_shuffle_zlib",
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 238,
+      "frame_header_bytes": 24,
+      "payload_bytes": 484763,
+      "total_bytes": 485721,
+      "mean_bytes_per_frame_including_session": 16190.7,
+      "saving_vs_raw_percent": 12.31175011463791,
+      "selected_delta_frames": 21,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 9,
+      "candidate_delta_frames": 24,
+      "mean_candidate_delta_bytes": 16066.666666666666,
+      "kind_counts": {
+        "4": 9,
+        "5": 21
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.5427060333333333,
+      "decoder_ms_per_frame_median_round_mean": 0.09986813333333333,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    }
+  ],
+  "float32_subtraction_diagnostic": {
+    "5.0": {
+      "value_count": 668160,
+      "different_float32_words": 21868,
+      "max_absolute_reconstruction_error": 4.76837158203125e-07,
+      "scope": "one-step subtraction/addition with original previous frame; not a predictive codec"
+    },
+    "1.0": {
+      "value_count": 133632,
+      "different_float32_words": 8239,
+      "max_absolute_reconstruction_error": 4.76837158203125e-07,
+      "scope": "one-step subtraction/addition with original previous frame; not a predictive codec"
+    }
+  },
+  "limitations": [
+    "One video and one split; descriptive measurements, not general performance evidence.",
+    "Application stream bytes include session, packet headers, zlib wrappers, checksums, and refreshes.",
+    "TCP/IP, Wi-Fi, MQTT/HTTP/WebSocket overhead, retries, and connection setup are not measured.",
+    "Python CPU codec timings exclude tensor extraction, inference, input/output files, and network.",
+    "Persistent reference size excludes codec workspace, temporary arrays, and interpreter memory.",
+    "Decoder is checked against original bytes for every frame in every round; no quantization.",
+    "XOR is a bitwise residual, not arithmetic subtraction of activation values."
+  ]
+}

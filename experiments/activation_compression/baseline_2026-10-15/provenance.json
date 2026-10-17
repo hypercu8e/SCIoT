@@ -1,0 +1,11 @@
+{
+  "consolidated_utc": "2026-10-17T11:30:12.519163+00:00",
+  "original_experiment_date": "2026-10-15",
+  "git_head_at_consolidation": "0cfeb9b08ca20dadc754cb38a5201c60991066ba",
+  "original_benchmark_rerun": false,
+  "copied_original_artifacts": true,
+  "csv_total_bytes_validated_for_all_12_summaries": true,
+  "codec_tests_rerun_during_consolidation": "6 passed",
+  "original_image_tmp_artifacts_available": false,
+  "note": "Single-image result is documented from chat; original /tmp artifacts are no longer present. Core experiment sources are unchanged."
+}
