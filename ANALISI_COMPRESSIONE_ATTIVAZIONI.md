@@ -1,6 +1,8 @@
 # SCIoT: analisi e spiegazioni della chat sulla compressione delle attivazioni
 
-Consolidato il 17 ottobre 2026. Esperimenti di riferimento eseguiti il 15 ottobre 2026.
+Consolidato il 17 ottobre 2026 e aggiornato con la prima prova con perdita della
+stessa giornata. La baseline senza perdita rimane quella del 15 ottobre 2026.
+Per la cronologia del percorso: [diario del tirocinio](DIARIO_TIROCINIO.md).
 
 Questo documento trascrive in forma ragionata le spiegazioni, le scelte, i risultati
 e le domande ancora aperte della chat. Non è il verbale integrale dei messaggi.
@@ -25,7 +27,11 @@ un modello FOMO e uno split fisso. Il vantaggio in byte esiste, ma è modesto:
 - a 1 frame al secondo quest'ultimo vantaggio scende al **2,78%**.
 
 Questi dati non dimostrano ancora un vantaggio di latenza, energia o RAM su ESP32.
-Non abbiamo implementato o misurato una codifica con perdita controllata.
+Il 17 ottobre abbiamo completato anche una prima prova con perdita controllata,
+descritta nella sezione 9.1. A 5 fps e passo 0,001, risparmio sul raw del 40,61%
+per l'indipendente e del 48,66% per il temporale: vantaggio temporale 13,57%
+a identica ricostruzione. Nessuna cella cambiata alla soglia 0,5 nel video,
+ma non è una misura di accuratezza rispetto ad annotazioni.
 
 ## 2. Modello, layer, tensore e split
 
@@ -348,7 +354,10 @@ La quantizzazione del modello, per esempio con attivazioni int8, è una scelta
 numerica distinta dalla compressione del messaggio; le due possono essere combinate.
 La prova attuale usa float32 e non ha quantizzato il modello.
 
-## 9. Perdita controllata: spiegata, non ancora implementata
+## 9. Perdita controllata: spiegazione e prima implementazione
+
+Il seguente esempio conserva la spiegazione iniziale; la prova effettivamente
+eseguita il 17 ottobre usa la griglia uniforme descritta nella sezione 9.1.
 
 Si può scegliere di approssimare differenze piccole per ottenere più zeri o meno
 valori distinti da codificare. Esempio concettuale:
@@ -363,9 +372,9 @@ Valore ricostruito:    1,2000
 Errore:                0,0007
 ```
 
-Il tensore ricostruito sarebbe diverso. Non sappiamo ancora se il risparmio sarebbe
-maggiore o se l'errore sarebbe accettabile. La soglia dell'esempio non è stata
-selezionata o validata sperimentalmente.
+Il tensore ricostruito sarebbe diverso. La soglia dell'esempio non è stata
+selezionata o validata sperimentalmente e non coincide automaticamente col passo
+usato nella nuova prova. L'accettabilità dell'errore per l'applicazione resta aperta.
 
 "Controllata" significa definire esplicitamente soglie e codifica, misurare errore
 nelle attivazioni e cambiamenti dell'uscita della rete, ed eventualmente valutare
@@ -377,13 +386,60 @@ successivo. Usare sul client il precedente originale e sul server un'approssimaz
 può desincronizzare il calcolo. Rimangono necessari identificatori di sequenza e
 riferimento, rinnovi completi e recupero dopo errori o cambio di split.
 
-La possibile prossima prova è confrontare compressione indipendente e differenziale
-a pari precisione/errore ammesso, misurando byte ed errore insieme. Non è ancora
-stata avviata e va spiegata prima di implementarla. La convenienza su ESP32 rimane
-una domanda sperimentale anche dopo eventuali buoni risultati sul PC.
+Abbiamo ora confrontato compressione indipendente e differenziale a pari precisione,
+misurando byte ed errore insieme. La convenienza su ESP32 rimane una domanda
+sperimentale anche dopo buoni risultati preliminari sul PC.
 
 L'idea di saltare del tutto i frame simili è un'altra pista, conservata in
 [IDEE_DA_ESPLORARE.md](IDEE_DA_ESPLORARE.md), non implementata nella prova attuale.
+
+### 9.1 Prova eseguita il 17 ottobre 2026
+
+Abbiamo rigenerato le attivazioni dal video sulla macchina attuale, verificato i
+checksum degli input e lo split Keras (massimo errore osservato 0,0 su 146 frame).
+I tensori rigenerati hanno un hash diverso da quelli del 15 ottobre: la nuova prova
+confronta tutti i metodi sugli stessi nuovi tensori e conserva controlli senza
+perdita misurati nella stessa esecuzione. I tempi storici non sono stati sostituiti.
+
+Quantizzazione uniforme: `q = rint(float64(x)/passo)` in int32, senza clipping;
+ricostruzione `float32(q*passo)`. Passi esplorati: 0,0001, 0,001, 0,01, 0,1, 0,5, 1.
+Limite d'errore per valore: circa mezzo passo, più arrotondamenti numerici,
+verificato su tutti i dati. La rete resta float32; non è una conversione INT8.
+
+Indipendente: q completo compresso con byte shuffle e zlib livello 1.
+Temporale: differenza intera di q corrente e precedente, stesso shuffle e zlib.
+Il riferimento intero corrisponde alla stessa attivazione ricostruita sui due lati;
+non deriva dal precedente float originale. Completo iniziale e ogni 5 secondi;
+scelta del payload minore e fallback raw. I due metodi ricostruiscono gli stessi
+tensori approssimati: il confronto in byte è a qualità identica.
+
+| Passo, a 5 fps | Riduzione indipendente/raw | Riduzione temporale/raw | Vantaggio temporale/indipendente | Celle cambiate a soglia 0,5 |
+|---|---:|---:|---:|---:|
+| 0,001 | 40,61% | 48,66% | 13,57% | 0 |
+| 0,01 | 52,50% | 57,47% | 10,48% | 1 |
+| 0,1 | 60,79% | 68,28% | 19,09% | 2 |
+| 0,5 | 67,81% | 79,01% | 34,78% | 49 |
+
+Le 151 celle oggetto del riferimento su 21.024 celle-frame non sono 151 oggetti
+distinti. Le metriche scelgono la classe oggetto col punteggio maggiore sopra
+soglia; non applicano componenti connesse o altro postprocessing FOMO. Sono proxy
+di fedeltà al modello originale, non accuratezza su etichette corrette. Con passo
+0,5 vengono perse 20 celle e introdotte 29: il risparmio maggiore ha un costo
+osservabile. Anche il massimo errore sui punteggi, non solo la media, va valutato.
+
+Il riferimento delle metriche è il suffisso eseguito sulle attivazioni originali
+con gli stessi batch delle approssimazioni; la parità col modello completo è
+verificata entro tolleranza e gli scarti numerici sono registrati. Nessuna soglia
+è stata dichiarata accettabile per l'applicazione. Un video/split e l'assenza di
+annotazioni non consentono di generalizzare o di scegliere una precisione definitiva.
+
+Il protocollo AQST/AQF1 è distinto dalla baseline ACT1 e da SCIoT; conta sessione,
+header da 24 byte, checksum sugli interi, wrapper e rinnovi. Restano esclusi rete
+reale, picco RAM, energia e tempi ESP32. Il riferimento occupa ancora 18.432 byte
+per lato, oltre a workspace e temporanei. Tutti i 15 test dei prototipi passano.
+
+Risultati completi a 5 e 1 fps, ambiente, hash e istruzioni:
+[lossy_2026-10-17](experiments/activation_compression/lossy_2026-10-17/README.md).
 
 ## 10. File da conservare e ripresa su un'altra macchina
 
@@ -395,11 +451,11 @@ L'idea di saltare del tutto i frame simili è un'altra pista, conservata in
 - [Copia dei risultati del 15 ottobre](experiments/activation_compression/baseline_2026-10-15/README.md):
   JSON, CSV, metadati, ambiente e report salvati fuori dalla directory ignorata `results/`.
 
-Al controllo del 17 ottobre, documenti, script e input aggiunti in questa chat sono
-presenti localmente ma **non ancora in un commit**. Un clone remoto da solo non li
-porta sull'altra macchina. La directory `results/` e il `uv.lock` della radice sono
-inoltre esclusi da Git. Occorre trasferire i file locali o versionare e inviare
-esplicitamente il lavoro. Questa operazione di documentazione non esegue commit o push.
+Al primo consolidamento del 17 ottobre questi file erano ancora locali. Ora la
+baseline e i documenti iniziali risultano nei commit locali `d38a489` e `087fef9`;
+non è stata verificata la loro presenza sul remoto. La nuova prova con perdita è
+nel lavoro corrente, senza commit o push. `results/` e il `uv.lock` della radice
+restano ignorati: i nuovi report stabili sono fuori da `results/`.
 
 La cartella `baseline_2026-10-15` conserva una copia del lock come
 `environment.uv.lock`, con un nome non escluso dal `.gitignore`. La copia conserva
@@ -436,18 +492,21 @@ I loro hash e quelli dei risultati stabili sono nel manifest della baseline.
 Il contenuto di `results/input/` può essere rigenerato con
 `extract_activations.py`, seguito da `compare.py`, come documentato nel README.
 
-L'archivio locale `experiments/activation_compression/results/SCIoT-ripresa-2026-10-17.tar.gz`
-contiene una copia del progetto con documenti, input e risultati generati, incluso
+Sulla macchina d'origine l'archivio `experiments/activation_compression/results/SCIoT-ripresa-2026-10-17.tar.gz`
+conteneva una copia del progetto con documenti, input e risultati generati, incluso
 il lock. Esclude `.git`, `.venv` e cache. È una copia di lavoro, non un repository
 con cronologia. Al suo interno `TRANSFER_SHA256SUMS.txt` permette di controllare
 l'integrità dei file dopo l'estrazione con `sha256sum -c TRANSFER_SHA256SUMS.txt`.
+L'archivio non è presente nel checkout attuale e non include automaticamente la
+nuova prova con perdita.
 
 ### Punto esatto da cui riprendere
 
 1. Leggere le conclusioni e i limiti di questa prova; distinguere byte, tempi PC e hardware.
-2. Ricreare l'ambiente e verificare i sei test dei codec.
+2. Ricreare l'ambiente se necessario e verificare i 15 test dei due prototipi.
 3. Consultare la baseline prima di rigenerare i risultati; ogni nuova esecuzione ha nuovi tempi.
-4. Definire insieme una prima codifica con perdita controllata e le metriche di errore.
+4. Leggere il nuovo report con perdita e discutere precisione, errori locali e
+   validazione su più sequenze con annotazioni.
 5. Solo dopo i risultati preliminari decidere quali prove giustificano il porting su ESP32.
 
 ## Fonti consultate nella chat

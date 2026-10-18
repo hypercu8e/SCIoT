@@ -1,6 +1,7 @@
 # Tirocinio SCIoT — scaletta e contesto per ripartire
 
-Aggiornato il 17 ottobre 2026, con gli esperimenti su PC del 15 ottobre.
+Aggiornato il 17 ottobre 2026, con baseline senza perdita del 15 ottobre e prima
+prova con perdita controllata del 17 ottobre. Cronologia: [diario](DIARIO_TIROCINIO.md).
 
 ## Punto di ripresa
 
@@ -14,8 +15,12 @@ XOR con riordino dei byte e zlib riduce i byte del 14,96% rispetto al raw a 5 fp
 il beneficio temporale rispetto al completo con lo stesso riordino è 5,71%, e
 scende a 2,78% a 1 fps. Sono misure su un video e uno split, non su ESP32 o rete reale.
 
-La possibile prova successiva riguarda una perdita controllata, ancora da definire
-e spiegare prima dell'implementazione. La convenienza sull'hardware resta aperta.
+È ora completata anche una prima prova con perdita controllata a griglia uniforme:
+a 5 fps, passo 0,001, risparmio sul raw del 40,61% per l'indipendente e del 48,66%
+per il temporale; vantaggio temporale aggiuntivo 13,57% a identica ricostruzione.
+Nessuna cella cambiata a soglia 0,5 sul video, senza una valutazione su annotazioni.
+Report: [lossy_2026-10-17](experiments/activation_compression/lossy_2026-10-17/README.md).
+La convenienza sull'hardware resta aperta.
 
 ## Contesto
 
@@ -66,7 +71,7 @@ Checkout esaminato: `main`, commit `0cfeb9b08ca20dadc754cb38a5201c60991066ba`. L
 - Prima parte seguita dalla seconda parte e modello completo: differenza massima osservata 0,0 sui 146 frame.
 - Il confronto senza perdita ricostruisce tutti i tensori byte per byte. Include header, checksum, primo completo, rinnovi ogni 5 secondi e ritorno al completo quando il delta è più grande.
 - I risultati contano il flusso applicativo sperimentale; escludono overhead e comportamento effettivo dei trasporti di SCIoT. Il codec non è integrato nel framework.
-- I file generati in `results/` sono ignorati da Git. Una copia stabile di report, JSON, CSV, metadati e lock è in [baseline_2026-10-15](experiments/activation_compression/baseline_2026-10-15/README.md). Documenti e script sono ancora locali e non in un commit.
+- I file generati in `results/` sono ignorati da Git. Una copia stabile di report, JSON, CSV, metadati e lock è in [baseline_2026-10-15](experiments/activation_compression/baseline_2026-10-15/README.md). Baseline e documenti iniziali risultano ora nei commit locali `d38a489` e `087fef9`; non è stata verificata la presenza sul remoto. La prova con perdita è aggiunta nel lavoro corrente, senza commit o push.
 
 File utili:
 
@@ -159,9 +164,10 @@ L'elenco e diversi contenuti delle issue sono già stati consultati; l'analisi s
 - [x] Confrontare su PC tensore completo, compressione indipendente e codifiche differenziali senza perdita, con e senza riordino dei byte.
 - [x] Contare i byte dei messaggi sperimentali, inclusi header e rinnovi; misurare tempi del codec sul PC e identificare il riferimento minimo da conservare. Picco RAM, tempi ESP32 e traffico di rete reale restano da misurare.
 - [x] Verificare nel prototipo sequenze/riferimenti, checksum, rifiuto di delta mancanti e ripristino tramite completo; sei test superati.
-- [ ] Definire riferimento condiviso, numeri di sequenza, invii completi, reset e recupero dopo aggiornamenti mancanti. Un cambio di split richiede di rivalutare/invalidare il riferimento.
-- [ ] Definire e poi provare una prima perdita controllata; mantenere riferimenti ricostruiti coerenti sui due lati. Soglie, risparmio ed effetti sulle uscite non sono ancora stati valutati.
-- [ ] Distinguere somiglianza rispetto alle uscite originali da accuratezza rispetto ad annotazioni corrette.
+- [x] Definire nei prototipi riferimento condiviso, sequenze, invii completi e recupero dopo aggiornamenti mancanti. Un cambio di split richiede una nuova sessione; integrazione nel framework ancora da fare.
+- [x] Provare una prima perdita controllata: passi da 0,0001 a 1, quantizzazione uniforme delle attivazioni, confronto indipendente/temporale a ricostruzione identica e riferimenti coerenti. Misurati byte, errore su attivazioni/uscite e cambiamenti delle celle.
+- [x] Distinguere fedeltà alle uscite originali da accuratezza su annotazioni; la seconda resta da valutare con un dataset adatto.
+- [x] Verificare i due prototipi con 15 test, inclusi limite d'errore, riferimenti, overflow, corruzione e recupero.
 
 ### 9. Decidere se proseguire e verificare su hardware
 
@@ -171,6 +177,12 @@ L'elenco e diversi contenuti delle issue sono già stati consultati; l'analisi s
 
 ## Prossimo traguardo
 
-**Riprendere dalla lettura della baseline senza perdita e definire una prima codifica con perdita controllata, spiegandone prima il funzionamento e le metriche.**
+**Discutere il compromesso byte/errore della prima prova con perdita e scegliere
+sequenze e metriche di applicazione per validarlo prima del porting.**
 
-Il traguardo di inferenza completa, split Keras e accesso alle attivazioni sul PC è raggiunto per il candidato e la sequenza provati. Abbiamo evidenza di un piccolo risparmio in byte del riferimento temporale; non abbiamo ancora evidenza della convenienza complessiva su ESP32. Le issue, il paper e il confronto con il codice restano attività aperte della scaletta.
+Il traguardo di inferenza completa, split Keras e confronto dei codec sul PC è
+raggiunto per il candidato e la sequenza provati. Con perdita controllata il
+risparmio è più interessante, ma vanno valutati anche gli errori locali e le celle
+perse/introdotte, non solo la media. Non abbiamo evidenza della convenienza
+complessiva su ESP32. Le issue, l'approfondimento del paper e il confronto con
+il codice restano attività aperte della scaletta.
