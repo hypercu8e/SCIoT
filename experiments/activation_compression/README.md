@@ -1,5 +1,10 @@
 # Primo confronto della compressione delle attivazioni
 
+Aggiornamento del 17 ottobre 2026: è stata aggiunta una prima prova con perdita
+controllata. I paragrafi seguenti descrivono la baseline senza perdita; la nuova
+prova è documentata [più sotto](#prima-prova-con-perdita-controllata).
+La cronologia del percorso è nel [diario del tirocinio](../../DIARIO_TIROCINIO.md).
+
 Esperimento isolato su PC. Usa il FOMO esportato in `model.h5`, uno split fisso
 dopo `block_2_add` e il video `VideoWithCan.mp4`. Non modifica il server o il firmware.
 
@@ -126,3 +131,93 @@ del picco di RAM su ESP32. Un singolo video e uno split non bastano per
 generalizzare i vantaggi.
 
 Riferimento per il compressore: [documentazione zlib di Python](https://docs.python.org/3.11/library/zlib.html).
+
+## Prima prova con perdita controllata
+
+Eseguita il 17 ottobre 2026, sempre su CPU PC. Il report e i dati numerici sono
+conservati fuori da `results/` in [lossy_2026-10-17](lossy_2026-10-17/README.md).
+La baseline del 15 ottobre non è stata modificata.
+
+**Compressione indipendente:** ogni tensore si codifica e ricostruisce senza
+usare attivazioni precedenti. **Temporale:** si conserva un riferimento tra frame.
+
+La nuova prova arrotonda le attivazioni su una griglia:
+
+```text
+q = rint(float64(attivazione) / passo)       # interi int32, senza clipping
+attivazione ricostruita = float32(q * passo)
+```
+
+Con passo `0,01`, per esempio, `1,234` diventa circa `1,23`: l'errore per valore
+è al massimo circa `0,005`, più l'arrotondamento numerico. Non si cambiano i pesi
+o gli operatori del modello, che rimane float32. Non è una conversione INT8.
+
+- `independent`: q completo, byte shuffle e zlib livello 1.
+- `temporal`: differenza intera tra q corrente e q precedente, stesso shuffle e
+  compressore; completo iniziale e ogni 5 secondi, scelta del payload minore nei
+  frame intermedi e fallback raw.
+
+I due metodi ricostruiscono **gli stessi tensori approssimati** a ciascun passo:
+il loro confronto in byte è a qualità identica. Il riferimento è il precedente
+tensore di interi condiviso e verificato, senza usare il precedente float originale.
+È una prima quantizzazione uniforme, non un'implementazione del metodo del paper
+con dead-zone o una ricerca esaustiva dei codec con perdita.
+
+Il formato sperimentale AQST/AQF1 include metodo, passo, forma, dtype, parametri
+zlib, hash modello, split, frequenza, rinnovi, sequenze, riferimento, lunghezza
+e CRC degli interi ricostruiti. Il decoder riceve i parametri dal messaggio di
+sessione; non consulta i tensori originali. Le verifiche contro gli originali
+avvengono fuori dalle misure di tempo.
+
+### Riproduzione
+
+Su questa macchina `.venv` è stato ricreato come ambiente minimo per gli esperimenti.
+Per ricrearlo su un'altra macchina Linux x86_64, con uv installato:
+
+```bash
+uv venv --python 3.11 .venv
+uv pip install --python .venv/bin/python -r experiments/activation_compression/lossy_2026-10-17/requirements.txt
+```
+
+Quindi dalla radice del repository:
+
+```bash
+CUDA_VISIBLE_DEVICES=-1 TF_CPP_MIN_LOG_LEVEL=3 TF_NUM_INTRAOP_THREADS=1 TF_NUM_INTEROP_THREADS=1 OMP_NUM_THREADS=1 \
+  .venv/bin/python experiments/activation_compression/extract_activations.py \
+  --video VideoWithCan.mp4 \
+  --model-zip ei-object-detection-with-fomo---bottles-vs.-cans-object-detection-keras-h5-model-model.5.zip \
+  --output-dir experiments/activation_compression/results/input_nuova_prova
+
+CUDA_VISIBLE_DEVICES=-1 TF_CPP_MIN_LOG_LEVEL=3 OMP_NUM_THREADS=1 \
+  .venv/bin/python experiments/activation_compression/compare_lossy.py \
+  --input-dir experiments/activation_compression/results/input_nuova_prova \
+  --output-dir experiments/activation_compression/results/lossy_nuova_prova
+
+.venv/bin/python -m unittest discover -s experiments/activation_compression -p 'test_*.py' -v
+```
+
+Il confronto rifiuta una directory che contiene già `summary.json`, per evitare
+di sovrascrivere una misura precedente. Servono ffmpeg e ffprobe per l'estrazione.
+Default: passi `0.0001 0.001 0.01 0.1 0.5 1.0`, 3 ripetizioni, 5 fps e sottoinsieme
+a 1 fps. Opzioni: `--steps` e `--rounds`.
+
+### Risultato preliminare e limiti
+
+A 5 fps, passo `0,001`: indipendente **40,61%** di risparmio sul raw;
+temporale **48,66%**, cioè **13,57%** di vantaggio aggiuntivo rispetto
+all'indipendente allo stesso passo. Nessuna cella cambiata alla soglia 0,5 su
+questo video rispetto al riferimento; i punteggi numerici cambiano comunque.
+Passo `0,1`: risparmio temporale **68,28%**, con due celle cambiate alla soglia 0,5.
+Passo `0,5`: risparmio **79,01%**, con 49 celle cambiate (20 perse, 29 introdotte).
+
+Il riferimento presenta 151 celle oggetto su 21.024 celle-frame a soglia 0,5.
+Non sono 151 oggetti distinti. Le metriche confrontano l'uscita con il modello
+non compresso usando gli stessi batch del suffisso; non sono accuratezza rispetto
+a etichette corrette e non applicano il postprocessing FOMO a componenti connesse.
+Il massimo errore sull'uscita è riportato insieme alle celle cambiate: una media
+piccola su molte celle di sfondo può nascondere differenze locali importanti.
+
+Nessuna precisione è stata validata come accettabile per l'applicazione. Mancano
+annotazioni, altri video/split e misure su dispositivo/rete/energia. Tempi solo PC;
+18.432 byte di riferimento per lato non includono workspace e buffer temporanei.
+I 15 test dei due prototipi sono passati.

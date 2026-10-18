@@ -1,0 +1,18 @@
+{
+  "recorded_utc": "2026-10-17T14:39:10.414126+00:00",
+  "unit_test_command": ".venv/bin/python -m unittest discover -s experiments/activation_compression -p 'test_*.py' -v",
+  "unit_tests_executed_in_session": 15,
+  "unit_test_result": "passed",
+  "ruff_result": "passed for all three new Python files",
+  "csv_rows": 2112,
+  "csv_groups_and_json_summaries_checked": 24,
+  "csv_payload_packet_and_session_totals_all_match": true,
+  "pairwise_reconstruction_hash_and_quality_metrics_identical": true,
+  "source_and_input_hashes_match_run_summary": true,
+  "integer_roundtrip_shared_references_and_error_bound_all_passed": true,
+  "historical_input_and_snapshot_checksums": "passed via sha256sum -c; historical files unchanged",
+  "historical_activation_npy_sha256": "243e5358b1f20dcd257c679228a7a8c2d7bc73135696af3c30b59043147ecdb1",
+  "new_activation_npy_sha256": "71ea32f25c3dbaa8fd91d50289fd90d442129c9549220bfd7e00839eeff47b5e",
+  "same_activation_npy_as_historical": false,
+  "note": "New controls and lossy methods use the same regenerated tensors; original timings are preserved."
+}

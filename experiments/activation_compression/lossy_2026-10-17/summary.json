@@ -1,0 +1,1988 @@
+{
+  "created_utc": "2026-10-17T14:35:00.013814+00:00",
+  "git_head_at_run": "087fef938abe9808b18ef6733a97bd23ee15c830",
+  "source_sha256": {
+    "compare_lossy.py": "635bcfca5bcee3d390eb98f8d3938ba4739ca0d6696eacc90b16d80b4b161d25",
+    "lossy_codec.py": "022cdf20cc52ba2ecde6ae1dcf6dcdf8bc75865281ef522a5947235e1019853a",
+    "compare.py": "c1f0b86234b87a04ac45a88e9da81281777dffebfa3860f98176dc408848dce3",
+    "extract_activations.py": "feed688a67eaf6395ec3bac1fa5152f07d649a852f7644abffce10bb2332462d"
+  },
+  "input_sha256": {
+    "activations.npy": "71ea32f25c3dbaa8fd91d50289fd90d442129c9549220bfd7e00839eeff47b5e",
+    "outputs.npy": "74f7f907128139a97b3df65ae5dcb27c2ba46f612b25363bcf08c0f62d0d152b",
+    "result.json": "65e4f936ccb9ae56b094044ebf030c997e3382e935a360a2e4b140f56096d6de",
+    "model.h5": "35ef2c4d89e65e85a37676148e4cde1ff72384c479dbb9ca2d7fda55d0cb0184"
+  },
+  "input_metadata": {
+    "video": "VideoWithCan.mp4",
+    "video_sha256": "03cfb29be68c4a57aa19c567e2576617f35828b700efd8d2388a4110cf26017e",
+    "model_sha256": "35ef2c4d89e65e85a37676148e4cde1ff72384c479dbb9ca2d7fda55d0cb0184",
+    "video_duration_seconds": 29.259989,
+    "original_size_wh": [
+      474,
+      850
+    ],
+    "original_average_fps": 29.42584849466412,
+    "original_frame_count": 861,
+    "preprocessing": {
+      "sampling_fps": 5,
+      "sampling": "ffmpeg fps filter; times are nominal sampling-grid times",
+      "crop_xywh": [
+        0,
+        188,
+        474,
+        474
+      ],
+      "resize": "96x96, FFmpeg Lanczos; pixel parity with Studio not established",
+      "grayscale": "BT.601 .299 .587 .114, float32 in [0,1]"
+    },
+    "split": {
+      "layer": "block_2_add",
+      "keras_layer_index_including_input": 26,
+      "boundary_tensors": [
+        "block_2_add"
+      ],
+      "activation_shape_without_batch": [
+        24,
+        24,
+        8
+      ],
+      "dtype": "float32",
+      "values_per_frame": 4608,
+      "raw_tensor_bytes_per_frame": 18432
+    },
+    "verification": {
+      "frames_checked": 146,
+      "full_vs_split_max_absolute_error": 0.0,
+      "rtol": 1e-05,
+      "atol": 1e-06,
+      "passed": true,
+      "scope": "Keras float32 on CPU, one process; no TFLite/network/ESP32 verification"
+    }
+  },
+  "platform": {
+    "python": "3.11.17",
+    "platform": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "numpy": "1.26.4",
+    "tensorflow": "2.15.0",
+    "zlib": "1.3.2",
+    "tensorflow_intra_op_threads": 1,
+    "tensorflow_inter_op_threads": 1,
+    "cuda_visible_devices": "-1"
+  },
+  "activation_statistics": {
+    "min": -7.8651227951049805,
+    "max": 10.078060150146484,
+    "std": 1.7535786628723145,
+    "frames": 146
+  },
+  "parameters": {
+    "steps": [
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      0.5,
+      1.0
+    ],
+    "rounds": 3,
+    "primary_cell_threshold": 0.5,
+    "sensitivity_thresholds": [
+      0.25,
+      0.1
+    ],
+    "output_reference": "suffix on unquantized activations, same batch size (16)",
+    "quantization": "rint(float64(x)/step) to signed little-endian int32; no clipping",
+    "reconstruction": "float32(float64(q)*step)",
+    "temporal": "exact signed int32 difference of quantized tensors",
+    "refresh_seconds": 5,
+    "zlib_level": 1,
+    "zlib_window_bits": 15,
+    "zlib_mem_level": 8,
+    "frame_header_bytes": 24
+  },
+  "suffix_control_vs_original_output": {
+    "mae": 4.784695039739105e-09,
+    "rmse": 4.544689205579598e-08,
+    "max_absolute_error": 1.430511474609375e-06,
+    "normalized_rmse_by_reference_std": 9.709741910840026e-08
+  },
+  "reference_output": {
+    "5.0": {
+      "mae": 0.0,
+      "rmse": 0.0,
+      "max_absolute_error": 0.0,
+      "normalized_rmse_by_reference_std": 0.0,
+      "argmax_changed_cells": 0,
+      "cells": 21024,
+      "thresholds": {
+        "0.5": {
+          "reference_foreground_cells": 151,
+          "reconstructed_foreground_cells": 151,
+          "changed_cells": 0,
+          "agreement_percent": 100.0,
+          "lost_foreground_cells": 0,
+          "introduced_foreground_cells": 0,
+          "foreground_class_changed_cells": 0,
+          "foreground_label_cell_iou": 1.0
+        },
+        "0.25": {
+          "reference_foreground_cells": 330,
+          "reconstructed_foreground_cells": 330,
+          "changed_cells": 0,
+          "agreement_percent": 100.0,
+          "lost_foreground_cells": 0,
+          "introduced_foreground_cells": 0,
+          "foreground_class_changed_cells": 0,
+          "foreground_label_cell_iou": 1.0
+        },
+        "0.1": {
+          "reference_foreground_cells": 422,
+          "reconstructed_foreground_cells": 422,
+          "changed_cells": 0,
+          "agreement_percent": 100.0,
+          "lost_foreground_cells": 0,
+          "introduced_foreground_cells": 0,
+          "foreground_class_changed_cells": 0,
+          "foreground_label_cell_iou": 1.0
+        }
+      }
+    },
+    "1.0": {
+      "mae": 0.0,
+      "rmse": 0.0,
+      "max_absolute_error": 0.0,
+      "normalized_rmse_by_reference_std": 0.0,
+      "argmax_changed_cells": 0,
+      "cells": 4320,
+      "thresholds": {
+        "0.5": {
+          "reference_foreground_cells": 27,
+          "reconstructed_foreground_cells": 27,
+          "changed_cells": 0,
+          "agreement_percent": 100.0,
+          "lost_foreground_cells": 0,
+          "introduced_foreground_cells": 0,
+          "foreground_class_changed_cells": 0,
+          "foreground_label_cell_iou": 1.0
+        },
+        "0.25": {
+          "reference_foreground_cells": 65,
+          "reconstructed_foreground_cells": 65,
+          "changed_cells": 0,
+          "agreement_percent": 100.0,
+          "lost_foreground_cells": 0,
+          "introduced_foreground_cells": 0,
+          "foreground_class_changed_cells": 0,
+          "foreground_label_cell_iou": 1.0
+        },
+        "0.1": {
+          "reference_foreground_cells": 84,
+          "reconstructed_foreground_cells": 84,
+          "changed_cells": 0,
+          "agreement_percent": 100.0,
+          "lost_foreground_cells": 0,
+          "introduced_foreground_cells": 0,
+          "foreground_class_changed_cells": 0,
+          "foreground_label_cell_iou": 1.0
+        }
+      }
+    }
+  },
+  "lossless_controls": [
+    {
+      "method": "raw",
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 239,
+      "frame_header_bytes": 24,
+      "payload_bytes": 2691072,
+      "total_bytes": 2694815,
+      "mean_bytes_per_frame_including_session": 18457.63698630137,
+      "saving_vs_raw_percent": 0.0,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 146,
+      "candidate_delta_frames": 0,
+      "mean_candidate_delta_bytes": null,
+      "kind_counts": {
+        "0": 146
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.004584458904109589,
+      "decoder_ms_per_frame_median_round_mean": 0.004613575342465754,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "full_shuffle_zlib",
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 239,
+      "frame_header_bytes": 24,
+      "payload_bytes": 2426694,
+      "total_bytes": 2430437,
+      "mean_bytes_per_frame_including_session": 16646.828767123287,
+      "saving_vs_raw_percent": 9.810617797511146,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 146,
+      "candidate_delta_frames": 0,
+      "mean_candidate_delta_bytes": null,
+      "kind_counts": {
+        "4": 146
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.2022654109589041,
+      "decoder_ms_per_frame_median_round_mean": 0.07244905479452055,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "xor_shuffle_zlib",
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 239,
+      "frame_header_bytes": 24,
+      "payload_bytes": 2287946,
+      "total_bytes": 2291689,
+      "mean_bytes_per_frame_including_session": 15696.5,
+      "saving_vs_raw_percent": 14.959320027534362,
+      "selected_delta_frames": 137,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 9,
+      "candidate_delta_frames": 140,
+      "mean_candidate_delta_bytes": 15635.828571428572,
+      "kind_counts": {
+        "4": 9,
+        "5": 137
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.3808616369863014,
+      "decoder_ms_per_frame_median_round_mean": 0.07338089726027397,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "raw",
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 238,
+      "frame_header_bytes": 24,
+      "payload_bytes": 552960,
+      "total_bytes": 553918,
+      "mean_bytes_per_frame_including_session": 18463.933333333334,
+      "saving_vs_raw_percent": 0.0,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 30,
+      "candidate_delta_frames": 0,
+      "mean_candidate_delta_bytes": null,
+      "kind_counts": {
+        "0": 30
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.004479466666666666,
+      "decoder_ms_per_frame_median_round_mean": 0.0046393,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "full_shuffle_zlib",
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 238,
+      "frame_header_bytes": 24,
+      "payload_bytes": 498650,
+      "total_bytes": 499608,
+      "mean_bytes_per_frame_including_session": 16653.6,
+      "saving_vs_raw_percent": 9.804700334706585,
+      "selected_delta_frames": 0,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 30,
+      "candidate_delta_frames": 0,
+      "mean_candidate_delta_bytes": null,
+      "kind_counts": {
+        "4": 30
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.20158303333333333,
+      "decoder_ms_per_frame_median_round_mean": 0.07245773333333334,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    },
+    {
+      "method": "xor_shuffle_zlib",
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "raw_tensor_bytes_per_frame": 18432,
+      "session_header_bytes": 238,
+      "frame_header_bytes": 24,
+      "payload_bytes": 484761,
+      "total_bytes": 485719,
+      "mean_bytes_per_frame_including_session": 16190.633333333333,
+      "saving_vs_raw_percent": 12.312111178910957,
+      "selected_delta_frames": 21,
+      "scheduled_refresh_frames": 6,
+      "full_frames": 9,
+      "candidate_delta_frames": 24,
+      "mean_candidate_delta_bytes": 16067.083333333334,
+      "kind_counts": {
+        "4": 9,
+        "5": 21
+      },
+      "encoder_ms_per_frame_median_round_mean": 0.35695773333333336,
+      "decoder_ms_per_frame_median_round_mean": 0.07393839999999999,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "roundtrip_bit_exact_all_frames_all_rounds": true
+    }
+  ],
+  "results": [
+    {
+      "method": "independent",
+      "step": 0.0001,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 366,
+      "frame_header_bytes": 24,
+      "payload_bytes": 1742564,
+      "total_bytes": 1746434,
+      "mean_bytes_per_frame_including_session": 11961.876712328767,
+      "selected_delta_frames": 0,
+      "full_frames": 146,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.18590681506849316,
+      "decoder_ms_per_frame_median_round_mean": 0.0833433493150685,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "5b505b069f25e7dd1f68b1b74576335eeb1332bb9ccc463e25277a8a2490c612",
+      "activation_error": {
+        "mae": 2.4989176645521348e-05,
+        "rmse": 2.8864213055285982e-05,
+        "max_absolute_error": 5.0067901611328125e-05,
+        "normalized_rmse_by_reference_std": 1.6460174034324812e-05
+      },
+      "output_error": {
+        "mae": 2.030366696878493e-07,
+        "rmse": 1.921348162099078e-06,
+        "max_absolute_error": 5.692243576049805e-05,
+        "normalized_rmse_by_reference_std": 4.104966024177345e-06,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 330,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 422,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 35.19280544304526
+    },
+    {
+      "method": "temporal",
+      "step": 0.0001,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 363,
+      "frame_header_bytes": 24,
+      "payload_bytes": 1654629,
+      "total_bytes": 1658496,
+      "mean_bytes_per_frame_including_session": 11359.561643835616,
+      "selected_delta_frames": 134,
+      "full_frames": 12,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.00031001984126984125,
+      "encoder_ms_per_frame_median_round_mean": 0.368220801369863,
+      "decoder_ms_per_frame_median_round_mean": 0.09829988356164383,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "5b505b069f25e7dd1f68b1b74576335eeb1332bb9ccc463e25277a8a2490c612",
+      "activation_error": {
+        "mae": 2.4989176645521348e-05,
+        "rmse": 2.8864213055285982e-05,
+        "max_absolute_error": 5.0067901611328125e-05,
+        "normalized_rmse_by_reference_std": 1.6460174034324812e-05
+      },
+      "output_error": {
+        "mae": 2.030366696878493e-07,
+        "rmse": 1.921348162099078e-06,
+        "max_absolute_error": 5.692243576049805e-05,
+        "normalized_rmse_by_reference_std": 4.104966024177345e-06,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 330,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 422,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 38.45603501539067,
+      "saving_vs_independent_same_step_percent": 5.035289051862257
+    },
+    {
+      "method": "independent",
+      "step": 0.0001,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 365,
+      "frame_header_bytes": 24,
+      "payload_bytes": 358219,
+      "total_bytes": 359304,
+      "mean_bytes_per_frame_including_session": 11976.8,
+      "selected_delta_frames": 0,
+      "full_frames": 30,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.18627353333333332,
+      "decoder_ms_per_frame_median_round_mean": 0.08325073333333334,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "14b6f133ba863a0f4d3354b457f46fb8588c91452fc67d1daa843c75dd18b032",
+      "activation_error": {
+        "mae": 2.501880324114449e-05,
+        "rmse": 2.8889720028873544e-05,
+        "max_absolute_error": 5.0067901611328125e-05,
+        "normalized_rmse_by_reference_std": 1.6474935470969e-05
+      },
+      "output_error": {
+        "mae": 1.8142945580664614e-07,
+        "rmse": 1.7378222383318206e-06,
+        "max_absolute_error": 4.553794860839844e-05,
+        "normalized_rmse_by_reference_std": 3.7120361560834997e-06,
+        "argmax_changed_cells": 0,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 27,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 65,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 84,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 35.13408121779757
+    },
+    {
+      "method": "temporal",
+      "step": 0.0001,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 362,
+      "frame_header_bytes": 24,
+      "payload_bytes": 349546,
+      "total_bytes": 350628,
+      "mean_bytes_per_frame_including_session": 11687.6,
+      "selected_delta_frames": 20,
+      "full_frames": 10,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.00019892939814814814,
+      "encoder_ms_per_frame_median_round_mean": 0.33703606666666663,
+      "decoder_ms_per_frame_median_round_mean": 0.09473943333333333,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "14b6f133ba863a0f4d3354b457f46fb8588c91452fc67d1daa843c75dd18b032",
+      "activation_error": {
+        "mae": 2.501880324114449e-05,
+        "rmse": 2.8889720028873544e-05,
+        "max_absolute_error": 5.0067901611328125e-05,
+        "normalized_rmse_by_reference_std": 1.6474935470969e-05
+      },
+      "output_error": {
+        "mae": 1.8142945580664614e-07,
+        "rmse": 1.7378222383318206e-06,
+        "max_absolute_error": 4.553794860839844e-05,
+        "normalized_rmse_by_reference_std": 3.7120361560834997e-06,
+        "argmax_changed_cells": 0,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 27,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 65,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 84,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 36.70037803429389,
+      "saving_vs_independent_same_step_percent": 2.4146683588270657
+    },
+    {
+      "method": "independent",
+      "step": 0.001,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 365,
+      "frame_header_bytes": 24,
+      "payload_bytes": 1596709,
+      "total_bytes": 1600578,
+      "mean_bytes_per_frame_including_session": 10962.86301369863,
+      "selected_delta_frames": 0,
+      "full_frames": 146,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.18893558219178083,
+      "decoder_ms_per_frame_median_round_mean": 0.09013842465753424,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "d762e5419489048469b115a383a757e7da9e18a565a2407989514ad25e73aafc",
+      "activation_error": {
+        "mae": 0.0002499014619266279,
+        "rmse": 0.0002886155963489085,
+        "max_absolute_error": 0.000500023365020752,
+        "normalized_rmse_by_reference_std": 0.0001645866088856863
+      },
+      "output_error": {
+        "mae": 1.939455095358851e-06,
+        "rmse": 1.808878776568029e-05,
+        "max_absolute_error": 0.0006027817726135254,
+        "normalized_rmse_by_reference_std": 3.8646748497445606e-05,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 330,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 422,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 40.6052734603303
+    },
+    {
+      "method": "temporal",
+      "step": 0.001,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 362,
+      "frame_header_bytes": 24,
+      "payload_bytes": 1379541,
+      "total_bytes": 1383407,
+      "mean_bytes_per_frame_including_session": 9475.390410958904,
+      "selected_delta_frames": 137,
+      "full_frames": 9,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.003125,
+      "encoder_ms_per_frame_median_round_mean": 0.36747519178082194,
+      "decoder_ms_per_frame_median_round_mean": 0.09517121917808219,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "d762e5419489048469b115a383a757e7da9e18a565a2407989514ad25e73aafc",
+      "activation_error": {
+        "mae": 0.0002499014619266279,
+        "rmse": 0.0002886155963489085,
+        "max_absolute_error": 0.000500023365020752,
+        "normalized_rmse_by_reference_std": 0.0001645866088856863
+      },
+      "output_error": {
+        "mae": 1.939455095358851e-06,
+        "rmse": 1.808878776568029e-05,
+        "max_absolute_error": 0.0006027817726135254,
+        "normalized_rmse_by_reference_std": 3.8646748497445606e-05,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 330,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 422,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 48.66411980043157,
+      "saving_vs_independent_same_step_percent": 13.568285956698144
+    },
+    {
+      "method": "independent",
+      "step": 0.001,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 364,
+      "frame_header_bytes": 24,
+      "payload_bytes": 328192,
+      "total_bytes": 329276,
+      "mean_bytes_per_frame_including_session": 10975.866666666667,
+      "selected_delta_frames": 0,
+      "full_frames": 30,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.19031556666666669,
+      "decoder_ms_per_frame_median_round_mean": 0.09425789999999999,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "bc3f644d046a7e318e1da5984f4450fcd3678aad0cf5be0e7f6eb548dbf89385",
+      "activation_error": {
+        "mae": 0.0002498084259661516,
+        "rmse": 0.00028859635077071793,
+        "max_absolute_error": 0.0004999935626983643,
+        "normalized_rmse_by_reference_std": 0.000164577789308888
+      },
+      "output_error": {
+        "mae": 1.811216157710396e-06,
+        "rmse": 1.7067945233464306e-05,
+        "max_absolute_error": 0.00045365095138549805,
+        "normalized_rmse_by_reference_std": 3.6457601024538826e-05,
+        "argmax_changed_cells": 0,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 27,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 65,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 84,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 40.55510021338898
+    },
+    {
+      "method": "temporal",
+      "step": 0.001,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 361,
+      "frame_header_bytes": 24,
+      "payload_bytes": 302615,
+      "total_bytes": 303696,
+      "mean_bytes_per_frame_including_session": 10123.2,
+      "selected_delta_frames": 23,
+      "full_frames": 7,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.0020706741898148147,
+      "encoder_ms_per_frame_median_round_mean": 0.3387542333333333,
+      "decoder_ms_per_frame_median_round_mean": 0.09675623333333334,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "bc3f644d046a7e318e1da5984f4450fcd3678aad0cf5be0e7f6eb548dbf89385",
+      "activation_error": {
+        "mae": 0.0002498084259661516,
+        "rmse": 0.00028859635077071793,
+        "max_absolute_error": 0.0004999935626983643,
+        "normalized_rmse_by_reference_std": 0.000164577789308888
+      },
+      "output_error": {
+        "mae": 1.811216157710396e-06,
+        "rmse": 1.7067945233464306e-05,
+        "max_absolute_error": 0.00045365095138549805,
+        "normalized_rmse_by_reference_std": 3.6457601024538826e-05,
+        "argmax_changed_cells": 0,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 27,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 65,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 84,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 45.17311226571442,
+      "saving_vs_independent_same_step_percent": 7.768558898917622
+    },
+    {
+      "method": "independent",
+      "step": 0.01,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 364,
+      "frame_header_bytes": 24,
+      "payload_bytes": 1276296,
+      "total_bytes": 1280164,
+      "mean_bytes_per_frame_including_session": 8768.246575342466,
+      "selected_delta_frames": 0,
+      "full_frames": 146,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.18000510273972603,
+      "decoder_ms_per_frame_median_round_mean": 0.08435514383561644,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "6e359b5c708224fd2d8ca0817eb41434a92bd65f5cf44e00375ea3a2a5ad8b93",
+      "activation_error": {
+        "mae": 0.002501766070705379,
+        "rmse": 0.0028889227134227258,
+        "max_absolute_error": 0.004999995231628418,
+        "normalized_rmse_by_reference_std": 0.0016474438621822591
+      },
+      "output_error": {
+        "mae": 1.9685783511792378e-05,
+        "rmse": 0.00018973701213163382,
+        "max_absolute_error": 0.006916940212249756,
+        "normalized_rmse_by_reference_std": 0.0004053736869211515,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 150,
+            "changed_cells": 1,
+            "agreement_percent": 99.99524353120243,
+            "lost_foreground_cells": 1,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9933774834437086
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 331,
+            "changed_cells": 1,
+            "agreement_percent": 99.99524353120243,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 1,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9969788519637462
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 422,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 52.49529188460061
+    },
+    {
+      "method": "temporal",
+      "step": 0.01,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 361,
+      "frame_header_bytes": 24,
+      "payload_bytes": 1142153,
+      "total_bytes": 1146018,
+      "mean_bytes_per_frame_including_session": 7849.438356164384,
+      "selected_delta_frames": 135,
+      "full_frames": 11,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.030693514384920635,
+      "encoder_ms_per_frame_median_round_mean": 0.3492253904109589,
+      "decoder_ms_per_frame_median_round_mean": 0.09665032191780822,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "6e359b5c708224fd2d8ca0817eb41434a92bd65f5cf44e00375ea3a2a5ad8b93",
+      "activation_error": {
+        "mae": 0.002501766070705379,
+        "rmse": 0.0028889227134227258,
+        "max_absolute_error": 0.004999995231628418,
+        "normalized_rmse_by_reference_std": 0.0016474438621822591
+      },
+      "output_error": {
+        "mae": 1.9685783511792378e-05,
+        "rmse": 0.00018973701213163382,
+        "max_absolute_error": 0.006916940212249756,
+        "normalized_rmse_by_reference_std": 0.0004053736869211515,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 150,
+            "changed_cells": 1,
+            "agreement_percent": 99.99524353120243,
+            "lost_foreground_cells": 1,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9933774834437086
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 331,
+            "changed_cells": 1,
+            "agreement_percent": 99.99524353120243,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 1,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9969788519637462
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 422,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 57.47322172394023,
+      "saving_vs_independent_same_step_percent": 10.47881365200084
+    },
+    {
+      "method": "independent",
+      "step": 0.01,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 363,
+      "frame_header_bytes": 24,
+      "payload_bytes": 262431,
+      "total_bytes": 263514,
+      "mean_bytes_per_frame_including_session": 8783.8,
+      "selected_delta_frames": 0,
+      "full_frames": 30,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.18062963333333334,
+      "decoder_ms_per_frame_median_round_mean": 0.08773653333333334,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "73ed6eb6ee2f78787232a4ef76158255985c19e704f5e796b936af10b7d3de2c",
+      "activation_error": {
+        "mae": 0.002496352669361891,
+        "rmse": 0.002884722807064028,
+        "max_absolute_error": 0.004999950528144836,
+        "normalized_rmse_by_reference_std": 0.001645070358955137
+      },
+      "output_error": {
+        "mae": 1.7480132368861246e-05,
+        "rmse": 0.00017179819890010252,
+        "max_absolute_error": 0.004255414009094238,
+        "normalized_rmse_by_reference_std": 0.00036696568371651734,
+        "argmax_changed_cells": 0,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 27,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 65,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 84,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 52.427254575587
+    },
+    {
+      "method": "temporal",
+      "step": 0.01,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 360,
+      "frame_header_bytes": 24,
+      "payload_bytes": 248323,
+      "total_bytes": 249403,
+      "mean_bytes_per_frame_including_session": 8313.433333333332,
+      "selected_delta_frames": 20,
+      "full_frames": 10,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.01880787037037037,
+      "encoder_ms_per_frame_median_round_mean": 0.3248122,
+      "decoder_ms_per_frame_median_round_mean": 0.09367206666666666,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "73ed6eb6ee2f78787232a4ef76158255985c19e704f5e796b936af10b7d3de2c",
+      "activation_error": {
+        "mae": 0.002496352669361891,
+        "rmse": 0.002884722807064028,
+        "max_absolute_error": 0.004999950528144836,
+        "normalized_rmse_by_reference_std": 0.001645070358955137
+      },
+      "output_error": {
+        "mae": 1.7480132368861246e-05,
+        "rmse": 0.00017179819890010252,
+        "max_absolute_error": 0.004255414009094238,
+        "normalized_rmse_by_reference_std": 0.00036696568371651734,
+        "argmax_changed_cells": 0,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 27,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 65,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 84,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 54.97474355410006,
+      "saving_vs_independent_same_step_percent": 5.354933703712139
+    },
+    {
+      "method": "independent",
+      "step": 0.1,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 363,
+      "frame_header_bytes": 24,
+      "payload_bytes": 1052757,
+      "total_bytes": 1056624,
+      "mean_bytes_per_frame_including_session": 7237.1506849315065,
+      "selected_delta_frames": 0,
+      "full_frames": 146,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.1593760890410959,
+      "decoder_ms_per_frame_median_round_mean": 0.08336713013698631,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "cca29e4a4f835201057331385d43299f243f83e8ea11f5fa9c68538708a35eda",
+      "activation_error": {
+        "mae": 0.025026174642678724,
+        "rmse": 0.02889238956845097,
+        "max_absolute_error": 0.04999995231628418,
+        "normalized_rmse_by_reference_std": 0.016476242039002015
+      },
+      "output_error": {
+        "mae": 0.000199955310271997,
+        "rmse": 0.001898094655884279,
+        "max_absolute_error": 0.06476402282714844,
+        "normalized_rmse_by_reference_std": 0.004055284839456268,
+        "argmax_changed_cells": 2,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 2,
+            "agreement_percent": 99.99048706240488,
+            "lost_foreground_cells": 1,
+            "introduced_foreground_cells": 1,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9868421052631579
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 332,
+            "changed_cells": 6,
+            "agreement_percent": 99.97146118721462,
+            "lost_foreground_cells": 2,
+            "introduced_foreground_cells": 4,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9820359281437125
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 425,
+            "changed_cells": 5,
+            "agreement_percent": 99.97621765601218,
+            "lost_foreground_cells": 1,
+            "introduced_foreground_cells": 4,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9882629107981221
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 60.79048097921378
+    },
+    {
+      "method": "temporal",
+      "step": 0.1,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 360,
+      "frame_header_bytes": 24,
+      "payload_bytes": 851066,
+      "total_bytes": 854930,
+      "mean_bytes_per_frame_including_session": 5855.684931506849,
+      "selected_delta_frames": 136,
+      "full_frames": 10,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.27362196180555554,
+      "encoder_ms_per_frame_median_round_mean": 0.31427229452054795,
+      "decoder_ms_per_frame_median_round_mean": 0.09269395205479451,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "cca29e4a4f835201057331385d43299f243f83e8ea11f5fa9c68538708a35eda",
+      "activation_error": {
+        "mae": 0.025026174642678724,
+        "rmse": 0.02889238956845097,
+        "max_absolute_error": 0.04999995231628418,
+        "normalized_rmse_by_reference_std": 0.016476242039002015
+      },
+      "output_error": {
+        "mae": 0.000199955310271997,
+        "rmse": 0.001898094655884279,
+        "max_absolute_error": 0.06476402282714844,
+        "normalized_rmse_by_reference_std": 0.004055284839456268,
+        "argmax_changed_cells": 2,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 2,
+            "agreement_percent": 99.99048706240488,
+            "lost_foreground_cells": 1,
+            "introduced_foreground_cells": 1,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9868421052631579
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 332,
+            "changed_cells": 6,
+            "agreement_percent": 99.97146118721462,
+            "lost_foreground_cells": 2,
+            "introduced_foreground_cells": 4,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9820359281437125
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 425,
+            "changed_cells": 5,
+            "agreement_percent": 99.97621765601218,
+            "lost_foreground_cells": 1,
+            "introduced_foreground_cells": 4,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9882629107981221
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 68.27500218011255,
+      "saving_vs_independent_same_step_percent": 19.08853101954906
+    },
+    {
+      "method": "independent",
+      "step": 0.1,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 362,
+      "frame_header_bytes": 24,
+      "payload_bytes": 216426,
+      "total_bytes": 217508,
+      "mean_bytes_per_frame_including_session": 7250.266666666666,
+      "selected_delta_frames": 0,
+      "full_frames": 30,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.1604883,
+      "decoder_ms_per_frame_median_round_mean": 0.0838922,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "423c5fb09538545465a87e176f84f5e21ec87d1c44a3a26ec2027c974dcccda3",
+      "activation_error": {
+        "mae": 0.02507260392962499,
+        "rmse": 0.028944347301812026,
+        "max_absolute_error": 0.04999953508377075,
+        "normalized_rmse_by_reference_std": 0.016506087756131924
+      },
+      "output_error": {
+        "mae": 0.0002184933059791645,
+        "rmse": 0.002155374712938953,
+        "max_absolute_error": 0.06476402282714844,
+        "normalized_rmse_by_reference_std": 0.004603939740129972,
+        "argmax_changed_cells": 0,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 27,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 67,
+            "changed_cells": 2,
+            "agreement_percent": 99.9537037037037,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 2,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9701492537313433
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 84,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 60.7328160485848
+    },
+    {
+      "method": "temporal",
+      "step": 0.1,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 359,
+      "frame_header_bytes": 24,
+      "payload_bytes": 196023,
+      "total_bytes": 197102,
+      "mean_bytes_per_frame_including_session": 6570.066666666667,
+      "selected_delta_frames": 21,
+      "full_frames": 9,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.1746509693287037,
+      "encoder_ms_per_frame_median_round_mean": 0.29434859999999996,
+      "decoder_ms_per_frame_median_round_mean": 0.0927983,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "423c5fb09538545465a87e176f84f5e21ec87d1c44a3a26ec2027c974dcccda3",
+      "activation_error": {
+        "mae": 0.02507260392962499,
+        "rmse": 0.028944347301812026,
+        "max_absolute_error": 0.04999953508377075,
+        "normalized_rmse_by_reference_std": 0.016506087756131924
+      },
+      "output_error": {
+        "mae": 0.0002184933059791645,
+        "rmse": 0.002155374712938953,
+        "max_absolute_error": 0.06476402282714844,
+        "normalized_rmse_by_reference_std": 0.004603939740129972,
+        "argmax_changed_cells": 0,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 27,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 67,
+            "changed_cells": 2,
+            "agreement_percent": 99.9537037037037,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 2,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9701492537313433
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 84,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 64.41675482652667,
+      "saving_vs_independent_same_step_percent": 9.381723890615511
+    },
+    {
+      "method": "independent",
+      "step": 0.5,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 363,
+      "frame_header_bytes": 24,
+      "payload_bytes": 863557,
+      "total_bytes": 867424,
+      "mean_bytes_per_frame_including_session": 5941.260273972603,
+      "selected_delta_frames": 0,
+      "full_frames": 146,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.15705651369863016,
+      "decoder_ms_per_frame_median_round_mean": 0.08544107534246576,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "8da902e1d82204c244c5eb71eeedea95ac3ea85ccad9f15e9c49f853b545ecd3",
+      "activation_error": {
+        "mae": 0.12502638611672118,
+        "rmse": 0.14440650784144687,
+        "max_absolute_error": 0.2499990463256836,
+        "normalized_rmse_by_reference_std": 0.08234959484973756
+      },
+      "output_error": {
+        "mae": 0.0010014759275100698,
+        "rmse": 0.009585152985287526,
+        "max_absolute_error": 0.2739855945110321,
+        "normalized_rmse_by_reference_std": 0.020478707668557552,
+        "argmax_changed_cells": 49,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 160,
+            "changed_cells": 49,
+            "agreement_percent": 99.76693302891934,
+            "lost_foreground_cells": 20,
+            "introduced_foreground_cells": 29,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.7277777777777777
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 317,
+            "changed_cells": 47,
+            "agreement_percent": 99.77644596651446,
+            "lost_foreground_cells": 30,
+            "introduced_foreground_cells": 17,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8645533141210374
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 428,
+            "changed_cells": 22,
+            "agreement_percent": 99.89535768645358,
+            "lost_foreground_cells": 8,
+            "introduced_foreground_cells": 14,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9495412844036697
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 67.81137109597505
+    },
+    {
+      "method": "temporal",
+      "step": 0.5,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 360,
+      "frame_header_bytes": 24,
+      "payload_bytes": 561861,
+      "total_bytes": 565725,
+      "mean_bytes_per_frame_including_session": 3874.828767123288,
+      "selected_delta_frames": 138,
+      "full_frames": 8,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.6747938368055556,
+      "encoder_ms_per_frame_median_round_mean": 0.2581331712328767,
+      "decoder_ms_per_frame_median_round_mean": 0.08315023287671233,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "8da902e1d82204c244c5eb71eeedea95ac3ea85ccad9f15e9c49f853b545ecd3",
+      "activation_error": {
+        "mae": 0.12502638611672118,
+        "rmse": 0.14440650784144687,
+        "max_absolute_error": 0.2499990463256836,
+        "normalized_rmse_by_reference_std": 0.08234959484973756
+      },
+      "output_error": {
+        "mae": 0.0010014759275100698,
+        "rmse": 0.009585152985287526,
+        "max_absolute_error": 0.2739855945110321,
+        "normalized_rmse_by_reference_std": 0.020478707668557552,
+        "argmax_changed_cells": 49,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 160,
+            "changed_cells": 49,
+            "agreement_percent": 99.76693302891934,
+            "lost_foreground_cells": 20,
+            "introduced_foreground_cells": 29,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.7277777777777777
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 317,
+            "changed_cells": 47,
+            "agreement_percent": 99.77644596651446,
+            "lost_foreground_cells": 30,
+            "introduced_foreground_cells": 17,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8645533141210374
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 428,
+            "changed_cells": 22,
+            "agreement_percent": 99.89535768645358,
+            "lost_foreground_cells": 8,
+            "introduced_foreground_cells": 14,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9495412844036697
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 79.00690770980569,
+      "saving_vs_independent_same_step_percent": 34.781029807798724
+    },
+    {
+      "method": "independent",
+      "step": 0.5,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 362,
+      "frame_header_bytes": 24,
+      "payload_bytes": 177677,
+      "total_bytes": 178759,
+      "mean_bytes_per_frame_including_session": 5958.633333333333,
+      "selected_delta_frames": 0,
+      "full_frames": 30,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.15719656666666668,
+      "decoder_ms_per_frame_median_round_mean": 0.08601489999999999,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "8879cd3ef3adc6ffd4292f03be6648eeed6509712f70b1b4549f68de213287a7",
+      "activation_error": {
+        "mae": 0.12509536554373216,
+        "rmse": 0.14443403011106215,
+        "max_absolute_error": 0.24999332427978516,
+        "normalized_rmse_by_reference_std": 0.08236636850455918
+      },
+      "output_error": {
+        "mae": 0.001053739276294591,
+        "rmse": 0.010004402065519906,
+        "max_absolute_error": 0.2075338363647461,
+        "normalized_rmse_by_reference_std": 0.021369678306599874,
+        "argmax_changed_cells": 6,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 29,
+            "changed_cells": 6,
+            "agreement_percent": 99.86111111111111,
+            "lost_foreground_cells": 2,
+            "introduced_foreground_cells": 4,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8064516129032258
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 57,
+            "changed_cells": 16,
+            "agreement_percent": 99.62962962962963,
+            "lost_foreground_cells": 12,
+            "introduced_foreground_cells": 4,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.7681159420289855
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 85,
+            "changed_cells": 3,
+            "agreement_percent": 99.93055555555556,
+            "lost_foreground_cells": 1,
+            "introduced_foreground_cells": 2,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9651162790697675
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 67.72825580681618
+    },
+    {
+      "method": "temporal",
+      "step": 0.5,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 359,
+      "frame_header_bytes": 24,
+      "payload_bytes": 144145,
+      "total_bytes": 145224,
+      "mean_bytes_per_frame_including_session": 4840.8,
+      "selected_delta_frames": 23,
+      "full_frames": 7,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.5274793836805556,
+      "encoder_ms_per_frame_median_round_mean": 0.2579013,
+      "decoder_ms_per_frame_median_round_mean": 0.08718346666666665,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "8879cd3ef3adc6ffd4292f03be6648eeed6509712f70b1b4549f68de213287a7",
+      "activation_error": {
+        "mae": 0.12509536554373216,
+        "rmse": 0.14443403011106215,
+        "max_absolute_error": 0.24999332427978516,
+        "normalized_rmse_by_reference_std": 0.08236636850455918
+      },
+      "output_error": {
+        "mae": 0.001053739276294591,
+        "rmse": 0.010004402065519906,
+        "max_absolute_error": 0.2075338363647461,
+        "normalized_rmse_by_reference_std": 0.021369678306599874,
+        "argmax_changed_cells": 6,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 29,
+            "changed_cells": 6,
+            "agreement_percent": 99.86111111111111,
+            "lost_foreground_cells": 2,
+            "introduced_foreground_cells": 4,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8064516129032258
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 57,
+            "changed_cells": 16,
+            "agreement_percent": 99.62962962962963,
+            "lost_foreground_cells": 12,
+            "introduced_foreground_cells": 4,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.7681159420289855
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 85,
+            "changed_cells": 3,
+            "agreement_percent": 99.93055555555556,
+            "lost_foreground_cells": 1,
+            "introduced_foreground_cells": 2,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9651162790697675
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 73.78240100520294,
+      "saving_vs_independent_same_step_percent": 18.759894606705117
+    },
+    {
+      "method": "independent",
+      "step": 1.0,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 363,
+      "frame_header_bytes": 24,
+      "payload_bytes": 742000,
+      "total_bytes": 745867,
+      "mean_bytes_per_frame_including_session": 5108.678082191781,
+      "selected_delta_frames": 0,
+      "full_frames": 146,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.14842673972602738,
+      "decoder_ms_per_frame_median_round_mean": 0.08236165068493151,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "4fbebf1f5ccf0015a48a9974a2bc6b18fffde726aaed0967cd3f3b722e909312",
+      "activation_error": {
+        "mae": 0.2513766808535823,
+        "rmse": 0.28987650279971355,
+        "max_absolute_error": 0.4999980926513672,
+        "normalized_rmse_by_reference_std": 0.16530565636435826
+      },
+      "output_error": {
+        "mae": 0.0019336686336586186,
+        "rmse": 0.018619516363252726,
+        "max_absolute_error": 0.5274550914764404,
+        "normalized_rmse_by_reference_std": 0.03978065171398393,
+        "argmax_changed_cells": 96,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 186,
+            "changed_cells": 93,
+            "agreement_percent": 99.55764840182648,
+            "lost_foreground_cells": 29,
+            "introduced_foreground_cells": 64,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.5674418604651162
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 322,
+            "changed_cells": 54,
+            "agreement_percent": 99.7431506849315,
+            "lost_foreground_cells": 31,
+            "introduced_foreground_cells": 23,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8470254957507082
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 413,
+            "changed_cells": 67,
+            "agreement_percent": 99.68131659056316,
+            "lost_foreground_cells": 38,
+            "introduced_foreground_cells": 29,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8514412416851441
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 72.32214456279931
+    },
+    {
+      "method": "temporal",
+      "step": 1.0,
+      "sampling_fps": 5.0,
+      "frames": 146,
+      "session_header_bytes": 360,
+      "frame_header_bytes": 24,
+      "payload_bytes": 431479,
+      "total_bytes": 435343,
+      "mean_bytes_per_frame_including_session": 2981.801369863014,
+      "selected_delta_frames": 138,
+      "full_frames": 8,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.7941855778769841,
+      "encoder_ms_per_frame_median_round_mean": 0.2298323219178082,
+      "decoder_ms_per_frame_median_round_mean": 0.07882007534246575,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "4fbebf1f5ccf0015a48a9974a2bc6b18fffde726aaed0967cd3f3b722e909312",
+      "activation_error": {
+        "mae": 0.2513766808535823,
+        "rmse": 0.28987650279971355,
+        "max_absolute_error": 0.4999980926513672,
+        "normalized_rmse_by_reference_std": 0.16530565636435826
+      },
+      "output_error": {
+        "mae": 0.0019336686336586186,
+        "rmse": 0.018619516363252726,
+        "max_absolute_error": 0.5274550914764404,
+        "normalized_rmse_by_reference_std": 0.03978065171398393,
+        "argmax_changed_cells": 96,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 186,
+            "changed_cells": 93,
+            "agreement_percent": 99.55764840182648,
+            "lost_foreground_cells": 29,
+            "introduced_foreground_cells": 64,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.5674418604651162
+          },
+          "0.25": {
+            "reference_foreground_cells": 330,
+            "reconstructed_foreground_cells": 322,
+            "changed_cells": 54,
+            "agreement_percent": 99.7431506849315,
+            "lost_foreground_cells": 31,
+            "introduced_foreground_cells": 23,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8470254957507082
+          },
+          "0.1": {
+            "reference_foreground_cells": 422,
+            "reconstructed_foreground_cells": 413,
+            "changed_cells": 67,
+            "agreement_percent": 99.68131659056316,
+            "lost_foreground_cells": 38,
+            "introduced_foreground_cells": 29,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8514412416851441
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 83.84516191278438,
+      "saving_vs_independent_same_step_percent": 41.63262351062589
+    },
+    {
+      "method": "independent",
+      "step": 1.0,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 362,
+      "frame_header_bytes": 24,
+      "payload_bytes": 152403,
+      "total_bytes": 153485,
+      "mean_bytes_per_frame_including_session": 5116.166666666667,
+      "selected_delta_frames": 0,
+      "full_frames": 30,
+      "scheduled_refresh_frames": null,
+      "mean_zero_delta_fraction_on_candidate_frames": null,
+      "encoder_ms_per_frame_median_round_mean": 0.15047973333333334,
+      "decoder_ms_per_frame_median_round_mean": 0.08511863333333333,
+      "minimum_persistent_reference_bytes_per_side": 0,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "f55beeaf005997900aeeb17bfcc687b211ff78ca37f5395d5a48ecd7876684b3",
+      "activation_error": {
+        "mae": 0.25147915351204886,
+        "rmse": 0.2899190974018124,
+        "max_absolute_error": 0.4999951124191284,
+        "normalized_rmse_by_reference_std": 0.165332111793493
+      },
+      "output_error": {
+        "mae": 0.0017933504779172511,
+        "rmse": 0.0182202962819227,
+        "max_absolute_error": 0.5274550914764404,
+        "normalized_rmse_by_reference_std": 0.038919054596731825,
+        "argmax_changed_cells": 18,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 35,
+            "changed_cells": 18,
+            "agreement_percent": 99.58333333333333,
+            "lost_foreground_cells": 5,
+            "introduced_foreground_cells": 13,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.55
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 67,
+            "changed_cells": 16,
+            "agreement_percent": 99.62962962962963,
+            "lost_foreground_cells": 7,
+            "introduced_foreground_cells": 9,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.7837837837837838
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 87,
+            "changed_cells": 11,
+            "agreement_percent": 99.74537037037037,
+            "lost_foreground_cells": 4,
+            "introduced_foreground_cells": 7,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8791208791208791
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 72.29102502536476
+    },
+    {
+      "method": "temporal",
+      "step": 1.0,
+      "sampling_fps": 1.0,
+      "frames": 30,
+      "session_header_bytes": 359,
+      "frame_header_bytes": 24,
+      "payload_bytes": 117294,
+      "total_bytes": 118373,
+      "mean_bytes_per_frame_including_session": 3945.766666666667,
+      "selected_delta_frames": 23,
+      "full_frames": 7,
+      "scheduled_refresh_frames": 6,
+      "mean_zero_delta_fraction_on_candidate_frames": 0.6757993344907407,
+      "encoder_ms_per_frame_median_round_mean": 0.23572843333333332,
+      "decoder_ms_per_frame_median_round_mean": 0.08715139999999999,
+      "minimum_persistent_reference_bytes_per_side": 18432,
+      "integer_roundtrip_and_shared_reference_all_frames_all_rounds": true,
+      "reconstruction_sha256": "f55beeaf005997900aeeb17bfcc687b211ff78ca37f5395d5a48ecd7876684b3",
+      "activation_error": {
+        "mae": 0.25147915351204886,
+        "rmse": 0.2899190974018124,
+        "max_absolute_error": 0.4999951124191284,
+        "normalized_rmse_by_reference_std": 0.165332111793493
+      },
+      "output_error": {
+        "mae": 0.0017933504779172511,
+        "rmse": 0.0182202962819227,
+        "max_absolute_error": 0.5274550914764404,
+        "normalized_rmse_by_reference_std": 0.038919054596731825,
+        "argmax_changed_cells": 18,
+        "cells": 4320,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 27,
+            "reconstructed_foreground_cells": 35,
+            "changed_cells": 18,
+            "agreement_percent": 99.58333333333333,
+            "lost_foreground_cells": 5,
+            "introduced_foreground_cells": 13,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.55
+          },
+          "0.25": {
+            "reference_foreground_cells": 65,
+            "reconstructed_foreground_cells": 67,
+            "changed_cells": 16,
+            "agreement_percent": 99.62962962962963,
+            "lost_foreground_cells": 7,
+            "introduced_foreground_cells": 9,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.7837837837837838
+          },
+          "0.1": {
+            "reference_foreground_cells": 84,
+            "reconstructed_foreground_cells": 87,
+            "changed_cells": 11,
+            "agreement_percent": 99.74537037037037,
+            "lost_foreground_cells": 4,
+            "introduced_foreground_cells": 7,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8791208791208791
+          }
+        }
+      },
+      "activation_error_bound_checked_all_values": true,
+      "saving_vs_raw_percent": 78.62986940305244,
+      "saving_vs_independent_same_step_percent": 22.876502589829627
+    }
+  ],
+  "scope": "offline PC Keras; one video/split; no annotations, network, energy or ESP32 measurements"
+}
