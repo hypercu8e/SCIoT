@@ -1,0 +1,158 @@
+{
+  "scope": "Public-image CPU functional/fidelity checks; no accuracy claim or retraining",
+  "images": 148,
+  "manifest_sha256": "684a7021afcf41ec5cf015178c3e9ab6d367a4025fb8792cdab60f22aa483a5c",
+  "model_sha256": "35ef2c4d89e65e85a37676148e4cde1ff72384c479dbb9ca2d7fda55d0cb0184",
+  "preprocessing": "center square crop, Pillow Lanczos 96x96, BT.601 grayscale float32 [0,1]; not pixel-parity with Studio/FFmpeg",
+  "split_max_error": 0.0,
+  "class_channels": "channel 0 background; 1/2 unnamed, local H5 label order unconfirmed",
+  "calibration": "none; use existing binaries calibrated on the original 48 frames",
+  "variants": {
+    "float32": {
+      "model_sha256": "01b71eb64daa7b7e99409f41f57394f130b86689aef74d28b9cb83873324ea72",
+      "output_vs_keras": {
+        "mae": 3.239912162487231e-08,
+        "rmse": 1.356645772214497e-07,
+        "max_absolute_error": 6.288290023803711e-06,
+        "normalized_rmse_by_reference_std": 2.8986204421827523e-07,
+        "argmax_changed_cells": 0,
+        "cells": 21312,
+        "thresholds": {
+          "0.25": {
+            "reference_foreground_cells": 473,
+            "reconstructed_foreground_cells": 472,
+            "changed_cells": 1,
+            "agreement_percent": 99.9953078078078,
+            "lost_foreground_cells": 1,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9978858350951374
+          },
+          "0.5": {
+            "reference_foreground_cells": 355,
+            "reconstructed_foreground_cells": 355,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          },
+          "0.75": {
+            "reference_foreground_cells": 269,
+            "reconstructed_foreground_cells": 269,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      }
+    },
+    "int8": {
+      "model_sha256": "2a20659a928e2158f0e5a26083c5b109d2be3024812e5bc0314272bdf72e0a2e",
+      "output_vs_keras": {
+        "mae": 0.00266921076790917,
+        "rmse": 0.014104437549000785,
+        "max_absolute_error": 0.6302363276481628,
+        "normalized_rmse_by_reference_std": 0.030135656515767086,
+        "argmax_changed_cells": 33,
+        "cells": 21312,
+        "thresholds": {
+          "0.25": {
+            "reference_foreground_cells": 473,
+            "reconstructed_foreground_cells": 449,
+            "changed_cells": 58,
+            "agreement_percent": 99.72785285285285,
+            "lost_foreground_cells": 40,
+            "introduced_foreground_cells": 16,
+            "foreground_class_changed_cells": 2,
+            "foreground_label_cell_iou": 0.8813905930470347
+          },
+          "0.5": {
+            "reference_foreground_cells": 355,
+            "reconstructed_foreground_cells": 342,
+            "changed_cells": 35,
+            "agreement_percent": 99.83577327327328,
+            "lost_foreground_cells": 24,
+            "introduced_foreground_cells": 11,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9043715846994536
+          },
+          "0.75": {
+            "reference_foreground_cells": 269,
+            "reconstructed_foreground_cells": 257,
+            "changed_cells": 34,
+            "agreement_percent": 99.84046546546547,
+            "lost_foreground_cells": 23,
+            "introduced_foreground_cells": 11,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8785714285714286
+          }
+        }
+      }
+    },
+    "16x8": {
+      "model_sha256": "137c28ab6075e57cace44b501793fb99d53e11c6f0b68af2c919bc31c79979ff",
+      "output_vs_keras": {
+        "mae": 0.0012382227422070588,
+        "rmse": 0.011623282475796096,
+        "max_absolute_error": 0.6076816916465759,
+        "normalized_rmse_by_reference_std": 0.024834400312626497,
+        "argmax_changed_cells": 31,
+        "cells": 21312,
+        "thresholds": {
+          "0.25": {
+            "reference_foreground_cells": 473,
+            "reconstructed_foreground_cells": 452,
+            "changed_cells": 49,
+            "agreement_percent": 99.77008258258259,
+            "lost_foreground_cells": 35,
+            "introduced_foreground_cells": 14,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.8993839835728953
+          },
+          "0.5": {
+            "reference_foreground_cells": 355,
+            "reconstructed_foreground_cells": 346,
+            "changed_cells": 33,
+            "agreement_percent": 99.84515765765765,
+            "lost_foreground_cells": 21,
+            "introduced_foreground_cells": 12,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.9100817438692098
+          },
+          "0.75": {
+            "reference_foreground_cells": 269,
+            "reconstructed_foreground_cells": 258,
+            "changed_cells": 29,
+            "agreement_percent": 99.86392642642643,
+            "lost_foreground_cells": 20,
+            "introduced_foreground_cells": 9,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 0.89568345323741
+          }
+        }
+      }
+    }
+  },
+  "groups": {
+    "edgeimpulse_test": {
+      "images": 84,
+      "images_with_foreground_0_5": 60,
+      "foreground_cells_0_5": 198
+    },
+    "Coke": {
+      "images": 32,
+      "images_with_foreground_0_5": 12,
+      "foreground_cells_0_5": 16
+    },
+    "Liquor": {
+      "images": 32,
+      "images_with_foreground_0_5": 32,
+      "foreground_cells_0_5": 141
+    }
+  }
+}

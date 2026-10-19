@@ -1,0 +1,35 @@
+{
+  "scope": "Actual SCIoT HTTP routes + RequestHandler + Edge suffix + split selection, two PC processes",
+  "model": "src/server/models/test/test_model/test_model.h5",
+  "model_sha256": "12beec5534646831f24c223a933d5bafbe49d3064482a8de263cda3bb72bd0ff",
+  "input_shape": [
+    1,
+    96,
+    96,
+    3
+  ],
+  "output_shape": [
+    1,
+    12,
+    12,
+    2
+  ],
+  "keras_split_layer": "block_2_add",
+  "wire_split_index_excluding_input": 25,
+  "registration_image_inference_and_decision_passed": true,
+  "max_prediction_error_vs_full_keras": 2.384185791015625e-07,
+  "rtol": 0.0001,
+  "atol": 1e-05,
+  "returned_split_index": 25,
+  "server_pid": 29151,
+  "client_pid": 29122,
+  "original_profiles_and_evaluations_unchanged": true,
+  "limits": [
+    "HTTP only; not MQTT/WebSocket",
+    "Original RGB model, not grayscale candidate",
+    "Local clock override replaces NTP; startup Edge.initialization not exercised",
+    "Copied profiles and zero device times are fixtures; split optimality/performance not evaluated",
+    "Prediction observed inside server; original HTTP response only confirms success",
+    "No ESP32, Wi-Fi or compression integration"
+  ]
+}
