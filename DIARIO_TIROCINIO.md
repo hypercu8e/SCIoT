@@ -1,8 +1,11 @@
 # Diario del tirocinio SCIoT
 
-Aggiornato il 17 ottobre 2026. Titolo del tirocinio: **Multi Device Split Computing**.
+Aggiornato il 18 ottobre 2026. Titolo del tirocinio: **Multi Device Split Computing**.
 Tirocinio interno da 300 ore, con possibile sviluppo in tesi triennale in Informatica
 a UNIMORE, referente prof. Luca Bedogni.
+
+Per una lettura d'insieme di ciò che abbiamo fatto e capito:
+[recap del lavoro sul fork](RECAP_LAVORO_FORK.md).
 
 Questo diario ricostruisce le attività dall'inizio del percorso sulla base dei
 documenti locali e delle prove conservate. La data amministrativa esatta di inizio
@@ -219,16 +222,175 @@ tutti i confronti nuovi usano gli stessi tensori rigenerati.
 La baseline senza perdita del 15 ottobre è stata preservata e verificata con
 i suoi checksum. Non abbiamo eseguito commit o push del nuovo lavoro.
 
+## 8. Prova client–server TCP su PC — 18 ottobre
+
+Realizzato un client Python che riproduce le attivazioni già estratte e un server
+separato che ricostruisce il tensore ed esegue il suffisso Keras. Il collegamento
+è TCP loopback, con formato sperimentale separato dal protocollo SCIoT.
+Non sono state modificate le applicazioni server o firmware esistenti.
+
+146 frame, tre metodi, tre giri: 1.314 richieste verificate e 18 connessioni.
+Ogni sequenza viene interrotta volontariamente a metà tra due frame confermati:
+la connessione nuova riparte con sessione, sequenza e riferimento nuovi.
+Non è una prova di recupero automatico da guasti durante un messaggio.
+
+Byte applicativi client → server: raw 2.696.760, indipendente 1.602.438,
+temporale 1.385.197, costanti nei tre giri. Il risparmio temporale sul raw è
+48,63%; sull'indipendente è 13,56%. Le risposte del server occupano 261.146 byte
+per ciascuna sequenza e sono conteggiate separatamente. Header TCP/IP esclusi.
+Sul loopback il codec aumenta il tempo complessivo: non c'è una dimostrazione
+di beneficio di latenza su ESP32 o rete limitata.
+
+Verificati hash dei tensori, uscite raw rispetto all'estrazione e identità byte
+per byte delle uscite indipendenti/temporali. Nessuna cella cambia a soglia 0,5
+nel campione; senza annotazioni resta una misura di accordo col raw.
+20 test passati. Input e ambiente sono identificati nei nuovi artefatti:
+non si assumono identici ai tensori rigenerati della prova con perdita del 17.
+
+Chiarito anche il rapporto con il paper di Shiba et al. (IEEE Access 2026):
+il nostro codec quantizza prima il tensore e codifica poi differenze intere;
+il DPCM del paper quantizza invece il residuo rispetto alla ricostruzione
+precedente, e D+DZ aggiunge dead-zone sui residui. Non è una replica di D+DZ.
+
+**Artefatti:** [prova TCP](experiments/activation_compression/tcp_2026-10-18/README.md),
+[client/server](experiments/activation_compression/socket_benchmark.py).
+
+## 9. Chiarimenti sul significato dei risultati e sul paper — 18 ottobre
+
+Abbiamo esplicitato cosa significa compressione indipendente: ogni tensore
+viene compresso e inviato separatamente; il ricevitore non usa il precedente.
+Il temporale mantiene invece un riferimento condiviso e può inviare differenze.
+La perdita di precisione è una scelta distinta dall'uso del riferimento temporale.
+
+Chiarito anche il confronto dei tempi TCP. La misura va dal tensore già pronto
+alla risposta del server, includendo codifica, scambio e suffisso della rete.
+Sul loopback del PC il temporale è più lento sia del raw sia dell'indipendente:
+il trasferimento è molto rapido e il lavoro del codec non viene compensato dal
+risparmio di byte. Non è una previsione dei tempi su ESP32 o Wi-Fi.
+
+Ricontrollato il PDF del paper di Shiba e documentato cosa dimostrano le metriche
+di accordo e comprimibilità, quali confronti usano un delta ideale e quali misure
+hardware/rete restano aperte. I risultati del paper sono distinti dai nostri:
+non rivendichiamo una sua replica o la convenienza complessiva sul dispositivo.
+
+**Nuovi appunti e proposta:** [analisi, sezioni 9.2–9.4](ANALISI_COMPRESSIONE_ATTIVAZIONI.md#92-cosa-abbiamo-misurato-con-il-client-e-il-server-tcp--18-ottobre).
+Proposto di spiegare e definire il nuovo codec, poi confrontare DPCM uniforme
+e DPCM/dead-zone sugli stessi input del FOMO, conservando i controlli attuali.
+È un aggiornamento documentale: nessun nuovo codec o benchmark eseguito qui.
+
+## 10. Fattibilità INT8 del modello — 18 ottobre
+
+Dopo la revisione delle priorità abbiamo verificato se il modello dato potesse
+essere adattato numericamente all'ESP32 senza riaddestramento. Preparato un
+esperimento separato che converte il modello intero in TFLite float32 (controllo)
+e integer-only INT8, con ingresso e uscita int8. Il percorso SCIoT non è modificato.
+
+Primi 48 frame per calibrare gli intervalli, successivi 98 per valutare. Gli indici
+sono disgiunti, ma provengono dallo stesso video e sono temporalmente correlati.
+Nessuna annotazione o ricerca dei parametri sui dati di valutazione.
+
+| Risultato sui 98 frame | TFLite float32 | TFLite INT8 |
+|---|---:|---:|
+| Byte del file | 84.292 | 57.088 |
+| Byte dei valori a `block_2_add` nel modello intero | 18.432 | 4.608 |
+| Errore assoluto massimo sui punteggi rispetto a Keras | 0,00000310 | 0,289446 |
+| Celle cambiate a soglia 0,5 | 0 | 25 |
+| Celle oggetto perse / introdotte rispetto a Keras | 0 / 0 | 11 / 14 |
+
+Il riferimento ha 99 celle oggetto su 14.112 celle-frame. L'accordo globale INT8
+del 99,82% nasconde l'11,11% di celle oggetto perse; non sono conteggi di oggetti
+distinti o accuratezza su annotazioni. La variante è fattibile sul PC, ma non
+viene promossa a baseline di qualità. La causa degli scostamenti non è stabilita.
+
+Verificati conversione, allocazione e inferenza desktop, assenza di fallback
+float, inventario di operatori/versioni e parametri del confine. INT8 comprende
+tensori int8 e int32; questi ultimi includono bias e forme. La riduzione del
+32,27% riguarda il file TFLite; quella del 75% i soli valori del tensore al confine.
+Non abbiamo misurato picco di RAM, tempo, energia o rete sull'ESP32, né esportato
+e verificato due sottomodelli INT8 o integrato ESP-NN.
+
+I quattro nuovi test INT8 verificano scale/zero point, clipping senza overflow,
+parametri invalidi e separazione degli indici. Passati 19 test senza socket;
+i cinque test TCP precedenti non sono stati rieseguiti in questa attività.
+Un percorso separato ricarica i file salvati, riesegue l'inferenza e controlla
+hash, metriche e conteggi CSV. Archivio permanente con modelli TFLite, report,
+input/source hash e verifiche. Le baseline precedenti sono conservate.
+
+**Artefatti:** [risultati e riproduzione](experiments/activation_compression/int8_2026-10-18/README.md),
+[conversione e confronto](experiments/activation_compression/check_int8.py),
+[verifica dei file salvati](experiments/activation_compression/verify_int8.py).
+
+## 11. Confronto 16×8 — 18 ottobre
+
+Provata la quantizzazione con attivazioni INT16, pesi INT8 e bias INT64, senza
+riaddestramento e mantenendo gli stessi 48 frame di calibrazione e 98 di
+valutazione. Riuscite conversione integer-only, allocazione e inferenza desktop.
+I controlli float32 e INT8 sono gli stessi binari precedenti: ricaricati,
+riproducono gli stessi hash delle uscite e le stesse metriche.
+
+Il 16×8 occupa 69.056 byte (-18,08% rispetto al TFLite float32) e il tensore
+al confine 9.216 byte (-50% sui soli valori). A soglia 0,5 le celle cambiate
+scendono da 25 di INT8 a 18; perse da 11 a 7 sulle 99 del riferimento,
+introdotte da 14 a 11. MAE dei punteggi da 0,00223682 a 0,000776675; il massimo
+scostamento resta circa 0,286. Più fedeltà in queste metriche, senza una qualità
+approvata per l'applicazione o una valutazione su annotazioni.
+
+Salvati modello 16×8, controlli identici, report, metriche per frame e hash;
+verificati in un percorso separato ricaricando i file. Passati 23 test senza
+socket, inclusi quattro nuovi controlli INT16. Archivi precedenti conservati.
+Nessuna modifica a firmware/server, split quantizzato distribuito, esecuzione
+ESP32 o misura di tempo/memoria. La variante INT16 dei singoli operatori deve
+essere verificata nel runtime Micro effettivo prima di scegliere il porting.
+
+**Artefatti:** [confronto e riproduzione](experiments/activation_compression/16x8_2026-10-18/README.md),
+[esperimento](experiments/activation_compression/check_16x8.py),
+[verifica dei binari](experiments/activation_compression/verify_16x8.py).
+
+## 12. Dati pubblici e prova HTTP originale sul PC — 18 ottobre
+
+Raccolte 84 immagini con bounding box dal set pubblico di test Beer/can e
+gli archivi OTB Coke (291 frame) e Liquor (1.741). Verificati immagini, hash e
+CRC ZIP. Eseguita l'inferenza su tutte le 84 foto e 32 frame scelti uniformemente
+per ogni sequenza, senza addestrare o ricalibrare. Keras intero e split coincidono
+(max errore 0,0). TFLite float32 non cambia celle a soglia 0,5; INT8 ne cambia
+35, 16×8 ne cambia 33 rispetto alle 355 celle oggetto del riferimento.
+Sono metriche di fedeltà: ordine dei canali del nostro H5 da confermare, nessun
+postprocessing FOMO o valutazione dell'accuratezza sulle annotazioni.
+
+Provato il vero percorso HTTP con client Python e server in processi distinti:
+registrazione, immagine RGB565, attivazioni, suffisso TFLite e decisione dello
+split. Modello RGB originale SCIoT, distinto dal candidato in grigio; errore
+massimo osservato rispetto a Keras intero `2,38e-7`. Dati di stato isolati e
+originali verificati invariati; orologio locale al posto di NTP, profili copiati
+e tempi dispositivo nulli. Non sono misure realistiche o prove dell'avvio ordinario.
+
+Preparati script ripetibili e [guida PC](TEST_SU_PC.md). Alla successiva richiesta
+di chiarimento abbiamo discusso TCP/UDP lasciando fermo l'esperimento UDP.
+Nessun porting del codec nel server originale o prova ESP32 eseguito.
+
 ## Stato e prossime decisioni
 
 - Studio iniziale, modello candidato, split Keras e baseline senza perdita completati.
 - Esperimento con perdita definito, implementato ed eseguito; risultati e
   interpretazione conservati insieme al report del 17 ottobre.
+- Prova TCP con suffisso Keras in processo separato completata sul PC;
+  resta separata dal protocollo SCIoT. Replica DPCM/dead-zone ancora da fare.
+- Prima conversione INT8 e confronto con TFLite float32 completati sul PC;
+  fedeltà da valutare, nessuna qualità accettabile o compatibilità ESP32 approvata.
+- Confronto 16×8 completato sugli stessi dati: fedeltà migliore nelle metriche
+  riportate, file e attivazioni più grandi dell'INT8; costi sul target ancora aperti.
 - Mancano dataset annotato e più sequenze/split per generalizzare i risultati.
 - Nessun riaddestramento, porting del codec nel firmware, benchmark su ESP32,
   emulazione prestazionale, misura di energia o prova di rete reale.
 - L'eventuale porting va deciso confrontando il beneficio temporale con la
   compressione indipendente alla stessa qualità e misurandone il costo sul dispositivo.
+- Prossimo passo: verificare il supporto INT8/INT16 nel runtime Micro effettivo,
+  poi misurare memoria/tempo e verificare lo split sul target. Ampliare calibrazione
+  e valutazione su sequenze distinte, senza cercare parametri sul test.
+  Conservare float32 come controllo.
+- DPCM/dead-zone rimane un confronto successivo da specificare; misurare il
+  beneficio temporale sulla rappresentazione scelta senza estendere i numeri
+  float32 alle nuove varianti INT8 o 16×8.
 
 Per riprendere: [istruzioni esperimenti](experiments/activation_compression/README.md)
 e [scaletta aggiornata](SCALETTA_TIROCINIO.md).

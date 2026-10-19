@@ -1,5 +1,26 @@
 # Primo confronto della compressione delle attivazioni
 
+Aggiornamento del 18 ottobre 2026: completato anche il
+[confronto 16×8](16x8_2026-10-18/README.md), sugli stessi 48/98 frame e con gli
+stessi binari float32/INT8 della prova precedente. Attivazioni INT16, pesi INT8,
+bias INT64, nessun fallback float. A soglia 0,5: 18 celle cambiate contro 25
+di INT8; 7 perse contro 11 sulle 99 del riferimento. File 69.056 byte e confine
+9.216 byte. Più fedeltà nel campione, con dimensioni maggiori di INT8 e nessuna
+validazione di qualità, prestazioni o compatibilità sul target.
+
+Aggiornamento del 18 ottobre 2026: completata una
+[verifica INT8 del modello su PC](int8_2026-10-18/README.md), senza riaddestramento.
+Conversione integer-only riuscita; file TFLite da 84.292 a 57.088 byte (-32,27%).
+Sui 98 frame separati dai 48 di calibrazione cambiano 25 celle a soglia 0,5:
+11 perse e 14 introdotte rispetto alle 99 celle oggetto del riferimento.
+INT8 è fattibile sul PC, ma non è approvato come baseline di qualità o validato
+sull'ESP32. La prossima verifica riguarda input di calibrazione più rappresentativi.
+
+Aggiornamento del 18 ottobre 2026: disponibile anche una
+[prova client–server TCP su PC](tcp_2026-10-18/README.md), con riproduzione delle
+attivazioni registrate, inferenza del suffisso in un processo separato e rinnovo
+dello stato dopo riconnessione. Il formato resta separato dal protocollo SCIoT.
+
 Aggiornamento del 17 ottobre 2026: è stata aggiunta una prima prova con perdita
 controllata. I paragrafi seguenti descrivono la baseline senza perdita; la nuova
 prova è documentata [più sotto](#prima-prova-con-perdita-controllata).
@@ -163,6 +184,30 @@ tensore di interi condiviso e verificato, senza usare il precedente float origin
 È una prima quantizzazione uniforme, non un'implementazione del metodo del paper
 con dead-zone o una ricerca esaustiva dei codec con perdita.
 
+Precisazione sul riferimento di Shiba et al., IEEE Access 2026,
+[Delta Coding With Dead-Zone Quantization for Bandwidth-Efficient Split Computing
+on Video Streams](https://da.lib.kobe-u.ac.jp/da/kernel/0100504251/0100504251.pdf),
+sezioni III-B–D: nel loro DPCM si calcola prima il residuo rispetto alla precedente
+ricostruzione condivisa e si quantizza il residuo; la variante D+DZ usa una zona
+centrale più ampia mappata a zero nei frame predetti. Nel nostro prototipo si
+quantizza prima l'intero tensore corrente e poi si codifica senza ulteriore perdita
+la differenza tra gli interi. Non sono lo stesso quantizzatore né la stessa prova.
+L'indipendente serve a isolare il beneficio temporale a identica ricostruzione;
+il confronto di quantizzazione diretta e DPCM del paper può produrre ricostruzioni
+diverse. La replica specifica di DPCM/dead-zone resta da implementare e valutare.
+
+I chiarimenti del 18 ottobre su indipendente/temporale, significato dei tempi
+TCP e risultati del paper sono nelle [sezioni 9.2–9.4 dell'analisi](../../ANALISI_COMPRESSIONE_ATTIVAZIONI.md#92-cosa-abbiamo-misurato-con-il-client-e-il-server-tcp--18-ottobre).
+La proposta DPCM senza e con dead-zone resta un approfondimento sullo stesso
+FOMO e sugli stessi input, dopo avere spiegato e specificato il nuovo codec.
+La priorità successivamente concordata è verificare la rappresentazione INT8:
+la prima prova PC è ora disponibile nell'archivio collegato all'inizio del README.
+Con passo fisso e senza clipping, cambiare solo l'ordine tra sottrazione e
+quantizzazione può lasciare quasi identica la ricostruzione: dichiarare le
+differenze effettive di intervallo, precisione e dead-zone prima del confronto.
+Le ricostruzioni dei nuovi metodi potranno differire: misurare byte ed errore,
+senza estendere loro l'identità di ricostruzione dei due metodi attuali.
+
 Il formato sperimentale AQST/AQF1 include metodo, passo, forma, dtype, parametri
 zlib, hash modello, split, frequenza, rinnovi, sequenze, riferimento, lunghezza
 e CRC degli interi ricostruiti. Il decoder riceve i parametri dal messaggio di
@@ -221,3 +266,51 @@ Nessuna precisione è stata validata come accettabile per l'applicazione. Mancan
 annotazioni, altri video/split e misure su dispositivo/rete/energia. Tempi solo PC;
 18.432 byte di riferimento per lato non includono workspace e buffer temporanei.
 I 15 test dei due prototipi sono passati.
+
+## Verifica INT8 del modello
+
+La prova [check_int8.py](check_int8.py) converte il modello intero prima in
+TFLite float32 e poi in INT8, con ingresso/uscita int8 e nessun fallback float.
+I primi 48 frame calibrano gli intervalli; i successivi 98 vengono valutati
+rispetto a Keras. L'ispezione del tensore `block_2_add` avviene nel modello
+intero: prefisso e suffisso INT8 separati non sono ancora esportati o verificati.
+
+```bash
+CUDA_VISIBLE_DEVICES=-1 TF_CPP_MIN_LOG_LEVEL=3 \
+TF_NUM_INTRAOP_THREADS=1 TF_NUM_INTEROP_THREADS=1 \
+.venv/bin/python experiments/activation_compression/check_int8.py \
+  --input-dir experiments/activation_compression/results/input \
+  --output-dir experiments/activation_compression/results/int8-new-run \
+  --calibration-frames 48
+```
+
+La directory di destinazione deve essere vuota. Per ricaricare e verificare i
+file salvati, vedere il [README dell'archivio INT8](int8_2026-10-18/README.md).
+I 19 test senza socket comprendono i quattro nuovi test INT8. Modello, runtime
+e protocollo SCIoT originali non sono stati modificati. Le precedenti prove di
+compressione continuano a riferirsi a float32: non usare i loro risparmi come
+previsione del beneficio temporale su INT8.
+
+## Verifica 16×8 del modello
+
+[check_16x8.py](check_16x8.py) converte una nuova variante integer-only con
+ingresso/uscita INT16 e riusa i binari dei due controlli. La partizione è letta
+dall'archivio INT8: nessun frame o parametro viene scelto in base al risultato.
+Sono conservati tipi dei tensori/operatori, scale/zero point, predizioni, errori
+e conteggi per frame. I sorgenti e gli archivi precedenti sono preservati.
+
+```bash
+CUDA_VISIBLE_DEVICES=-1 TF_CPP_MIN_LOG_LEVEL=3 \
+TF_NUM_INTRAOP_THREADS=1 TF_NUM_INTEROP_THREADS=1 \
+.venv/bin/python experiments/activation_compression/check_16x8.py \
+  --input-dir experiments/activation_compression/results/input \
+  --int8-archive experiments/activation_compression/int8_2026-10-18 \
+  --output-dir experiments/activation_compression/results/16x8-new-run
+```
+
+Usare una directory vuota; istruzioni complete e verifica dei binari nel
+[nuovo archivio](16x8_2026-10-18/README.md). I 23 test senza socket includono i
+quattro nuovi controlli INT16. Prossimo passo: verificare il supporto INT8/INT16
+del runtime Micro prima del porting e delle misure sulla scheda, ampliando poi
+calibrazione e valutazione su sequenze distinte. I byte del confine sono osservati
+nel modello intero; split distribuito e protocollo quantizzato restano da verificare.

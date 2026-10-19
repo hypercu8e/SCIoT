@@ -1,9 +1,12 @@
 # Tirocinio SCIoT — scaletta e contesto per ripartire
 
-Aggiornato il 17 ottobre 2026, con baseline senza perdita del 15 ottobre e prima
-prova con perdita controllata del 17 ottobre. Cronologia: [diario](DIARIO_TIROCINIO.md).
+Aggiornato il 18 ottobre 2026, con baseline senza perdita del 15 ottobre, prima
+prova con perdita del 17, prova TCP e verifiche INT8/16×8 su PC del 18.
+Cronologia: [diario](DIARIO_TIROCINIO.md).
 
 ## Punto di ripresa
+
+Per iniziare dalla visione d'insieme: [recap del lavoro sul fork](RECAP_LAVORO_FORK.md).
 
 La trascrizione ragionata di spiegazioni, scelte, prove e limiti della chat è in
 [ANALISI_COMPRESSIONE_ATTIVAZIONI.md](ANALISI_COMPRESSIONE_ATTIVAZIONI.md), con le
@@ -21,6 +24,25 @@ per il temporale; vantaggio temporale aggiuntivo 13,57% a identica ricostruzione
 Nessuna cella cambiata a soglia 0,5 sul video, senza una valutazione su annotazioni.
 Report: [lossy_2026-10-17](experiments/activation_compression/lossy_2026-10-17/README.md).
 La convenienza sull'hardware resta aperta.
+
+Completata il 18 ottobre anche la [prova client–server TCP su PC](experiments/activation_compression/tcp_2026-10-18/README.md):
+replay delle attivazioni, suffisso Keras in processo separato, raw/indipendente/
+temporale e nuova sessione dopo riconnessione. Non è integrazione SCIoT né replica
+del DPCM/dead-zone di Shiba et al.; sul loopback si risparmiano byte ma aumentano
+i tempi. Il vantaggio temporale sull'indipendente è 13,56% nel flusso in salita.
+
+Completata anche la [verifica INT8 su PC](experiments/activation_compression/int8_2026-10-18/README.md):
+file TFLite da 84.292 a 57.088 byte, conversione integer-only ed esecuzione desktop
+riuscite. Su 98 frame non usati nei 48 di calibrazione cambiano 25 celle a soglia
+0,5 (11 perse, 14 introdotte; 99 celle oggetto nel riferimento). Non è una
+configurazione approvata per qualità o hardware: verificare la calibrazione con
+input rappresentativi separati dalla valutazione. Nessun riaddestramento richiesto.
+
+Il successivo [confronto 16×8](experiments/activation_compression/16x8_2026-10-18/README.md)
+usa la stessa partizione e gli stessi binari di controllo: 18 celle cambiate a
+soglia 0,5, 7 perse e 11 introdotte; file 69.056 byte e confine 9.216 byte.
+Migliore fedeltà nelle metriche riportate, con dimensioni maggiori dell'INT8.
+Compatibilità INT16 del runtime Micro e costi sulla scheda ancora da verificare.
 
 ## Contesto
 
@@ -71,7 +93,7 @@ Checkout esaminato: `main`, commit `0cfeb9b08ca20dadc754cb38a5201c60991066ba`. L
 - Prima parte seguita dalla seconda parte e modello completo: differenza massima osservata 0,0 sui 146 frame.
 - Il confronto senza perdita ricostruisce tutti i tensori byte per byte. Include header, checksum, primo completo, rinnovi ogni 5 secondi e ritorno al completo quando il delta è più grande.
 - I risultati contano il flusso applicativo sperimentale; escludono overhead e comportamento effettivo dei trasporti di SCIoT. Il codec non è integrato nel framework.
-- I file generati in `results/` sono ignorati da Git. Una copia stabile di report, JSON, CSV, metadati e lock è in [baseline_2026-10-15](experiments/activation_compression/baseline_2026-10-15/README.md). Baseline e documenti iniziali risultano ora nei commit locali `d38a489` e `087fef9`; non è stata verificata la presenza sul remoto. La prova con perdita è aggiunta nel lavoro corrente, senza commit o push.
+- I file generati in `results/` sono ignorati da Git. Una copia stabile di report, JSON, CSV, metadati e lock è in [baseline_2026-10-15](experiments/activation_compression/baseline_2026-10-15/README.md). Baseline e documenti iniziali risultano nei commit locali `d38a489` e `087fef9`; la prova con perdita è nel commit locale `78eac02`. La prova TCP del 18 ottobre e gli ultimi aggiornamenti documentali sono modifiche locali non ancora in un commit. La corrispondenza col remoto non è stata verificata.
 
 File utili:
 
@@ -109,6 +131,12 @@ Il principio non è nuovo. Il riferimento più vicino già consultato è **Delta
 - Studia differenze quantizzate, riferimento ricostruito e invii completi periodici. Le prove sono su classificazione e simulano la separazione su una macchina; non dimostrano benefici su ESP32 con object detection e rete reale.
 - Un nostro eventuale contributo sarebbe implementazione e valutazione su SCIoT, non l'invenzione della codifica differenziale.
 
+Il 18 ottobre abbiamo precisato risultati, metriche e limiti nella
+[sezione 9.3 dell'analisi](ANALISI_COMPRESSIONE_ATTIVAZIONI.md#93-risultati-del-paper-e-differenze-dal-nostro-metodo).
+Lì sono distinti accordo col modello originale, comprimibilità e tempi di un
+sistema distribuito. La prova TCP attuale usa il nostro codec preliminare;
+non è una replica del metodo specifico del paper.
+
 ## Scaletta aggiornata
 
 ### 1. Approfondire le issue
@@ -143,8 +171,8 @@ L'elenco e diversi contenuti delle issue sono già stati consultati; l'analisi s
 
 - [x] Scegliere un punto compatibile con le dipendenze del grafo: `block_2_add`, un tensore di confine.
 - [x] Eseguire le due parti in Keras sul PC e confrontarle con l'inferenza completa su 146 frame: differenza massima 0,0. Prova TFLite/distribuita ancora da fare.
-- [ ] Recuperare/adattare il client Python degli autori, se disponibile; altrimenti realizzare il programma che svolga il ruolo del dispositivo.
-- [ ] Verificare successivamente lo scambio dei dati col server. Le prime analisi delle attivazioni possono avvenire anche in un solo processo.
+- [x] Realizzare un client Python sperimentale: riproduce le attivazioni registrate; non esegue camera o prefisso della rete. Il client degli autori non è stato recuperato.
+- [x] Verificare lo scambio TCP col ricevitore separato e l'inferenza del suffisso Keras sul PC, inclusa nuova sessione dopo riconnessione. Integrazione col server SCIoT e hardware ancora da fare.
 
 ### 6. Preparare le sequenze di valutazione
 
@@ -168,6 +196,28 @@ L'elenco e diversi contenuti delle issue sono già stati consultati; l'analisi s
 - [x] Provare una prima perdita controllata: passi da 0,0001 a 1, quantizzazione uniforme delle attivazioni, confronto indipendente/temporale a ricostruzione identica e riferimenti coerenti. Misurati byte, errore su attivazioni/uscite e cambiamenti delle celle.
 - [x] Distinguere fedeltà alle uscite originali da accuratezza su annotazioni; la seconda resta da valutare con un dataset adatto.
 - [x] Verificare i due prototipi con 15 test, inclusi limite d'errore, riferimenti, overflow, corruzione e recupero.
+- [x] Confrontare i tre metodi via TCP loopback con suffisso Keras in un processo
+  separato, rinnovo della sessione dopo riconnessione e 20 test complessivi.
+- [x] Chiarire risultati e limiti del paper di Shiba, distinguendone il metodo
+  dal codec attuale e la fedeltà al modello dall'accuratezza su annotazioni.
+- [x] Convertire il modello intero in TFLite float32 e INT8 senza riaddestramento,
+  separando calibrazione (48 frame) e valutazione (98 frame dello stesso video).
+  Verificati tipi int8/int32, operatori/versioni, inferenza desktop e predizioni;
+  quattro nuovi test INT8, 19 test senza socket passati.
+- [x] Confrontare il 16×8 sugli stessi 48/98 frame, con attivazioni INT16,
+  pesi INT8 e bias INT64; verificati assenza di fallback float, predizioni,
+  binari di controllo invariati e ricaricamento dei risultati. 23 test senza socket.
+- [ ] Verificare la calibrazione su input rappresentativi aggiuntivi, con
+  valutazione separata: la prima variante INT8 modifica 25 celle a soglia 0,5.
+- [ ] Verificare sul target operatori/runtime, memoria e tempo della variante
+  scelta, incluse le varianti INT16 degli operatori. Esportare e verificare uno
+  split quantizzato con scale/zero point coerenti; i byte osservati nel modello
+  intero non sono un payload SCIoT integrato.
+- [ ] Spiegare con un esempio e specificare il nuovo codec DPCM: riferimento,
+  quantizzazione del residuo, parametri e rinnovi; poi aggiungere dead-zone come
+  variante separata. Non ancora implementato.
+- [ ] Confrontare indipendente, temporale attuale, DPCM e DPCM/dead-zone sugli
+  stessi input; misurare byte ed errore senza assumere ricostruzioni identiche.
 
 ### 9. Decidere se proseguire e verificare su hardware
 
@@ -177,12 +227,20 @@ L'elenco e diversi contenuti delle issue sono già stati consultati; l'analisi s
 
 ## Prossimo traguardo
 
-**Discutere il compromesso byte/errore della prima prova con perdita e scegliere
-sequenze e metriche di applicazione per validarlo prima del porting.**
+**Verificare il supporto INT8/INT16 nel runtime Micro effettivo prima di scegliere
+il porting e misurare memoria/tempo sulla scheda.**
 
-Il traguardo di inferenza completa, split Keras e confronto dei codec sul PC è
-raggiunto per il candidato e la sequenza provati. Con perdita controllata il
-risparmio è più interessante, ma vanno valutati anche gli errori locali e le celle
-perse/introdotte, non solo la media. Non abbiamo evidenza della convenienza
-complessiva su ESP32. Le issue, l'approfondimento del paper e il confronto con
-il codice restano attività aperte della scaletta.
+Le sezioni [9.5](ANALISI_COMPRESSIONE_ATTIVAZIONI.md#95-verifica-int8-del-modello--18-ottobre)
+e [9.6](ANALISI_COMPRESSIONE_ATTIVAZIONI.md)
+documentano le prove completate: il 16×8 migliora la fedeltà su questo campione,
+ma nessuna qualità è ancora approvata. Ampliare calibrazione e valutazione su
+sequenze distinte. Il modello rimane quello dato; calibrare non richiede
+annotazioni, mentre l'accuratezza reale le richiede. Evitare di cercare parametri
+sul campione usato per valutare.
+
+Poi verificare esecuzione sul target e split con parametri coerenti; tempi e
+memoria ESP32 vanno misurati. Conservare float32 come controllo. DPCM/dead-zone
+resta un approfondimento successivo: chiarire intervalli, precisione e dead-zone,
+perché il solo cambio d'ordine con passo fisso può lasciare quasi uguali le
+ricostruzioni. Confrontare il vantaggio temporale sulla rappresentazione scelta,
+senza trasferire automaticamente i precedenti numeri float32 a INT8 o 16×8.

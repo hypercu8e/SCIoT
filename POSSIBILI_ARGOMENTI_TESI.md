@@ -2,6 +2,8 @@
 
 Documento del 17 ottobre 2026. Proposte da discutere con il relatore; nessun
 argomento viene scelto definitivamente con questo documento.
+Aggiornamento del 18 ottobre: prova TCP e chiarimenti sul paper nella direzione
+compressione; la priorità tra i possibili argomenti non viene cambiata.
 
 ## Contesto e obiettivo
 
@@ -107,15 +109,55 @@ Sono già disponibili esperimenti isolati su PC, su un video e uno split FOMO:
   a 5 fps e passo 0,001, il temporale risparmia il 48,66% sul raw contro il
   40,61% dell'indipendente. Il beneficio temporale è il 13,57% rispetto
   all'indipendente, a identica ricostruzione.
+- [Prova TCP del 18 ottobre](experiments/activation_compression/tcp_2026-10-18/README.md):
+  replay delle attivazioni e suffisso Keras in processi distinti sullo stesso PC.
+  Il temporale risparmia il 13,56% dei byte in salita sull'indipendente, ma aumenta
+  il tempo di codifica + scambio + suffisso rispetto sia al raw sia all'indipendente.
+  Sono misure su loopback; non su Wi-Fi o ESP32.
 
-Le due esecuzioni hanno attivazioni con hash diversi: i loro numeri sono risultati
-storici distinti. Per un confronto diretto occorre usare gli stessi input e
-tensori. La seconda prova quantizza i dati al confine; non converte la rete in
+Le prove offline del 15 e del 17 ottobre hanno attivazioni con hash diversi:
+i loro numeri sono risultati storici distinti. Per un confronto diretto occorre
+usare gli stessi input e tensori. La prova con perdita quantizza i dati al confine;
+non converte la rete in
 un modello INT8 e non replica il metodo di un paper.
 
 Sono byte del flusso applicativo sperimentale, non misure del traffico Wi-Fi.
 L'accordo con le uscite originali non è accuratezza rispetto a oggetti annotati.
 Non è ancora dimostrata la convenienza complessiva su ESP32.
+
+Il [confronto col paper e il prossimo esperimento proposto](ANALISI_COMPRESSIONE_ATTIVAZIONI.md#93-risultati-del-paper-e-differenze-dal-nostro-metodo)
+chiariscono cosa è già misurato e cosa resta da implementare. Il confronto DPCM,
+prima senza e poi con dead-zone, resta un possibile approfondimento sullo stesso
+FOMO; specificare le differenze di intervallo e precisione, perché con passo fisso
+il solo cambio d'ordine può lasciare quasi identiche le ricostruzioni.
+
+La priorità è stata poi aggiornata alla rappresentazione del modello:
+[prima verifica INT8 sul PC](experiments/activation_compression/int8_2026-10-18/README.md)
+completata senza riaddestramento. TFLite da 84.292 a 57.088 byte (-32,27%),
+conversione integer-only e inferenza desktop riuscite; 25 celle cambiate a soglia
+0,5 nei 98 frame di valutazione, con 11 celle oggetto perse sulle 99 del riferimento
+e 14 introdotte. Calibrazione su 48 frame separati dello stesso video. Questa
+variante non è approvata come baseline di qualità e non è verificata su ESP32.
+Verificare input di calibrazione più rappresentativi mantenendo la valutazione
+separata, poi runtime, split e costi sul target. Calibrare non richiede annotazioni;
+la valutazione dell'accuratezza reale le richiede.
+
+Completato poi il [confronto 16×8](experiments/activation_compression/16x8_2026-10-18/README.md)
+con la stessa calibrazione/valutazione e controlli float32/INT8 invariati:
+attivazioni INT16, pesi INT8 e bias INT64, nessun fallback float. Il file occupa
+69.056 byte; il confine 9.216 byte. Celle cambiate a soglia 0,5 da 25 a 18,
+perse da 11 a 7 sulle 99 del riferimento e introdotte da 14 a 11. Migliore
+fedeltà nelle metriche riportate, con dimensioni maggiori di INT8 e massimo
+errore sui punteggi ancora circa 0,286. Nessuna qualità approvata; verificare
+il supporto INT8/INT16 nel runtime Micro prima di scegliere il porting.
+
+La riduzione del 75% dei soli valori al confine (18.432 → 4.608 byte) è osservata
+nel modello intero; non è una misura del traffico del protocollo o della memoria
+totale. Il contributo temporale va confrontato anche con questa eventuale base
+INT8 o 16×8: i precedenti risparmi float32 non dimostrano il vantaggio sulle
+nuove rappresentazioni.
+Questo percorso resta un adattamento sperimentale e non definisce ancora
+l'argomento definitivo della tesi.
 
 ### Contributo e perimetro iniziale
 
