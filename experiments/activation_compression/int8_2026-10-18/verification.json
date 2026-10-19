@@ -1,0 +1,21 @@
+{
+  "scope": "Separate desktop reload/evaluation path; shared metric helpers; no conversion or ESP32",
+  "source_and_input_hashes_match": true,
+  "calibration_evaluation_indices_disjoint": true,
+  "models": {
+    "float32": {
+      "file_hash_and_size": true,
+      "outputs_recomputed_from_saved_binary": true,
+      "output_hash_and_metrics_match": true,
+      "csv_counts_match": true,
+      "frames": 98
+    },
+    "int8": {
+      "file_hash_and_size": true,
+      "outputs_recomputed_from_saved_binary": true,
+      "output_hash_and_metrics_match": true,
+      "csv_counts_match": true,
+      "frames": 98
+    }
+  }
+}

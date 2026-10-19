@@ -1,0 +1,25 @@
+{
+  "scope": "Separate desktop binary reload/evaluation; shared metric helpers; no ESP32",
+  "source_input_control_hashes_match": true,
+  "disjoint_frame_indices": true,
+  "models": {
+    "float32": {
+      "file_hash_and_size": true,
+      "output_recomputed_and_hash_matches": true,
+      "metrics_and_csv_match": true,
+      "evaluation_frames": 98
+    },
+    "int8": {
+      "file_hash_and_size": true,
+      "output_recomputed_and_hash_matches": true,
+      "metrics_and_csv_match": true,
+      "evaluation_frames": 98
+    },
+    "16x8": {
+      "file_hash_and_size": true,
+      "output_recomputed_and_hash_matches": true,
+      "metrics_and_csv_match": true,
+      "evaluation_frames": 98
+    }
+  }
+}
