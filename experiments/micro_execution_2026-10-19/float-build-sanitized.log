@@ -1,0 +1,56 @@
+[  2%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/flatbuffer_utils.cpp.o
+[  4%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/debug_log.cpp.o
+[  6%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/memory_helpers.cpp.o
+[  8%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_allocation_info.cpp.o
+[ 10%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_allocator.cpp.o
+/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_allocation_info.cpp: In member function ‘TfLiteStatus tflite::AllocationInfoBuilder::GetOfflinePlannedOffsets(const int32_t**)’:
+/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_allocation_info.cpp:326:18: warning: ‘int strncmp(const char*, const char*, size_t)’ specified bound 23 exceeds source size 0 [-Wstringop-overread]
+  326 |       if (strncmp(metadata->name()->c_str(), kOfflineMemAllocMetadata,
+      |           ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  327 |                   strlen(kOfflineMemAllocMetadata)) == 0) {
+      |                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[ 12%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_context.cpp.o
+[ 14%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_error_reporter.cpp.o
+[ 16%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_graph.cpp.o
+[ 18%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_interpreter.cpp.o
+[ 20%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_profiler.cpp.o
+[ 22%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_resource_variable.cpp.o
+[ 25%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_string.cpp.o
+[ 27%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_time.cpp.o
+[ 29%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/micro_utils.cpp.o
+[ 31%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/recording_micro_allocator.cpp.o
+[ 33%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/system_setup.cpp.o
+[ 35%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/arena_allocator/non_persistent_arena_buffer_allocator.cpp.o
+[ 37%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/arena_allocator/recording_simple_memory_allocator.cpp.o
+[ 39%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/arena_allocator/simple_memory_allocator.cpp.o
+[ 41%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/memory_planner/greedy_memory_planner.cpp.o
+[ 43%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/memory_planner/linear_memory_planner.cpp.o
+[ 45%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/memory_planner/non_persistent_buffer_planner_shim.cpp.o
+[ 47%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/core/api/error_reporter.cpp.o
+[ 50%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/core/api/flatbuffer_conversions.cpp.o
+[ 52%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/core/api/op_resolver.cpp.o
+[ 54%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/core/api/tensor_utils.cpp.o
+[ 56%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/kernel_util.cpp.o
+[ 58%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/add.cpp.o
+[ 60%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/add_common.cpp.o
+[ 62%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/mul.cpp.o
+[ 64%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/mul_common.cpp.o
+[ 66%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/conv.cpp.o
+[ 68%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/conv_common.cpp.o
+[ 70%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/depthwise_conv.cpp.o
+[ 72%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/depthwise_conv_common.cpp.o
+[ 75%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/pad.cpp.o
+[ 77%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/softmax.cpp.o
+[ 79%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/softmax_common.cpp.o
+[ 81%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/activations.cpp.o
+[ 83%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/micro/kernels/activations_common.cpp.o
+[ 85%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/c/common.cpp.o
+[ 87%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/kernels/kernel_util.cpp.o
+[ 89%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/kernels/internal/quantization_util.cpp.o
+[ 91%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/kernels/internal/reference/portable_tensor_utils.cpp.o
+[ 93%] Building CXX object CMakeFiles/sciot_micro.dir/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/tensorflow/lite/schema/schema_utils.cpp.o
+[ 95%] Linking CXX static library libsciot_micro.a
+[ 95%] Built target sciot_micro
+[ 97%] Building CXX object CMakeFiles/experiment_host.dir/experiment_host.cpp.o
+[100%] Linking CXX executable experiment_host
+[100%] Built target experiment_host

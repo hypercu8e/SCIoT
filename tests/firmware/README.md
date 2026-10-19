@@ -54,3 +54,50 @@ AddressSanitizer e UndefinedBehaviorSanitizer sono attivi anche sulla libreria
 nativa. Le stampe `SCIoTFail` e `Failed starting model allocation` nello stderr
 sono attese nelle prove negative; l'esito del processo e `summary.json` stabiliscono
 se la verifica è riuscita. Non vengono disattivati i controlli tramite `NDEBUG`.
+
+## Esperimenti Micro INT8 e prefissi float32
+
+Il runner `check_experiments.py` offre due comandi indipendenti. Richiede lo
+stesso ambiente e il runtime **TensorFlowLite_ESP32 1.0.0** già installato;
+`--runtime` indica la sua directory `src`. Ogni `--output-dir` deve essere nuova:
+una prova precedente, anche fallita, non viene sovrascritta.
+
+```bash
+.venv/bin/python tests/firmware/check_experiments.py int8 \
+  --output-dir experiments/activation_compression/results/int8-new-run
+
+.venv/bin/python tests/firmware/check_experiments.py float \
+  --output-dir experiments/activation_compression/results/float-new-run
+```
+
+INT8 esegue i modelli archiviati full/prefix/suffix e la catena con confine
+realmente calcolato da Micro. Controlla 144 invocazioni, stabilità con ingressi
+alternati, specifiche dei tensori e byte attesi. Conserva anche gli output
+nativi e un confronto diagnostico con due selezioni di kernel desktop.
+
+**Il comando INT8 attualmente termina con codice 2:** i vettori archiviati
+non coincidono tutti con Micro. I risultati Micro coincidono con `BUILTIN_REF`,
+e full e prefix→suffix coincidono tra loro. Il criterio di uguaglianza con
+l'archivio resta invariato: la diagnosi non trasforma il fallimento in successo.
+Codice 1 indica errori di esecuzione/configurazione; codice 0 significa che
+anche il confronto esatto con l'archivio è riuscito.
+
+Float32 compone i binari dei layer originali senza riconversione, con prefissi
+0/11/25/58 inclusivi. Verifica codici/versioni/opzioni degli operatori e costanti,
+confronta numericamente con la catena originale, poi confronta layer separati,
+prefisso ricreato per immagine e prefisso persistente. Usa tre ingressi sintetici,
+cinque riscaldamenti e trenta misure per combinazione: 1.080 campioni salvati in
+`timings.csv`. Comparazioni e scrittura su disco sono fuori dal cronometro.
+
+CMake condivide la libreria nativa fra i runner. `SCIOT_SANITIZERS=ON` abilita
+ASan/UBSan e `-O1`; `OFF` abilita `-O3` senza sanitizer. Entrambe le modalità
+mantengono i controlli, `-ffp-contract=off` e `-fno-fast-math`. Il driver costruisce
+prima la versione di correttezza e avvia il benchmark soltanto se questa passa.
+
+Il report distingue conteggi delle copie esplicite, tempi del PC e memoria
+usata con ABI nativa. Le arene float hanno capacità sperimentale di 8 MiB;
+quelle INT8 di 512 KiB. Non sono misure sulla scheda, picchi di RAM del processo
+o benchmark del client completo. CPU non vincolata a un core; carico esterno
+non controllato. Ripetere in una nuova directory se occorrono altre sessioni.
+
+[Risultati conservati e limiti](../../experiments/micro_execution_2026-10-19/README.md).

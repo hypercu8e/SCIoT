@@ -1,0 +1,132 @@
+{
+  "scope": "Native host execution of production helpers and real TensorFlowLite_ESP32; not ESP32 execution",
+  "tensorflow": "2.15.0",
+  "model_sha256": "12beec5534646831f24c223a933d5bafbe49d3064482a8de263cda3bb72bd0ff",
+  "embedded_models_match_all_three_clients": true,
+  "submodel_sha256": {
+    "submodel_0.tflite": "61a70ec8f34e5f97317a67632703a1bfc990c45ed48c36adea49c5f0072bb87b",
+    "submodel_1.tflite": "7a5194f88f5e8ff739a356cfe0588e5833509f3b6b528bdc1f36b02b858d6f7c",
+    "submodel_2.tflite": "16924872a7b786b7c30568a3e5f99b913ef35a84d00592706d217331f232e6ba",
+    "submodel_3.tflite": "81ab0f93e8326e28fb36b6d91fdb42b40037621af42b31c7e99e74c3ca4035d6",
+    "submodel_4.tflite": "82faf1f47f6f90313c1b7abff43c7c4316544baf8cb3937a586eae6dcd44132a",
+    "submodel_5.tflite": "6de37a193cf5fbc3d3a241d3fb484e15f9bf0ec178799cc0991abb0550baed8d",
+    "submodel_6.tflite": "f07c58a2683a7a22e1d6dd965325b555fc572f47828b7347cf4c7e58e4600a61",
+    "submodel_7.tflite": "7d91d1fd3dd6c2f5ead0c512c2f1b634c2253cb090b1cd56094b929d1ae73a5c",
+    "submodel_8.tflite": "69eae44776e3c9aabb8cd772b545c56506b3ddee88c4ae63f1373638c4a9f473",
+    "submodel_9.tflite": "aac8e4c39478a0dac595d5c0751df9160c5519e7d208ac7591b00317e9d4724a",
+    "submodel_10.tflite": "89e032af4e0870920c74d20e532e9f13f766f0dfa792ebc05d47eeca18155336",
+    "submodel_11.tflite": "58dffdc1d4f5c8935cf87b08d811ff1bb8834793ca56a325520c73ab2df35df3",
+    "submodel_12.tflite": "c5dbb1c438a97cb6c50516f6a6c89d9e984e7121852ea5a52fb0aae0e6e9e9e3",
+    "submodel_13.tflite": "1355fe33ab4025c54574a501a6bde44d1a84d3eed3563f95006291bdb35e15c4",
+    "submodel_14.tflite": "dfb8ec7bf0c888d7b0f60d9be1ad6a4aa5d91840dad86ebdfdea9591b1b16ff0",
+    "submodel_15.tflite": "da3046ee30c46ed0be3e887211067ff4c3bfd70d1223fe166b2a237541761256",
+    "submodel_16.tflite": "bb9e4ae171ceeaf495113e428047a658343b18e21c2ee0b318ba00ba426f2f45",
+    "submodel_17.tflite": "88aa1956be4075b556160a78c7f605f2f2884ff43827d20a95eb5a6bbcd84368",
+    "submodel_18.tflite": "f5e1b688b3d966f67f251239b5146782084df6f95590a01471efef59a8fd1cab",
+    "submodel_19.tflite": "79665c8007975e9564a1ca98061ecc6282bef2ea38cc00e96a3a9bf4989b628c",
+    "submodel_20.tflite": "19a1fd499b5486cc3a3707cb5a496e8167ec9ff0b650ec1492e5926cd8901fc3",
+    "submodel_21.tflite": "5119a9d73b98ab4bc673d19b7eef50bae323aee65eaa53eaeb66b559586055cd",
+    "submodel_22.tflite": "5df656b8a8a472278ed61ce235952aed834264af5eddc9f6d468a1075ffb13af",
+    "submodel_23.tflite": "d6be49c1ed0cbbed1d118a9ddbad89f2004c27d4f63e41ccc49cb876dd42a41b",
+    "submodel_24.tflite": "1025a275a838910a3b925079f2aaf981d2982f496dd1a75d30a918340acfe766",
+    "submodel_25.tflite": "6aaa871b6fa9040f261154c32ac95a9c022f02d703809fc2095258f35a1d9444",
+    "submodel_26.tflite": "2eec3fca56fead51bf1c3c890e46cb6bb82bad638b7bea834e67b9f3cf72341c",
+    "submodel_27.tflite": "84842e46549906deb11182f44bdb19c2bfb78792f084662b47010007f67441d5",
+    "submodel_28.tflite": "f97a80090f1b821ee7e095d58637f41e9153c8dc7e14022209454ba2fcc3f75f",
+    "submodel_29.tflite": "f84db95978e3258bd6f57a75b34d250a0fdb5083671886af0e8cf1c14bac77b7",
+    "submodel_30.tflite": "7a3149955aa85b25b5297eb1a2664aac4683617aed9eb70ec1a6b5ca9cdf39f2",
+    "submodel_31.tflite": "a7f7517bae9aea060038a1b01abd2b9ed850c2631700f2583cc7c839e990628a",
+    "submodel_32.tflite": "1f9479a3881ab62fe2730967ce65d7ac40152acffc158e2d4e41d9100fa19cf4",
+    "submodel_33.tflite": "cc6aca58420d31cbfa4cbda1b54368fe957a0b63c4fcf8235a31ba7ff3877e25",
+    "submodel_34.tflite": "5cabc3a20ebd8d9ac53c9c7048839cf2f3ae844ade4d94eae6f8a736b7585ed7",
+    "submodel_35.tflite": "4aa6120f71b28bdf1557d00bdbaf1ebf6d9d4cf71f019beeea86628f0ce193dc",
+    "submodel_36.tflite": "e826feb12183c33a433b830b058e76c2de7f3c360c0d25d924ef0467cb97ecab",
+    "submodel_37.tflite": "d27a3dd6a8f995ffc45f51272e336c9929abdfc716dcf683b273e44a316176e7",
+    "submodel_38.tflite": "12e59e9e5694649cdb50d436421ed4c6c47814fc78ec48d6badcce7aa6793bf5",
+    "submodel_39.tflite": "5df413d29a6f859f44f3a70672c65cf3907ef3ceedae93b8b0f3790f2ba0e76a",
+    "submodel_40.tflite": "cbd8adf7eadab26554b13989fdc1b57ae2912a42083ab2c1364dea040986766e",
+    "submodel_41.tflite": "c57783ce6d45e3a16ccf543df510c28cc9933d3daa7d679325ea7fa9a5c62cab",
+    "submodel_42.tflite": "f9d21772eeb188ba39fa15f92ea9d7a960fe2bf42e88c3a94e1ea7cd0ad203f1",
+    "submodel_43.tflite": "0fc38352e3332604ae85bf166b53584896fd6b661af95d65b599357e0d29b1f4",
+    "submodel_44.tflite": "7fe5be0f2ec800e0d8b6a03acfe8872c32e2f87fcec43eeb6b86b9a588f02dc0",
+    "submodel_45.tflite": "0eefd2c4af0cd19be237d9bbde1d16192cc7903c66b84d4666a6ecdd6e0d7eca",
+    "submodel_46.tflite": "f643901eb3a17336590bb99faf3144a953a701987f4c4955cb28b9ae8b46ecc3",
+    "submodel_47.tflite": "97127bf7e7f0613eb0903ddf725252c3206bf433379fd0b113e67b8e822ae84f",
+    "submodel_48.tflite": "eaea653f63bd2add907f43ebfaa09147550b2ecde3b98680f3abc184e779e05d",
+    "submodel_49.tflite": "26c04340dd6f632b7658cf724373ce9d88381138485e3d4b4055ad56be2e1fdc",
+    "submodel_50.tflite": "7038f55dc8522eca9f93b71f5ab7245deb7bfcb4460bd2e9613b3ce9079107dc",
+    "submodel_51.tflite": "a5403517956cea5b96ced5f04761f18d842a70e283875fb2d31ce3a26858c977",
+    "submodel_52.tflite": "c0696c37da3952e6c90ea8307453e3e43d7bf20bd25569b90883f6f854725108",
+    "submodel_53.tflite": "d160c49c9af68b74cca73f120ac1d7dfd46364650a87caaf998f2adfb4b680c2",
+    "submodel_54.tflite": "0edc9470c14d76499cdfa16d3146cc42575795c855f4fdf121d1ec71333a9b0c",
+    "submodel_55.tflite": "ac13fa88a9838c03f0dfa529b45ff23362ad230ee51e9256394b06dc45b1a6db",
+    "submodel_56.tflite": "e9606b777efcc0e373ad115eeda19264bfabed530b29ff107299324d959e14d3",
+    "submodel_57.tflite": "910202028a6e5d39706cf16aa55ae5dc35855d1ab53245d104e9e9e2de09f37c",
+    "submodel_58.tflite": "a6cb4b568b04a9996560ed8510a1d2f4f76547822b0bf5b705b74c652ce4ee6a"
+  },
+  "operators": {
+    "CONV_2D": 15,
+    "MUL": 19,
+    "ADD": 22,
+    "RELU6": 13,
+    "DEPTHWISE_CONV_2D": 6,
+    "PAD": 2,
+    "SOFTMAX": 1
+  },
+  "max_output_values": 115248,
+  "residual_sources": {
+    "25": 16,
+    "43": 34,
+    "52": 43
+  },
+  "message_capacity_before_bytes": 922253,
+  "message_capacity_after_bytes": 461261,
+  "reserved_buffer_reduction_bytes": 460992,
+  "native_checks": {
+    "invocations": 1170,
+    "compared_float_values": 33363072,
+    "max_absolute_error": 0,
+    "watchdog_calls": 2342,
+    "checks_passed": true
+  },
+  "sanitizers": [
+    "AddressSanitizer",
+    "UndefinedBehaviorSanitizer"
+  ],
+  "native_reference": "Desktop TFLite reference kernels, same 59 binaries, rtol=1e-5 atol=1e-5",
+  "desktop_tflite_vs_keras": {
+    "max_intermediate_absolute_error": 0.0007476806640625,
+    "max_final_absolute_error": 4.76837158203125e-07,
+    "final_output_tolerance": {
+      "rtol": 1e-05,
+      "atol": 1e-05,
+      "passed": true
+    }
+  },
+  "server_packet_checks": {
+    "0": {
+      "bytes": 85,
+      "parsed_by_unmodified_server": true
+    },
+    "11": {
+      "bytes": 461073,
+      "parsed_by_unmodified_server": true
+    },
+    "25": {
+      "bytes": 185,
+      "parsed_by_unmodified_server": true
+    },
+    "58": {
+      "bytes": 461261,
+      "parsed_by_unmodified_server": true
+    }
+  },
+  "hardware_verified": false,
+  "source_sha256": {
+    "src/client/common/inference_message.h": "dbaa9bf891f58a6808c06134f665cb850a4bef7703588ced512d7f74b4308811",
+    "src/client/common/float_layer.h": "18c3a78306bee759dc42ed0b99a45907a91f7d1b880f0e15c99ae18953241726",
+    "tests/firmware/check_firmware.py": "2139eb7164f85bd4810e059b6d1f3e83fa34e6b1dac29ac6cec4677039249bd2",
+    "tests/firmware/firmware_host.cpp": "b98f1bc1183f3474a0c6f3cda2351e0f20e0744b07566f0f43671edb2340d2d1",
+    "tests/firmware/CMakeLists.txt": "8ed88e99f3b582337ccb3403e1d349360cf455948b70008b2909f553a9662eb5"
+  }
+}

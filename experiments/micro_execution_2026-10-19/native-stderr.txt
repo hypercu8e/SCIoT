@@ -1,0 +1,4 @@
+Node SCIoTFail (number 0) failed to invoke with status 1
+Failed to resize buffer. Requested: 192, available 8, missing: 184
+Failed starting model allocation.
+

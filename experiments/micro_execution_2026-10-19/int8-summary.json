@@ -1,0 +1,287 @@
+{
+  "experiment": "int8",
+  "scope": "Native host only; no ESP32 verification",
+  "passed": false,
+  "provenance": {
+    "cpu": "AMD Ryzen 7 8845HS w/ Radeon 780M Graphics",
+    "platform": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+    "python": "3.11.17 (main, Oct 14 2026, 01:05:33) [Clang 23.1.3 ]",
+    "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "cmake": "cmake version 3.28.3",
+    "tensorflow": "2.15.0",
+    "numpy": "1.26.4",
+    "runtime_path": "/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src",
+    "runtime_version": "1.0.0",
+    "runtime_source_tree_sha256": "9295d6ecbb02cfc05a7829dd79c01013353e40eace664e3a0ff76fcd635a10af",
+    "source_sha256": {
+      "tests/firmware/check_experiments.py": "0fd3646d7025103444f34e3293679d5e189ac54667512922d435b8a8a7f4d221",
+      "tests/firmware/CMakeLists.txt": "8ed88e99f3b582337ccb3403e1d349360cf455948b70008b2909f553a9662eb5",
+      "tests/firmware/experiment_host.cpp": "f2c4a6149634a29f1aead789bf6498853fcf676c03e13777eea5ed9a266add92",
+      "src/client/common/float_layer.h": "18c3a78306bee759dc42ed0b99a45907a91f7d1b880f0e15c99ae18953241726",
+      "experiments/activation_compression/compose_float_prefix.py": "43351e387809c11426dc78551a2fe260ae0edfd7639980d14663a78f03e7847f",
+      "experiments/activation_compression/test_compose_float_prefix.py": "49f93b8deecbd5509edcbbc227d3348e39d1f89dc12b711fc62cd446b82b30ef"
+    },
+    "command": [
+      "/home/gabriele/Desktop/SCIoT/.venv/bin/python",
+      "tests/firmware/check_experiments.py",
+      "int8",
+      "--output-dir",
+      "experiments/activation_compression/results/micro-int8-final-2026-10-19"
+    ]
+  },
+  "artifacts": {
+    "frame_indices": [
+      48,
+      96,
+      145
+    ],
+    "vectors_sha256": "767372a86c456322027889ded93f623e9c7bf14bd4231972ffd213e3905a7c42",
+    "model_sha256": {
+      "full": "2a20659a928e2158f0e5a26083c5b109d2be3024812e5bc0314272bdf72e0a2e",
+      "prefix": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+      "suffix": "4e9307867c93b8df38deee74d7babe3cfdfcea25f8570482a0a3e82e1d8be68d"
+    }
+  },
+  "native": {
+    "stages": [
+      {
+        "stage": "full",
+        "arena_used_bytes": 239328,
+        "checked_invocations": 36,
+        "mismatched_invocations": 36,
+        "max_mismatched_values": 15,
+        "max_integer_error": 15
+      },
+      {
+        "stage": "prefix",
+        "arena_used_bytes": 230704,
+        "checked_invocations": 36,
+        "mismatched_invocations": 36,
+        "max_mismatched_values": 680,
+        "max_integer_error": 4
+      },
+      {
+        "stage": "suffix",
+        "arena_used_bytes": 66816,
+        "checked_invocations": 36,
+        "mismatched_invocations": 0,
+        "max_mismatched_values": 0,
+        "max_integer_error": 0
+      },
+      {
+        "stage": "suffix_chain",
+        "arena_used_bytes": 66816,
+        "checked_invocations": 36,
+        "mismatched_invocations": 36,
+        "max_mismatched_values": 15,
+        "max_integer_error": 15
+      }
+    ],
+    "stable_across_alternating_inputs": true,
+    "exact_match": false,
+    "hardware_verified": false
+  },
+  "independent_output_check": {
+    "full": [
+      {
+        "sample": 0,
+        "exact_match": false,
+        "mismatched_values": 14,
+        "max_integer_error": 7
+      },
+      {
+        "sample": 1,
+        "exact_match": false,
+        "mismatched_values": 14,
+        "max_integer_error": 15
+      },
+      {
+        "sample": 2,
+        "exact_match": false,
+        "mismatched_values": 15,
+        "max_integer_error": 7
+      }
+    ],
+    "prefix": [
+      {
+        "sample": 0,
+        "exact_match": false,
+        "mismatched_values": 674,
+        "max_integer_error": 4
+      },
+      {
+        "sample": 1,
+        "exact_match": false,
+        "mismatched_values": 680,
+        "max_integer_error": 4
+      },
+      {
+        "sample": 2,
+        "exact_match": false,
+        "mismatched_values": 587,
+        "max_integer_error": 4
+      }
+    ],
+    "suffix": [
+      {
+        "sample": 0,
+        "exact_match": true,
+        "mismatched_values": 0,
+        "max_integer_error": 0
+      },
+      {
+        "sample": 1,
+        "exact_match": true,
+        "mismatched_values": 0,
+        "max_integer_error": 0
+      },
+      {
+        "sample": 2,
+        "exact_match": true,
+        "mismatched_values": 0,
+        "max_integer_error": 0
+      }
+    ],
+    "suffix_chain": [
+      {
+        "sample": 0,
+        "exact_match": false,
+        "mismatched_values": 14,
+        "max_integer_error": 7
+      },
+      {
+        "sample": 1,
+        "exact_match": false,
+        "mismatched_values": 14,
+        "max_integer_error": 15
+      },
+      {
+        "sample": 2,
+        "exact_match": false,
+        "mismatched_values": 15,
+        "max_integer_error": 7
+      }
+    ],
+    "micro_full_vs_micro_chain_exact": [
+      true,
+      true,
+      true
+    ]
+  },
+  "desktop_kernel_diagnostics": {
+    "BUILTIN_REF": {
+      "full": [
+        {
+          "sample": 0,
+          "matches_archived": false,
+          "matches_micro": true
+        },
+        {
+          "sample": 1,
+          "matches_archived": false,
+          "matches_micro": true
+        },
+        {
+          "sample": 2,
+          "matches_archived": false,
+          "matches_micro": true
+        }
+      ],
+      "prefix": [
+        {
+          "sample": 0,
+          "matches_archived": false,
+          "matches_micro": true
+        },
+        {
+          "sample": 1,
+          "matches_archived": false,
+          "matches_micro": true
+        },
+        {
+          "sample": 2,
+          "matches_archived": false,
+          "matches_micro": true
+        }
+      ],
+      "suffix": [
+        {
+          "sample": 0,
+          "matches_archived": true,
+          "matches_micro": true
+        },
+        {
+          "sample": 1,
+          "matches_archived": true,
+          "matches_micro": true
+        },
+        {
+          "sample": 2,
+          "matches_archived": true,
+          "matches_micro": true
+        }
+      ]
+    },
+    "BUILTIN_WITHOUT_DEFAULT_DELEGATES": {
+      "full": [
+        {
+          "sample": 0,
+          "matches_archived": true,
+          "matches_micro": false
+        },
+        {
+          "sample": 1,
+          "matches_archived": true,
+          "matches_micro": false
+        },
+        {
+          "sample": 2,
+          "matches_archived": true,
+          "matches_micro": false
+        }
+      ],
+      "prefix": [
+        {
+          "sample": 0,
+          "matches_archived": true,
+          "matches_micro": false
+        },
+        {
+          "sample": 1,
+          "matches_archived": true,
+          "matches_micro": false
+        },
+        {
+          "sample": 2,
+          "matches_archived": true,
+          "matches_micro": false
+        }
+      ],
+      "suffix": [
+        {
+          "sample": 0,
+          "matches_archived": true,
+          "matches_micro": true
+        },
+        {
+          "sample": 1,
+          "matches_archived": true,
+          "matches_micro": true
+        },
+        {
+          "sample": 2,
+          "matches_archived": true,
+          "matches_micro": true
+        }
+      ]
+    }
+  },
+  "error": "Micro differs from archived desktop INT8 outputs; exact parity failed, diagnostics retained",
+  "builds": {
+    "build-sanitized": {
+      "executable_sha256": "67f75beea259c64ab8f33906c94b79814f0ab3797e23cebb46a56753bb45e8a7",
+      "sanitizers": true,
+      "runner_compile_command": "/usr/bin/c++ -DTF_LITE_DISABLE_X86_NEON -DTF_LITE_STATIC_MEMORY -I/home/gabriele/Desktop/SCIoT/src/client/common -I/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src -I/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/third_party/flatbuffers/include -I/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/third_party/gemmlowp -I/home/gabriele/Desktop/SCIoT/src/client/esp32-s3-eye-http/.pio/libdeps/esp32dev/TensorFlowLite_ESP32/src/third_party/ruy -g -std=gnu++11 -fno-exceptions -ffp-contract=off -fno-fast-math -UNDEBUG -O1 -g -fno-omit-frame-pointer -fsanitize=address,undefined -o CMakeFiles/experiment_host.dir/experiment_host.cpp.o -c /home/gabriele/Desktop/SCIoT/tests/firmware/experiment_host.cpp"
+    }
+  }
+}
