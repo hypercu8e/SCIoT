@@ -1,0 +1,28 @@
+{
+  "scope": "Static inspection of exact downloaded runtime source; no target execution",
+  "runtime": "tanakamasayuki/TensorFlowLite_ESP32@1.0.0",
+  "source_sha256": {
+    "micro_interpreter.h": "f19f11713b5b4541de66a2839126461c6b37e2fab7a9d933b3cf944b570df345",
+    "micro_mutable_op_resolver.h": "4e4d1813323ac4882848385260b630e67e7c5f893521b7caab212aa6362de35a",
+    "kernels/add.cpp": "60fbdd3d035de686940a2d8730540180c40a0f0c82f677d87606bdb31d9cf331",
+    "kernels/conv.cpp": "ad6445d16a862bb230b4946dce88486b79797dab6cb1ef32b037d9ad6ab54e31",
+    "kernels/depthwise_conv.cpp": "631c186eaf344c1ad557fae3c81b3fbbd5b710489681863cfc1446ebb23b4dab",
+    "kernels/pad.cpp": "a67cdd9b9e4384024e2f4b25e7c00844a328183711c2ed7b09c17d3a2334eeeb",
+    "kernels/softmax.cpp": "3abcb23e2147fa4af8c188acae68618aa264acdc76a1640483a4a77f953b7951"
+  },
+  "required_int8_operations": [
+    "ADD",
+    "CONV_2D",
+    "DEPTHWISE_CONV_2D",
+    "PAD",
+    "SOFTMAX"
+  ],
+  "int8_dispatch_present_for_required_operations": true,
+  "depthwise_conv_eval_input_dispatch": [
+    "kTfLiteFloat32",
+    "kTfLiteInt8"
+  ],
+  "int16_depthwise_dispatch_present": false,
+  "conclusion": "Saved 16x8 model uses INT16 depthwise inputs; this runtime implementation cannot execute those nodes unchanged. INT8 still needs target AllocateTensors/Invoke and output comparison.",
+  "saved_16x8_depthwise_nodes_with_int16_input": 6
+}

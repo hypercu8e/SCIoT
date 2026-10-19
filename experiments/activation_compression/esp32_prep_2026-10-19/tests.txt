@@ -1,0 +1,17 @@
+Executed 19 October 2026 on the PC; no hardware results.
+
+.venv/bin/python -m unittest discover -s experiments/activation_compression -p 'test_*.py'
+...............................
+----------------------------------------------------------------------
+Ran 31 tests in 0.103s
+
+OK
+
+.venv/bin/python -m unittest discover -s experiments/esp32_int8_firmware -p 'test_*.py'
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.014s
+
+OK
+
+Ruff check of the new Python files: All checks passed.

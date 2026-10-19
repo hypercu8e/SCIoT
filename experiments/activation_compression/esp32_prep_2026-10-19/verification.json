@@ -1,0 +1,16 @@
+{
+  "scope": "Independent reload of saved binaries/vectors on desktop; no conversion or ESP32",
+  "models_checked": [
+    "full",
+    "prefix",
+    "suffix"
+  ],
+  "frame_indices": [
+    48,
+    96,
+    145
+  ],
+  "hashes_io_quantization_and_integer_types_match": true,
+  "all_saved_inputs_reproduce_expected_bytes": true,
+  "passed": true
+}

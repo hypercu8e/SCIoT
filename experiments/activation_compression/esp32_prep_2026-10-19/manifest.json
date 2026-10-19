@@ -1,0 +1,255 @@
+{
+  "scope": "Desktop verification and hardware preparation; no ESP32 execution or Wi-Fi",
+  "tensorflow": "2.15.0",
+  "numpy": "1.26.4",
+  "python": "3.11.17",
+  "git_head_before_changes": "3538d54e0c16984722208f80e4f15d84c93d0e42",
+  "source_sha256": {
+    "prepare_esp32_int8.py": "e5db3e0dd9f7defd8296101c3cf3b774bc43712bec395956b9a4a2a1f9973392",
+    "split_tflite.py": "1f7eb5be353ef028b7e44facc7ba6c01e67627a83a5c304505e392680d438bcb",
+    "check_int8.py": "19b4a268ce8bfb69ae7e1e0e3f0435ed86bc8d8d55f550c413318ce51736aa72"
+  },
+  "video_sha256": "03cfb29be68c4a57aa19c567e2576617f35828b700efd8d2388a4110cf26017e",
+  "decoded_input_npy_sha256": "9950248bf367bece38432b62b3fd0d93e967a9c70066e7bd946e7e114decf864",
+  "decoded_inputs_match_archived_int8": true,
+  "frames_verified": 146,
+  "selected_frame_indices": [
+    48,
+    96,
+    145
+  ],
+  "selected_frames_in_archived_evaluation_partition": true,
+  "input_values_clipped": 162,
+  "boundary_tensor": {
+    "index": 54,
+    "name": "model_1/block_2_add/add",
+    "shape": [
+      1,
+      24,
+      24,
+      8
+    ],
+    "dtype": "int8",
+    "logical_value_bytes": 4608,
+    "scales": [
+      0.06843240559101105
+    ],
+    "zero_points": [
+      -20
+    ],
+    "quantized_dimension": 0
+  },
+  "models": {
+    "full": {
+      "input": {
+        "index": 0,
+        "name": "serving_default_input_1:0",
+        "shape": [
+          1,
+          96,
+          96,
+          1
+        ],
+        "dtype": "int8",
+        "logical_value_bytes": 9216,
+        "scales": [
+          0.0036874895449727774
+        ],
+        "zero_points": [
+          -128
+        ],
+        "quantized_dimension": 0
+      },
+      "output": {
+        "index": 70,
+        "name": "StatefulPartitionedCall:0",
+        "shape": [
+          1,
+          12,
+          12,
+          3
+        ],
+        "dtype": "int8",
+        "logical_value_bytes": 432,
+        "scales": [
+          0.00390625
+        ],
+        "zero_points": [
+          -128
+        ],
+        "quantized_dimension": 0
+      },
+      "sha256": "2a20659a928e2158f0e5a26083c5b109d2be3024812e5bc0314272bdf72e0a2e",
+      "file_bytes": 57088,
+      "operators": [
+        {
+          "name": "ADD",
+          "version": 2,
+          "count": 3
+        },
+        {
+          "name": "CONV_2D",
+          "version": 3,
+          "count": 15
+        },
+        {
+          "name": "DEPTHWISE_CONV_2D",
+          "version": 3,
+          "count": 6
+        },
+        {
+          "name": "PAD",
+          "version": 2,
+          "count": 2
+        },
+        {
+          "name": "SOFTMAX",
+          "version": 2,
+          "count": 1
+        }
+      ]
+    },
+    "prefix": {
+      "input": {
+        "index": 0,
+        "name": "serving_default_input_1:0",
+        "shape": [
+          1,
+          96,
+          96,
+          1
+        ],
+        "dtype": "int8",
+        "logical_value_bytes": 9216,
+        "scales": [
+          0.0036874895449727774
+        ],
+        "zero_points": [
+          -128
+        ],
+        "quantized_dimension": 0
+      },
+      "output": {
+        "index": 30,
+        "name": "model_1/block_2_add/add",
+        "shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "dtype": "int8",
+        "logical_value_bytes": 4608,
+        "scales": [
+          0.06843240559101105
+        ],
+        "zero_points": [
+          -20
+        ],
+        "quantized_dimension": 0
+      },
+      "sha256": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+      "file_bytes": 16400,
+      "operators": [
+        {
+          "name": "ADD",
+          "version": 2,
+          "count": 1
+        },
+        {
+          "name": "CONV_2D",
+          "version": 3,
+          "count": 6
+        },
+        {
+          "name": "DEPTHWISE_CONV_2D",
+          "version": 3,
+          "count": 3
+        },
+        {
+          "name": "PAD",
+          "version": 2,
+          "count": 1
+        }
+      ]
+    },
+    "suffix": {
+      "input": {
+        "index": 25,
+        "name": "model_1/block_2_add/add",
+        "shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "dtype": "int8",
+        "logical_value_bytes": 4608,
+        "scales": [
+          0.06843240559101105
+        ],
+        "zero_points": [
+          -20
+        ],
+        "quantized_dimension": 0
+      },
+      "output": {
+        "index": 41,
+        "name": "StatefulPartitionedCall:0",
+        "shape": [
+          1,
+          12,
+          12,
+          3
+        ],
+        "dtype": "int8",
+        "logical_value_bytes": 432,
+        "scales": [
+          0.00390625
+        ],
+        "zero_points": [
+          -128
+        ],
+        "quantized_dimension": 0
+      },
+      "sha256": "4e9307867c93b8df38deee74d7babe3cfdfcea25f8570482a0a3e82e1d8be68d",
+      "file_bytes": 41168,
+      "operators": [
+        {
+          "name": "ADD",
+          "version": 2,
+          "count": 2
+        },
+        {
+          "name": "CONV_2D",
+          "version": 3,
+          "count": 9
+        },
+        {
+          "name": "DEPTHWISE_CONV_2D",
+          "version": 3,
+          "count": 3
+        },
+        {
+          "name": "PAD",
+          "version": 2,
+          "count": 1
+        },
+        {
+          "name": "SOFTMAX",
+          "version": 2,
+          "count": 1
+        }
+      ]
+    }
+  },
+  "vectors_sha256": "767372a86c456322027889ded93f623e9c7bf14bd4231972ffd213e3905a7c42",
+  "full_raw_int8_output_sha256_all_frames": "bc1301ad06ca7bbcbeb55127a0c43d774013d6e0ba3421b390b4ff0a462fd099",
+  "verification": {
+    "prefix_matches_full_boundary_byte_for_byte": true,
+    "split_matches_full_output_byte_for_byte": true,
+    "boundary_quantization_unchanged": true,
+    "new_calibration_or_training": false,
+    "hardware_allocate_invoke_checked": false
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "scope": "Cross-compilation only; no attached ESP32, AllocateTensors or Invoke execution",
+  "platformio_core": "6.1.18",
+  "platform": "espressif32@6.10.0",
+  "board": "esp32-s3-devkitc-1 with 8 MB flash / OPI PSRAM overrides for S3-EYE N8R8",
+  "runtime": "tanakamasayuki/TensorFlowLite_ESP32@1.0.0",
+  "arena_capacity_bytes": 524288,
+  "arena_in_psram": true,
+  "esp_nn_enabled": false,
+  "models": {
+    "full": {
+      "compiled_and_linked": true,
+      "firmware_binary_bytes": 423424,
+      "firmware_binary_sha256": "b8f290da63b7e9295af83ca616117f3d0cbd54dd60eb8e18d36f00ab9544c6da",
+      "static_ram_bytes": 19340,
+      "linked_flash_bytes": 423061
+    },
+    "prefix": {
+      "compiled_and_linked": true,
+      "firmware_binary_bytes": 395280,
+      "firmware_binary_sha256": "7ea0ba709c772a5f6a3a1bd6b07269342ddf05d97f4b05cb5324e10b7b3cad47",
+      "static_ram_bytes": 19340,
+      "linked_flash_bytes": 394921
+    },
+    "suffix": {
+      "compiled_and_linked": true,
+      "firmware_binary_bytes": 393696,
+      "firmware_binary_sha256": "0d8b8268eb276f585fd617df8e0de44cb407873f6c5cdb6a6cb337f7a0f0f27d",
+      "static_ram_bytes": 19340,
+      "linked_flash_bytes": 393333
+    }
+  },
+  "sources_sha256": {
+    "platformio.ini": "a33f3c720d7df28943d58e354c50cb6600a1b7170a562b4b67ca7ebe5e58ba89",
+    "src/main.cpp": "58c75bf3794a8ffef463e60a7ad31fc08cba7bc0b5975813dc28d3bc412eda4d",
+    "generate_assets.py": "cc38837aba4e6643a4fe21864c20bcabd861fbc93f2fa2b3e423ef522e129828"
+  },
+  "static_ram_is_not_peak_or_arena_memory": true,
+  "hardware_verified": false,
+  "host_verifier_sha256": "e1aaeb9e0b05fdd6b6b08118172a9d0d264dad716e0942cb30e954ce089a7fc6",
+  "dependency_build_warnings": "Third-party library display driver sources emit warnings; unused by this probe. All three firmware images linked successfully."
+}
