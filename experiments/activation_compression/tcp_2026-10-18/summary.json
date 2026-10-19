@@ -1,0 +1,690 @@
+{
+  "created_utc": "2026-10-18T10:06:43.725483+00:00",
+  "protocol": "activation-tcp-v1",
+  "scope": "PC CPU / TCP loopback / activation replay / Keras suffix in separate process",
+  "frames": 146,
+  "rounds": 3,
+  "step": 0.001,
+  "reconnect_at": 73,
+  "sampling_fps": 5,
+  "input_metadata": {
+    "video": "VideoWithCan.mp4",
+    "video_sha256": "03cfb29be68c4a57aa19c567e2576617f35828b700efd8d2388a4110cf26017e",
+    "model_sha256": "35ef2c4d89e65e85a37676148e4cde1ff72384c479dbb9ca2d7fda55d0cb0184",
+    "video_duration_seconds": 29.259989,
+    "original_size_wh": [
+      474,
+      850
+    ],
+    "original_average_fps": 29.42584849466412,
+    "original_frame_count": 861,
+    "preprocessing": {
+      "sampling_fps": 5,
+      "sampling": "ffmpeg fps filter; times are nominal sampling-grid times",
+      "crop_xywh": [
+        0,
+        188,
+        474,
+        474
+      ],
+      "resize": "96x96, FFmpeg Lanczos; pixel parity with Studio not established",
+      "grayscale": "BT.601 .299 .587 .114, float32 in [0,1]"
+    },
+    "split": {
+      "layer": "block_2_add",
+      "keras_layer_index_including_input": 26,
+      "boundary_tensors": [
+        "block_2_add"
+      ],
+      "activation_shape_without_batch": [
+        24,
+        24,
+        8
+      ],
+      "dtype": "float32",
+      "values_per_frame": 4608,
+      "raw_tensor_bytes_per_frame": 18432
+    },
+    "verification": {
+      "frames_checked": 146,
+      "full_vs_split_max_absolute_error": 0.0,
+      "rtol": 1e-05,
+      "atol": 1e-06,
+      "passed": true,
+      "scope": "Keras float32 on CPU, one process; no TFLite/network/ESP32 verification"
+    }
+  },
+  "input_hashes": {
+    "model.h5": "35ef2c4d89e65e85a37676148e4cde1ff72384c479dbb9ca2d7fda55d0cb0184",
+    "activations.npy": "243e5358b1f20dcd257c679228a7a8c2d7bc73135696af3c30b59043147ecdb1",
+    "outputs.npy": "b58e1751fddc194bf396e85d9718afc930d6101ecf235afb964c0e482a359f48",
+    "result.json": "65e4f936ccb9ae56b094044ebf030c997e3382e935a360a2e4b140f56096d6de"
+  },
+  "source_hashes": {
+    "socket_benchmark.py": "5a24bba05af780890faabd794ae6431309ca67a0adfb13f4dd7fb609e7e0216f",
+    "lossy_codec.py": "022cdf20cc52ba2ecde6ae1dcf6dcdf8bc75865281ef522a5947235e1019853a",
+    "compare.py": "c1f0b86234b87a04ac45a88e9da81281777dffebfa3860f98176dc408848dce3",
+    "compare_lossy.py": "635bcfca5bcee3d390eb98f8d3938ba4739ca0d6696eacc90b16d80b4b161d25"
+  },
+  "environment": {
+    "python": "3.11.17 (main, Oct 14 2026, 01:05:33) [Clang 23.1.3 ]",
+    "numpy": "1.26.4",
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+    "server_tensorflow": "2.15.0",
+    "client_pid": 13119,
+    "server_pid": 13131,
+    "server_tensorflow_env": {
+      "CUDA_VISIBLE_DEVICES": "-1",
+      "TF_CPP_MIN_LOG_LEVEL": "3",
+      "OMP_NUM_THREADS": "1",
+      "TF_ENABLE_ONEDNN_OPTS": "0"
+    }
+  },
+  "raw_outputs_match_extraction_all_rounds": true,
+  "independent_temporal_outputs_bit_exact_all_rounds": true,
+  "results": [
+    {
+      "method": "raw",
+      "frames": 146,
+      "connections": 2,
+      "client_application_bytes": 2696760,
+      "server_application_bytes": 261146,
+      "handshake_client_bytes": 1600,
+      "handshake_server_bytes": 98,
+      "connection_and_handshake_ms": [
+        1.522073,
+        0.293151
+      ],
+      "selected_delta_frames": 0,
+      "tensor_hash_verified_every_frame": true,
+      "timing": {
+        "encode_ms": {
+          "mean": 0.013391438356164385,
+          "p50": 0.011878,
+          "p95": 0.019262
+        },
+        "request_roundtrip_ms": {
+          "mean": 0.6743617671232877,
+          "p50": 0.6476405000000001,
+          "p95": 0.8425
+        },
+        "encode_plus_roundtrip_ms": {
+          "mean": 0.6877532054794521,
+          "p50": 0.659389,
+          "p95": 0.86116875
+        },
+        "server_decode_ms": {
+          "mean": 0.018352136986301372,
+          "p50": 0.017494,
+          "p95": 0.0235755
+        },
+        "server_suffix_ms": {
+          "mean": 0.5772168904109588,
+          "p50": 0.5548299999999999,
+          "p95": 0.722632
+        }
+      },
+      "output_sha256": "65b26f08f5f96d33440ff3a17f4496f16f833f3b216a215d308492946b190588",
+      "round": 1,
+      "output_error_vs_raw": {
+        "mae": 0.0,
+        "rmse": 0.0,
+        "max_absolute_error": 0.0,
+        "normalized_rmse_by_reference_std": 0.0,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "upload_saving_vs_raw_percent": 0.0,
+      "upload_saving_vs_independent_percent": -68.29106648743976,
+      "same_step_output_bit_exact_between_compressed_methods": true
+    },
+    {
+      "method": "independent",
+      "frames": 146,
+      "connections": 2,
+      "client_application_bytes": 1602438,
+      "server_application_bytes": 261146,
+      "handshake_client_bytes": 1616,
+      "handshake_server_bytes": 98,
+      "connection_and_handshake_ms": [
+        0.621229,
+        0.339231
+      ],
+      "selected_delta_frames": 0,
+      "tensor_hash_verified_every_frame": true,
+      "timing": {
+        "encode_ms": {
+          "mean": 0.3335842671232877,
+          "p50": 0.3324125,
+          "p95": 0.3463845
+        },
+        "request_roundtrip_ms": {
+          "mean": 0.8581315684931508,
+          "p50": 0.850751,
+          "p95": 0.8776765
+        },
+        "encode_plus_roundtrip_ms": {
+          "mean": 1.1917158356164381,
+          "p50": 1.1830135,
+          "p95": 1.21153625
+        },
+        "server_decode_ms": {
+          "mean": 0.1709584589041096,
+          "p50": 0.16914400000000002,
+          "p95": 0.17962975
+        },
+        "server_suffix_ms": {
+          "mean": 0.5955177739726027,
+          "p50": 0.5908305,
+          "p95": 0.6082537499999999
+        }
+      },
+      "output_sha256": "874d376702d9e804953c87105aa828cd95a1f3ddb3773e2171107e11a5148a31",
+      "round": 1,
+      "output_error_vs_raw": {
+        "mae": 1.935893315533109e-06,
+        "rmse": 1.8133399043833412e-05,
+        "max_absolute_error": 0.000605463981628418,
+        "normalized_rmse_by_reference_std": 3.874206274812193e-05,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "upload_saving_vs_raw_percent": 40.57913941173853,
+      "upload_saving_vs_independent_percent": 0.0,
+      "same_step_output_bit_exact_between_compressed_methods": true
+    },
+    {
+      "method": "temporal",
+      "frames": 146,
+      "connections": 2,
+      "client_application_bytes": 1385197,
+      "server_application_bytes": 261146,
+      "handshake_client_bytes": 1598,
+      "handshake_server_bytes": 98,
+      "connection_and_handshake_ms": [
+        0.419006,
+        0.341725
+      ],
+      "selected_delta_frames": 137,
+      "tensor_hash_verified_every_frame": true,
+      "timing": {
+        "encode_ms": {
+          "mean": 0.6175036506849316,
+          "p50": 0.62937,
+          "p95": 0.6436735
+        },
+        "request_roundtrip_ms": {
+          "mean": 0.8683648219178082,
+          "p50": 0.8596035,
+          "p95": 0.8883145
+        },
+        "encode_plus_roundtrip_ms": {
+          "mean": 1.4858684726027398,
+          "p50": 1.488743,
+          "p95": 1.5274815
+        },
+        "server_decode_ms": {
+          "mean": 0.17379308219178083,
+          "p50": 0.17271599999999998,
+          "p95": 0.181959
+        },
+        "server_suffix_ms": {
+          "mean": 0.6018572808219178,
+          "p50": 0.593711,
+          "p95": 0.6163705
+        }
+      },
+      "output_sha256": "874d376702d9e804953c87105aa828cd95a1f3ddb3773e2171107e11a5148a31",
+      "round": 1,
+      "output_error_vs_raw": {
+        "mae": 1.935893315533109e-06,
+        "rmse": 1.8133399043833412e-05,
+        "max_absolute_error": 0.000605463981628418,
+        "normalized_rmse_by_reference_std": 3.874206274812193e-05,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "upload_saving_vs_raw_percent": 48.63476913036384,
+      "upload_saving_vs_independent_percent": 13.556905165753685,
+      "same_step_output_bit_exact_between_compressed_methods": true
+    },
+    {
+      "method": "independent",
+      "frames": 146,
+      "connections": 2,
+      "client_application_bytes": 1602438,
+      "server_application_bytes": 261146,
+      "handshake_client_bytes": 1616,
+      "handshake_server_bytes": 98,
+      "connection_and_handshake_ms": [
+        0.392354,
+        0.365902
+      ],
+      "selected_delta_frames": 0,
+      "tensor_hash_verified_every_frame": true,
+      "timing": {
+        "encode_ms": {
+          "mean": 0.331648102739726,
+          "p50": 0.32971649999999997,
+          "p95": 0.3444155
+        },
+        "request_roundtrip_ms": {
+          "mean": 0.8533199315068494,
+          "p50": 0.8497645,
+          "p95": 0.873503
+        },
+        "encode_plus_roundtrip_ms": {
+          "mean": 1.1849680342465754,
+          "p50": 1.1805185,
+          "p95": 1.24005125
+        },
+        "server_decode_ms": {
+          "mean": 0.16899021917808218,
+          "p50": 0.1676615,
+          "p95": 0.1802215
+        },
+        "server_suffix_ms": {
+          "mean": 0.5956033287671233,
+          "p50": 0.588776,
+          "p95": 0.617695
+        }
+      },
+      "output_sha256": "874d376702d9e804953c87105aa828cd95a1f3ddb3773e2171107e11a5148a31",
+      "round": 2,
+      "output_error_vs_raw": {
+        "mae": 1.935893315533109e-06,
+        "rmse": 1.8133399043833412e-05,
+        "max_absolute_error": 0.000605463981628418,
+        "normalized_rmse_by_reference_std": 3.874206274812193e-05,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "upload_saving_vs_raw_percent": 40.57913941173853,
+      "upload_saving_vs_independent_percent": 0.0,
+      "same_step_output_bit_exact_between_compressed_methods": true
+    },
+    {
+      "method": "temporal",
+      "frames": 146,
+      "connections": 2,
+      "client_application_bytes": 1385197,
+      "server_application_bytes": 261146,
+      "handshake_client_bytes": 1598,
+      "handshake_server_bytes": 98,
+      "connection_and_handshake_ms": [
+        0.392464,
+        0.30785
+      ],
+      "selected_delta_frames": 137,
+      "tensor_hash_verified_every_frame": true,
+      "timing": {
+        "encode_ms": {
+          "mean": 0.6196461575342467,
+          "p50": 0.6282179999999999,
+          "p95": 0.6489809999999999
+        },
+        "request_roundtrip_ms": {
+          "mean": 0.8854166506849316,
+          "p50": 0.8573489999999999,
+          "p95": 0.97146325
+        },
+        "encode_plus_roundtrip_ms": {
+          "mean": 1.5050628082191781,
+          "p50": 1.483012,
+          "p95": 1.5679675
+        },
+        "server_decode_ms": {
+          "mean": 0.17515015753424656,
+          "p50": 0.1719095,
+          "p95": 0.18442625
+        },
+        "server_suffix_ms": {
+          "mean": 0.6140309863013699,
+          "p50": 0.5922080000000001,
+          "p95": 0.69346825
+        }
+      },
+      "output_sha256": "874d376702d9e804953c87105aa828cd95a1f3ddb3773e2171107e11a5148a31",
+      "round": 2,
+      "output_error_vs_raw": {
+        "mae": 1.935893315533109e-06,
+        "rmse": 1.8133399043833412e-05,
+        "max_absolute_error": 0.000605463981628418,
+        "normalized_rmse_by_reference_std": 3.874206274812193e-05,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "upload_saving_vs_raw_percent": 48.63476913036384,
+      "upload_saving_vs_independent_percent": 13.556905165753685,
+      "same_step_output_bit_exact_between_compressed_methods": true
+    },
+    {
+      "method": "raw",
+      "frames": 146,
+      "connections": 2,
+      "client_application_bytes": 2696760,
+      "server_application_bytes": 261146,
+      "handshake_client_bytes": 1600,
+      "handshake_server_bytes": 98,
+      "connection_and_handshake_ms": [
+        0.29763,
+        0.304493
+      ],
+      "selected_delta_frames": 0,
+      "tensor_hash_verified_every_frame": true,
+      "timing": {
+        "encode_ms": {
+          "mean": 0.01543669178082192,
+          "p50": 0.0147435,
+          "p95": 0.01768475
+        },
+        "request_roundtrip_ms": {
+          "mean": 0.7003643972602741,
+          "p50": 0.696952,
+          "p95": 0.720586
+        },
+        "encode_plus_roundtrip_ms": {
+          "mean": 0.7158010890410959,
+          "p50": 0.7125325,
+          "p95": 0.73602775
+        },
+        "server_decode_ms": {
+          "mean": 0.020969068493150684,
+          "p50": 0.0218425,
+          "p95": 0.023823499999999997
+        },
+        "server_suffix_ms": {
+          "mean": 0.5907855205479452,
+          "p50": 0.587529,
+          "p95": 0.60981175
+        }
+      },
+      "output_sha256": "65b26f08f5f96d33440ff3a17f4496f16f833f3b216a215d308492946b190588",
+      "round": 2,
+      "output_error_vs_raw": {
+        "mae": 0.0,
+        "rmse": 0.0,
+        "max_absolute_error": 0.0,
+        "normalized_rmse_by_reference_std": 0.0,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "upload_saving_vs_raw_percent": 0.0,
+      "upload_saving_vs_independent_percent": -68.29106648743976,
+      "same_step_output_bit_exact_between_compressed_methods": true
+    },
+    {
+      "method": "temporal",
+      "frames": 146,
+      "connections": 2,
+      "client_application_bytes": 1385197,
+      "server_application_bytes": 261146,
+      "handshake_client_bytes": 1598,
+      "handshake_server_bytes": 98,
+      "connection_and_handshake_ms": [
+        0.407393,
+        0.291598
+      ],
+      "selected_delta_frames": 137,
+      "tensor_hash_verified_every_frame": true,
+      "timing": {
+        "encode_ms": {
+          "mean": 0.6516669863013699,
+          "p50": 0.6198665,
+          "p95": 0.799409
+        },
+        "request_roundtrip_ms": {
+          "mean": 0.8840459520547946,
+          "p50": 0.836368,
+          "p95": 1.0573437499999998
+        },
+        "encode_plus_roundtrip_ms": {
+          "mean": 1.5357129383561643,
+          "p50": 1.4624715,
+          "p95": 1.7985185000000001
+        },
+        "server_decode_ms": {
+          "mean": 0.17213040410958905,
+          "p50": 0.167401,
+          "p95": 0.190641
+        },
+        "server_suffix_ms": {
+          "mean": 0.6196133150684932,
+          "p50": 0.582429,
+          "p95": 0.77085275
+        }
+      },
+      "output_sha256": "874d376702d9e804953c87105aa828cd95a1f3ddb3773e2171107e11a5148a31",
+      "round": 3,
+      "output_error_vs_raw": {
+        "mae": 1.935893315533109e-06,
+        "rmse": 1.8133399043833412e-05,
+        "max_absolute_error": 0.000605463981628418,
+        "normalized_rmse_by_reference_std": 3.874206274812193e-05,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "upload_saving_vs_raw_percent": 48.63476913036384,
+      "upload_saving_vs_independent_percent": 13.556905165753685,
+      "same_step_output_bit_exact_between_compressed_methods": true
+    },
+    {
+      "method": "raw",
+      "frames": 146,
+      "connections": 2,
+      "client_application_bytes": 2696760,
+      "server_application_bytes": 261146,
+      "handshake_client_bytes": 1600,
+      "handshake_server_bytes": 98,
+      "connection_and_handshake_ms": [
+        0.455396,
+        0.294263
+      ],
+      "selected_delta_frames": 0,
+      "tensor_hash_verified_every_frame": true,
+      "timing": {
+        "encode_ms": {
+          "mean": 0.014803164383561645,
+          "p50": 0.013772,
+          "p95": 0.02046225
+        },
+        "request_roundtrip_ms": {
+          "mean": 0.6943987191780822,
+          "p50": 0.6586624999999999,
+          "p95": 0.99989675
+        },
+        "encode_plus_roundtrip_ms": {
+          "mean": 0.7092018835616438,
+          "p50": 0.6733605,
+          "p95": 1.01872075
+        },
+        "server_decode_ms": {
+          "mean": 0.021507397260273974,
+          "p50": 0.0207555,
+          "p95": 0.026642
+        },
+        "server_suffix_ms": {
+          "mean": 0.5845604863013699,
+          "p50": 0.5526205,
+          "p95": 0.8626842499999999
+        }
+      },
+      "output_sha256": "65b26f08f5f96d33440ff3a17f4496f16f833f3b216a215d308492946b190588",
+      "round": 3,
+      "output_error_vs_raw": {
+        "mae": 0.0,
+        "rmse": 0.0,
+        "max_absolute_error": 0.0,
+        "normalized_rmse_by_reference_std": 0.0,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "upload_saving_vs_raw_percent": 0.0,
+      "upload_saving_vs_independent_percent": -68.29106648743976,
+      "same_step_output_bit_exact_between_compressed_methods": true
+    },
+    {
+      "method": "independent",
+      "frames": 146,
+      "connections": 2,
+      "client_application_bytes": 1602438,
+      "server_application_bytes": 261146,
+      "handshake_client_bytes": 1616,
+      "handshake_server_bytes": 98,
+      "connection_and_handshake_ms": [
+        0.367946,
+        0.407693
+      ],
+      "selected_delta_frames": 0,
+      "tensor_hash_verified_every_frame": true,
+      "timing": {
+        "encode_ms": {
+          "mean": 0.32223626712328773,
+          "p50": 0.30912700000000004,
+          "p95": 0.39161475
+        },
+        "request_roundtrip_ms": {
+          "mean": 0.8703881780821918,
+          "p50": 0.790003,
+          "p95": 1.3288847499999998
+        },
+        "encode_plus_roundtrip_ms": {
+          "mean": 1.1926244452054795,
+          "p50": 1.0988440000000002,
+          "p95": 1.67032175
+        },
+        "server_decode_ms": {
+          "mean": 0.1686082191780822,
+          "p50": 0.156605,
+          "p95": 0.21929474999999998
+        },
+        "server_suffix_ms": {
+          "mean": 0.608070801369863,
+          "p50": 0.5498455,
+          "p95": 1.01098825
+        }
+      },
+      "output_sha256": "874d376702d9e804953c87105aa828cd95a1f3ddb3773e2171107e11a5148a31",
+      "round": 3,
+      "output_error_vs_raw": {
+        "mae": 1.935893315533109e-06,
+        "rmse": 1.8133399043833412e-05,
+        "max_absolute_error": 0.000605463981628418,
+        "normalized_rmse_by_reference_std": 3.874206274812193e-05,
+        "argmax_changed_cells": 0,
+        "cells": 21024,
+        "thresholds": {
+          "0.5": {
+            "reference_foreground_cells": 151,
+            "reconstructed_foreground_cells": 151,
+            "changed_cells": 0,
+            "agreement_percent": 100.0,
+            "lost_foreground_cells": 0,
+            "introduced_foreground_cells": 0,
+            "foreground_class_changed_cells": 0,
+            "foreground_label_cell_iou": 1.0
+          }
+        }
+      },
+      "upload_saving_vs_raw_percent": 40.57913941173853,
+      "upload_saving_vs_independent_percent": 0.0,
+      "same_step_output_bit_exact_between_compressed_methods": true
+    }
+  ]
+}

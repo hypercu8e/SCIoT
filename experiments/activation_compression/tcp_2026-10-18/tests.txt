@@ -1,0 +1,25 @@
+test_all_methods_preserve_float_bits_across_refreshes (test_compare.CodecTests.test_all_methods_preserve_float_bits_across_refreshes) ... ok
+test_corrupted_tensor_is_rejected (test_compare.CodecTests.test_corrupted_tensor_is_rejected) ... ok
+test_duplicate_and_truncated_packets_are_rejected (test_compare.CodecTests.test_duplicate_and_truncated_packets_are_rejected) ... ok
+test_float64_delta_falls_back_when_signed_zero_would_be_lost (test_compare.CodecTests.test_float64_delta_falls_back_when_signed_zero_would_be_lost) ... ok
+test_missing_delta_is_rejected_until_complete_refresh (test_compare.CodecTests.test_missing_delta_is_rejected_until_complete_refresh) ... ok
+test_shuffle_preserves_every_bit_pattern (test_compare.CodecTests.test_shuffle_preserves_every_bit_pattern) ... ok
+test_corruption_rejection_preserves_reference (test_lossy.LossyTests.test_corruption_rejection_preserves_reference) ... ok
+test_extreme_integer_transition_does_not_wrap (test_lossy.LossyTests.test_extreme_integer_transition_does_not_wrap) ... ok
+test_foreground_thresholds_and_lost_introduced_class_changes (test_lossy.LossyTests.test_foreground_thresholds_and_lost_introduced_class_changes) ... ok
+test_lost_delta_requires_refresh_and_recovers (test_lossy.LossyTests.test_lost_delta_requires_refresh_and_recovers) ... ok
+test_methods_have_identical_reconstructions_across_refreshes (test_lossy.LossyTests.test_methods_have_identical_reconstructions_across_refreshes) ... ok
+test_no_drift_when_small_changes_accumulate (test_lossy.LossyTests.test_no_drift_when_small_changes_accumulate) ... ok
+test_no_foreground_is_not_reported_as_perfect_foreground_iou (test_lossy.LossyTests.test_no_foreground_is_not_reported_as_perfect_foreground_iou) ... ok
+test_overflow_nonfinite_and_invalid_steps_are_rejected (test_lossy.LossyTests.test_overflow_nonfinite_and_invalid_steps_are_rejected) ... ok
+test_session_truncation_and_oversized_decompression_are_rejected (test_lossy.LossyTests.test_session_truncation_and_oversized_decompression_are_rejected) ... ok
+test_fragmented_messages_and_truncated_stream (test_socket_benchmark.TransportTests.test_fragmented_messages_and_truncated_stream) ... ok
+test_length_limit_rejected_before_payload_read (test_socket_benchmark.TransportTests.test_length_limit_rejected_before_payload_read) ... ok
+test_sequence_and_corruption_do_not_advance_decoder (test_socket_benchmark.TransportTests.test_sequence_and_corruption_do_not_advance_decoder) ... ok
+test_server_rejects_wrong_model_before_acknowledgement (test_socket_benchmark.TransportTests.test_server_rejects_wrong_model_before_acknowledgement) ... ok
+test_tcp_replay_all_modes_and_reconnect_isolates_reference (test_socket_benchmark.TransportTests.test_tcp_replay_all_modes_and_reconnect_isolates_reference) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.070s
+
+OK

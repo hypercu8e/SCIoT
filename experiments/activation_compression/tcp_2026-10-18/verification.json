@@ -1,0 +1,56 @@
+{
+  "scope": "Independent audit of saved JSON/CSV, input/source hashes, reconnect sequences and test log",
+  "checks": [
+    {
+      "round": 1,
+      "method": "raw",
+      "csv_totals_and_reconnect_sequences": true
+    },
+    {
+      "round": 1,
+      "method": "independent",
+      "csv_totals_and_reconnect_sequences": true
+    },
+    {
+      "round": 1,
+      "method": "temporal",
+      "csv_totals_and_reconnect_sequences": true
+    },
+    {
+      "round": 2,
+      "method": "independent",
+      "csv_totals_and_reconnect_sequences": true
+    },
+    {
+      "round": 2,
+      "method": "temporal",
+      "csv_totals_and_reconnect_sequences": true
+    },
+    {
+      "round": 2,
+      "method": "raw",
+      "csv_totals_and_reconnect_sequences": true
+    },
+    {
+      "round": 3,
+      "method": "temporal",
+      "csv_totals_and_reconnect_sequences": true
+    },
+    {
+      "round": 3,
+      "method": "raw",
+      "csv_totals_and_reconnect_sequences": true
+    },
+    {
+      "round": 3,
+      "method": "independent",
+      "csv_totals_and_reconnect_sequences": true
+    }
+  ],
+  "rows": 1314,
+  "connections": 18,
+  "distinct_client_server_pids": true,
+  "all_source_and_input_hashes_match": true,
+  "independent_temporal_output_hashes_match_every_round": true,
+  "tests_passed": 20
+}
