@@ -25,7 +25,15 @@
 
 #define MODEL_NAME "test_model"
 #include "model_layers/layers.h"
+#include "../../common/inference_message.h"
+#include "../../common/float_layer.h"
+#if __has_include("conf.h")
 #include "conf.h"
+#else
+#include "conf.template.h"
+#endif
+static_assert(OUTPUT_MSG_SIZE >= sciot::inferenceMessageCapacity(MAX_ELEMENTS_PER_MODEL_LAYER, MAX_NUM_LAYER),
+              "OUTPUT_MSG_SIZE is too small for this model");
 
 /* 
 * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -65,6 +73,7 @@ String                      DeviceUUID = "";
 SpiRamAllocator             allocator;
 
 bool                        modelDataLoaded = false;
+bool                        firmwareReady = false;
 float*                      inputBuffer = nullptr;
 char*                       output_message = nullptr;
 int                         best_offloading_layer_index = MAX_NUM_LAYER-1;
@@ -76,9 +85,7 @@ float*                      lastMultiOutputLayerData = nullptr;
 tflite::MicroErrorReporter  micro_error_reporter;
 tflite::ErrorReporter*      error_reporter = &micro_error_reporter;
 const tflite::Model*        model = nullptr;
-tflite::MicroInterpreter*   interpreter = nullptr;
-TfLiteTensor*               input;
-TfLiteTensor*               output;
+tflite::AllOpsResolver      layerResolver;
 uint8_t*                    tensor_arena = nullptr;
 
 /*
@@ -128,230 +135,77 @@ void timeConfiguration(){
 * LOAD NN LAYER
 * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
-void loadNeuralNetworkLayer(String layer_name){
-  // Import del modello da testare -> Nome nell'header file
+const tflite::Model* loadNeuralNetworkLayer(const String& layer_name) {
+  model = nullptr;
   LOAD_LAYER();
-
-  if (model->version() != TFLITE_SCHEMA_VERSION) {
-      Serial.println("Model provided is schema version not equal to supported!");
-      return;
-  } else { Serial.println("Model Layer Loaded!"); }
-
-  // Questo richiama tutte le implementazioni delle operazioni di cui abbiamo bisogno
-  tflite::AllOpsResolver resolver;
-  tflite::MicroInterpreter static_interpreter(model, resolver, tensor_arena, K_TENSOR_ARENA_SIZE, error_reporter);
-  interpreter = &static_interpreter;
-  Serial.println("Interprete ok");
-
-  // Alloco la memoria del tensor_arena per i tensori del modello
-  TfLiteStatus allocate_status = interpreter->AllocateTensors();
-  if (allocate_status != kTfLiteOk) {
-      Serial.println("AllocateTensors() failed");
-      return;
-  } else { Serial.println("AllocateTensors() done"); }
+  return model;
 }
 
-/* 
-* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* INFERENCE FOR NN LAYER
-* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-*/
 void postDeviceInferenceResult(char* output_message, int size);
 
 extern "C" void runNeuralNetworkLayer(int offloading_layer_index, float inputBuffer[]) {
-  // Register the current running task to the watchdog
-  esp_task_wdt_add(NULL); 
-
-  // Initialize input data with image
-  float* inputData = inputBuffer;
-  int inputSize = BATCH_SIZE * IMAGE_HEIGHT * IMAGE_WIDTH * CHANNELS * sizeof(float);
-
-  // Initialize inference times array
-  float inference_times[MAX_NUM_LAYER];
-
+  // Capture/validate this inference's split before accessing any model or buffer.
+  if (!sciot::validSplit(offloading_layer_index, MAX_NUM_LAYER) || !inputBuffer || !tensor_arena) {
+    Serial.println("Invalid split or unallocated inference buffers");
+    return;
+  }
+  esp_task_wdt_add(NULL);
+  constexpr size_t capacity = MAX_ELEMENTS_PER_MODEL_LAYER * sizeof(float);
+  size_t inputBytes = BATCH_SIZE * IMAGE_HEIGHT * IMAGE_WIDTH * CHANNELS * sizeof(float);
+  float inference_times[MAX_NUM_LAYER] = {};
+  size_t residualBytes = 0;
 #ifdef FOMO
-  int multiOutputLayers[] = {16, 34, 43};
-  size_t multiOutputLayersSize = sizeof(multiOutputLayers)/sizeof(multiOutputLayers[0]);
+  if (!lastMultiOutputLayerData) { Serial.println("Missing FOMO buffer"); return; }
+  const int residualLayers[] = {16, 34, 43};
 #endif
-
-  // Assuming inputData is in the format expected by your neural network
-  for (int i = 0; i <= offloading_layer_index; i++) {
-    String layer_name = "layer_" + String(i);
-    float inizio = micros();
-    
-    loadNeuralNetworkLayer(layer_name); // Load the appropriate layer
-    input = interpreter->input(0);
-
-    // Copy the input data to the input tensor
-    memcpy(input->data.f, inputData, inputSize);
-
+  for (int i = 0; i <= offloading_layer_index; ++i) {
+    const uint32_t start = micros();
+    const tflite::Model* layer = loadNeuralNetworkLayer("layer_" + String(i));
+    size_t outputBytes = 0;
 #ifdef FOMO
-    // Copy the input data of last layer with multiple outputs to the input tensor
-    if (interpreter->inputs_size() > 1) {
-      if (interpreter->inputs_size() == 2) {
-        input = interpreter->input(1);
-        memcpy(input->data.f, lastMultiOutputLayerData, inputSize);
-      } else {
-        Serial.println("Error: this device can only handle sequential and FOMO models");
-        return;
-      }
-    }
+    const float* residual = lastMultiOutputLayerData;
+#else
+    const float* residual = nullptr;
 #endif
-
-#ifdef DEBUG
-    Serial.print("LAYER " + String(i) + " INPUT TENSOR: (");
-    for (int j = 0; j < input->dims->size; ++j) {
-      Serial.print(input->dims->data[j]);
-      if (j+1 < input->dims->size) {
-        Serial.print(", ");
-      }
+    const sciot::LayerError error = sciot::runFloatLayer(
+        layer, layerResolver, tensor_arena, K_TENSOR_ARENA_SIZE, error_reporter,
+        inputBuffer, inputBytes, capacity, residual, residualBytes, outputBytes,
+        []() { esp_task_wdt_reset(); });
+    if (error != sciot::LayerError::Ok) {
+      Serial.printf("Layer %d failed: %s\n", i, sciot::layerErrorText(error));
+      return;  // A failed layer must never produce a valid-looking result packet.
     }
-    Serial.println(")");
-
-    int numInput = 1;
-    for (int j = 0; j < input->dims->size; ++j) {
-      numInput *= input->dims->data[j];
-    }
-    Serial.println("LAYER " + String(i) + " INPUT DATA:");
-    for (int j = 0; j < numInput; ++j) {
-  #ifdef ALL
-      Serial.print(inputData[j]);
-      Serial.print(" ");
-  #else // Only print first 3 and last 3 elements
-      if (j < 3) {
-        Serial.print(inputData[j]);
-        Serial.print(" ");
-      } else if (j >= numInput-3) {
-        Serial.print(inputData[j]);
-        Serial.print(" ");
-      }
-  #endif // ALL
-    }
-    Serial.println();
-  #ifdef FOMO
-    if (interpreter->inputs_size() == 2) {
-      Serial.println("LAYER " + String(i) + " INPUT DATA 2:");
-      for (int j = 0; j < numInput; ++j) {
-    #ifdef ALL
-        Serial.print(lastMultiOutputLayerData[j]);
-        Serial.print(" ");
-    #else // Only print first 3 and last 3 elements
-        if (j < 3) {
-          Serial.print(lastMultiOutputLayerData[j]);
-          Serial.print(" ");
-        } else if (j >= numInput-3) {
-          Serial.print(lastMultiOutputLayerData[j]);
-          Serial.print(" ");
-        }
-    #endif // ALL
-      }
-      Serial.println();
-    }
-  #endif // FOMO
-#endif // DEBUG
-
-    // Run inference
-    esp_task_wdt_reset();
-    interpreter->Invoke();
-    esp_task_wdt_reset();
-
-    // Extract relevant information from the output tensor
-    output = interpreter->output(0);
-    float* outputData = output->data.f;
-    int outputSize = output->bytes;
-
-#ifdef DEBUG
-    Serial.print("LAYER " + String(i) + " OUTPUT TENSOR: (");
-    for (int j = 0; j < output->dims->size; ++j) {
-      Serial.print(output->dims->data[j]);
-      if (j+1 < output->dims->size) {
-        Serial.print(", ");
-      }
-    }
-    Serial.println(")");
-
-    int numOutput = 1;
-    for (int j = 0; j < output->dims->size; ++j) {
-      numOutput *= output->dims->data[j];
-    }
-    Serial.println("LAYER " + String(i) + " OUTPUT DATA:");
-    for (int j = 0; j < numOutput; ++j) {
-  #ifdef ALL
-      Serial.print(outputData[j]);
-      Serial.print(" ");
-  #else // Only print first 3 and last 3 elements
-      if (j < 3) {
-        Serial.print(outputData[j]);
-        Serial.print(" ");
-      } else if (j >= numOutput-3) {
-        Serial.print(outputData[j]);
-        Serial.print(" ");
-      }
-  #endif // ALL
-    }
-    Serial.println();
-#endif // DEBUG
-
-    // Set next layer's input data and size
-    memcpy(inputData, outputData, outputSize);
-    inputSize = outputSize;
-
+    inputBytes = outputBytes;
 #ifdef FOMO
-    // Saves the output of the layer with multiple outputs for future use
-    for (int j = 0; j < multiOutputLayersSize; ++j) {
-      if (i == multiOutputLayers[j]) {
-        memcpy(lastMultiOutputLayerData, outputData, outputSize);
+    for (int saved : residualLayers) {
+      if (i == saved) {
+        memcpy(lastMultiOutputLayerData, inputBuffer, outputBytes);
+        residualBytes = outputBytes;
         break;
       }
     }
 #endif
-
-    // Store inference time in seconds
-    inference_times[i] = (micros() - inizio) / 1000000.0; // Convert microseconds to seconds
-
-    Serial.println("Computed layer: " + String(i) + " Inf Time: " + String((micros() - inizio) / 1000000.0) + " s");
+    // Keep the per-layer preparation/copy/compute cost used by the server.
+    // Unsigned subtraction handles micros() wraparound for short intervals.
+    inference_times[i] = static_cast<uint32_t>(micros() - start) / 1000000.0f;
+    Serial.printf("Computed layer: %d Inf Time: %.6f s\n", i, inference_times[i]);
   }
   Serial.println("Model inference successful!");
-
   if (deviceRegistered) {
-    // Set up message
-    double timestamp = getCurrTime();
-    memcpy(output_message, &timestamp, sizeof(timestamp)); // sizeof(timestamp) == sizeof(double) == 8
-    int offset = sizeof(timestamp);
-
-    memcpy(output_message+offset, &DeviceUUID, 9);
-    offset += 9;
-
-    memcpy(output_message+offset, &MessageUUID, 4);
-    offset += 4;
-
-    memcpy(output_message+offset, &offloading_layer_index, sizeof(offloading_layer_index)); // sizeof(offloading_layer_index) == sizeof(int) == 4
-    offset += sizeof(offloading_layer_index);
-
-    memcpy(output_message+offset, &output->bytes, sizeof(output->bytes)); // sizeof(output->bytes) == sizeof(size_t) == 4
-    offset += sizeof(output->bytes);
-
-    memcpy(output_message+offset, output->data.f, output->bytes);
-    offset += output->bytes;
-
-    int layers_inference_time_size = (offloading_layer_index+1)*sizeof(int);
-    memcpy(output_message+offset, &layers_inference_time_size, sizeof(layers_inference_time_size)); // sizeof(layers_inference_time_size) == sizeof(int) == 4
-    offset += sizeof(layers_inference_time_size);
-
-    memcpy(output_message+offset, inference_times, sizeof(inference_times)); // sizeof(inference_times) == layers_inference_time_size
-    offset += sizeof(inference_times);
-
-    // Send device prediction
-    postDeviceInferenceResult(output_message, offset);
-    Serial.println("Prediction sent");
+    size_t written = 0;
+    if (!sciot::serializeInferenceResult(
+            reinterpret_cast<uint8_t*>(output_message), OUTPUT_MSG_SIZE, getCurrTime(),
+            DeviceUUID.c_str(), DeviceUUID.length(), MessageUUID.c_str(), MessageUUID.length(),
+            offloading_layer_index, MAX_NUM_LAYER, inputBuffer, inputBytes / sizeof(float),
+            inference_times, static_cast<size_t>(offloading_layer_index) + 1, written)) {
+      Serial.println("Invalid inference result or insufficient message buffer");
+      return;
+    }
+    postDeviceInferenceResult(output_message, static_cast<int>(written));
   }
 }
 
-/*
- * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- * GENERATE MESSAGE UUID
- * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-*/
+/* Generate identifiers for registration and inference messages. */
 void generateMessageUUID(){
   // Generate a UUID
   unsigned long seed = esp_random();
@@ -369,6 +223,14 @@ void generateMessageUUID(){
 * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 void getModelDataForPrediction(const camera_fb_t* fb) {
+  modelDataLoaded = false;
+  if (!inputBuffer || !fb || !fb->buf || fb->format != PIXFORMAT_RGB565 ||
+      fb->width != IMAGE_WIDTH || fb->height != IMAGE_HEIGHT || CHANNELS != 3 ||
+      fb->len != static_cast<size_t>(IMAGE_WIDTH) * IMAGE_HEIGHT * 2 ||
+      static_cast<size_t>(IMAGE_WIDTH) * IMAGE_HEIGHT * CHANNELS > MAX_ELEMENTS_PER_MODEL_LAYER) {
+    Serial.println("Invalid RGB565 frame or input buffer");
+    return;
+  }
   uint16_t* pixels = (uint16_t*)fb->buf;
   int n = fb->height*fb->width;
   try {
@@ -385,6 +247,7 @@ void getModelDataForPrediction(const camera_fb_t* fb) {
   } catch (const std::exception& e) {
     Serial.print("Error receiving model input data: ");
     Serial.println(e.what());
+    return;
   }
   modelDataLoaded = true;
 }
@@ -486,6 +349,11 @@ void offloadingLayerCallback(void *optParm, AsyncHTTPRequest *request, int ready
     if (!error)
     {
       // Extract "offloading_layer" value
+      if (!doc["offloading_layer_index"].is<int>() ||
+          !sciot::validSplit(doc["offloading_layer_index"].as<int>(), MAX_NUM_LAYER)) {
+        Serial.println("Invalid offloading layer");
+        return;
+      }
       best_offloading_layer_index = doc["offloading_layer_index"].as<int>();
 
       Serial.print("Best Offloading Layer Index: ");
@@ -540,8 +408,8 @@ void wifiConfiguration(){
 * CAMERA CONFIGURATION
 * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
-void cameraConfiguration(){
-  camera_config_t config;
+bool cameraConfiguration(){
+  camera_config_t config = {};
   config.ledc_channel = LEDC_CHANNEL_0;
   config.ledc_timer = LEDC_TIMER_0;
   config.pin_d0 = CAMERA_PIN_D0;
@@ -556,8 +424,8 @@ void cameraConfiguration(){
   config.pin_pclk = CAMERA_PIN_PCLK;
   config.pin_vsync = CAMERA_PIN_VSYNC;
   config.pin_href = CAMERA_PIN_HREF;
-  config.pin_sscb_sda = CAMERA_PIN_SIOD;
-  config.pin_sscb_scl = CAMERA_PIN_SIOC;
+  config.pin_sccb_sda = CAMERA_PIN_SIOD;
+  config.pin_sccb_scl = CAMERA_PIN_SIOC;
   config.pin_pwdn = CAMERA_PIN_PWDN;
   config.pin_reset = CAMERA_PIN_RESET;
   config.xclk_freq_hz = XCLK_FREQ_HZ;
@@ -571,9 +439,10 @@ void cameraConfiguration(){
   esp_err_t err = esp_camera_init(&config);
   if (err != ESP_OK) {
       Serial.printf("Camera init failed with error 0x%x\n", err);
-      return;
+      return false;
   }
   Serial.println("Camera initialized successfully.");
+  return true;
 }
 
 /*
@@ -590,16 +459,32 @@ void setup() {
     Serial.println("The PSRAM is correctly initialized");
   } else {
     Serial.println("PSRAM does not work");
+    return;
   }
 
   inputBuffer = (float*)ps_malloc(MAX_ELEMENTS_PER_MODEL_LAYER*sizeof(float)); 
-  tensor_arena = (uint8_t*)ps_malloc(K_TENSOR_ARENA_SIZE*sizeof(uint8_t));
+  tensor_arena = (uint8_t*)heap_caps_aligned_alloc(16, K_TENSOR_ARENA_SIZE, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
   output_message = (char*)ps_malloc(OUTPUT_MSG_SIZE);
 #ifdef FOMO
   lastMultiOutputLayerData = (float*)ps_malloc(MAX_ELEMENTS_PER_MODEL_LAYER*sizeof(float)); 
 #endif // FOMO
 
-  cameraConfiguration();        // Camera OV2640
+  if (!inputBuffer || !tensor_arena || !output_message
+#ifdef FOMO
+      || !lastMultiOutputLayerData
+#endif
+  ) {
+    Serial.println("Inference buffer allocation failed");
+    free(inputBuffer); inputBuffer = nullptr;
+    free(tensor_arena); tensor_arena = nullptr;
+    free(output_message); output_message = nullptr;
+#ifdef FOMO
+    free(lastMultiOutputLayerData); lastMultiOutputLayerData = nullptr;
+#endif
+    return;
+  }
+  if (!cameraConfiguration()) return;  // Stop before networking/capture on failure.
+  firmwareReady = true;
 
   wifiReconnectTimer = xTimerCreate("wifiTimer", pdMS_TO_TICKS(2000), pdFALSE, (void*)0, reinterpret_cast<TimerCallbackFunction_t>(connectToWifi));
   deviceRegistrationTimer = xTimerCreate("registrationTimer", pdMS_TO_TICKS(30000), pdTRUE, (void*)0, reinterpret_cast<TimerCallbackFunction_t>(postRegistration));
@@ -614,6 +499,7 @@ void setup() {
  * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  */
 void loop() {
+  if (!firmwareReady) { delay(1000); return; }
   // Capture a frame
   camera_fb_t *fb = esp_camera_fb_get();
   if (!fb) {

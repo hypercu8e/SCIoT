@@ -1,0 +1,12 @@
+Resolving esp32dev dependencies...
+Platform espressif32 @ 6.10.0 (required: espressif32 @ 6.10.0)
+├── framework-arduinoespressif32 @ 3.20017.241212+sha.dcc1105b (required: platformio/framework-arduinoespressif32 @ ~3.20017.0)
+├── tool-esptoolpy @ 1.40501.0 (required: platformio/tool-esptoolpy @ ~1.40501.0)
+├── toolchain-riscv32-esp @ 8.4.0+2021r2-patch5 (required: espressif/toolchain-riscv32-esp @ 8.4.0+2021r2-patch5)
+└── toolchain-xtensa-esp32s3 @ 8.4.0+2021r2-patch5 (required: espressif/toolchain-xtensa-esp32s3 @ 8.4.0+2021r2-patch5)
+
+Libraries
+├── ArduinoJson @ 7.2.1 (required: bblanchon/ArduinoJson @ 7.2.1)
+├── ArduinoWebsockets @ 0.5.4 (required: gilmaimon/ArduinoWebsockets @ 0.5.4)
+├── TensorFlowLite_ESP32 @ 1.0.0 (required: tanakamasayuki/TensorFlowLite_ESP32 @ 1.0.0)
+└── UUID @ 0.1.6 (required: robtillaart/UUID @ 0.1.6)

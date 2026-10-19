@@ -1,0 +1,62 @@
+{
+  "scope": "Final cross-compilation of all three original float32 firmware clients; no ESP32 execution",
+  "git_base": "3538d54e0c16984722208f80e4f15d84c93d0e42",
+  "platformio_core": "6.1.18",
+  "espressif32": "6.10.0",
+  "arduino_esp32": "2.0.17",
+  "runtime": "TensorFlowLite_ESP32@1.0.0",
+  "hardware_profile": "ESP32-S3 N8R8, qio_opi, 8 MB flash, OPI PSRAM, USB CDC",
+  "output_message_capacity_bytes": 461261,
+  "output_message_previous_capacity_bytes": 922253,
+  "reserved_psram_reduction_bytes": 460992,
+  "hardware_memory_and_latency_measured": false,
+  "runtime_source_sha256": {
+    "library.properties": "ad589171ee6673b4518d047cd4a9758311d457221e451ab13a81cda43e193d52",
+    "src/tensorflow/lite/micro/micro_interpreter.cpp": "4b97afef3105ed2c8f1439936a231cb923c080c48de1ff372bb035ae06fc53b8",
+    "src/tensorflow/lite/micro/micro_allocator.cpp": "4766419f4ae3a010258938feb84fd875bf9d6878db57b917b86a75cd6fa08e27"
+  },
+  "shared_sources_sha256": {
+    "src/client/common/inference_message.h": "dbaa9bf891f58a6808c06134f665cb850a4bef7703588ced512d7f74b4308811",
+    "src/client/common/float_layer.h": "18c3a78306bee759dc42ed0b99a45907a91f7d1b880f0e15c99ae18953241726"
+  },
+  "clients": {
+    "http": {
+      "compiled_and_linked": true,
+      "firmware_bytes": 1176272,
+      "firmware_sha256": "5a1dd72b5b81f558c057b92c0e0f8da6fb7f23e56d4c3205aee2c617be8b1f99",
+      "static_ram_bytes": 56044,
+      "linked_flash_bytes": 1175905,
+      "sources_sha256": {
+        "src/client/esp32-s3-eye-http/platformio.ini": "29b509612cb49284f94445b28ead0fcbf7946de769e62e4620ac73388aaaffe8",
+        "src/client/esp32-s3-eye-http/src/main.cpp": "4805fb7c13e10a51950eb74a15cbb94bec03e124044b13566befc642ceb2227e",
+        "src/client/esp32-s3-eye-http/src/conf.template.h": "b00c6eee818b49d457e8ff07fadf1325dff9714d368cfda8d926815c856755f3"
+      },
+      "selected_AsyncTCP": "1.1.1 (confirmed from compiler dependency file)"
+    },
+    "mqtt": {
+      "compiled_and_linked": true,
+      "firmware_bytes": 1187344,
+      "firmware_sha256": "ae7a8965a41e1de5fdef2b986e25a3f05a7319816cba2fd313cd62bb14119488",
+      "static_ram_bytes": 56012,
+      "linked_flash_bytes": 1186981,
+      "sources_sha256": {
+        "src/client/esp32-s3-eye-mqtt/platformio.ini": "0eade9d80f4f7c8bb2f97ae6b454f61dee0e8d9587c07e29db0ca27837c9fca9",
+        "src/client/esp32-s3-eye-mqtt/src/main.cpp": "7652c33ca70917b1d76415678a6fbc38502c44f879b08e72eadf02ff0b98cf9a",
+        "src/client/esp32-s3-eye-mqtt/src/conf.template.h": "126939351cfd55b818eb6c03264e5ff15cb57bc15656edac0d6b4cd899b9e419"
+      },
+      "selected_AsyncTCP": "1.1.1 (confirmed from compiler dependency file)"
+    },
+    "websocket": {
+      "compiled_and_linked": true,
+      "firmware_bytes": 1322896,
+      "firmware_sha256": "68507d37344dcc11ab513b84a64adc02a7fa7ec24d7d3fb7cef7e3a15e5da685",
+      "static_ram_bytes": 56548,
+      "linked_flash_bytes": 1322537,
+      "sources_sha256": {
+        "src/client/esp32-s3-eye-websocket/platformio.ini": "bda179ecd5d6c5c8c9f82d01cf7734a1359d46c2fcd38afede669f9384d17b5f",
+        "src/client/esp32-s3-eye-websocket/src/main.cpp": "1bd1393adc2d6b85e5dec6c469c047576b1d74d553452212cbf86287a9a187d4",
+        "src/client/esp32-s3-eye-websocket/src/conf.template.h": "1cd911ef07697450359b912e467f7bcd7ec67fc47ba262becf605103352950e8"
+      }
+    }
+  }
+}

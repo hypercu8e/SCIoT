@@ -1,6 +1,8 @@
 #ifndef CONF_H_
 #define CONF_H_
 
+#include "../../common/inference_message.h"
+
 // ------------------------------------------------------------------------------------------------------------------------------------------------------
 // WiFi Conf Hotspot
 const char* SSID                = "";
@@ -26,7 +28,7 @@ constexpr int CHANNELS = 3;
 constexpr int MAX_ELEMENTS_PER_MODEL_LAYER = 1*49*49*48;
 constexpr int K_TENSOR_ARENA_SIZE = 1000*1024;
 // timestamp + device_id + message_id + offloading_layer_index + layer_output_size + layer_output + layers_inference_time_size + layers_inference_time
-constexpr int OUTPUT_MSG_SIZE = 1*sizeof(double) + 9*sizeof(char) + 4*sizeof(char) + 1*sizeof(int) + 1*sizeof(size_t) + 2*MAX_ELEMENTS_PER_MODEL_LAYER*sizeof(float) + 1*sizeof(int) + MAX_NUM_LAYER*sizeof(float);
+constexpr int OUTPUT_MSG_SIZE = sciot::inferenceMessageCapacity(MAX_ELEMENTS_PER_MODEL_LAYER, MAX_NUM_LAYER);
 #define WDT_TIMEOUT 15
 #define FOMO // Comment for Sequential models / Uncomment for FOMO models
 // ------------------------------------------------------------------------------------------------------------------------------------------------------

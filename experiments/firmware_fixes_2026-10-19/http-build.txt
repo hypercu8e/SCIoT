@@ -1,0 +1,39 @@
+Processing esp32dev (platform: espressif32@6.10.0; board: esp32-s3-devkitc-1; framework: arduino)
+--------------------------------------------------------------------------------
+Library Manager: Installing me-no-dev/ESP Async WebServer @ >=1.2.3
+Library Manager: Warning! Could not install `{'owner': 'me-no-dev', 'name': 'ESP Async WebServer', 'version': '>=1.2.3', 'platforms': ['espressif8266', 'espressif32']}` dependency for the`ESPAsync_WiFiManager` package
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PLATFORM: Espressif 32 (6.10.0) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - framework-arduinoespressif32 @ 3.20017.241212+sha.dcc1105b 
+ - tool-esptoolpy @ 1.40501.0 (4.5.1) 
+ - toolchain-riscv32-esp @ 8.4.0+2021r2-patch5 
+ - toolchain-xtensa-esp32s3 @ 8.4.0+2021r2-patch5
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 45 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- UUID @ 0.1.6
+|-- ArduinoJson @ 7.2.1
+|-- TensorFlowLite_ESP32 @ 1.0.0
+|-- AsyncHTTPRequest_Generic @ 1.13.0
+|-- WebServer @ 2.0.0
+|-- FS @ 2.0.0
+|-- AsyncTCP @ 1.1.1
+|-- WiFi @ 2.0.0
+Building in release mode
+Compiling .pio/build/esp32dev/src/main.cpp.o
+In file included from src/main.cpp:27:
+src/model_layers/layers.h:60:88: warning: backslash-newline at end of file
+ #define LOAD_LAYER() if(layer_name.equals("layer_0"))model = tflite::GetModel(layer_0);\
+                                                                                         
+Retrieving maximum program size .pio/build/esp32dev/firmware.elf
+Checking size .pio/build/esp32dev/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [==        ]  17.1% (used 56044 bytes from 327680 bytes)
+Flash: [====      ]  35.2% (used 1175905 bytes from 3342336 bytes)
+========================= [SUCCESS] Took 5.54 seconds =========================
