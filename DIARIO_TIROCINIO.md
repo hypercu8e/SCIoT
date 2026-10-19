@@ -368,6 +368,110 @@ Preparati script ripetibili e [guida PC](TEST_SU_PC.md). Alla successiva richies
 di chiarimento abbiamo discusso TCP/UDP lasciando fermo l'esperimento UDP.
 Nessun porting del codec nel server originale o prova ESP32 eseguito.
 
+## 13. Preparazione delle prove ESP32 — 19 ottobre
+
+In attesa di una scheda, deciso di chiedere il 20 ottobre al professore una
+ESP32-S3-EYE in prestito; acquisto da valutare se non disponibile. Nessun messaggio
+al professore inviato dall'assistente e nessun acquisto eseguito.
+
+Diviso direttamente il modello INT8 TFLite già conservato in prima e seconda
+parte, senza riaddestrare, ricalibrare o convertire di nuovo. Conservati pesi,
+opzioni e parametri di quantizzazione; rimappati gli indici e rimosse le costanti
+non usate dalle singole parti. Taglio a `block_2_add`, un tensore INT8 `24×24×8`
+da 4.608 byte. File: intero 57.088 byte, prima parte 16.400, seconda 41.168.
+
+Rigenerati i 146 input del video, con hash NPY identico alla precedente prova
+INT8. Prima parte identica byte per byte al confine del modello intero; seconda
+parte, dopo serializzazione/rilettura dei byte intermedi, identica all'uscita
+intera su tutti i frame. È equivalenza dello split, non accuratezza su annotazioni.
+Salvati tre vettori hardware fissati (frame 48, 96, 145), tutti nella precedente
+partizione di valutazione. Un percorso separato ricarica i tre binari e verifica
+hash, scale, tipi e uscite dei vettori.
+
+Preparato firmware isolato PlatformIO/Arduino, senza camera o rete, con tre
+versioni: `prefix`, `full`, `suffix`. Compilazione e collegamento riusciti per
+tutte, usando TensorFlowLite_ESP32 1.0.0, la libreria indicata nel firmware
+originale. Il programma registra solo i cinque operatori necessari, mantiene
+resolver/interprete validi, confronta le uscite e stampa log JSON di tempi,
+arena e heap. Arena iniziale 512 KiB in PSRAM; i byte statici del compilatore
+non sono il consumo RAM totale. Nessuna esecuzione `AllocateTensors`/`Invoke`
+su hardware, nessun collegamento ESP32–server, nessuna ottimizzazione ESP-NN.
+
+Ispezionata la libreria effettivamente scaricata: percorsi INT8 presenti per i
+cinque operatori; nella depthwise convolution manca il ramo con ingresso INT16.
+Il modello 16×8 archiviato ha sei nodi con ingresso INT16: non eseguibile con
+quella implementazione invariata. Non è un limite generale dell'hardware ESP32-S3.
+
+Passati 31 test degli esperimenti, compresi cinque socket e tre nuovi test del
+taglio, più quattro test del verificatore seriale con log sintetici. Conservati
+modelli, vettori, manifest, verifica indipendente, versioni e hash del build/runtime.
+Firmware/server originali invariati. Script e istruzioni:
+[archivio](experiments/activation_compression/esp32_prep_2026-10-19/README.md),
+[guida della prova hardware](experiments/esp32_int8_firmware/README.md).
+
+## 14. Correzioni dei tre firmware e verifiche native — 19 ottobre
+
+Implementato il piano concordato durante l'attesa della scheda. HTTP, MQTT e
+WebSocket usano ora funzioni comuni per eseguire un layer float32 e comporre il
+pacchetto binario. L'interprete viene distrutto soltanto dopo la copia dell'uscita,
+e il resolver resta valido; controllati allocatore, AllocateTensors, Invoke,
+input/output e secondo ingresso FOMO. Fermato l'invio in caso di errore. Gli ID
+vengono copiati come testo; inviati esattamente i tempi fino allo split. Aggiunti
+controlli su split, frame e allocazioni principali; inizializzazione camera azzerata
+e arresto operativo se setup fallisce.
+
+Nei template `OUTPUT_MSG_SIZE` passa da 922.253 a 461.261 byte: richiesta PSRAM
+ridotta di 460.992 byte, senza misura del picco RAM complessivo. Restano uguali
+modello, float32, arena e formato riconosciuto dal server. I `conf.h` locali
+possono mantenere la vecchia capacità finché non vengono aggiornati.
+
+Configurata una build con piattaforma e dipendenze dirette fissate, profilo S3
+generico con flash 8 MB e PSRAM OPI e fallback al template senza credenziali.
+Compilazione e link riusciti per tutti i client. La libreria camera viene dal
+framework Arduino; UUID 0.1.6 rientra nel precedente intervallo di dipendenza.
+
+Preparato harness nativo C++ con la stessa libreria Micro 1.0.0, ASan e UBSan.
+Eseguite 1.170 invocazioni su tre input sintetici, sei split e due ripetizioni;
+33.363.072 valori intermedi identici ai kernel di riferimento desktop sugli
+stessi 59 binari. Il confronto iniziale diretto degli intermedi con Keras aveva
+segnalato differenze: il riferimento definitivo usa i binari effettivamente
+distribuiti e registra separatamente lo scostamento Keras. Il massimo intermedio
+è 0,00074768; sulle uscite finali 4,77e-7, entro `rtol=atol=1e-5`.
+
+Le prove negative verificano schema, capacità, tipi, allocazione e fallimenti
+del calcolo. Quattro pacchetti C++, incluso il massimo da 461.261 byte, decodificati
+con il parser server originale e contenuti verificati. Nessun errore ASan/UBSan;
+passati nuovamente anche 31 test degli esperimenti e quattro del verificatore log.
+L'ambiente PC è stato completato con dipendenze già dichiarate dal progetto,
+fra cui pandas per importare il parser reale. Nessun server o broker avviato.
+
+Non misurati tempi/RAM ESP32, camera o rete reale. Non affrontati invii asincroni,
+concorrenza delle callback, frammentazione MQTT, NTP e riconnessioni. Nessuna
+modifica al server o ai modelli. [Report](experiments/firmware_fixes_2026-10-19/README.md),
+[riproduzione dei test](tests/firmware/README.md).
+
+## 15. Esecuzione Micro nativa e costo della suddivisione per layer — 19 ottobre 2026
+
+Implementati due esperimenti riproducibili con il runtime TensorFlowLite_ESP32
+1.0.0 sul PC. Il candidato INT8 viene eseguito intero, nelle due parti e come
+catena con confine realmente prodotto da Micro, con controlli ASan/UBSan.
+Il confronto esatto con i vettori archiviati fallisce: Micro coincide invece
+con i kernel desktop `BUILTIN_REF`, e intero e catena Micro coincidono fra loro.
+I vettori precedenti restano invariati; il comando segnala il fallimento con
+codice 2 e conserva diagnosi e risultati. Non è una misura di accuratezza.
+
+Per float32 sono composti prefissi 0/11/25/58 direttamente dai binari dei
+layer, preservando operatori, opzioni e costanti. Confrontati layer separati,
+prefisso ricreato per immagine e prefisso persistente: nessuna differenza
+numerica osservata sui tre ingressi sintetici. La build con sanitizer è
+separata dal benchmark Release, che raccoglie 1.080 misure. Copie esplicite,
+memoria nativa e tempi del PC sono riportati separatamente.
+
+I dettagli, i risultati e i comandi sono nel
+[report Micro](experiments/micro_execution_2026-10-19/README.md).
+Nessuna integrazione dei prefissi nei client o modifica al server; resta da
+valutare sul target il compromesso fra memoria, tempo e cambio dello split.
+
 ## Stato e prossime decisioni
 
 - Studio iniziale, modello candidato, split Keras e baseline senza perdita completati.
@@ -384,8 +488,11 @@ Nessun porting del codec nel server originale o prova ESP32 eseguito.
   emulazione prestazionale, misura di energia o prova di rete reale.
 - L'eventuale porting va deciso confrontando il beneficio temporale con la
   compressione indipendente alla stessa qualità e misurandone il costo sul dispositivo.
-- Prossimo passo: verificare il supporto INT8/INT16 nel runtime Micro effettivo,
-  poi misurare memoria/tempo e verificare lo split sul target. Ampliare calibrazione
+- Prossimo passo: esplicitare il riferimento numerico INT8 prima del confronto
+  hardware: i vettori desktop archiviati differiscono da Micro, mentre i kernel
+  di riferimento coincidono nei casi provati. Verificare poi allocazione e
+  inferenza sul target e misurare memoria/tempo. Per INT16 aggiornare o
+  estendere il runtime che manca della depthwise INT16. Ampliare calibrazione
   e valutazione su sequenze distinte, senza cercare parametri sul test.
   Conservare float32 come controllo.
 - DPCM/dead-zone rimane un confronto successivo da specificare; misurare il

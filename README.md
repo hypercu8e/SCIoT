@@ -11,6 +11,16 @@ il [diario del tirocinio](DIARIO_TIROCINIO.md).
 
 Per eseguire prove senza scheda o camera: [dati pubblici e test client–server sul PC](TEST_SU_PC.md).
 
+Per le prossime prove sulla scheda: [firmware di test INT8 per ESP32-S3-EYE](experiments/esp32_int8_firmware/README.md),
+con split verificato sul PC e tre versioni già compilate.
+
+I client originali includono anche [correzioni di interprete, buffer e messaggi](experiments/firmware_fixes_2026-10-19/README.md),
+verificate con test nativi sul PC e compilazione dei tre trasporti.
+
+Gli [esperimenti di esecuzione Micro sul PC](experiments/micro_execution_2026-10-19/README.md)
+confrontano layer separati e prefissi raggruppati, e documentano la differenza
+fra i riferimenti INT8 desktop e il runtime Micro.
+
 ## Publications
 If you use this work, please consider citing our work:
 - F. Bove, S. Colli and L. Bedogni, "Performance Evaluation of Split Computing with TinyML on IoT Devices," 2024 IEEE 21st Consumer Communications & Networking Conference (CCNC), Las Vegas, NV, USA, 2024, pp. 1-6, [DOI Link](http://dx.doi.org/10.1109/CCNC51664.2024.10454775).

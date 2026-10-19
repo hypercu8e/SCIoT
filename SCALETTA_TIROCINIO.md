@@ -6,6 +6,25 @@ Cronologia: [diario](DIARIO_TIROCINIO.md).
 
 ## Punto di ripresa
 
+**19 ottobre — correzioni firmware:** applicati ai tre client float32 i controlli
+di interprete/tensori/allocazioni e la serializzazione condivisa. Nei template
+il buffer messaggio riserva 460.992 byte in meno. Build HTTP/MQTT/WebSocket riusciti;
+1.170 esecuzioni di layer Micro sul PC, 33.363.072 valori identici al riferimento
+TFLite e pacchetti verificati col parser server. [Report](experiments/firmware_fixes_2026-10-19/README.md).
+Questi test non certificano camera, rete o prestazioni ESP32. Per lo stato attuale
+dei firmware questa nota aggiorna i riscontri storici ancora elencati più sotto.
+
+**19 ottobre — preparazione in attesa della scheda:** l'utente chiederà al
+professore una ESP32-S3-EYE in prestito il 20 ottobre; se non disponibile valuterà
+l'acquisto. Nel frattempo completata la [preparazione INT8](experiments/activation_compression/esp32_prep_2026-10-19/README.md):
+taglio del binario già quantizzato, equivalenza byte per byte sui 146 frame,
+tre vettori fissi e tre firmware compilati. [Guida hardware](experiments/esp32_int8_firmware/README.md).
+Prossimo passo: caricare `prefix`, poi `full` e `suffix`, verificare i log e misurare
+memoria/tempi. Non sono ancora risultati hardware o integrazione SCIoT.
+Nel runtime TensorFlowLite_ESP32 1.0.0 manca il percorso INT16 della depthwise
+convolution necessario al nostro 16×8; occorre aggiornare/estendere il runtime
+prima di provare quella variante. INT8 resta da validare sulla scheda.
+
 Per iniziare dalla visione d'insieme: [recap del lavoro sul fork](RECAP_LAVORO_FORK.md).
 
 La trascrizione ragionata di spiegazioni, scelte, prove e limiti della chat è in

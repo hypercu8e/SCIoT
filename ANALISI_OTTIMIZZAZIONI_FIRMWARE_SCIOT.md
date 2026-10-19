@@ -8,6 +8,14 @@ Documento del 17 ottobre 2026, predisposto come approfondimento da integrare in 
 
 ## 1. Perimetro e ordine delle priorità
 
+**Aggiornamento del 19 ottobre 2026:** applicati ai tre client i prerequisiti di
+correttezza per interprete, buffer e serializzazione; ridotto il buffer messaggio
+nei template e preparate build ripetibili. Le sezioni seguenti conservano l'analisi
+storica e le proposte; lo stato implementato e i limiti sono nel
+[report delle correzioni](experiments/firmware_fixes_2026-10-19/README.md).
+Verificati sul PC codice C++ condiviso, runtime Micro reale e parser del server;
+compilati HTTP/MQTT/WebSocket. Nessuna misura hardware.
+
 Il documento riguarda codice C++, configurazione della build, gestione della camera, memoria, inferenza e comunicazione sul dispositivo. Il parser del server è stato consultato soltanto per verificare la compatibilità delle proposte con il formato esistente.
 
 | Priorità | Intervento | Risultato da verificare |

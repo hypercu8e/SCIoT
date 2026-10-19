@@ -1,12 +1,12 @@
 # SCIoT — recap del lavoro sul fork
 
-**Stato al 18 ottobre 2026.** Questo documento riunisce ciò che abbiamo studiato,
+**Stato al 19 ottobre 2026.** Questo documento riunisce ciò che abbiamo studiato,
 realizzato e capito dall'inizio del lavoro sul fork. Il dettaglio cronologico è
 nel [diario](DIARIO_TIROCINIO.md); qui conta soprattutto il filo del ragionamento.
 Le date delle attività seguono i resoconti conservati, mentre i commit possono
 essere successivi. Non ricostruiamo ore svolte o date amministrative mancanti.
 
-Aggiornamento successivo nello stesso giorno: raccolti 84 input di test pubblici
+Aggiornamento del 18 ottobre: raccolti 84 input di test pubblici
 Beer/can e le sequenze OTB Coke/Liquor; eseguite inferenze su 148 input e una
 prova dei veri componenti HTTP SCIoT con client Python. Istruzioni, risultati e
 limiti in [TEST_SU_PC.md](TEST_SU_PC.md). UDP è stato discusso, non implementato.
@@ -20,9 +20,17 @@ convertito il modello in INT8 e 16×8.
 
 Abbiamo trovato risparmi di byte e misurato gli effetti sulle predizioni.
 **Non abbiamo ancora dimostrato un miglioramento complessivo sull'ESP32.**
-I nuovi esperimenti sono separati dalle applicazioni originali: nel confronto
-del checkout con la base `0cfeb9b`, firmware, server e algoritmo di offloading
-non risultano modificati.
+Gli esperimenti restano separati dalle applicazioni originali. Dal 19 ottobre
+sono applicate ai firmware originali correzioni di interprete, buffer e messaggi,
+verificate sul PC e compilate per i tre trasporti; server, modelli e algoritmo
+di offloading non sono modificati. Non è ancora una verifica hardware.
+
+Gli [esperimenti Micro nativi del 19 ottobre](experiments/micro_execution_2026-10-19/README.md)
+aggiungono un confronto misurato fra layer separati e prefissi raggruppati.
+Il test INT8 rileva una differenza rispetto ai vettori desktop archiviati:
+Micro coincide con i kernel desktop di riferimento, e il modello intero con
+la catena delle sue due parti. L'uguaglianza con l'archivio resta un controllo
+fallito, senza modificare i vettori per nasconderlo.
 
 La domanda che guida il lavoro è diventata più precisa:
 
@@ -61,9 +69,9 @@ firmware e percorso di inferenza sul server. I principali riscontri sono:
 
 Abbiamo anche analizzato duplicazioni, file probabilmente superflui e firmware.
 Tra i problemi documentati: durata non valida dell'interprete, serializzazione
-degli identificativi e lunghezze incoerenti dei tempi inviati. **Sono riscontri
-e proposte di correzione, non correzioni già applicate.** Le stime di pulizia del
-codice non sono riduzioni di memoria o accelerazioni misurate.
+degli identificativi e lunghezze incoerenti dei tempi inviati. **Questi tre difetti
+sono corretti dal 19 ottobre**, con test nativi e compilazione. Altre proposte
+restano da applicare; le stime di pulizia non sono accelerazioni misurate.
 
 Approfondimenti: [spiegazione del repository](SPIEGAZIONE_REPOSITORY.md),
 [miglioramenti](ANALISI_MIGLIORAMENTI_SCIOT.md),
@@ -226,6 +234,44 @@ I binari sono stati ricaricati in verifiche separate, confrontando hash delle
 uscite, metriche e CSV. L'ultima suite senza socket comprende **23 test passati**;
 i cinque test TCP precedenti non sono stati rieseguiti durante queste prove.
 
+### F. Split INT8 e preparazione ESP32 — 19 ottobre
+
+Diviso il binario INT8 già salvato in prima parte (16.400 byte) e seconda parte
+(41.168 byte), senza nuova conversione/calibrazione. Conservati pesi e parametri
+numerici; confine INT8 `24×24×8`, 4.608 byte. Su tutti i 146 frame, rigenerati con
+hash identico alla prova precedente, confine e uscita dello split coincidono
+byte per byte con il modello INT8 intero.
+
+Preparati tre input fissi e tre firmware isolati (`prefix`, `full`, `suffix`),
+compilati e collegati per ESP32-S3. Registrano confronto delle uscite, tempi di
+sola inferenza, arena e heap. Non sono stati caricati su hardware e non usano
+camera, rete o codec. Nel runtime effettivamente scaricato TensorFlowLite_ESP32
+1.0.0 manca la depthwise convolution con ingresso INT16 richiesta da sei nodi
+del nostro 16×8; per quella variante occorre aggiornare/estendere il runtime.
+
+Passati 31 test degli esperimenti (inclusi cinque socket e tre nuovi test sul
+taglio) e quattro del verificatore seriale, questi ultimi con log sintetici.
+[Risultati e artefatti](experiments/activation_compression/esp32_prep_2026-10-19/README.md),
+[istruzioni hardware](experiments/esp32_int8_firmware/README.md).
+
+### G. Correzioni dei tre firmware — 19 ottobre
+
+Applicate ai client float32 HTTP/MQTT/WebSocket correzioni di durata dell'interprete,
+verifica di allocazioni/tensori e serializzazione condivisa. Nei template il buffer
+messaggio passa da 922.253 a 461.261 byte: 460.992 byte in meno richiesti in PSRAM,
+senza misura di picco o prestazioni hardware. Compilati tutti i client.
+
+Le funzioni C++ usate dai client sono eseguite sul PC con il runtime Micro 1.0.0:
+1.170 invocazioni e 33.363.072 valori intermedi identici al riferimento TFLite
+sugli stessi binari; nessun errore ASan/UBSan. Quattro pacchetti verificati col
+parser originale, passati anche 35 test di regressione degli esperimenti/probe.
+Il confronto finale del riferimento TFLite con Keras ha errore massimo 4,77e-7
+sui tre input sintetici. Nessun risultato di accuratezza su annotazioni.
+
+[Report e limiti](experiments/firmware_fixes_2026-10-19/README.md),
+[riproduzione dei test](tests/firmware/README.md). Camera, rete e concorrenza dei
+trasporti restano da provare sulla scheda; server e modelli non sono modificati.
+
 ## 5. Rapporto con i paper e idee ancora aperte
 
 Abbiamo confrontato il codice con la documentazione SCIoT e studiato il diverso
@@ -270,9 +316,11 @@ Rimandi: [confronto col paper e spiegazioni](ANALISI_COMPRESSIONE_ATTIVAZIONI.md
 | Client/server TCP sperimentali | Implementati e provati su loopback |
 | Modelli TFLite float32, INT8 e 16×8 | Convertiti ed eseguiti sul PC |
 | Report, JSON, CSV, hash, verifiche e test | Conservati negli archivi degli esperimenti |
-| Correzioni/refactoring del firmware e server originali | Analizzati, ancora da applicare |
-| Supporto INT8/INT16 nel runtime Micro effettivo | Ancora da verificare |
-| Split quantizzato e protocollo SCIoT aggiornato | Ancora da integrare e verificare |
+| Correzioni firmware originali | Interprete, buffer e messaggi corretti; test nativi e tre build riusciti; hardware da provare |
+| Refactoring/server e altre proposte | Ancora da sviluppare |
+| Runtime Micro | Percorsi INT8 ispezionati; manca depthwise INT16 nella libreria scelta; esecuzione hardware da provare |
+| Split quantizzato | INT8 esportato e verificato sul PC, firmware di prova compilati |
+| Protocollo SCIoT aggiornato | Ancora da integrare e verificare |
 | Tempi, picco RAM, energia e rete sull'ESP32 | Non misurati |
 | Accuratezza su un dataset annotato rappresentativo | Non valutata |
 | DPCM/dead-zone, più client e selezione dei frame | Proposte da implementare se scelte |
@@ -283,13 +331,14 @@ su float32 non si trasferiscono automaticamente ai tensori quantizzati**.
 
 ## 7. Punto di ripresa
 
-Il prossimo controllo è il **supporto delle varianti INT8 e INT16 nel runtime
-Micro effettivamente usato dal firmware**, prima di scegliere il porting.
-Il risultato CPU non certifica il supporto della scheda; il nome di un operatore
-supportato non basta a garantire anche la sua variante INT16.
+Il prossimo controllo è **allocazione e inferenza INT8 sulla scheda**, usando
+i firmware di prova già compilati e confrontando i log con i tre vettori attesi.
+Il risultato CPU e il build non certificano l'esecuzione sulla scheda.
+Per INT16 serve prima un runtime che implementi la depthwise INT16 mancante
+nella libreria scelta.
 
-Poi occorre correggere i prerequisiti di correttezza del firmware, verificare
-un modello e uno split sulla scheda e misurare memoria e tempi reali. In parallelo
+Poi occorre verificare sul target anche le correzioni float32, camera e rete,
+e misurare memoria e tempi reali. In parallelo
 serve ampliare calibrazione e valutazione su sequenze distinte, senza scegliere
 parametri in base allo stesso campione di test. L'accuratezza richiederà annotazioni
 adatte quando disponibili; la sola calibrazione può usare immagini non annotate.

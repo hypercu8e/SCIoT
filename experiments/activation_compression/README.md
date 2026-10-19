@@ -1,5 +1,12 @@
 # Primo confronto della compressione delle attivazioni
 
+Aggiornamento del 19 ottobre 2026: esportato e verificato lo
+[split INT8](esp32_prep_2026-10-19/README.md) senza nuova conversione/calibrazione.
+Equivalenza byte per byte col modello INT8 intero sui 146 frame; preparati tre
+vettori di prova e compilati i firmware `full`, `prefix` e `suffix`. Nessuna prova
+ESP32 ancora eseguita. La libreria selezionata non implementa la depthwise
+convolution con ingresso INT16 richiesta dal modello 16×8.
+
 Aggiornamento del 18 ottobre 2026: completato anche il
 [confronto 16×8](16x8_2026-10-18/README.md), sugli stessi 48/98 frame e con gli
 stessi binari float32/INT8 della prova precedente. Attivazioni INT16, pesi INT8,
@@ -314,3 +321,13 @@ quattro nuovi controlli INT16. Prossimo passo: verificare il supporto INT8/INT16
 del runtime Micro prima del porting e delle misure sulla scheda, ampliando poi
 calibrazione e valutazione su sequenze distinte. I byte del confine sono osservati
 nel modello intero; split distribuito e protocollo quantizzato restano da verificare.
+
+## Esecuzione Micro sul PC e prefissi raggruppati
+
+Il [report del 19 ottobre](../micro_execution_2026-10-19/README.md) raccoglie
+la verifica INT8 con il runtime Micro e il confronto float32 fra layer separati,
+prefisso ricreato e persistente. `compose_float_prefix.py` unisce direttamente
+i binari originali; i comandi riproducibili sono in
+[tests/firmware](../../tests/firmware/README.md#esperimenti-micro-int8-e-prefissi-float32).
+Il confronto INT8 con l'archivio fallisce pur coincidendo con `BUILTIN_REF`;
+questa distinzione è conservata nel report e nel codice di uscita.
