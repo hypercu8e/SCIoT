@@ -1,6 +1,6 @@
 # SCIoT — recap del lavoro sul fork
 
-**Stato al 19 ottobre 2026.** Questo documento riunisce ciò che abbiamo studiato,
+**Stato al 20 ottobre 2026.** Questo documento riunisce ciò che abbiamo studiato,
 realizzato e capito dall'inizio del lavoro sul fork. Il dettaglio cronologico è
 nel [diario](DIARIO_TIROCINIO.md); qui conta soprattutto il filo del ragionamento.
 Le date delle attività seguono i resoconti conservati, mentre i commit possono
@@ -10,6 +10,11 @@ Aggiornamento del 18 ottobre: raccolti 84 input di test pubblici
 Beer/can e le sequenze OTB Coke/Liquor; eseguite inferenze su 148 input e una
 prova dei veri componenti HTTP SCIoT con client Python. Istruzioni, risultati e
 limiti in [TEST_SU_PC.md](TEST_SU_PC.md). UDP è stato discusso, non implementato.
+
+Aggiornamento del 20 ottobre: documentati percorso di lettura del survey e
+[valutazione di FOMO con early exiting](ANALISI_FOMO_EARLY_EXITING.md), già
+presente come tema 6 nel [catalogo](TEMI_DI_TESI_E_RICERCA.md). È una proposta
+da discutere: nessuna testa addestrata, nuova misura o approvazione del relatore.
 
 ## 1. Dove siamo arrivati
 

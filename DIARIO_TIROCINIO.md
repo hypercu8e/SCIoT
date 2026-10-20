@@ -1,6 +1,6 @@
 # Diario del tirocinio SCIoT
 
-Aggiornato il 18 ottobre 2026. Titolo del tirocinio: **Multi Device Split Computing**.
+Aggiornato il 20 ottobre 2026. Titolo del tirocinio: **Multi Device Split Computing**.
 Tirocinio interno da 300 ore, con possibile sviluppo in tesi triennale in Informatica
 a UNIMORE, referente prof. Luca Bedogni.
 
@@ -471,6 +471,25 @@ I dettagli, i risultati e i comandi sono nel
 [report Micro](experiments/micro_execution_2026-10-19/README.md).
 Nessuna integrazione dei prefissi nei client o modifica al server; resta da
 valutare sul target il compromesso fra memoria, tempo e cambio dello split.
+
+## 16. Survey e valutazione di FOMO con early exiting — 20 ottobre 2026
+
+Individuato il survey SC/EE di Matsubara nei PDF locali e discusso un percorso
+di lettura. Chiarito il ruolo delle teste intermedie addestrate e della decisione
+di arresto nel software di esecuzione. L'ispezione della configurazione del
+candidato H5 mostra una sola uscita finale `softmax`, senza teste anticipate.
+
+L'idea compare già come tema 6 nel catalogo delle proposte. La
+[valutazione dedicata](ANALISI_FOMO_EARLY_EXITING.md) distingue rilevamento
+anticipato completo e riconoscimento di immagini vuote, collega il precedente
+BlankSkip e propone una sola testa con verifica iniziale su PC. Sono documentati
+limiti dei dati, costo aggiuntivo, rischio di oggetti mancati, confronti con
+modelli statici e condizioni per passare a ESP32 e più client.
+
+La proposta è da discutere con il docente: ridurre offloading e carico sul server
+la collega alle esigenze di rete e multi-client, ma non è un argomento approvato.
+Nessun modello addestrato, nuovo benchmark o risultato hardware in questa attività.
+I PDF e le versioni sono descritti nell'[inventario](papers/README.md).
 
 ## Stato e prossime decisioni
 

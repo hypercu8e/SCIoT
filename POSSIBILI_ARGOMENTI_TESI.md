@@ -4,6 +4,7 @@ Documento del 17 ottobre 2026. Proposte da discutere con il relatore; nessun
 argomento viene scelto definitivamente con questo documento.
 Aggiornamento del 18 ottobre: prova TCP e chiarimenti sul paper nella direzione
 compressione; la priorità tra i possibili argomenti non viene cambiata.
+Aggiornamento del 19 ottobre: catalogo ampliato con le nuove direzioni emerse dallo studio del survey di Matsubara (CSUR 2023) in [TEMI_DI_TESI_E_RICERCA.md](TEMI_DI_TESI_E_RICERCA.md).
 
 ## Contesto e obiettivo
 

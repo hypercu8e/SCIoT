@@ -2,7 +2,12 @@
 
 Documento creato il 18 ottobre 2026 come guida allo studio bibliografico per il tirocinio e la tesi triennale su **Multi Device Split Computing** nell'ambito del framework **SCIoT** (Università di Modena e Reggio Emilia, relatore Prof. Luca Bedogni).
 
-Questo documento raccoglie, categorizza e analizza i paper scientifici fondamentali, collegando ciascun lavoro direttamente all'architettura del repository, alle sperimentazioni in corso e ai potenziali argomenti di tesi descritti in [POSSIBILI_ARGOMENTI_TESI.md](POSSIBILI_ARGOMENTI_TESI.md).
+Aggiornamento del 20 ottobre: [inventario dei PDF e versioni](papers/README.md)
+e [approfondimento FOMO con early exiting](ANALISI_FOMO_EARLY_EXITING.md).
+Per le altre correzioni bibliografiche già individuate consultare la sezione 5
+del [catalogo delle proposte](TEMI_DI_TESI_E_RICERCA.md#5-correzioni-bibliografiche-e-tecniche-registrate).
+
+Questo documento raccoglie, categorizza e analizza i paper scientifici fondamentali, collegando ciascun lavoro direttamente all'architettura del repository, alle sperimentazioni in corso e ai potenziali argomenti di tesi descritti in [POSSIBILI_ARGOMENTI_TESI.md](POSSIBILI_ARGOMENTI_TESI.md) e nel catalogo esteso [TEMI_DI_TESI_E_RICERCA.md](TEMI_DI_TESI_E_RICERCA.md).
 
 ---
 
@@ -62,7 +67,7 @@ Questi sono i paper scritti dal gruppo di ricerca con cui svolgi la tesi. Costit
 
 ### 2.1 Il Survey Completo su Split Computing ed Early Exiting
 * **Riferimento:** Y. Matsubara, M. Levorato, F. Restuccia, *"Split Computing and Early Exiting for Deep Learning Applications: Survey and Research Challenges"*, ACM Computing Surveys (CSUR), Vol. 55, No. 5, 2023.
-* **Link:** [arXiv:2103.04504](https://arxiv.org/abs/2103.04504)
+* **Link:** [arXiv:2103.04505](https://arxiv.org/abs/2103.04505) | [PDF Locale](papers/matsubara_csur2023_split_computing_survey.pdf)
 * **Contributo:** La rassegna più esaustiva della letteratura scientifica sul tema. Classifica le tecniche di splitting (statico, dinamico, adattivo), la compressione di feature (lossless, lossy con bottleneck), le problematiche di privacy e le sfide aperte di latenza ed energia.
 * **Collegamento con SCIoT:** Fornisce l'inquadramento bibliografico e tassonomico per l'intero capitolo di *Stato dell'Arte* della tesi.
 * **Cosa estrarre per la tesi:** La tassonomia delle tecniche di compressione dei tensori intermedi e la rassegna dei colli di bottiglia nei layer convoluzionali.
@@ -124,8 +129,8 @@ Questa direzione corrisponde alla seconda proposta in [POSSIBILI_ARGOMENTI_TESI.
   e la distinzione tra modello teorico DnD e DPCM reale.
 
 ### 4.2 Supervised Compression for Split Computing (SC2)
-* **Riferimento:** Y. Matsubara, D. Callegaro, S. Singh, M. Levorato, *"SC2: Supervised Compression for Split Computing"*, Transactions on Machine Learning Research (TMLR), 2022.
-* **Link:** [arXiv:2203.08875](https://arxiv.org/abs/2203.08875) | [GitHub SC2-Benchmark](https://github.com/yoshitomo-matsubara/sc2-benchmark)
+* **Riferimento:** Y. Matsubara, R. Yang, M. Levorato, S. Mandt, *"SC2 Benchmark: Supervised Compression for Split Computing"*, Transactions on Machine Learning Research (TMLR), 2023; primo preprint arXiv nel 2022. La copia locale è la v2 del 14 giugno 2023, nonostante il nome storico del file contenga `2022`.
+* **Link:** [arXiv:2203.08875](https://arxiv.org/abs/2203.08875) | [PDF Locale](papers/matsubara_tmlr2022_sc2_supervised_compression.pdf) | [GitHub SC2-Benchmark](https://github.com/yoshitomo-matsubara/sc2-benchmark)
 * **Contributo:** Stabilisce formalmente che la compressione per la visione artificiale (*machine vision*) segue regole di rate-distortion diverse dalla compressione per la percezione umana (JPEG/H.264). Fornisce un framework standard per quantificare byte vs accuratezza del task.
 * **Collegamento con SCIoT:** Aiuta a strutturare il protocollo di test: misurare l'IoU e le detection corrette su video annotati, non solo l'errore quadratico medio (MSE) o la dimensione zlib.
 * **Cosa estrarre per la tesi:** La metodologia sperimentale e le metriche di accuratezza per compiti di object detection.
@@ -230,7 +235,7 @@ Nel firmware e nel server di SCIoT sono presenti diversi trasporti ([src/server/
   * **HTTP:** latenza media più alta e forte jitter a causa degli header testuali e dell'handshake per connessione (se stateless).
   * **MQTT:** overhead di framing minimo (2-4 byte), ottimo throughput con QoS 0, ma necessita di un broker centrale che aggiunge un hop intermedio.
   * **WebSocket:** socket TCP bidirezionale persistente con overhead di framing ridotto (2-10 byte), eccellente per flussi continui di frame o attivazioni.
-* **Collegamento con SCIoT:** Supporta il confronto sperimentale tra le implementazioni [mqtt_server.py](src/server/communication/mqtt_server.py), [http_server.py](src/server/communication/http_server.py) e [ws_server.py](src/server/communication/ws_server.py).
+* **Collegamento con SCIoT:** Supporta il confronto sperimentale tra le implementazioni [mqtt_client.py](src/server/communication/mqtt_client.py), [http_server.py](src/server/communication/http_server.py) e [websocket_server.py](src/server/communication/websocket_server.py).
 * **Cosa estrarre per la tesi:** Tabella comparativa di overhead di byte a livello trasporto per frame trasmesso.
 
 ### 8.2 Protocolli Ultra-Lightweight a Livello MAC: ESP-NOW
