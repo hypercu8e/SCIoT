@@ -1,0 +1,11 @@
+artifacts/
+results/
+__pycache__/
+include/network.local.h
+idf/.pio/
+idf/components/
+idf/managed_components/
+idf/sdkconfig.*
+!idf/sdkconfig.defaults
+idf/dependencies.lock
+idf/vendor/

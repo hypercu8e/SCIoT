@@ -1,0 +1,2039 @@
+{
+  "date": "2026-10-28",
+  "scope": "One ESP32-S3-EYE, one serial HTTP suffix server, INT8 ESP-NN, independent lossless tensors",
+  "model_manifest": {
+    "frames": [
+      48,
+      96,
+      145
+    ],
+    "models": {
+      "float32": {
+        "full": {
+          "sha256": "01b71eb64daa7b7e99409f41f57394f130b86689aef74d28b9cb83873324ea72",
+          "bytes": 84292,
+          "input": {
+            "index": 0,
+            "name": "serving_default_input_1:0",
+            "shape": [
+              1,
+              96,
+              96,
+              1
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 36864,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 70,
+            "name": "StatefulPartitionedCall:0",
+            "shape": [
+              1,
+              12,
+              12,
+              3
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 1728,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          }
+        },
+        "prefix": {
+          "sha256": "8d8c80cb59bb73cb9df928ac5f40bf8a11c0d0c09224dc1e100ed5901babbcde",
+          "bytes": 18032,
+          "input": {
+            "index": 0,
+            "name": "serving_default_input_1:0",
+            "shape": [
+              1,
+              96,
+              96,
+              1
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 36864,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 30,
+            "name": "model_1/block_2_add/add",
+            "shape": [
+              1,
+              24,
+              24,
+              8
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 18432,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          }
+        },
+        "suffix": {
+          "sha256": "e1bd3430355ba342d1e63fd553c05064bbf9bf3866e5a2ddb9d972a153b52ec6",
+          "bytes": 66652,
+          "input": {
+            "index": 25,
+            "name": "model_1/block_2_add/add",
+            "shape": [
+              1,
+              24,
+              24,
+              8
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 18432,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 41,
+            "name": "StatefulPartitionedCall:0",
+            "shape": [
+              1,
+              12,
+              12,
+              3
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 1728,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          }
+        },
+        "desktop_split_vs_full_max_error": 0.0
+      },
+      "int8": {
+        "full": {
+          "sha256": "2a20659a928e2158f0e5a26083c5b109d2be3024812e5bc0314272bdf72e0a2e",
+          "bytes": 57088,
+          "input": {
+            "index": 0,
+            "name": "serving_default_input_1:0",
+            "shape": [
+              1,
+              96,
+              96,
+              1
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 9216,
+            "scales": [
+              0.0036874895449727774
+            ],
+            "zero_points": [
+              -128
+            ],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 70,
+            "name": "StatefulPartitionedCall:0",
+            "shape": [
+              1,
+              12,
+              12,
+              3
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 432,
+            "scales": [
+              0.00390625
+            ],
+            "zero_points": [
+              -128
+            ],
+            "quantized_dimension": 0
+          }
+        },
+        "prefix": {
+          "sha256": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+          "bytes": 16400,
+          "input": {
+            "index": 0,
+            "name": "serving_default_input_1:0",
+            "shape": [
+              1,
+              96,
+              96,
+              1
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 9216,
+            "scales": [
+              0.0036874895449727774
+            ],
+            "zero_points": [
+              -128
+            ],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 30,
+            "name": "model_1/block_2_add/add",
+            "shape": [
+              1,
+              24,
+              24,
+              8
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 4608,
+            "scales": [
+              0.06843240559101105
+            ],
+            "zero_points": [
+              -20
+            ],
+            "quantized_dimension": 0
+          }
+        },
+        "suffix": {
+          "sha256": "4e9307867c93b8df38deee74d7babe3cfdfcea25f8570482a0a3e82e1d8be68d",
+          "bytes": 41168,
+          "input": {
+            "index": 25,
+            "name": "model_1/block_2_add/add",
+            "shape": [
+              1,
+              24,
+              24,
+              8
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 4608,
+            "scales": [
+              0.06843240559101105
+            ],
+            "zero_points": [
+              -20
+            ],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 41,
+            "name": "StatefulPartitionedCall:0",
+            "shape": [
+              1,
+              12,
+              12,
+              3
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 432,
+            "scales": [
+              0.00390625
+            ],
+            "zero_points": [
+              -128
+            ],
+            "quantized_dimension": 0
+          }
+        },
+        "desktop_split_vs_full_max_error": 0.0
+      }
+    },
+    "source_input_sha256": "9950248bf367bece38432b62b3fd0d93e967a9c70066e7bd946e7e114decf864",
+    "scope": "Archived candidate grayscale FOMO, split at block_2_add; one experimental HTTP request per inference",
+    "inputs_sha256": "9c95212b7f480fd84da3206de4183da3065a92a5a4036279fb51b2885cd0bd30",
+    "experiment_sha256": "e875f73df1adb5ca7d12dd8301472f50939d04224d321e5cbb0e82f1105a99b0"
+  },
+  "miniz_revision": "293d4db1b7d0ffee9756d035b9ac6f7431ef8492",
+  "zlib_level": 1,
+  "firmware_sha256": "37d95a59ba458e57cc330c764521aca3d73bb0bc9f8b6edd07354dde96cb748f",
+  "fixed_outputs_exact_across_sessions": true,
+  "runs": [
+    {
+      "samples": 408,
+      "boot": {
+        "event": "boot",
+        "experiment_sha256": "e875f73df1adb5ca7d12dd8301472f50939d04224d321e5cbb0e82f1105a99b0",
+        "cpu_mhz": 240,
+        "runtime": "esp-tflite-micro-dd40859",
+        "arena_capacity_each": 1048576,
+        "arena_in_psram": true,
+        "esp_nn_enabled": true,
+        "repetitions": 20
+      },
+      "allocations": [
+        {
+          "event": "allocated",
+          "mode": "raw",
+          "arena_used_bytes": 229820,
+          "model_sha256": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+          "input_bytes": 9216,
+          "output_bytes": 4608
+        }
+      ],
+      "kernel_checks": [
+        {
+          "event": "kernel_check",
+          "mode": "raw",
+          "esp32s3_conv_calls": 6,
+          "esp32s3_depthwise_calls": 3
+        },
+        {
+          "event": "kernel_check",
+          "mode": "zlib",
+          "esp32s3_conv_calls": 6,
+          "esp32s3_depthwise_calls": 3
+        }
+      ],
+      "codec_memory": [
+        {
+          "event": "codec_allocated",
+          "codec": "miniz-3.0.2-level1",
+          "workspace_bytes": 319296,
+          "compressed_capacity_bytes": 8192,
+          "message_capacity_bytes": 8224
+        }
+      ],
+      "timing": {
+        "embedded": {
+          "raw": {
+            "compression_us": {
+              "count": 60,
+              "min": 0.0,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0
+            },
+            "input_prepare_us": {
+              "count": 60,
+              "min": 38858.0,
+              "p50": 38966.0,
+              "p95": 39682.9,
+              "max": 40363.0
+            },
+            "invoke_us": {
+              "count": 60,
+              "min": 93765.0,
+              "p50": 94340.0,
+              "p95": 95104.6,
+              "max": 95636.0
+            },
+            "packing_us": {
+              "count": 60,
+              "min": 1052.0,
+              "p50": 1053.5,
+              "p95": 1058.1,
+              "max": 1654.0
+            },
+            "request_response_us": {
+              "count": 60,
+              "min": 17624.0,
+              "p50": 22701.0,
+              "p95": 33147.649999999994,
+              "max": 41374.0
+            },
+            "observed_cycle_us": {
+              "count": 60,
+              "min": 152307.0,
+              "p50": 157387.0,
+              "p95": 167505.6,
+              "max": 176133.0
+            },
+            "server_decode_us": {
+              "count": 60,
+              "min": 18.0,
+              "p50": 49.0,
+              "p95": 95.54999999999991,
+              "max": 166.0
+            },
+            "server_invoke_us": {
+              "count": 60,
+              "min": 279.0,
+              "p50": 315.5,
+              "p95": 384.1,
+              "max": 413.0
+            },
+            "server_post_us": {
+              "count": 60,
+              "min": 73.0,
+              "p50": 107.0,
+              "p95": 150.14999999999998,
+              "max": 164.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 60,
+              "min": 4.0,
+              "p50": 10.0,
+              "p95": 28.049999999999997,
+              "max": 44.0
+            }
+          },
+          "zlib": {
+            "compression_us": {
+              "count": 60,
+              "min": 6722.0,
+              "p50": 6783.0,
+              "p95": 6823.1,
+              "max": 6911.0
+            },
+            "input_prepare_us": {
+              "count": 60,
+              "min": 38862.0,
+              "p50": 38971.5,
+              "p95": 39523.35,
+              "max": 39692.0
+            },
+            "invoke_us": {
+              "count": 60,
+              "min": 94007.0,
+              "p50": 94335.0,
+              "p95": 95358.9,
+              "max": 96642.0
+            },
+            "packing_us": {
+              "count": 60,
+              "min": 1057.0,
+              "p50": 1061.0,
+              "p95": 1067.0,
+              "max": 1188.0
+            },
+            "request_response_us": {
+              "count": 60,
+              "min": 16643.0,
+              "p50": 21386.0,
+              "p95": 30894.7,
+              "max": 35248.0
+            },
+            "observed_cycle_us": {
+              "count": 60,
+              "min": 158555.0,
+              "p50": 162708.5,
+              "p95": 172381.95,
+              "max": 176407.0
+            },
+            "server_decode_us": {
+              "count": 60,
+              "min": 45.0,
+              "p50": 93.0,
+              "p95": 133.29999999999998,
+              "max": 170.0
+            },
+            "server_invoke_us": {
+              "count": 60,
+              "min": 279.0,
+              "p50": 326.0,
+              "p95": 388.1,
+              "max": 395.0
+            },
+            "server_post_us": {
+              "count": 60,
+              "min": 73.0,
+              "p50": 109.0,
+              "p95": 155.39999999999998,
+              "max": 211.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 60,
+              "min": 31.0,
+              "p50": 47.5,
+              "p95": 66.44999999999997,
+              "max": 83.0
+            }
+          }
+        },
+        "annotated": {
+          "raw": {
+            "compression_us": {
+              "count": 84,
+              "min": 0.0,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0
+            },
+            "input_prepare_us": {
+              "count": 84,
+              "min": 35955.0,
+              "p50": 38853.0,
+              "p95": 39350.95,
+              "max": 39982.0
+            },
+            "invoke_us": {
+              "count": 84,
+              "min": 94021.0,
+              "p50": 94327.0,
+              "p95": 95191.1,
+              "max": 95879.0
+            },
+            "packing_us": {
+              "count": 84,
+              "min": 1052.0,
+              "p50": 1054.0,
+              "p95": 1058.0,
+              "max": 1214.0
+            },
+            "request_response_us": {
+              "count": 84,
+              "min": 16986.0,
+              "p50": 22232.5,
+              "p95": 34504.999999999985,
+              "max": 46676.0
+            },
+            "observed_cycle_us": {
+              "count": 84,
+              "min": 149573.0,
+              "p50": 156268.5,
+              "p95": 168106.8,
+              "max": 180979.0
+            },
+            "server_decode_us": {
+              "count": 84,
+              "min": 17.0,
+              "p50": 36.5,
+              "p95": 80.85,
+              "max": 108.0
+            },
+            "server_invoke_us": {
+              "count": 84,
+              "min": 277.0,
+              "p50": 311.0,
+              "p95": 355.4,
+              "max": 376.0
+            },
+            "server_post_us": {
+              "count": 84,
+              "min": 71.0,
+              "p50": 102.5,
+              "p95": 125.69999999999999,
+              "max": 214.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 84,
+              "min": 4.0,
+              "p50": 10.0,
+              "p95": 19.69999999999999,
+              "max": 26.0
+            }
+          },
+          "zlib": {
+            "compression_us": {
+              "count": 84,
+              "min": 5337.0,
+              "p50": 6763.5,
+              "p95": 6821.0,
+              "max": 6955.0
+            },
+            "input_prepare_us": {
+              "count": 84,
+              "min": 35960.0,
+              "p50": 38882.0,
+              "p95": 39557.45,
+              "max": 39901.0
+            },
+            "invoke_us": {
+              "count": 84,
+              "min": 94011.0,
+              "p50": 94349.5,
+              "p95": 95258.35,
+              "max": 96433.0
+            },
+            "packing_us": {
+              "count": 84,
+              "min": 1033.0,
+              "p50": 1061.0,
+              "p95": 1067.0,
+              "max": 1192.0
+            },
+            "request_response_us": {
+              "count": 84,
+              "min": 17155.0,
+              "p50": 22305.5,
+              "p95": 31606.299999999992,
+              "max": 38468.0
+            },
+            "observed_cycle_us": {
+              "count": 84,
+              "min": 156838.0,
+              "p50": 162896.5,
+              "p95": 172611.19999999998,
+              "max": 180912.0
+            },
+            "server_decode_us": {
+              "count": 84,
+              "min": 45.0,
+              "p50": 88.5,
+              "p95": 116.94999999999996,
+              "max": 189.0
+            },
+            "server_invoke_us": {
+              "count": 84,
+              "min": 278.0,
+              "p50": 314.5,
+              "p95": 362.65,
+              "max": 504.0
+            },
+            "server_post_us": {
+              "count": 84,
+              "min": 72.0,
+              "p50": 101.0,
+              "p95": 134.09999999999997,
+              "max": 171.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 84,
+              "min": 32.0,
+              "p50": 46.0,
+              "p95": 58.849999999999994,
+              "max": 91.0
+            }
+          }
+        },
+        "camera_alternating": {
+          "raw": {
+            "compression_us": {
+              "count": 20,
+              "min": 0.0,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0
+            },
+            "input_prepare_us": {
+              "count": 20,
+              "min": 38856.0,
+              "p50": 39204.5,
+              "p95": 40475.95,
+              "max": 40589.0
+            },
+            "invoke_us": {
+              "count": 20,
+              "min": 94608.0,
+              "p50": 95741.0,
+              "p95": 97225.7,
+              "max": 97486.0
+            },
+            "packing_us": {
+              "count": 20,
+              "min": 1052.0,
+              "p50": 1054.0,
+              "p95": 1068.7,
+              "max": 1234.0
+            },
+            "request_response_us": {
+              "count": 20,
+              "min": 27039.0,
+              "p50": 236548.5,
+              "p95": 1747401.3000000005,
+              "max": 2355198.0
+            },
+            "observed_cycle_us": {
+              "count": 20,
+              "min": 171234.0,
+              "p50": 381085.0,
+              "p95": 1897894.0500000005,
+              "max": 2605835.0
+            },
+            "server_decode_us": {
+              "count": 20,
+              "min": 30.0,
+              "p50": 68.0,
+              "p95": 90.55000000000001,
+              "max": 101.0
+            },
+            "server_invoke_us": {
+              "count": 20,
+              "min": 311.0,
+              "p50": 329.5,
+              "p95": 429.90000000000003,
+              "max": 466.0
+            },
+            "server_post_us": {
+              "count": 20,
+              "min": 86.0,
+              "p50": 104.5,
+              "p95": 131.45000000000002,
+              "max": 140.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 20,
+              "min": 8.0,
+              "p50": 15.5,
+              "p95": 23.150000000000002,
+              "max": 26.0
+            }
+          },
+          "zlib": {
+            "compression_us": {
+              "count": 20,
+              "min": 6663.0,
+              "p50": 6693.5,
+              "p95": 6826.7,
+              "max": 6897.0
+            },
+            "input_prepare_us": {
+              "count": 20,
+              "min": 38872.0,
+              "p50": 39248.0,
+              "p95": 39910.6,
+              "max": 40226.0
+            },
+            "invoke_us": {
+              "count": 20,
+              "min": 94453.0,
+              "p50": 95740.0,
+              "p95": 96397.45,
+              "max": 96710.0
+            },
+            "packing_us": {
+              "count": 20,
+              "min": 1054.0,
+              "p50": 1055.0,
+              "p95": 1060.95,
+              "max": 1079.0
+            },
+            "request_response_us": {
+              "count": 20,
+              "min": 105332.0,
+              "p50": 251674.5,
+              "p95": 1395312.7500000007,
+              "max": 2187608.0
+            },
+            "observed_cycle_us": {
+              "count": 20,
+              "min": 256883.0,
+              "p50": 402523.5,
+              "p95": 1546659.0500000005,
+              "max": 2339397.0
+            },
+            "server_decode_us": {
+              "count": 20,
+              "min": 65.0,
+              "p50": 102.0,
+              "p95": 124.45,
+              "max": 133.0
+            },
+            "server_invoke_us": {
+              "count": 20,
+              "min": 313.0,
+              "p50": 330.0,
+              "p95": 352.65000000000003,
+              "max": 384.0
+            },
+            "server_post_us": {
+              "count": 20,
+              "min": 81.0,
+              "p50": 104.5,
+              "p95": 115.80000000000001,
+              "max": 131.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 20,
+              "min": 44.0,
+              "p50": 52.0,
+              "p95": 61.0,
+              "max": 61.0
+            }
+          }
+        },
+        "camera_continuous": {
+          "raw": {
+            "compression_us": {
+              "count": 40,
+              "min": 0.0,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0
+            },
+            "input_prepare_us": {
+              "count": 40,
+              "min": 38846.0,
+              "p50": 39177.5,
+              "p95": 39792.15,
+              "max": 39932.0
+            },
+            "invoke_us": {
+              "count": 40,
+              "min": 94659.0,
+              "p50": 95919.0,
+              "p95": 96678.5,
+              "max": 97069.0
+            },
+            "packing_us": {
+              "count": 40,
+              "min": 1052.0,
+              "p50": 1054.0,
+              "p95": 1060.0,
+              "max": 1061.0
+            },
+            "request_response_us": {
+              "count": 40,
+              "min": 45185.0,
+              "p50": 229086.0,
+              "p95": 2317306.1999999997,
+              "max": 4415224.0
+            },
+            "observed_cycle_us": {
+              "count": 40,
+              "min": 189536.0,
+              "p50": 373301.5,
+              "p95": 2461576.3999999994,
+              "max": 4558901.0
+            },
+            "server_decode_us": {
+              "count": 40,
+              "min": 22.0,
+              "p50": 64.0,
+              "p95": 88.34999999999998,
+              "max": 96.0
+            },
+            "server_invoke_us": {
+              "count": 40,
+              "min": 280.0,
+              "p50": 319.0,
+              "p95": 378.34999999999997,
+              "max": 391.0
+            },
+            "server_post_us": {
+              "count": 40,
+              "min": 73.0,
+              "p50": 101.5,
+              "p95": 124.0,
+              "max": 135.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 40,
+              "min": 5.0,
+              "p50": 14.0,
+              "p95": 26.0,
+              "max": 27.0
+            }
+          },
+          "zlib": {
+            "compression_us": {
+              "count": 40,
+              "min": 6664.0,
+              "p50": 6691.0,
+              "p95": 6720.25,
+              "max": 6850.0
+            },
+            "input_prepare_us": {
+              "count": 40,
+              "min": 38851.0,
+              "p50": 39163.0,
+              "p95": 40096.85,
+              "max": 40215.0
+            },
+            "invoke_us": {
+              "count": 40,
+              "min": 94606.0,
+              "p50": 96085.5,
+              "p95": 97165.3,
+              "max": 97592.0
+            },
+            "packing_us": {
+              "count": 40,
+              "min": 1053.0,
+              "p50": 1054.0,
+              "p95": 1057.1,
+              "max": 1060.0
+            },
+            "request_response_us": {
+              "count": 40,
+              "min": 23976.0,
+              "p50": 160109.5,
+              "p95": 1920347.899999998,
+              "max": 3361756.0
+            },
+            "observed_cycle_us": {
+              "count": 40,
+              "min": 174617.0,
+              "p50": 312083.5,
+              "p95": 2072474.349999998,
+              "max": 3513155.0
+            },
+            "server_decode_us": {
+              "count": 40,
+              "min": 51.0,
+              "p50": 106.5,
+              "p95": 125.1,
+              "max": 138.0
+            },
+            "server_invoke_us": {
+              "count": 40,
+              "min": 307.0,
+              "p50": 329.0,
+              "p95": 381.29999999999995,
+              "max": 445.0
+            },
+            "server_post_us": {
+              "count": 40,
+              "min": 80.0,
+              "p50": 104.0,
+              "p95": 113.54999999999997,
+              "max": 129.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 40,
+              "min": 35.0,
+              "p50": 52.0,
+              "p95": 62.05,
+              "max": 68.0
+            }
+          }
+        }
+      },
+      "traffic": {
+        "embedded": {
+          "raw": {
+            "wire_bytes": {
+              "count": 60,
+              "min": 4608.0,
+              "p50": 4608.0,
+              "p95": 4608.0,
+              "max": 4608.0
+            },
+            "request_body_bytes": {
+              "count": 60,
+              "min": 4640.0,
+              "p50": 4640.0,
+              "p95": 4640.0,
+              "max": 4640.0
+            },
+            "http_total_bytes": {
+              "count": 60,
+              "min": 6822.0,
+              "p50": 6822.0,
+              "p95": 6822.0,
+              "max": 6822.0
+            },
+            "expanded_frames": 0
+          },
+          "zlib": {
+            "wire_bytes": {
+              "count": 60,
+              "min": 3872.0,
+              "p50": 3949.0,
+              "p95": 3955.0,
+              "max": 3955.0
+            },
+            "request_body_bytes": {
+              "count": 60,
+              "min": 3904.0,
+              "p50": 3981.0,
+              "p95": 3987.0,
+              "max": 3987.0
+            },
+            "http_total_bytes": {
+              "count": 60,
+              "min": 6086.0,
+              "p50": 6163.0,
+              "p95": 6169.0,
+              "max": 6169.0
+            },
+            "expanded_frames": 0
+          }
+        },
+        "annotated": {
+          "raw": {
+            "wire_bytes": {
+              "count": 84,
+              "min": 4608.0,
+              "p50": 4608.0,
+              "p95": 4608.0,
+              "max": 4608.0
+            },
+            "request_body_bytes": {
+              "count": 84,
+              "min": 4640.0,
+              "p50": 4640.0,
+              "p95": 4640.0,
+              "max": 4640.0
+            },
+            "http_total_bytes": {
+              "count": 84,
+              "min": 6822.0,
+              "p50": 6822.0,
+              "p95": 6822.0,
+              "max": 6822.0
+            },
+            "expanded_frames": 0
+          },
+          "zlib": {
+            "wire_bytes": {
+              "count": 84,
+              "min": 2814.0,
+              "p50": 3925.0,
+              "p95": 4039.9,
+              "max": 4209.0
+            },
+            "request_body_bytes": {
+              "count": 84,
+              "min": 2846.0,
+              "p50": 3957.0,
+              "p95": 4071.9,
+              "max": 4241.0
+            },
+            "http_total_bytes": {
+              "count": 84,
+              "min": 5028.0,
+              "p50": 6139.0,
+              "p95": 6253.9,
+              "max": 6423.0
+            },
+            "expanded_frames": 0
+          }
+        },
+        "camera_alternating": {
+          "raw": {
+            "wire_bytes": {
+              "count": 20,
+              "min": 4608.0,
+              "p50": 4608.0,
+              "p95": 4608.0,
+              "max": 4608.0
+            },
+            "request_body_bytes": {
+              "count": 20,
+              "min": 4640.0,
+              "p50": 4640.0,
+              "p95": 4640.0,
+              "max": 4640.0
+            },
+            "http_total_bytes": {
+              "count": 20,
+              "min": 6822.0,
+              "p50": 6822.0,
+              "p95": 6822.0,
+              "max": 6822.0
+            },
+            "expanded_frames": 0
+          },
+          "zlib": {
+            "wire_bytes": {
+              "count": 20,
+              "min": 3745.0,
+              "p50": 3760.5,
+              "p95": 3797.05,
+              "max": 3798.0
+            },
+            "request_body_bytes": {
+              "count": 20,
+              "min": 3777.0,
+              "p50": 3792.5,
+              "p95": 3829.05,
+              "max": 3830.0
+            },
+            "http_total_bytes": {
+              "count": 20,
+              "min": 5959.0,
+              "p50": 5974.5,
+              "p95": 6011.05,
+              "max": 6012.0
+            },
+            "expanded_frames": 0
+          }
+        },
+        "camera_continuous": {
+          "raw": {
+            "wire_bytes": {
+              "count": 40,
+              "min": 4608.0,
+              "p50": 4608.0,
+              "p95": 4608.0,
+              "max": 4608.0
+            },
+            "request_body_bytes": {
+              "count": 40,
+              "min": 4640.0,
+              "p50": 4640.0,
+              "p95": 4640.0,
+              "max": 4640.0
+            },
+            "http_total_bytes": {
+              "count": 40,
+              "min": 6822.0,
+              "p50": 6822.0,
+              "p95": 6822.0,
+              "max": 6822.0
+            },
+            "expanded_frames": 0
+          },
+          "zlib": {
+            "wire_bytes": {
+              "count": 40,
+              "min": 3743.0,
+              "p50": 3755.5,
+              "p95": 3767.1,
+              "max": 3772.0
+            },
+            "request_body_bytes": {
+              "count": 40,
+              "min": 3775.0,
+              "p50": 3787.5,
+              "p95": 3799.1,
+              "max": 3804.0
+            },
+            "http_total_bytes": {
+              "count": 40,
+              "min": 5957.0,
+              "p50": 5969.5,
+              "p95": 5981.1,
+              "max": 5986.0
+            },
+            "expanded_frames": 0
+          }
+        }
+      },
+      "throughput": [
+        {
+          "event": "throughput",
+          "mode": "raw",
+          "round": 0,
+          "frames": 20,
+          "elapsed_us": 14893879,
+          "frames_per_second": 1.3428335224154835
+        },
+        {
+          "event": "throughput",
+          "mode": "zlib",
+          "round": 0,
+          "frames": 20,
+          "elapsed_us": 16306210,
+          "frames_per_second": 1.2265265809774313
+        },
+        {
+          "event": "throughput",
+          "mode": "zlib",
+          "round": 1,
+          "frames": 20,
+          "elapsed_us": 5612056,
+          "frames_per_second": 3.563756313194309
+        },
+        {
+          "event": "throughput",
+          "mode": "raw",
+          "round": 1,
+          "frames": 20,
+          "elapsed_us": 8665062,
+          "frames_per_second": 2.308119664925652
+        }
+      ],
+      "exact_parity_frames": 87,
+      "exact_parity_requests": 288,
+      "quality": {
+        "images": 84,
+        "class_agnostic": {
+          "tp": 110,
+          "fp": 5,
+          "fn": 2,
+          "precision": 0.9565217391304348,
+          "recall": 0.9821428571428571,
+          "f1": 0.9691629955947136
+        }
+      },
+      "wifi_rssi_dbm": {
+        "count": 408,
+        "min": -78.0,
+        "p50": -67.5,
+        "p95": -63.0,
+        "max": -63.0
+      },
+      "run": "2026-10-28-run1",
+      "device_log_sha256": "4253e119657ec674bd9281457ad737617719ac94d7ca612503419018f59a5031",
+      "server_log_sha256": "bec6ebb6586021a9ec9a01a3eb40ae6e2bcdcf59cff31ad13573b3d915c168cf"
+    },
+    {
+      "samples": 408,
+      "boot": {
+        "event": "boot",
+        "experiment_sha256": "e875f73df1adb5ca7d12dd8301472f50939d04224d321e5cbb0e82f1105a99b0",
+        "cpu_mhz": 240,
+        "runtime": "esp-tflite-micro-dd40859",
+        "arena_capacity_each": 1048576,
+        "arena_in_psram": true,
+        "esp_nn_enabled": true,
+        "repetitions": 20
+      },
+      "allocations": [
+        {
+          "event": "allocated",
+          "mode": "raw",
+          "arena_used_bytes": 229820,
+          "model_sha256": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+          "input_bytes": 9216,
+          "output_bytes": 4608
+        }
+      ],
+      "kernel_checks": [
+        {
+          "event": "kernel_check",
+          "mode": "raw",
+          "esp32s3_conv_calls": 6,
+          "esp32s3_depthwise_calls": 3
+        },
+        {
+          "event": "kernel_check",
+          "mode": "zlib",
+          "esp32s3_conv_calls": 6,
+          "esp32s3_depthwise_calls": 3
+        }
+      ],
+      "codec_memory": [
+        {
+          "event": "codec_allocated",
+          "codec": "miniz-3.0.2-level1",
+          "workspace_bytes": 319296,
+          "compressed_capacity_bytes": 8192,
+          "message_capacity_bytes": 8224
+        }
+      ],
+      "timing": {
+        "embedded": {
+          "raw": {
+            "compression_us": {
+              "count": 60,
+              "min": 0.0,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0
+            },
+            "input_prepare_us": {
+              "count": 60,
+              "min": 38858.0,
+              "p50": 39057.0,
+              "p95": 39704.65,
+              "max": 40262.0
+            },
+            "invoke_us": {
+              "count": 60,
+              "min": 93772.0,
+              "p50": 94316.5,
+              "p95": 95136.15,
+              "max": 95671.0
+            },
+            "packing_us": {
+              "count": 60,
+              "min": 1052.0,
+              "p50": 1052.0,
+              "p95": 1058.5,
+              "max": 1656.0
+            },
+            "request_response_us": {
+              "count": 60,
+              "min": 18107.0,
+              "p50": 28152.0,
+              "p95": 103580.25,
+              "max": 273817.0
+            },
+            "observed_cycle_us": {
+              "count": 60,
+              "min": 152433.0,
+              "p50": 163096.5,
+              "p95": 237939.0,
+              "max": 410260.0
+            },
+            "server_decode_us": {
+              "count": 60,
+              "min": 18.0,
+              "p50": 58.5,
+              "p95": 94.14999999999999,
+              "max": 161.0
+            },
+            "server_invoke_us": {
+              "count": 60,
+              "min": 279.0,
+              "p50": 328.0,
+              "p95": 357.29999999999995,
+              "max": 416.0
+            },
+            "server_post_us": {
+              "count": 60,
+              "min": 74.0,
+              "p50": 105.5,
+              "p95": 146.2,
+              "max": 159.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 60,
+              "min": 4.0,
+              "p50": 13.0,
+              "p95": 25.34999999999998,
+              "max": 37.0
+            }
+          },
+          "zlib": {
+            "compression_us": {
+              "count": 60,
+              "min": 6722.0,
+              "p50": 6785.0,
+              "p95": 6864.3,
+              "max": 6914.0
+            },
+            "input_prepare_us": {
+              "count": 60,
+              "min": 38861.0,
+              "p50": 39103.5,
+              "p95": 39877.75,
+              "max": 40380.0
+            },
+            "invoke_us": {
+              "count": 60,
+              "min": 94037.0,
+              "p50": 94366.0,
+              "p95": 95294.75,
+              "max": 95889.0
+            },
+            "packing_us": {
+              "count": 60,
+              "min": 1057.0,
+              "p50": 1061.0,
+              "p95": 1067.0,
+              "max": 1193.0
+            },
+            "request_response_us": {
+              "count": 60,
+              "min": 16923.0,
+              "p50": 25432.5,
+              "p95": 91435.19999999994,
+              "max": 187387.0
+            },
+            "observed_cycle_us": {
+              "count": 60,
+              "min": 158016.0,
+              "p50": 166704.5,
+              "p95": 233022.99999999994,
+              "max": 329251.0
+            },
+            "server_decode_us": {
+              "count": 60,
+              "min": 46.0,
+              "p50": 70.5,
+              "p95": 114.1,
+              "max": 133.0
+            },
+            "server_invoke_us": {
+              "count": 60,
+              "min": 279.0,
+              "p50": 327.5,
+              "p95": 377.15,
+              "max": 384.0
+            },
+            "server_post_us": {
+              "count": 60,
+              "min": 77.0,
+              "p50": 99.5,
+              "p95": 144.54999999999995,
+              "max": 165.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 60,
+              "min": 32.0,
+              "p50": 47.0,
+              "p95": 65.0,
+              "max": 70.0
+            }
+          }
+        },
+        "annotated": {
+          "raw": {
+            "compression_us": {
+              "count": 84,
+              "min": 0.0,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0
+            },
+            "input_prepare_us": {
+              "count": 84,
+              "min": 36053.0,
+              "p50": 38886.0,
+              "p95": 39459.1,
+              "max": 39808.0
+            },
+            "invoke_us": {
+              "count": 84,
+              "min": 94128.0,
+              "p50": 94366.0,
+              "p95": 95815.0,
+              "max": 95982.0
+            },
+            "packing_us": {
+              "count": 84,
+              "min": 1052.0,
+              "p50": 1053.5,
+              "p95": 1058.0,
+              "max": 1206.0
+            },
+            "request_response_us": {
+              "count": 84,
+              "min": 17273.0,
+              "p50": 21775.0,
+              "p95": 33290.049999999996,
+              "max": 76501.0
+            },
+            "observed_cycle_us": {
+              "count": 84,
+              "min": 150975.0,
+              "p50": 156121.0,
+              "p95": 166774.75,
+              "max": 211856.0
+            },
+            "server_decode_us": {
+              "count": 84,
+              "min": 18.0,
+              "p50": 35.5,
+              "p95": 94.54999999999998,
+              "max": 130.0
+            },
+            "server_invoke_us": {
+              "count": 84,
+              "min": 278.0,
+              "p50": 324.5,
+              "p95": 383.94999999999993,
+              "max": 400.0
+            },
+            "server_post_us": {
+              "count": 84,
+              "min": 71.0,
+              "p50": 101.5,
+              "p95": 138.54999999999998,
+              "max": 153.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 84,
+              "min": 4.0,
+              "p50": 7.0,
+              "p95": 25.549999999999983,
+              "max": 36.0
+            }
+          },
+          "zlib": {
+            "compression_us": {
+              "count": 84,
+              "min": 5331.0,
+              "p50": 6762.5,
+              "p95": 6927.7,
+              "max": 7945.0
+            },
+            "input_prepare_us": {
+              "count": 84,
+              "min": 35951.0,
+              "p50": 38874.5,
+              "p95": 39297.7,
+              "max": 39596.0
+            },
+            "invoke_us": {
+              "count": 84,
+              "min": 94045.0,
+              "p50": 94381.0,
+              "p95": 95740.65,
+              "max": 95963.0
+            },
+            "packing_us": {
+              "count": 84,
+              "min": 1033.0,
+              "p50": 1061.0,
+              "p95": 1065.85,
+              "max": 1092.0
+            },
+            "request_response_us": {
+              "count": 84,
+              "min": 16785.0,
+              "p50": 22753.5,
+              "p95": 31995.35,
+              "max": 40342.0
+            },
+            "observed_cycle_us": {
+              "count": 84,
+              "min": 155657.0,
+              "p50": 163663.5,
+              "p95": 172568.6,
+              "max": 181681.0
+            },
+            "server_decode_us": {
+              "count": 84,
+              "min": 47.0,
+              "p50": 71.0,
+              "p95": 107.0,
+              "max": 154.0
+            },
+            "server_invoke_us": {
+              "count": 84,
+              "min": 283.0,
+              "p50": 315.0,
+              "p95": 354.7,
+              "max": 455.0
+            },
+            "server_post_us": {
+              "count": 84,
+              "min": 76.0,
+              "p50": 98.5,
+              "p95": 120.85,
+              "max": 162.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 84,
+              "min": 33.0,
+              "p50": 44.0,
+              "p95": 57.0,
+              "max": 75.0
+            }
+          }
+        },
+        "camera_alternating": {
+          "raw": {
+            "compression_us": {
+              "count": 20,
+              "min": 0.0,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0
+            },
+            "input_prepare_us": {
+              "count": 20,
+              "min": 38884.0,
+              "p50": 39200.5,
+              "p95": 39690.5,
+              "max": 39757.0
+            },
+            "invoke_us": {
+              "count": 20,
+              "min": 94702.0,
+              "p50": 95011.0,
+              "p95": 95471.0,
+              "max": 95927.0
+            },
+            "packing_us": {
+              "count": 20,
+              "min": 1052.0,
+              "p50": 1054.0,
+              "p95": 1059.65,
+              "max": 1091.0
+            },
+            "request_response_us": {
+              "count": 20,
+              "min": 20915.0,
+              "p50": 79648.5,
+              "p95": 296772.6500000016,
+              "max": 2436945.0
+            },
+            "observed_cycle_us": {
+              "count": 20,
+              "min": 164837.0,
+              "p50": 223183.0,
+              "p95": 446027.10000000166,
+              "max": 2696256.0
+            },
+            "server_decode_us": {
+              "count": 20,
+              "min": 20.0,
+              "p50": 43.5,
+              "p95": 85.60000000000004,
+              "max": 135.0
+            },
+            "server_invoke_us": {
+              "count": 20,
+              "min": 285.0,
+              "p50": 320.5,
+              "p95": 342.6,
+              "max": 354.0
+            },
+            "server_post_us": {
+              "count": 20,
+              "min": 73.0,
+              "p50": 93.0,
+              "p95": 108.15,
+              "max": 111.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 20,
+              "min": 5.0,
+              "p50": 9.0,
+              "p95": 21.70000000000001,
+              "max": 35.0
+            }
+          },
+          "zlib": {
+            "compression_us": {
+              "count": 20,
+              "min": 6677.0,
+              "p50": 6724.5,
+              "p95": 6750.85,
+              "max": 6919.0
+            },
+            "input_prepare_us": {
+              "count": 20,
+              "min": 38912.0,
+              "p50": 39215.0,
+              "p95": 39665.15,
+              "max": 39725.0
+            },
+            "invoke_us": {
+              "count": 20,
+              "min": 94732.0,
+              "p50": 95271.5,
+              "p95": 96312.2,
+              "max": 96354.0
+            },
+            "packing_us": {
+              "count": 20,
+              "min": 1055.0,
+              "p50": 1056.5,
+              "p95": 1065.8000000000002,
+              "max": 1195.0
+            },
+            "request_response_us": {
+              "count": 20,
+              "min": 24076.0,
+              "p50": 58270.5,
+              "p95": 209023.75000000003,
+              "max": 239039.0
+            },
+            "observed_cycle_us": {
+              "count": 20,
+              "min": 175499.0,
+              "p50": 209045.5,
+              "p95": 359946.55000000005,
+              "max": 390889.0
+            },
+            "server_decode_us": {
+              "count": 20,
+              "min": 50.0,
+              "p50": 68.5,
+              "p95": 130.20000000000005,
+              "max": 172.0
+            },
+            "server_invoke_us": {
+              "count": 20,
+              "min": 278.0,
+              "p50": 319.5,
+              "p95": 369.20000000000005,
+              "max": 392.0
+            },
+            "server_post_us": {
+              "count": 20,
+              "min": 72.0,
+              "p50": 89.5,
+              "p95": 109.30000000000001,
+              "max": 134.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 20,
+              "min": 34.0,
+              "p50": 46.0,
+              "p95": 62.15000000000002,
+              "max": 84.0
+            }
+          }
+        },
+        "camera_continuous": {
+          "raw": {
+            "compression_us": {
+              "count": 40,
+              "min": 0.0,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0
+            },
+            "input_prepare_us": {
+              "count": 40,
+              "min": 38888.0,
+              "p50": 39182.5,
+              "p95": 39572.65,
+              "max": 39947.0
+            },
+            "invoke_us": {
+              "count": 40,
+              "min": 94644.0,
+              "p50": 95036.5,
+              "p95": 95965.2,
+              "max": 96465.0
+            },
+            "packing_us": {
+              "count": 40,
+              "min": 1052.0,
+              "p50": 1054.0,
+              "p95": 1068.8999999999999,
+              "max": 1093.0
+            },
+            "request_response_us": {
+              "count": 40,
+              "min": 26612.0,
+              "p50": 92685.0,
+              "p95": 163395.39999999988,
+              "max": 399814.0
+            },
+            "observed_cycle_us": {
+              "count": 40,
+              "min": 170527.0,
+              "p50": 236751.5,
+              "p95": 307163.0499999999,
+              "max": 543379.0
+            },
+            "server_decode_us": {
+              "count": 40,
+              "min": 20.0,
+              "p50": 62.0,
+              "p95": 112.14999999999999,
+              "max": 135.0
+            },
+            "server_invoke_us": {
+              "count": 40,
+              "min": 288.0,
+              "p50": 329.0,
+              "p95": 379.1,
+              "max": 458.0
+            },
+            "server_post_us": {
+              "count": 40,
+              "min": 77.0,
+              "p50": 103.5,
+              "p95": 135.14999999999998,
+              "max": 150.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 40,
+              "min": 5.0,
+              "p50": 13.0,
+              "p95": 32.099999999999994,
+              "max": 35.0
+            }
+          },
+          "zlib": {
+            "compression_us": {
+              "count": 40,
+              "min": 6663.0,
+              "p50": 6695.5,
+              "p95": 6848.25,
+              "max": 6916.0
+            },
+            "input_prepare_us": {
+              "count": 40,
+              "min": 38870.0,
+              "p50": 39206.5,
+              "p95": 39674.05,
+              "max": 39910.0
+            },
+            "invoke_us": {
+              "count": 40,
+              "min": 94512.0,
+              "p50": 95022.5,
+              "p95": 96365.05,
+              "max": 96882.0
+            },
+            "packing_us": {
+              "count": 40,
+              "min": 1054.0,
+              "p50": 1055.0,
+              "p95": 1063.6,
+              "max": 1100.0
+            },
+            "request_response_us": {
+              "count": 40,
+              "min": 25479.0,
+              "p50": 74818.5,
+              "p95": 672694.2499999985,
+              "max": 1429992.0
+            },
+            "observed_cycle_us": {
+              "count": 40,
+              "min": 175889.0,
+              "p50": 225253.5,
+              "p95": 825140.2499999985,
+              "max": 1580950.0
+            },
+            "server_decode_us": {
+              "count": 40,
+              "min": 48.0,
+              "p50": 97.5,
+              "p95": 128.19999999999993,
+              "max": 167.0
+            },
+            "server_invoke_us": {
+              "count": 40,
+              "min": 284.0,
+              "p50": 328.5,
+              "p95": 370.14999999999986,
+              "max": 488.0
+            },
+            "server_post_us": {
+              "count": 40,
+              "min": 73.0,
+              "p50": 103.0,
+              "p95": 122.74999999999996,
+              "max": 139.0
+            },
+            "server_decompression_and_validation_us": {
+              "count": 40,
+              "min": 34.0,
+              "p50": 49.0,
+              "p95": 63.39999999999998,
+              "max": 103.0
+            }
+          }
+        }
+      },
+      "traffic": {
+        "embedded": {
+          "raw": {
+            "wire_bytes": {
+              "count": 60,
+              "min": 4608.0,
+              "p50": 4608.0,
+              "p95": 4608.0,
+              "max": 4608.0
+            },
+            "request_body_bytes": {
+              "count": 60,
+              "min": 4640.0,
+              "p50": 4640.0,
+              "p95": 4640.0,
+              "max": 4640.0
+            },
+            "http_total_bytes": {
+              "count": 60,
+              "min": 6822.0,
+              "p50": 6822.0,
+              "p95": 6822.0,
+              "max": 6822.0
+            },
+            "expanded_frames": 0
+          },
+          "zlib": {
+            "wire_bytes": {
+              "count": 60,
+              "min": 3872.0,
+              "p50": 3949.0,
+              "p95": 3955.0,
+              "max": 3955.0
+            },
+            "request_body_bytes": {
+              "count": 60,
+              "min": 3904.0,
+              "p50": 3981.0,
+              "p95": 3987.0,
+              "max": 3987.0
+            },
+            "http_total_bytes": {
+              "count": 60,
+              "min": 6086.0,
+              "p50": 6163.0,
+              "p95": 6169.0,
+              "max": 6169.0
+            },
+            "expanded_frames": 0
+          }
+        },
+        "annotated": {
+          "raw": {
+            "wire_bytes": {
+              "count": 84,
+              "min": 4608.0,
+              "p50": 4608.0,
+              "p95": 4608.0,
+              "max": 4608.0
+            },
+            "request_body_bytes": {
+              "count": 84,
+              "min": 4640.0,
+              "p50": 4640.0,
+              "p95": 4640.0,
+              "max": 4640.0
+            },
+            "http_total_bytes": {
+              "count": 84,
+              "min": 6822.0,
+              "p50": 6822.0,
+              "p95": 6822.0,
+              "max": 6822.0
+            },
+            "expanded_frames": 0
+          },
+          "zlib": {
+            "wire_bytes": {
+              "count": 84,
+              "min": 2814.0,
+              "p50": 3925.0,
+              "p95": 4039.9,
+              "max": 4209.0
+            },
+            "request_body_bytes": {
+              "count": 84,
+              "min": 2846.0,
+              "p50": 3957.0,
+              "p95": 4071.9,
+              "max": 4241.0
+            },
+            "http_total_bytes": {
+              "count": 84,
+              "min": 5028.0,
+              "p50": 6139.0,
+              "p95": 6253.9,
+              "max": 6423.0
+            },
+            "expanded_frames": 0
+          }
+        },
+        "camera_alternating": {
+          "raw": {
+            "wire_bytes": {
+              "count": 20,
+              "min": 4608.0,
+              "p50": 4608.0,
+              "p95": 4608.0,
+              "max": 4608.0
+            },
+            "request_body_bytes": {
+              "count": 20,
+              "min": 4640.0,
+              "p50": 4640.0,
+              "p95": 4640.0,
+              "max": 4640.0
+            },
+            "http_total_bytes": {
+              "count": 20,
+              "min": 6822.0,
+              "p50": 6822.0,
+              "p95": 6822.0,
+              "max": 6822.0
+            },
+            "expanded_frames": 0
+          },
+          "zlib": {
+            "wire_bytes": {
+              "count": 20,
+              "min": 3772.0,
+              "p50": 3800.5,
+              "p95": 3840.1,
+              "max": 3842.0
+            },
+            "request_body_bytes": {
+              "count": 20,
+              "min": 3804.0,
+              "p50": 3832.5,
+              "p95": 3872.1,
+              "max": 3874.0
+            },
+            "http_total_bytes": {
+              "count": 20,
+              "min": 5986.0,
+              "p50": 6014.5,
+              "p95": 6054.1,
+              "max": 6056.0
+            },
+            "expanded_frames": 0
+          }
+        },
+        "camera_continuous": {
+          "raw": {
+            "wire_bytes": {
+              "count": 40,
+              "min": 4608.0,
+              "p50": 4608.0,
+              "p95": 4608.0,
+              "max": 4608.0
+            },
+            "request_body_bytes": {
+              "count": 40,
+              "min": 4640.0,
+              "p50": 4640.0,
+              "p95": 4640.0,
+              "max": 4640.0
+            },
+            "http_total_bytes": {
+              "count": 40,
+              "min": 6822.0,
+              "p50": 6822.0,
+              "p95": 6822.0,
+              "max": 6822.0
+            },
+            "expanded_frames": 0
+          },
+          "zlib": {
+            "wire_bytes": {
+              "count": 40,
+              "min": 3757.0,
+              "p50": 3776.0,
+              "p95": 3789.3,
+              "max": 3797.0
+            },
+            "request_body_bytes": {
+              "count": 40,
+              "min": 3789.0,
+              "p50": 3808.0,
+              "p95": 3821.3,
+              "max": 3829.0
+            },
+            "http_total_bytes": {
+              "count": 40,
+              "min": 5971.0,
+              "p50": 5990.0,
+              "p95": 6003.3,
+              "max": 6011.0
+            },
+            "expanded_frames": 0
+          }
+        }
+      },
+      "throughput": [
+        {
+          "event": "throughput",
+          "mode": "raw",
+          "round": 0,
+          "frames": 20,
+          "elapsed_us": 5037354,
+          "frames_per_second": 3.970338395911822
+        },
+        {
+          "event": "throughput",
+          "mode": "zlib",
+          "round": 0,
+          "frames": 20,
+          "elapsed_us": 7797583,
+          "frames_per_second": 2.5648973534491395
+        },
+        {
+          "event": "throughput",
+          "mode": "zlib",
+          "round": 1,
+          "frames": 20,
+          "elapsed_us": 4520124,
+          "frames_per_second": 4.424657376656039
+        },
+        {
+          "event": "throughput",
+          "mode": "raw",
+          "round": 1,
+          "frames": 20,
+          "elapsed_us": 4922898,
+          "frames_per_second": 4.062647651850597
+        }
+      ],
+      "exact_parity_frames": 87,
+      "exact_parity_requests": 288,
+      "quality": {
+        "images": 84,
+        "class_agnostic": {
+          "tp": 110,
+          "fp": 5,
+          "fn": 2,
+          "precision": 0.9565217391304348,
+          "recall": 0.9821428571428571,
+          "f1": 0.9691629955947136
+        }
+      },
+      "wifi_rssi_dbm": {
+        "count": 408,
+        "min": -72.0,
+        "p50": -66.0,
+        "p95": -64.0,
+        "max": -62.0
+      },
+      "run": "2026-10-28-run2",
+      "device_log_sha256": "4318925765bc91d72af2aa078644bf8c4a9561113d867f05f88c2cba1b560b08",
+      "server_log_sha256": "fe1bd63532b0600a30e48333246a2cde0185f7507ccac6221ed4c31257ebcad4"
+    }
+  ]
+}

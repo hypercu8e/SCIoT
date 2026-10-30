@@ -1,0 +1,22 @@
+{
+  "closed_date": "2026-10-29",
+  "hardware_sessions": 2,
+  "requests_validated": 816,
+  "native_codec_and_protocol_tests_passed": 4,
+  "fixed_frames_per_session_exact_between_raw_and_zlib": 87,
+  "fixed_outputs_identical_across_sessions": true,
+  "backup_sha256": "ba5564a9c76cd238e600a8329e9fe5e69d6af85e987a0fb399fd141c894ec603",
+  "restored_flash_bytes": 8388608,
+  "restored_flash_digest_verified_before_boot": true,
+  "restored_firmware": {
+    "project": "sciot_esp32_client",
+    "version": "0.1.0",
+    "model": "fomo_224"
+  },
+  "evidence_sha256": {
+    "restore-final.log": "b6b40a60c63d475f0179c09f9b21275df426516f18bb5f26cfee05683f6cd459",
+    "restore-verify-final.log": "ad825f2a03014205eca2db15246db69ff4c41747b322fd0fa16155540dcd4c9f",
+    "restored-original-final.log": "4ccd903bc597f7ac7998e7b681ec2d56e1c657ca6567dd4601f9e3e310c7b73a",
+    "tests-final.log": "46b07c57450110b360047a117782de72a19b27df624c9fec53f415a4ede0ddcc"
+  }
+}
