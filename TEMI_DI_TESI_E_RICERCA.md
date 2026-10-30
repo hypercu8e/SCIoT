@@ -1,5 +1,12 @@
 # SCIoT — Temi di tesi, sfide aperte e direzioni di ricerca
 
+**Avanzamento al 29 ottobre 2026:** il catalogo conserva le proposte di ricerca.
+La baseline INT8 ESP-NN e il confronto raw/zlib sono ora misurati su una scheda;
+HTTP v2 multi-client è implementato e verificato su PC/build, con hardware ancora
+aperto. Ciò non costituisce approvazione di una tesi o novità scientifica.
+Stato operativo e priorità: [recap](RECAP_LAVORO_FORK.md).
+
+
 Documento creato il 19 ottobre 2026; revisione critica del 20 ottobre 2026.
 
 Questo documento raccoglie proposte di **tesi triennale** collegate al tirocinio da 300 ore con il Prof. Luca Bedogni, Università di Modena e Reggio Emilia, sul framework **SCIoT**. Le proposte restano da discutere con il relatore.

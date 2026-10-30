@@ -1,5 +1,28 @@
 # Primo confronto della compressione delle attivazioni
 
+## Stato corrente — 29 ottobre 2026
+
+Questa cartella conserva le prove PC del 15–19 ottobre. I paragrafi datati sotto
+sono resoconti storici: il runtime Arduino 1.0.0 e i suoi limiti INT16 non
+identificano il runtime ESP-IDF/ESP-NN usato successivamente.
+
+- [FLOAT32 / INT8 con ESP-NN sulla scheda](../esp32_representation_benchmark/espnn_2026-10-27/report.md):
+  tempi completi e HTTP favorevoli a INT8 nella configurazione provata.
+- [INT8 raw / zlib sulla scheda](../esp32_int8_compression_benchmark/2026-10-28/report.md):
+  meno byte, maggiore mediana del ciclo sugli ingressi identici; nessuna perdita aggiuntiva.
+- [DPCM e dead-zone sulla scheda](../esp32_deadzone_benchmark/2026-10-29/report.md):
+  4224 richieste misurate e 720 diagnostiche, video e camera. Sul video D+DZ a
+  4 bit riduce il payload del 58,02%, con maggiore latenza e cambi nelle predizioni.
+- [Multi-client HTTP v2](../multiclient_validation/2026-10-28/README.md): PC/build verificati,
+  hardware ancora aperto. [EON](../eon_prefix_benchmark/README.md) accantonato.
+
+Il confronto DPCM/dead-zone è ora implementato e misurato sul target in un
+esperimento isolato; integrazione nel servizio SCIoT e qualità su video annotati
+restano fuori da questa prova. I resoconti storici sotto conservano lo stato
+dei rispettivi esperimenti precedenti.
+Stato e priorità: [recap](../../RECAP_LAVORO_FORK.md), [diario](../../DIARIO_TIROCINIO.md).
+
+
 Aggiornamento del 19 ottobre 2026: esportato e verificato lo
 [split INT8](esp32_prep_2026-10-19/README.md) senza nuova conversione/calibrazione.
 Equivalenza byte per byte col modello INT8 intero sui 146 frame; preparati tre

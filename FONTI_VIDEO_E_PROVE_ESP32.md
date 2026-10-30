@@ -1,5 +1,22 @@
 # Fonti per nuovi test e primo benchmark ESP32
 
+## Aggiornamento di contesto — 29 ottobre 2026
+
+Questa ricerca e le proposte seguenti risalgono al 17 ottobre e descrivono le
+schede considerate allora. L'utente dispone ora di due ESP32-S3-EYE. Su una sono
+completati i [confronti FLOAT32/INT8 ESP-NN](experiments/esp32_representation_benchmark/espnn_2026-10-27/report.md)
+e [INT8 raw/zlib](experiments/esp32_int8_compression_benchmark/2026-10-28/report.md),
+con camera e rete reali. La proposta seriale della sezione 4 non è il benchmark
+poi adottato. Il nuovo servizio multi-client ha [verifiche PC/build](experiments/multiclient_validation/2026-10-28/README.md),
+ancora senza validazione fisica con due schede.
+
+I dati pubblici sono stati successivamente raccolti nella cache
+`experiments/activation_compression/results/public_test_data/`; provenienza,
+hash e limiti sono in [TEST_SU_PC.md](TEST_SU_PC.md). La vecchia cache
+`public_sources/` qui citata è storica e non sostituisce i manifest attuali.
+Per il prossimo passo usare [recap](RECAP_LAVORO_FORK.md) e [scaletta](SCALETTA_TIROCINIO.md).
+
+
 Ricerca e download eseguiti il 17 ottobre 2026. Non sono stati avviati nuovi
 benchmark di compressione su queste sequenze né prove sulla scheda.
 

@@ -1,6 +1,6 @@
 # Possibili idee da esplorare
 
-Questo file raccoglie le piste da valutare in seguito. Per ora proseguiamo con lo studio della compressione delle differenze tra attivazioni di frame consecutivi.
+Questo file raccoglie le piste da valutare in seguito. Al 29 ottobre 2026 la baseline INT8 ESP-NN e il confronto raw/zlib su una scheda sono completati; il prossimo controllo riguarda il servizio HTTP v2 con due ESP32. La selezione preventiva dei frame e la compressione temporale INT8 restano da valutare. Stato e priorità nel [recap](RECAP_LAVORO_FORK.md).
 
 ## 1. Selezione dei frame da elaborare e trasmettere
 

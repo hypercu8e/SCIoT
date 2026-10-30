@@ -1,5 +1,12 @@
 # SCIoT: ottimizzazioni del firmware ESP32
 
+**Contesto aggiornato al 29 ottobre 2026:** il testo conserva l'audit dei firmware
+legacy e le sue proposte. I successivi benchmark ESP-IDF/ESP-NN e raw/zlib INT8
+hanno misure fisiche su una scheda; il nuovo client HTTP v2 ha build e test PC,
+ancora senza validazione hardware del servizio multi-client. Risultati e limiti
+attuali: [recap](RECAP_LAVORO_FORK.md).
+
+
 Documento del 17 ottobre 2026, predisposto come approfondimento da integrare in [ANALISI_MIGLIORAMENTI_SCIOT.md](ANALISI_MIGLIORAMENTI_SCIOT.md), dopo la sezione 9 oppure come appendice dedicata al firmware.
 
 **Obiettivo:** ridurre tempi, occupazione di memoria e lavoro superfluo sul dispositivo, mantenendo il modello e l'interfaccia del server attuali. Si parte dai progetti PlatformIO esistenti; una migrazione a ESP-IDF o una nuova repository non sono prerequisiti.

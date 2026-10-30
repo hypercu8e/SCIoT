@@ -1,5 +1,17 @@
 # Come provare modello e comunicazione sul PC
 
+## Stato corrente e ambito storico — 29 ottobre 2026
+
+Le sezioni seguenti conservano le prove PC del 18 ottobre. In seguito sono stati
+completati i [confronti fisici FLOAT32/INT8 ESP-NN](experiments/esp32_representation_benchmark/espnn_2026-10-27/report.md)
+e [raw/zlib INT8](experiments/esp32_int8_compression_benchmark/2026-10-28/report.md).
+Le 84 foto annotate sono state valutate con postprocessing e matching senza
+classe: l'ordine dei canali rimane da confermare, così come l'indipendenza dal
+training. Il [servizio multi-client HTTP v2](experiments/multiclient_validation/2026-10-28/README.md)
+ha test, carico PC e build; la validazione con due schede reali resta aperta.
+Cronologia: [diario](DIARIO_TIROCINIO.md). Priorità: [recap](RECAP_LAVORO_FORK.md).
+
+
 Verifiche del 18 ottobre 2026. Per queste prove non serve acquistare una camera
 o una scheda: un programma Python svolge il lavoro del client e un secondo
 processo svolge quello del server. I risultati non misurano le prestazioni ESP32.

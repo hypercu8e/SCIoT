@@ -1,6 +1,6 @@
 # SCIoT — recap del lavoro sul fork
 
-**Stato al 20 ottobre 2026.** Questo documento riunisce ciò che abbiamo studiato,
+**Stato al 29 ottobre 2026.** Questo documento riunisce ciò che abbiamo studiato,
 realizzato e capito dall'inizio del lavoro sul fork. Il dettaglio cronologico è
 nel [diario](DIARIO_TIROCINIO.md); qui conta soprattutto il filo del ragionamento.
 Le date delle attività seguono i resoconti conservati, mentre i commit possono
@@ -16,19 +16,56 @@ Aggiornamento del 20 ottobre: documentati percorso di lettura del survey e
 presente come tema 6 nel [catalogo](TEMI_DI_TESI_E_RICERCA.md). È una proposta
 da discutere: nessuna testa addestrata, nuova misura o approvazione del relatore.
 
+Aggiornamento del 27 ottobre: completato un [confronto fisico FLOAT32 / INT8 con
+ESP-NN](experiments/esp32_representation_benchmark/espnn_2026-10-27/report.md)
+su una ESP32-S3-EYE, con server HTTP sperimentale sul PC e taglio fisso
+`block_2_add`. Due sessioni, 816 richieste validate: attivazioni -75%, scambio
+HTTP completo per immagine circa -67%, tempo mediano sulle immagini identiche
+da circa 860 a 160 ms. Camera continua: circa 1,1 contro 4,9–5,5 frame/s.
+Su 84 foto annotate, ignorando la classe, FLOAT32 trova 111/112 oggetti con
+7 falsi positivi; INT8 110/112 con 5 falsi positivi. Questo è un primo risultato
+favorevole nella configurazione provata; qualità per classe, scene indipendenti,
+altri tagli, protocollo originale SCIoT e due client restano da verificare.
+
+Aggiornamento del 28 ottobre, chiusura del 29: completato il [confronto fisico
+INT8 raw / zlib senza perdita](experiments/esp32_int8_compression_benchmark/2026-10-28/report.md)
+con ESP-NN, un solo interprete e due sessioni da 408 richieste. Sui tre ingressi
+canonici il payload mediano scende da 4.608 a 3.949 byte (-14,3%); includendo
+lo scambio HTTP completo il risparmio è circa 9,7%. La compressione richiede
+circa 6,8 ms e il ciclo mediano cresce da 157,4 a 162,7 ms nella prima sessione
+e da 163,1 a 166,7 ms nella seconda. Con camera attiva il vantaggio temporale
+non è uniforme. Tensori e predizioni coincidono byte per byte sui 87 ingressi
+fissi e fra le due sessioni. Il codec non aggiunge perdita al modello INT8;
+compressione temporale e beneficio sotto altre condizioni di rete restano aperti.
+
+Aggiornamento del 28 ottobre — multi-client ed EON: implementato il percorso
+HTTP v2 con stato per dispositivo/sessione/richiesta, coda limitata e un worker.
+Dieci test, matrice fino a 32 client simulati e prova breve di circa 60 secondi
+verificati sul PC; firmware compilato, **nessuna prova hardware multi-client**.
+EON è stato accantonato dopo il rifiuto del servizio per il piano del progetto
+sui modelli importati/BYOM; nessuna libreria o prestazione EON ottenuta.
+Fonti: [multi-client](experiments/multiclient_validation/2026-10-28/README.md),
+[EON](experiments/eon_prefix_benchmark/README.md).
+
+Le sezioni storiche descrivono la situazione alla data indicata. Le sezioni 6–8
+riassumono lo stato attuale e dove riprendere.
+
 ## 1. Dove siamo arrivati
 
-Abbiamo costruito una base sperimentale su PC per capire come ridurre i dati
+Abbiamo costruito una base sperimentale su PC e un primo confronto fisico per capire come ridurre i dati
 scambiati durante l'inferenza distribuita tra ESP32 e server. Abbiamo verificato
 uno split del modello, confrontato diversi codec, provato uno scambio TCP e
 convertito il modello in INT8 e 16×8.
 
 Abbiamo trovato risparmi di byte e misurato gli effetti sulle predizioni.
-**Non abbiamo ancora dimostrato un miglioramento complessivo sull'ESP32.**
+**Dal 27 ottobre abbiamo misurato un miglioramento del tempo completo con INT8
+ed ESP-NN nella configurazione sperimentale descritta sopra.**
 Gli esperimenti restano separati dalle applicazioni originali. Dal 19 ottobre
 sono applicate ai firmware originali correzioni di interprete, buffer e messaggi,
-verificate sul PC e compilate per i tre trasporti; server, modelli e algoritmo
-di offloading non sono modificati. Non è ancora una verifica hardware.
+verificate sul PC e compilate per i tre trasporti. Il percorso legacy e il suo
+algoritmo di offloading restano distinti dal servizio HTTP v2 aggiunto in seguito. Le correzioni del 19 ottobre non hanno ancora
+una verifica hardware nel percorso originale; il confronto del 27 ottobre usa
+firmware e server sperimentali separati.
 
 Gli [esperimenti Micro nativi del 19 ottobre](experiments/micro_execution_2026-10-19/README.md)
 aggiungono un confronto misurato fra layer separati e prefissi raggruppati.
@@ -70,7 +107,8 @@ firmware e percorso di inferenza sul server. I principali riscontri sono:
 - Modello, preparazione delle immagini, protocollo e firmware sono legati a FOMO.
   Cambiare soltanto il nome del modello non garantisce il supporto di altre reti.
 - Sono emersi limiti nello stato condiviso tra client e nella scelta dello split
-  in presenza di carico concorrente. La gestione di più client resta da sviluppare.
+  in presenza di carico concorrente. HTTP v2 ora implementa isolamento e coda;
+  la validazione con più schede reali resta da eseguire.
 
 Abbiamo anche analizzato duplicazioni, file probabilmente superflui e firmware.
 Tra i problemi documentati: durata non valida dell'interprete, serializzazione
@@ -230,8 +268,9 @@ nessuna variante per l'applicazione né stabilito la causa degli errori residui.
 
 Il 75% di riduzione INT8 e il 50% INT16 riguardano **i soli valori del tensore**.
 Non sono riduzioni del file TFLite, del traffico totale o della RAM totale.
-Abbiamo osservato il confine nel modello intero; due sottomodelli quantizzati
-separati con parametri coerenti sono ancora da esportare e verificare.
+Nella prova del 18 ottobre il confine era osservato nel modello intero; lo split
+INT8 è stato successivamente esportato il 19 e verificato sulla scheda il 27.
+La variante 16×8 non ha ancora una verifica hardware.
 
 Archivi: [INT8](experiments/activation_compression/int8_2026-10-18/README.md)
 e [16×8](experiments/activation_compression/16x8_2026-10-18/README.md).
@@ -295,10 +334,11 @@ non dimostrano la convenienza della nostra variante su ESP32 con FOMO. Il nostro
 possibile contributo è adattare e valutare la soluzione nel sistema concreto,
 senza rivendicare l'invenzione della compressione temporale.
 
-Abbiamo mantenuto altre piste: gestione di più client e scelta dello split in
-base al carico, supporto generale ai grafi e selezione preventiva dei frame simili.
+Abbiamo implementato una prima gestione HTTP v2 di più client sul PC. Restano
+altre piste: scelta dello split in base al carico, supporto generale ai grafi e
+selezione preventiva dei frame simili.
 L'ultima potrebbe evitare anche inferenza e invio; è diversa dal comprimere
-attivazioni già calcolate. Sono proposte, non funzionalità realizzate.
+attivazioni già calcolate. Queste estensioni restano proposte.
 
 Sono state documentate anche fonti di sequenze aggiuntive Coke/Liquor e un piano
 per il benchmark ESP32. I confronti storici qui sopra usano il primo video.
@@ -311,73 +351,72 @@ Rimandi: [confronto col paper e spiegazioni](ANALISI_COMPRESSIONE_ATTIVAZIONI.md
 [selezione dei frame](IDEE_DA_ESPLORARE.md),
 [fonti e piano hardware](FONTI_VIDEO_E_PROVE_ESP32.md).
 
-## 6. Cosa abbiamo prodotto e cosa manca
+## 6. Cosa abbiamo prodotto e cosa manca — 29 ottobre 2026
 
-| Ambito | Stato |
+| Ambito | Stato attuale |
 |---|---|
-| Studio di struttura, protocollo, firmware e limiti | Documentato con riferimenti al codice |
-| Ambiente PC, modello candidato, video e split Keras | Preparati ed eseguiti |
-| Codec senza perdita e con perdita controllata | Implementati e provati offline |
-| Client/server TCP sperimentali | Implementati e provati su loopback |
-| Modelli TFLite float32, INT8 e 16×8 | Convertiti ed eseguiti sul PC |
-| Report, JSON, CSV, hash, verifiche e test | Conservati negli archivi degli esperimenti |
-| Correzioni firmware originali | Interprete, buffer e messaggi corretti; test nativi e tre build riusciti; hardware da provare |
-| Refactoring/server e altre proposte | Ancora da sviluppare |
-| Runtime Micro | Percorsi INT8 ispezionati; manca depthwise INT16 nella libreria scelta; esecuzione hardware da provare |
-| Split quantizzato | INT8 esportato e verificato sul PC, firmware di prova compilati |
-| Protocollo SCIoT aggiornato | Ancora da integrare e verificare |
-| Tempi, picco RAM, energia e rete sull'ESP32 | Non misurati |
-| Accuratezza su un dataset annotato rappresentativo | Non valutata |
-| DPCM/dead-zone, più client e selezione dei frame | Proposte da implementare se scelte |
+| Modello, split e codec PC | Esperimenti storici conservati con report, JSON, CSV e hash |
+| INT8 ESP-NN / FLOAT32 su ESP32 | Due sessioni fisiche, 816 richieste validate; miglioramento nel taglio e nella rete provati |
+| INT8 raw / zlib indipendente | Due sessioni fisiche, 816 richieste validate; meno byte, maggiore mediana del ciclo sugli ingressi identici |
+| Qualità | 84 foto annotate, matching senza classe; classi e indipendenza dal training da confermare |
+| Memoria | Arene e workspace richiesti misurati; picco RAM complessivo ed energia non misurati |
+| Correzioni dei firmware legacy | Test nativi e build; percorso legacy completo da verificare sulla scheda |
+| HTTP v2 multi-client | Server, firmware e strumenti implementati; test e carico PC, build; hardware ancora aperto |
+| EON sul prefisso importato | Upload riuscito, compilazione rifiutata dal piano del servizio; accantonato come dipendenza |
+| INT16/16×8 | Conversione e confronto PC; costi e correttezza sul target da verificare |
+| Temporale INT8, DPCM/dead-zone, altri tagli, frame skipping, early exit | Attività successive, non risultati già ottenuti |
 
-Non abbiamo riaddestrato il modello. Le prove di compressione su float32 e le
-conversioni INT8/16×8 sono filoni collegati ma distinti: **i risparmi temporali
-su float32 non si trasferiscono automaticamente ai tensori quantizzati**.
+Nessun riaddestramento eseguito. I risparmi di un codec float32 non si trasferiscono
+automaticamente a INT8. I risultati del server PC non certificano Wi-Fi, camera o
+concorrenza tra schede. Il formato sperimentale di compressione e HTTP v2
+multi-client sono due percorsi distinti, non interoperabili automaticamente.
 
 ## 7. Punto di ripresa
 
-Il prossimo controllo è **allocazione e inferenza INT8 sulla scheda**, usando
-i firmware di prova già compilati e confrontando i log con i tre vettori attesi.
-Il risultato CPU e il build non certificano l'esecuzione sulla scheda.
-Per INT16 serve prima un runtime che implementi la depthwise INT16 mancante
-nella libreria scelta.
+1. Validare HTTP v2 prima con una ESP32 e client simulati, poi con due ESP32 reali:
+   almeno 1.000 richieste per scheda, riavvio di A mentre B prosegue, un'ora di
+   stabilità e controllo di correttezza, code, memoria e tempi per dispositivo.
+2. Ampliare la valutazione della qualità su scene indipendenti e confermare i
+   canali delle classi; tenere separati calibrazione e test.
+3. Conservare INT8 raw con ESP-NN come controllo. Per ulteriori codec misurare
+   byte, tempo completo e memoria sul target; zlib indipendente non ha mostrato
+   un vantaggio stabile di velocità. Temporale e DPCM/dead-zone restano da provare.
+4. Valutare altri tagli o 16×8 come confronti successivi. EON non è un prerequisito.
 
-Poi occorre verificare sul target anche le correzioni float32, camera e rete,
-e misurare memoria e tempi reali. In parallelo
-serve ampliare calibrazione e valutazione su sequenze distinte, senza scegliere
-parametri in base allo stesso campione di test. L'accuratezza richiederà annotazioni
-adatte quando disponibili; la sola calibrazione può usare immagini non annotate.
+La [procedura del client HTTP v2](src/client/esp32-s3-eye-multiclient/README.md)
+richiede backup e verifica della flash della specifica scheda prima del caricamento.
+La chiusura della prova zlib del 29 ottobre ha verificato il ripristino del firmware
+preesistente sulla scheda `24:EC:4A:0E:B7:6C`; non è una prova del nuovo client v2.
 
-La scelta della rappresentazione e del codec deve confrontare tre aspetti insieme:
-**byte, costo sul dispositivo e fedeltà delle predizioni**. Da questi dipenderà
-l'integrazione in un solo percorso SCIoT e l'eventuale approfondimento DPCM/dead-zone.
+## 8. Dove ritrovare il lavoro e stato Git
 
-## 8. Dove ritrovare il lavoro e cosa è salvato in Git
-
-| Per orientarsi | File |
+| Per orientarsi | Documento |
 |---|---|
-| Recap del percorso e delle conclusioni | Questo documento |
-| Cronologia dettagliata delle attività | [DIARIO_TIROCINIO.md](DIARIO_TIROCINIO.md) |
-| Concetti, metodi, risultati e limiti | [ANALISI_COMPRESSIONE_ATTIVAZIONI.md](ANALISI_COMPRESSIONE_ATTIVAZIONI.md) |
-| Prossimi controlli e contesto del tirocinio | [SCALETTA_TIROCINIO.md](SCALETTA_TIROCINIO.md) |
-| Comandi e archivi sperimentali | [README degli esperimenti](experiments/activation_compression/README.md) |
-| Dataset pubblici e prove eseguibili senza ESP32 | [TEST_SU_PC.md](TEST_SU_PC.md) |
+| Cronologia e decisioni | [Diario](DIARIO_TIROCINIO.md) |
+| Attività aperte e priorità | [Scaletta](SCALETTA_TIROCINIO.md) |
+| Metodi e risultati storici PC | [Analisi compressione](ANALISI_COMPRESSIONE_ATTIVAZIONI.md) |
+| FLOAT32 / INT8 ESP-NN | [Rapporto 27 ottobre](experiments/esp32_representation_benchmark/espnn_2026-10-27/report.md) |
+| INT8 raw / zlib e ripristino | [Rapporto 28–29 ottobre](experiments/esp32_int8_compression_benchmark/2026-10-28/report.md) |
+| Multi-client PC/build | [Verifica 28 ottobre](experiments/multiclient_validation/2026-10-28/README.md) |
+| API HTTP v2 e firmware | [Server](src/server/multiclient/README.md), [client](src/client/esp32-s3-eye-multiclient/README.md) |
+| Tentativo EON e decisione | [README](experiments/eon_prefix_benchmark/README.md), [stato del servizio](experiments/eon_prefix_benchmark/STATUS.json) |
+| Dati, modelli e istruzioni PC | [Test PC](TEST_SU_PC.md), [esperimenti](experiments/activation_compression/README.md) |
 
-Il fork configurato come `origin` è `hypercu8e/SCIoT`; il progetto originale
-configurato come `upstream` è `UBICO/SCIoT`. La base locale del lavoro è
-`0cfeb9b`; il ramo locale `main`, al momento del recap, è a `4f35e1b`.
-Il remoto non è stato interrogato durante questa ricostruzione.
+Controllo locale del 29 ottobre: ramo `main`, HEAD `ff0ae88`; `origin` è
+`git@github.com:hypercu8e/SCIoT.git`, `upstream` è `git@github.com:UBICO/SCIoT.git`.
+Questi sono riferimenti locali: non è stata verificata la corrispondenza coi remoti.
+I vecchi esperimenti TCP/INT8/16×8 risultano già tracciati; l'elenco precedente
+che li indicava tutti ancora fuori dai commit era obsoleto.
 
-La cronologia aggiunta comprende il prototipo e la baseline (`d38a489`),
-la documentazione (`087fef9`), la prova con perdita (`78eac02`), l'analisi firmware
-(`c6f168d`), le proposte di tesi (`508de5a`) e il diario (`4f35e1b`). I primi due
-commit sono del 17 ottobre, i successivi del 18: la data del commit può differire
-da quella dell'attività o dell'esperimento descritto.
+Le nuove cartelle ESP-NN, compressione INT8, EON e multi-client, insieme alle
+relative modifiche di codice/documentazione, sono ancora nel working tree e in
+parte non tracciate. Nessun commit, staging, push o sincronizzazione è stato
+eseguito durante questo allineamento. Lo stato operativo si legge con `git status`.
 
-**Il lavoro recente non è tutto nei commit:** TCP, INT8, 16×8, i relativi script
-e archivi, questo recap e ulteriori aggiornamenti ai documenti sono ancora nella
-cartella di lavoro. `git status` identifica lo stato attuale. La cache `results/`
-e l'ambiente `.venv` sono ignorati da Git: i report permanenti contengono hash
-e istruzioni, ma non sostituiscono automaticamente tutti gli input necessari.
-L'archivio di trasferimento del 17 ottobre è una copia storica e non include
-automaticamente il lavoro successivo.
+I report permanenti conservano risultati e hash; i log grezzi, gli input, le cache,
+i firmware e i backup restano nelle cartelle ignorate indicate nei README.
+Credenziali e chiavi API sono escluse da Git; firmware e backup possono contenerle.
+Trasferire soltanto i sorgenti non trasferisce automaticamente questi dati o
+l'ambiente `.venv`. L'archivio del 17 ottobre è una copia storica: non contiene
+implicitamente il lavoro successivo. Conservare i dati locali necessari a riprodurre
+i report insieme ai rispettivi manifest, seguendo le istruzioni di ogni esperimento.

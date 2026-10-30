@@ -1,67 +1,36 @@
 # Tirocinio SCIoT — scaletta e contesto per ripartire
 
-Aggiornato il 18 ottobre 2026, con baseline senza perdita del 15 ottobre, prima
-prova con perdita del 17, prova TCP e verifiche INT8/16×8 su PC del 18.
-Cronologia: [diario](DIARIO_TIROCINIO.md).
+Aggiornato il 29 ottobre 2026. Cronologia: [diario](DIARIO_TIROCINIO.md).
+Risultati e stato generale: [recap](RECAP_LAVORO_FORK.md).
 
 ## Punto di ripresa
 
-**19 ottobre — correzioni firmware:** applicati ai tre client float32 i controlli
-di interprete/tensori/allocazioni e la serializzazione condivisa. Nei template
-il buffer messaggio riserva 460.992 byte in meno. Build HTTP/MQTT/WebSocket riusciti;
-1.170 esecuzioni di layer Micro sul PC, 33.363.072 valori identici al riferimento
-TFLite e pacchetti verificati col parser server. [Report](experiments/firmware_fixes_2026-10-19/README.md).
-Questi test non certificano camera, rete o prestazioni ESP32. Per lo stato attuale
-dei firmware questa nota aggiorna i riscontri storici ancora elencati più sotto.
+- **Baseline fisica disponibile:** INT8 con ESP-NN, taglio `block_2_add`, una
+  ESP32-S3-EYE e suffisso HTTP sul PC. Il [confronto del 27 ottobre](experiments/esp32_representation_benchmark/espnn_2026-10-27/report.md)
+  misura meno traffico e meno attesa rispetto a FLOAT32 nella configurazione provata.
+- **Zlib già provato sul target:** il [confronto del 28–29 ottobre](experiments/esp32_int8_compression_benchmark/2026-10-28/report.md)
+  risparmia circa 14,3% sul payload dei tre ingressi canonici, ma aumenta la mediana
+  del tempo completo. Con camera il vantaggio temporale non è uniforme. I punteggi
+  coincidono esattamente; INT8 raw resta il controllo.
+- **Multi-client implementato, hardware da validare:** server HTTP v2, firmware
+  dedicato, dieci test e prove con client simulati fino a 32 identità sul PC.
+  [Report PC/build](experiments/multiclient_validation/2026-10-28/README.md).
+- **EON accantonato:** upload del prefisso riuscito, compilazione rifiutata per
+  il piano del progetto sui modelli importati; nessuna misura hardware EON.
+  [Esito persistente](experiments/eon_prefix_benchmark/STATUS.json).
+- **Qualità ancora da consolidare:** 84 foto annotate valutate senza distinguere
+  la classe; restano ordine dei canali, dati indipendenti e scene rappresentative.
 
-**19 ottobre — preparazione in attesa della scheda:** l'utente chiederà al
-professore una ESP32-S3-EYE in prestito il 20 ottobre; se non disponibile valuterà
-l'acquisto. Nel frattempo completata la [preparazione INT8](experiments/activation_compression/esp32_prep_2026-10-19/README.md):
-taglio del binario già quantizzato, equivalenza byte per byte sui 146 frame,
-tre vettori fissi e tre firmware compilati. [Guida hardware](experiments/esp32_int8_firmware/README.md).
-Prossimo passo: caricare `prefix`, poi `full` e `suffix`, verificare i log e misurare
-memoria/tempi. Non sono ancora risultati hardware o integrazione SCIoT.
-Nel runtime TensorFlowLite_ESP32 1.0.0 manca il percorso INT16 della depthwise
-convolution necessario al nostro 16×8; occorre aggiornare/estendere il runtime
-prima di provare quella variante. INT8 resta da validare sulla scheda.
+Prossima verifica: HTTP v2 con una scheda e client simulati, poi due ESP32 reali,
+almeno 1.000 richieste per scheda, riavvio di A mentre B continua e prova di un'ora.
+Seguire il [README del firmware](src/client/esp32-s3-eye-multiclient/README.md),
+con backup verificato della specifica scheda e coordinamento sull'uso dell'hardware.
+La chiusura del test di compressione del 29 ottobre ha verificato il ripristino
+del firmware preesistente: non è una validazione del client HTTP v2.
 
-Per iniziare dalla visione d'insieme: [recap del lavoro sul fork](RECAP_LAVORO_FORK.md).
-
-La trascrizione ragionata di spiegazioni, scelte, prove e limiti della chat è in
-[ANALISI_COMPRESSIONE_ATTIVAZIONI.md](ANALISI_COMPRESSIONE_ATTIVAZIONI.md), con le
-istruzioni per trasferire il lavoro su un'altra macchina.
-
-È stato scelto un FOMO pubblico come candidato sperimentale, configurato l'ambiente
-e verificato uno split Keras su PC. Il primo confronto senza perdita è completato:
-XOR con riordino dei byte e zlib riduce i byte del 14,96% rispetto al raw a 5 fps;
-il beneficio temporale rispetto al completo con lo stesso riordino è 5,71%, e
-scende a 2,78% a 1 fps. Sono misure su un video e uno split, non su ESP32 o rete reale.
-
-È ora completata anche una prima prova con perdita controllata a griglia uniforme:
-a 5 fps, passo 0,001, risparmio sul raw del 40,61% per l'indipendente e del 48,66%
-per il temporale; vantaggio temporale aggiuntivo 13,57% a identica ricostruzione.
-Nessuna cella cambiata a soglia 0,5 sul video, senza una valutazione su annotazioni.
-Report: [lossy_2026-10-17](experiments/activation_compression/lossy_2026-10-17/README.md).
-La convenienza sull'hardware resta aperta.
-
-Completata il 18 ottobre anche la [prova client–server TCP su PC](experiments/activation_compression/tcp_2026-10-18/README.md):
-replay delle attivazioni, suffisso Keras in processo separato, raw/indipendente/
-temporale e nuova sessione dopo riconnessione. Non è integrazione SCIoT né replica
-del DPCM/dead-zone di Shiba et al.; sul loopback si risparmiano byte ma aumentano
-i tempi. Il vantaggio temporale sull'indipendente è 13,56% nel flusso in salita.
-
-Completata anche la [verifica INT8 su PC](experiments/activation_compression/int8_2026-10-18/README.md):
-file TFLite da 84.292 a 57.088 byte, conversione integer-only ed esecuzione desktop
-riuscite. Su 98 frame non usati nei 48 di calibrazione cambiano 25 celle a soglia
-0,5 (11 perse, 14 introdotte; 99 celle oggetto nel riferimento). Non è una
-configurazione approvata per qualità o hardware: verificare la calibrazione con
-input rappresentativi separati dalla valutazione. Nessun riaddestramento richiesto.
-
-Il successivo [confronto 16×8](experiments/activation_compression/16x8_2026-10-18/README.md)
-usa la stessa partizione e gli stessi binari di controllo: 18 celle cambiate a
-soglia 0,5, 7 perse e 11 introdotte; file 69.056 byte e confine 9.216 byte.
-Migliore fedeltà nelle metriche riportate, con dimensioni maggiori dell'INT8.
-Compatibilità INT16 del runtime Micro e costi sulla scheda ancora da verificare.
+Le sezioni di fonti riportano anche riscontri storici; le checklist qui sotto
+separano ciò che è completato da ciò che manca. Nessun commit eseguito durante
+l'allineamento documentale; dati locali e stato Git sono descritti nel recap.
 
 ## Contesto
 
@@ -75,7 +44,7 @@ Compatibilità INT16 del runtime Micro e costi sulla scheda ancora da verificare
 
 Nel flusso esaminato, l'ESP32 esegue i primi layer del modello e invia al server l'intero tensore di attivazioni al punto di split. Il server completa l'inferenza.
 
-La proposta è conservare un riferimento condiviso tra client e server e inviare una codifica compressa delle differenze delle attivazioni tra frame consecutivi. Il server ricostruisce il tensore corrente prima di eseguire i layer rimanenti. Servono invii completi per inizializzare e ripristinare il riferimento.
+Una pista successiva resta conservare un riferimento condiviso tra client e server e inviare una codifica compressa delle differenze delle attivazioni tra frame consecutivi. Il server ricostruisce il tensore corrente prima di eseguire i layer rimanenti. Servono invii completi per inizializzare e ripristinare il riferimento.
 
 **Domanda:** il risparmio di traffico compensa il costo aggiuntivo di calcolo e memoria sull'ESP32, mantenendo risultati di detection adeguati?
 
@@ -89,7 +58,7 @@ Distinzioni già chiarite:
 
 ## Fonti e verifiche già svolte
 
-### Repository
+### Repository — riscontri storici del 15–18 ottobre
 
 Checkout esaminato: `main`, commit `0cfeb9b08ca20dadc754cb38a5201c60991066ba`. La corrispondenza col ramo pubblico era stata verificata durante l'analisi precedente; ricontrollarla prima di assumere che non siano arrivati aggiornamenti.
 
@@ -100,9 +69,9 @@ Checkout esaminato: `main`, commit `0cfeb9b08ca20dadc754cb38a5201c60991066ba`. L
 - `src/client/python/` contiene soltanto un README, non un client eseguibile.
 - Il README prevede l'importazione di un modello Keras `.h5`; `model_split.py` genera sott modelli TFLite e header C.
 - Il supporto dichiarato a TensorFlow Lite non garantisce la compatibilità di qualunque architettura, operazione o punto di split.
-- Non è stata eseguita alcuna prova su ESP32. È stato invece configurato `.venv` con Python 3.11.17, TensorFlow/Keras 2.15.0, NumPy 1.26.4 e h5py 3.11.0, installando le dipendenze autorizzate. Sono state eseguite inferenze complete e con split in Keras sul PC, e il confronto dei codec con sei test superati. I tempi del PC non emulano l'ESP32.
+- Durante questa prima ispezione non erano state eseguite prove su ESP32. È stato invece configurato `.venv` con Python 3.11.17, TensorFlow/Keras 2.15.0, NumPy 1.26.4 e h5py 3.11.0, installando le dipendenze autorizzate. Sono state eseguite inferenze complete e con split in Keras sul PC, e il confronto dei codec con sei test superati. I tempi del PC non emulano l'ESP32.
 
-### Esperimento isolato completato su PC
+### Esperimento storico isolato completato su PC
 
 - Script e istruzioni: [experiments/activation_compression/README.md](experiments/activation_compression/README.md).
 - Modello candidato: [Beer vs. cans FOMO](https://studio.edgeimpulse.com/public/89078/latest), `.h5` scaricato dall'utente. Nessun riaddestramento effettuato. L'ordine delle etichette dell'esportazione resta da confermare.
@@ -112,7 +81,7 @@ Checkout esaminato: `main`, commit `0cfeb9b08ca20dadc754cb38a5201c60991066ba`. L
 - Prima parte seguita dalla seconda parte e modello completo: differenza massima osservata 0,0 sui 146 frame.
 - Il confronto senza perdita ricostruisce tutti i tensori byte per byte. Include header, checksum, primo completo, rinnovi ogni 5 secondi e ritorno al completo quando il delta è più grande.
 - I risultati contano il flusso applicativo sperimentale; escludono overhead e comportamento effettivo dei trasporti di SCIoT. Il codec non è integrato nel framework.
-- I file generati in `results/` sono ignorati da Git. Una copia stabile di report, JSON, CSV, metadati e lock è in [baseline_2026-10-15](experiments/activation_compression/baseline_2026-10-15/README.md). Baseline e documenti iniziali risultano nei commit locali `d38a489` e `087fef9`; la prova con perdita è nel commit locale `78eac02`. La prova TCP del 18 ottobre e gli ultimi aggiornamenti documentali sono modifiche locali non ancora in un commit. La corrispondenza col remoto non è stata verificata.
+- I file generati in `results/` sono ignorati da Git. Una copia stabile di report, JSON, CSV, metadati e lock è in [baseline_2026-10-15](experiments/activation_compression/baseline_2026-10-15/README.md). Baseline e documenti iniziali risultano nei commit locali `d38a489` e `087fef9`; la prova con perdita è nel commit locale `78eac02`. TCP e quantizzazione PC risultano successivamente tracciati nella cronologia locale; i nuovi lavori hardware e multi-client sono ancora nel working tree. Lo stato corrente è nella sezione Git del recap; la corrispondenza col remoto non è stata verificata.
 
 File utili:
 
@@ -175,23 +144,25 @@ L'elenco e diversi contenuti delle issue sono già stati consultati; l'analisi s
 ### 3. Scegliere un modello con classi e dati noti
 
 - [x] Selezionare un progetto FOMO pubblico come candidato per la prima prova: Beer vs. cans. Non è una scelta definitiva per l'applicazione su hardware.
-- [ ] Conservare etichette, provenienza dei dati, configurazione, preparazione degli input e versione del modello.
-- [ ] Verificare presto esportazione e importazione con SCIoT, prima di investire nella raccolta di un dataset esteso.
+- [x] Conservare modello, provenienza dei dati, configurazione, preprocessing, manifest e hash.
+- [ ] Confermare l’associazione dei canali alle classi dell’H5 esportato.
+- [x] Verificare il candidato TFLite INT8 nel percorso sperimentale ESP-NN/HTTP.
+- [ ] Validare sulla scheda il nuovo percorso HTTP v2 e confermare la preparazione degli input prima di ampliare il dataset.
 
-**Stato:** modello pubblico recuperato e caricato in Keras. Non abbiamo addestrato un nuovo modello né completato l'integrazione del candidato nel firmware/server SCIoT. Edge Impulse serve anche ad addestrare ed esportare; lo split distribuisce l'esecuzione del modello già addestrato.
+**Stato:** candidato recuperato senza nuovo addestramento, usato nei benchmark fisici ESP-NN e nel nuovo server/client HTTP v2. La validazione hardware di v2 resta aperta. Edge Impulse serve anche ad addestrare ed esportare; lo split distribuisce l'esecuzione del modello già addestrato.
 
 ### 4. Ottenere un'inferenza completa sul PC
 
 - [x] Preparare l'ambiente compatibile col progetto, verificando dipendenze e versioni.
-- [x] Elaborare un'immagine nota e spiegare la griglia FOMO. Su `canCoke.jpeg` non è stata ottenuta una rilevazione con soglia 0,5; non è una valutazione complessiva dell'accuratezza.
+- [x] Elaborare un'immagine nota e spiegare la griglia FOMO. Nella prima prova su `canCoke.jpeg` non è stata ottenuta una rilevazione con soglia 0,5; non è una valutazione complessiva dell'accuratezza.
 - [x] Verificare dimensioni, canali, normalizzazione e tipo numerico usati nella prova. Parità esatta con Studio e ordine delle etichette restano da confermare.
 
 ### 5. Riprodurre lo split sul PC
 
 - [x] Scegliere un punto compatibile con le dipendenze del grafo: `block_2_add`, un tensore di confine.
-- [x] Eseguire le due parti in Keras sul PC e confrontarle con l'inferenza completa su 146 frame: differenza massima 0,0. Prova TFLite/distribuita ancora da fare.
+- [x] Eseguire le due parti in Keras sul PC e confrontarle con l'inferenza completa su 146 frame: differenza massima 0,0. Successivamente verificati split TFLite INT8 e percorso fisico ESP-NN/HTTP.
 - [x] Realizzare un client Python sperimentale: riproduce le attivazioni registrate; non esegue camera o prefisso della rete. Il client degli autori non è stato recuperato.
-- [x] Verificare lo scambio TCP col ricevitore separato e l'inferenza del suffisso Keras sul PC, inclusa nuova sessione dopo riconnessione. Integrazione col server SCIoT e hardware ancora da fare.
+- [x] Verificare lo scambio TCP col ricevitore separato e l'inferenza del suffisso Keras sul PC, inclusa nuova sessione dopo riconnessione. Successivamente verificato il percorso sperimentale ESP32/HTTP; il vecchio endpoint SCIoT e HTTP v2 multi-client hanno verifiche distinte.
 
 ### 6. Preparare le sequenze di valutazione
 
@@ -209,11 +180,11 @@ L'elenco e diversi contenuti delle issue sono già stati consultati; l'analisi s
 ### 8. Confrontare le strategie di trasmissione
 
 - [x] Confrontare su PC tensore completo, compressione indipendente e codifiche differenziali senza perdita, con e senza riordino dei byte.
-- [x] Contare i byte dei messaggi sperimentali, inclusi header e rinnovi; misurare tempi del codec sul PC e identificare il riferimento minimo da conservare. Picco RAM, tempi ESP32 e traffico di rete reale restano da misurare.
+- [x] Contare i byte dei messaggi sperimentali, inclusi header e rinnovi; misurare tempi del codec sul PC e identificare il riferimento minimo da conservare. Tempi e traffico HTTP sul target sono ora misurati per FLOAT32/INT8 e zlib INT8; il picco RAM complessivo resta aperto.
 - [x] Verificare nel prototipo sequenze/riferimenti, checksum, rifiuto di delta mancanti e ripristino tramite completo; sei test superati.
 - [x] Definire nei prototipi riferimento condiviso, sequenze, invii completi e recupero dopo aggiornamenti mancanti. Un cambio di split richiede una nuova sessione; integrazione nel framework ancora da fare.
 - [x] Provare una prima perdita controllata: passi da 0,0001 a 1, quantizzazione uniforme delle attivazioni, confronto indipendente/temporale a ricostruzione identica e riferimenti coerenti. Misurati byte, errore su attivazioni/uscite e cambiamenti delle celle.
-- [x] Distinguere fedeltà alle uscite originali da accuratezza su annotazioni; la seconda resta da valutare con un dataset adatto.
+- [x] Distinguere fedeltà alle uscite originali da accuratezza su annotazioni; il primo conteggio su 84 foto annotate ignora la classe e non certifica la qualità generale.
 - [x] Verificare i due prototipi con 15 test, inclusi limite d'errore, riferimenti, overflow, corruzione e recupero.
 - [x] Confrontare i tre metodi via TCP loopback con suffisso Keras in un processo
   separato, rinnovo della sessione dopo riconnessione e 20 test complessivi.
@@ -228,10 +199,12 @@ L'elenco e diversi contenuti delle issue sono già stati consultati; l'analisi s
   binari di controllo invariati e ricaricamento dei risultati. 23 test senza socket.
 - [ ] Verificare la calibrazione su input rappresentativi aggiuntivi, con
   valutazione separata: la prima variante INT8 modifica 25 celle a soglia 0,5.
-- [ ] Verificare sul target operatori/runtime, memoria e tempo della variante
-  scelta, incluse le varianti INT16 degli operatori. Esportare e verificare uno
-  split quantizzato con scale/zero point coerenti; i byte osservati nel modello
-  intero non sono un payload SCIoT integrato.
+- [x] Verificare INT8 con ESP-NN sul target, split e parametri quantizzati coerenti,
+  tempi completi, arene e traffico HTTP sperimentale (27 ottobre).
+- [x] Confrontare raw e zlib indipendente INT8 sul target con ricostruzione esatta
+  e costo del codec incluso (28–29 ottobre).
+- [ ] Misurare picco RAM complessivo ed energia, se richiesti dalla domanda di ricerca.
+- [ ] Verificare runtime e costi della variante 16×8 sulla scheda prima di adottarla.
 - [ ] Spiegare con un esempio e specificare il nuovo codec DPCM: riferimento,
   quantizzazione del residuo, parametri e rinnovi; poi aggiungere dead-zone come
   variante separata. Non ancora implementato.
@@ -240,26 +213,21 @@ L'elenco e diversi contenuti delle issue sono già stati consultati; l'analisi s
 
 ### 9. Decidere se proseguire e verificare su hardware
 
-- [ ] Se i risultati preliminari giustificano il lavoro, portare la soluzione su ESP32 e misurare tempi, memoria e comportamento della rete reali.
+- [x] Misurare sulla scheda INT8 ESP-NN e zlib indipendente, con camera e rete reali. La compressione temporale non è inclusa in questa verifica.
 - [ ] Definire quando conviene tornare al tensore completo.
-- [ ] Se i benefici sono insufficienti, documentare il risultato e valutare altre attività, inclusa la pista già annotata in `IDEE_DA_ESPLORARE.md`.
+- [x] Documentare il compromesso osservato con zlib: meno byte, più attesa sulle immagini identiche.
+- [x] Implementare HTTP v2 con identità/sessioni, coda limitata e verifiche PC.
+- [ ] Validare HTTP v2 con una e poi due ESP32; riconnessioni, 1.000 richieste per scheda e stabilità di un’ora.
+- [ ] Valutare altre piste, inclusa la selezione dei frame in `IDEE_DA_ESPLORARE.md`, dopo aver fissato i controlli.
 
 ## Prossimo traguardo
 
-**Verificare il supporto INT8/INT16 nel runtime Micro effettivo prima di scegliere
-il porting e misurare memoria/tempo sulla scheda.**
+**Chiudere la validazione hardware multi-client mantenendo INT8 raw con ESP-NN
+come controllo**, seguendo la procedura del client v2. Le prove PC e la build
+sono già disponibili; non dimostrano il comportamento di due schede su Wi-Fi.
 
-Le sezioni [9.5](ANALISI_COMPRESSIONE_ATTIVAZIONI.md#95-verifica-int8-del-modello--18-ottobre)
-e [9.6](ANALISI_COMPRESSIONE_ATTIVAZIONI.md)
-documentano le prove completate: il 16×8 migliora la fedeltà su questo campione,
-ma nessuna qualità è ancora approvata. Ampliare calibrazione e valutazione su
-sequenze distinte. Il modello rimane quello dato; calibrare non richiede
-annotazioni, mentre l'accuratezza reale le richiede. Evitare di cercare parametri
-sul campione usato per valutare.
-
-Poi verificare esecuzione sul target e split con parametri coerenti; tempi e
-memoria ESP32 vanno misurati. Conservare float32 come controllo. DPCM/dead-zone
-resta un approfondimento successivo: chiarire intervalli, precisione e dead-zone,
-perché il solo cambio d'ordine con passo fisso può lasciare quasi uguali le
-ricostruzioni. Confrontare il vantaggio temporale sulla rappresentazione scelta,
-senza trasferire automaticamente i precedenti numeri float32 a INT8 o 16×8.
+In parallelo confermare classi e preprocessing e ampliare la qualità su dati
+indipendenti, separando calibrazione e valutazione. Usare byte, tempo completo,
+memoria e riconoscimenti utili come criteri distinti. Dopo questa base, scegliere
+un confronto fra temporale INT8, altri tagli o 16×8; specificare DPCM/dead-zone
+prima di implementarlo. EON non è una dipendenza del percorso attuale.

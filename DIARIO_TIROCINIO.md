@@ -1,6 +1,6 @@
 # Diario del tirocinio SCIoT
 
-Aggiornato il 20 ottobre 2026. Titolo del tirocinio: **Multi Device Split Computing**.
+Aggiornato il 29 ottobre 2026. Titolo del tirocinio: **Multi Device Split Computing**.
 Tirocinio interno da 300 ore, con possibile sviluppo in tesi triennale in Informatica
 a UNIMORE, referente prof. Luca Bedogni.
 
@@ -12,6 +12,8 @@ documenti locali e delle prove conservate. La data amministrativa esatta di iniz
 e le ore effettivamente svolte non sono riportate nelle fonti disponibili: non
 vengono inventate. Le prime attività tecniche documentate risalgono al 15 ottobre.
 Non è un registro ufficiale delle presenze.
+Le sezioni datate descrivono le evidenze disponibili in quel momento; lo stato
+attuale e le attività successive sono riportati in fondo al documento.
 
 ## Obiettivo iniziale
 
@@ -491,32 +493,120 @@ la collega alle esigenze di rete e multi-client, ma non è un argomento approvat
 Nessun modello addestrato, nuovo benchmark o risultato hardware in questa attività.
 I PDF e le versioni sono descritti nell'[inventario](papers/README.md).
 
-## Stato e prossime decisioni
+## 17. FLOAT32 e INT8 con ESP-NN sulla scheda — 27 ottobre 2026
 
-- Studio iniziale, modello candidato, split Keras e baseline senza perdita completati.
-- Esperimento con perdita definito, implementato ed eseguito; risultati e
-  interpretazione conservati insieme al report del 17 ottobre.
-- Prova TCP con suffisso Keras in processo separato completata sul PC;
-  resta separata dal protocollo SCIoT. Replica DPCM/dead-zone ancora da fare.
-- Prima conversione INT8 e confronto con TFLite float32 completati sul PC;
-  fedeltà da valutare, nessuna qualità accettabile o compatibilità ESP32 approvata.
-- Confronto 16×8 completato sugli stessi dati: fedeltà migliore nelle metriche
-  riportate, file e attivazioni più grandi dell'INT8; costi sul target ancora aperti.
-- Mancano dataset annotato e più sequenze/split per generalizzare i risultati.
-- Nessun riaddestramento, porting del codec nel firmware, benchmark su ESP32,
-  emulazione prestazionale, misura di energia o prova di rete reale.
-- L'eventuale porting va deciso confrontando il beneficio temporale con la
-  compressione indipendente alla stessa qualità e misurandone il costo sul dispositivo.
-- Prossimo passo: esplicitare il riferimento numerico INT8 prima del confronto
-  hardware: i vettori desktop archiviati differiscono da Micro, mentre i kernel
-  di riferimento coincidono nei casi provati. Verificare poi allocazione e
-  inferenza sul target e misurare memoria/tempo. Per INT16 aggiornare o
-  estendere il runtime che manca della depthwise INT16. Ampliare calibrazione
-  e valutazione su sequenze distinte, senza cercare parametri sul test.
-  Conservare float32 come controllo.
-- DPCM/dead-zone rimane un confronto successivo da specificare; misurare il
-  beneficio temporale sulla rappresentazione scelta senza estendere i numeri
-  float32 alle nuove varianti INT8 o 16×8.
+Eseguito un confronto fisico su una ESP32-S3-EYE, CPU 240 MHz, arene in PSRAM,
+con prefisso sul dispositivo e suffisso sul PC via HTTP sperimentale. Stesso
+FOMO candidato 96×96 in grigio e taglio `block_2_add`. INT8 comprende pesi e
+attivazioni; le chiamate ai kernel ESP32-S3 sono verificate nel firmware.
+Due sessioni complete, 816 richieste validate, incluse immagini identiche,
+84 foto annotate, camera alternata e sequenze continue.
 
-Per riprendere: [istruzioni esperimenti](experiments/activation_compression/README.md)
-e [scaletta aggiornata](SCALETTA_TIROCINIO.md).
+Le attivazioni passano da 18.432 a 4.608 byte (-75%); lo scambio HTTP completo
+per immagine scende da 20.647 a 6.822 byte (circa -67%). Sui tre ingressi fissi,
+la mediana del tempo completo è circa 860 ms FLOAT32 contro 160 ms INT8.
+Nelle sequenze camera: circa 1,1 contro 4,9–5,5 immagini/s. Questi numeri
+riguardano questa configurazione, non il vecchio endpoint SCIoT o due schede.
+
+Sulle 84 foto, con matching che ignora la classe, FLOAT32 trova 111/112 oggetti
+con 7 falsi positivi; INT8 110/112 con 5 falsi positivi. L'ordine beer/can dei
+canali non è confermato e l'indipendenza dal training dell'H5 non è dimostrata.
+Non si generalizza il risultato a nuove scene. L'ingresso viene ripristinato
+prima di ogni Invoke perché il runtime può riutilizzarne il buffer.
+
+**Artefatti:** [rapporto](experiments/esp32_representation_benchmark/espnn_2026-10-27/report.md),
+[metodo e riproduzione](experiments/esp32_representation_benchmark/README.md).
+Il firmware originale è stato ripristinato e verificato dopo la prova.
+
+## 18. Valutazione EON e decisione sul runtime — 27–28 ottobre 2026
+
+Preparato il prefisso INT8 congelato, senza training o ricalibrazione. Dopo un
+primo rifiuto per il ruolo della API key, upload e configurazione freeform sono
+riusciti. La compilazione EON ha restituito `enterprise_required_for_imported_model`:
+nel progetto usato l'accesso EON per modelli importati/BYOM richiede Enterprise.
+È il risultato di questo tentativo, non una dichiarazione generale sui prezzi
+né un'incompatibilità tecnica dimostrata del modello.
+
+Non sono state ottenute librerie EON, build, prove hardware o misure prestazionali.
+Decisione: accantonare EON come dipendenza e continuare con TFLite Micro + ESP-NN,
+già verificato sulla scheda. Nessun piano a pagamento attivato e nessun modello
+riaddestrato per aggirare il vincolo.
+
+**Artefatti:** [stato e istruzioni](experiments/eon_prefix_benchmark/README.md),
+[risposta persistente del servizio](experiments/eon_prefix_benchmark/STATUS.json).
+
+## 19. Servizio HTTP v2 multi-client — verifica PC del 28 ottobre 2026
+
+Implementati server `src/server/multiclient/`, firmware ESP32 dedicato e selezione
+`--http-v2` nel launcher. Il servizio distingue client, sessione e richiesta;
+consente una richiesta pendente per dispositivo, usa coda FIFO limitata e un solo
+worker di inferenza. Sono espliciti rifiuti, scadenze, sostituzione delle sessioni
+e gestione dei completamenti tardivi. Il percorso legacy resta distinto.
+
+La suite registra 10 test passati. La matrice con 1/2/4/8/16/32 client simulati
+sul loopback produce 1.890 tentativi, 1.743 completamenti corretti e 147 rifiuti
+429, senza altri errori. In una prova di circa 60 secondi con due client a 20
+richieste/s ciascuno: 2.402 completamenti corretti. Queste sono verifiche PC,
+non 32 flussi video su Wi-Fi né una misura stabile della capacità massima.
+
+Build del firmware riuscita: 51.540 byte di RAM statica e 1.196.518 byte di flash,
+che non sono picchi RAM misurati sulla scheda. Nessuna flash o prova hardware
+multi-client è stata eseguita in questa attività. Restano prima una scheda con
+client simulati, poi due ESP32 con almeno 1.000 richieste ciascuna, riavvio di A
+mentre B continua e verifica di stabilità di un'ora.
+
+**Artefatti:** [report PC/build](experiments/multiclient_validation/2026-10-28/README.md),
+[server e protocollo](src/server/multiclient/README.md),
+[firmware e procedura hardware](src/client/esp32-s3-eye-multiclient/README.md).
+
+## 20. INT8 non compresso contro zlib — 28 ottobre, chiusura 29 ottobre 2026
+
+Implementato un esperimento separato con lo stesso prefisso INT8 ESP-NN e un
+solo interprete: invio raw contro miniz 3.0.2, zlib livello 1, indipendente per
+ogni tensore. Nessuna compressione temporale, nuova quantizzazione o modifica
+del modello. Compressione e decompressione sono comprese nel tempo completo.
+Due sessioni, 816 richieste validate; quattro test del codec e protocollo passati.
+
+Sui tre ingressi canonici il payload mediano scende da 4.608 a 3.949 byte
+(-14,3%), lo scambio HTTP da 6.822 a 6.163 byte (circa -9,7%). La compressione
+richiede circa 6,8 ms. La mediana del ciclo cresce da 157,4 a 162,7 ms nella prima
+sessione e da 163,1 a 166,7 ms nella seconda. Con camera i tempi non indicano un
+vantaggio uniforme. Per questa configurazione il codec risparmia byte ma non
+mostra un miglioramento stabile della velocità; INT8 raw resta il controllo.
+
+Per ciascuna sessione, attivazioni e punteggi dei 87 ingressi fissi coincidono
+byte per byte fra le modalità. Anche le predizioni fra sessioni coincidono.
+Sulle 84 foto entrambe trovano 110 oggetti, ne mancano 2 e producono 5 falsi
+positivi, con il medesimo limite sul matching senza classe. Workspace del codec:
+319.296 byte, più buffer. Non è una misura del picco RAM dell'applicazione.
+
+Il 29 ottobre completato il ripristino: digest degli interi 8 MB confrontato col
+backup prima dell'avvio e log seriale del firmware `sciot_esp32_client 0.1.0`,
+modello `fomo_224`. Una prima lettura non coincideva dopo il riavvio: le differenze erano nei settori
+`0xb000` e `0xc000`, nell'area NVS. Il backup definitivo è stato letto e verificato
+mantenendo ferma l'applicazione fra le due operazioni.
+
+**Artefatti:** [rapporto](experiments/esp32_int8_compression_benchmark/2026-10-28/report.md),
+[verifiche e ripristino](experiments/esp32_int8_compression_benchmark/2026-10-28/verification.json),
+[metodo e comandi](experiments/esp32_int8_compression_benchmark/README.md).
+
+## Stato e prossime decisioni — 29 ottobre 2026
+
+- INT8 con ESP-NN è una baseline fisica favorevole nel modello/taglio/rete provati.
+  Le due schede sono disponibili; la validazione del servizio HTTP v2 con due
+  dispositivi reali resta da eseguire.
+- Zlib indipendente su INT8 risparmia byte ma non dà un vantaggio stabile di
+  velocità: mantenere INT8 raw come controllo per i prossimi confronti.
+- Confermare classi e preprocessing, usare scene indipendenti e più condizioni
+  di luce/distanza/occlusione. Le 84 foto non bastano ad approvare la qualità.
+- INT16/16×8 è stato verificato sul PC, non sulla scheda. Il limite della vecchia
+  libreria Arduino non dimostra un limite generale del target o del nuovo runtime.
+- Compressione temporale su INT8, DPCM/dead-zone, altri tagli, selezione dei frame
+  ed early exit restano esperimenti separati; l'early exit richiederebbe training.
+- Nessun riaddestramento, misura di energia o misura del picco RAM complessivo
+  dell'applicazione è documentato. EON è accantonato e non blocca il lavoro.
+- Il lavoro recente è locale e in parte non tracciato da Git; questo aggiornamento
+  allinea la documentazione senza creare commit o sincronizzare remoti.
+
+Per riprendere: [recap](RECAP_LAVORO_FORK.md), [scaletta](SCALETTA_TIROCINIO.md)
+e [archivi degli esperimenti](experiments/activation_compression/README.md).

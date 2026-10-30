@@ -11,8 +11,19 @@ il [diario del tirocinio](DIARIO_TIROCINIO.md).
 
 Per eseguire prove senza scheda o camera: [dati pubblici e test client–server sul PC](TEST_SU_PC.md).
 
-Per le prossime prove sulla scheda: [firmware di test INT8 per ESP32-S3-EYE](experiments/esp32_int8_firmware/README.md),
-con split verificato sul PC e tre versioni già compilate.
+Risultati e percorsi al 29 ottobre 2026:
+
+- [FLOAT32 / INT8 con ESP-NN su ESP32-S3-EYE](experiments/esp32_representation_benchmark/espnn_2026-10-27/report.md).
+- [INT8 raw / zlib senza perdita](experiments/esp32_int8_compression_benchmark/2026-10-28/report.md).
+- [HTTP v2 multi-client: test PC e build](experiments/multiclient_validation/2026-10-28/README.md),
+  [server](src/server/multiclient/README.md) e [firmware](src/client/esp32-s3-eye-multiclient/README.md).
+  La prova con due schede reali resta aperta.
+- [EON sul prefisso importato](experiments/eon_prefix_benchmark/README.md): tentativo
+  accantonato per il vincolo del piano del progetto; nessuna misura hardware EON.
+
+Le [prime preparazioni INT8 del 19 ottobre](experiments/esp32_int8_firmware/README.md)
+sono conservate come passaggio storico; le priorità attuali sono nella
+[scaletta](SCALETTA_TIROCINIO.md).
 
 I client originali includono anche [correzioni di interprete, buffer e messaggi](experiments/firmware_fixes_2026-10-19/README.md),
 verificate con test nativi sul PC e compilazione dei tre trasporti.

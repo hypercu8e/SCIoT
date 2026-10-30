@@ -1,5 +1,11 @@
 # SCIoT: spiegazione del repository e dei file
 
+**Contesto aggiornato al 29 ottobre 2026:** questa mappa descrive il checkout
+storico. Sono stati aggiunti benchmark fisici ESP-NN e zlib INT8 e un percorso
+HTTP v2 multi-client con test PC/build, ancora da validare con due schede.
+Per i risultati correnti e i nuovi percorsi leggere il [recap](RECAP_LAVORO_FORK.md).
+
+
 Documento salvato il 17 ottobre 2026. Riprende la spiegazione e l'analisi statica del checkout svolte il 15 ottobre 2026; non costituisce una nuova verifica di eventuali modifiche successive.
 
 L'analisi ha riguardato i sorgenti e la struttura dei modelli presenti. Non sono state eseguite inferenze o prove sulla scheda.

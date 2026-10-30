@@ -1,5 +1,12 @@
 # SCIoT: miglioramenti, supporto ad altre reti neurali e WebSocket
 
+**Stato al 29 ottobre 2026:** i riscontri e le proposte seguenti appartengono
+all'analisi iniziale. Correzioni dei firmware legacy, benchmark fisici ESP-NN/zlib
+e un percorso HTTP v2 multi-client sono stati sviluppati successivamente.
+Il multi-client ha verifiche PC/build, ancora senza prova con due ESP32.
+L'elenco aggiornato di attività completate e aperte è nel [recap](RECAP_LAVORO_FORK.md).
+
+
 Documento creato il 17 ottobre 2026 per raccogliere l'analisi discussa in chat il 15 ottobre 2026.
 
 **Obiettivo:** individuare come migliorare SCIoT e renderlo utilizzabile con reti che svolgono compiti diversi dalla rilevazione di oggetti con FOMO, approfondendo anche il suggerimento di usare WebSocket per la comunicazione.

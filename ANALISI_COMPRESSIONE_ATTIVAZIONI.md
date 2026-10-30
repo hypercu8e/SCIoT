@@ -9,6 +9,28 @@ Questo documento trascrive in forma ragionata le spiegazioni, le scelte, i risul
 e le domande ancora aperte della chat. Non è il verbale integrale dei messaggi.
 Serve a riprendere il lavoro su un'altra macchina senza dipendere dalla chat o da `/tmp`.
 
+## Stato aggiornato al 29 ottobre 2026
+
+Le sezioni 1–9 conservano spiegazioni e risultati storici del 15–18 ottobre.
+I loro limiti descrivono quelle prove, non lo stato attuale dell'intero progetto.
+Per cronologia e priorità correnti leggere [diario](DIARIO_TIROCINIO.md) e
+[recap](RECAP_LAVORO_FORK.md).
+
+- [FLOAT32 / INT8 con ESP-NN su una scheda](experiments/esp32_representation_benchmark/espnn_2026-10-27/report.md):
+  due sessioni, 816 richieste, attivazioni -75% e tempo completo favorevole a INT8
+  nel modello/taglio/rete provati. Primo conteggio su 84 foto annotate senza classe.
+- [Raw / zlib INT8 sulla scheda](experiments/esp32_int8_compression_benchmark/2026-10-28/report.md):
+  altre 816 richieste, ricostruzione esatta e -14,3% sul payload degli ingressi
+  canonici; circa 6,8 ms per comprimere e maggiore mediana del ciclo. Camera variabile.
+- [HTTP v2 multi-client](experiments/multiclient_validation/2026-10-28/README.md):
+  codice, test, carico PC e build disponibili; prove con due ESP32 ancora aperte.
+- [EON](experiments/eon_prefix_benchmark/README.md): compilazione del modello
+  importato rifiutata dal piano del progetto; accantonato come prerequisito.
+
+La compressione temporale INT8 e DPCM/dead-zone non sono stati provati sul target.
+L'integrazione dei codec con il nuovo HTTP v2 non è automatica. Picco RAM
+complessivo, energia e qualità su scene indipendenti rimangono da valutare.
+
 ## 1. Obiettivo e conclusione raggiunta
 
 Il tirocinio riguarda il **Multi Device Split Computing**. La prima direzione in
@@ -720,7 +742,7 @@ misura ESP32 o integrazione del protocollo quantizzato è stata eseguita.
 
 ### Documenti e risultati stabili
 
-- Questo documento: spiegazioni e stato dell'intera chat.
+- Questo documento: spiegazioni e risultati storici, con rimandi allo stato corrente.
 - [SCALETTA_TIROCINIO.md](SCALETTA_TIROCINIO.md): percorso di lavoro aggiornato.
 - [README dell'esperimento](experiments/activation_compression/README.md): script e comandi.
 - [Copia dei risultati del 15 ottobre](experiments/activation_compression/baseline_2026-10-15/README.md):
@@ -729,12 +751,12 @@ misura ESP32 o integrazione del protocollo quantizzato è stata eseguita.
 - [Prova TCP del 18 ottobre](experiments/activation_compression/tcp_2026-10-18/README.md):
   report, CSV, JSON, test e checksum; i valori sono una misura storica su PC.
 
-Al primo consolidamento del 17 ottobre questi file erano ancora locali. Ora la
-baseline e i documenti iniziali risultano nei commit locali `d38a489` e `087fef9`;
-la prova con perdita è nel commit locale `78eac02`. La prova TCP del 18 ottobre e
-questo aggiornamento documentale sono modifiche locali non ancora in un commit.
-Non è stata verificata la corrispondenza con il remoto. `results/` e il `uv.lock` della radice
-restano ignorati: i nuovi report stabili sono fuori da `results/`.
+Le baseline PC e i relativi esperimenti TCP/INT8/16×8 risultano già tracciati
+nella cronologia locale. Le nuove attività ESP-NN, zlib INT8, EON e multi-client
+sono nel working tree e in parte non tracciate. Per lo stato locale verificato
+al 29 ottobre vedere la [sezione Git del recap](RECAP_LAVORO_FORK.md#8-dove-ritrovare-il-lavoro-e-stato-git).
+Nessuna sincronizzazione col remoto o creazione di commit in questo allineamento.
+`results/`, credenziali e firmware restano esclusi come indicato nei README.
 
 La cartella `baseline_2026-10-15` conserva una copia del lock come
 `environment.uv.lock`, con un nome non escluso dal `.gitignore`. La copia conserva
@@ -781,18 +803,15 @@ copia storica e non include automaticamente gli aggiornamenti successivi.
 
 ### Punto esatto da cui riprendere
 
-1. Leggere le sezioni 9.2–9.6: TCP, paper, confronto DPCM proposto, INT8 e 16×8.
-2. Ricreare l'ambiente se necessario; eseguire i 23 test senza socket documentati
-   nell'archivio 16×8. I cinque test TCP aggiuntivi richiedono socket locali;
-   non sono stati rieseguiti durante le prove di quantizzazione del modello.
-3. Preservare le baseline; ogni nuova esecuzione deve identificare input e tempi.
-4. Verificare il supporto INT8/INT16 nel runtime Micro effettivo; il confronto
-   PC favorisce 16×8 in fedeltà, ma non ne dimostra la convenienza sulla scheda.
-5. Ampliare calibrazione e valutazione su sequenze distinte. Provare runtime e
-   split sul target con scala/zero point coerenti e misurare memoria/tempo.
-   Conservare float32 come controllo; nessuna qualità approvata per ora.
-6. Definire DPCM/dead-zone e confrontare byte ed errore sulla rappresentazione
-   scelta, distinguendo le misure PC, di rete e sulla scheda.
+1. Consultare [recap](RECAP_LAVORO_FORK.md) e [scaletta](SCALETTA_TIROCINIO.md).
+2. Preservare modelli, input e manifest delle baseline; seguire i comandi dello
+   specifico esperimento. Gli archivi vecchi non includono le attività successive.
+3. Validare HTTP v2 con una scheda e client PC, poi due schede, riavvii e stabilità.
+   [Procedura firmware](src/client/esp32-s3-eye-multiclient/README.md).
+4. Confermare classi e preprocessing e valutare scene indipendenti. Le misure
+   dei singoli punteggi e il matching senza classe non approvano la qualità generale.
+5. Tenere INT8 raw ESP-NN come controllo; scegliere poi temporale INT8, altri tagli
+   o 16×8. DPCM/dead-zone va specificato prima di implementarlo; EON è accantonato.
 
 ## Fonti consultate nella chat
 
