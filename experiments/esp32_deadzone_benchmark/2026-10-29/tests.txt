@@ -1,0 +1,14 @@
+test_actual_miniz_levels_and_repeated_reset (test_codec.CodecTests.test_actual_miniz_levels_and_repeated_reset) ... ok
+test_bounded_streams_and_header_and_payload (test_codec.CodecTests.test_bounded_streams_and_header_and_payload) ... ok
+test_deadzone_boundaries_and_rounding (test_codec.CodecTests.test_deadzone_boundaries_and_rounding) ... ok
+test_device_isolation_and_bounded_sessions (test_codec.CodecTests.test_device_isolation_and_bounded_sessions) ... ok
+test_diagnostic_does_not_change_reference_and_wrong_ref_is_rejected (test_codec.CodecTests.test_diagnostic_does_not_change_reference_and_wrong_ref_is_rejected) ... ok
+test_native_matches_decoder_all_modes_long_sequences (test_codec.CodecTests.test_native_matches_decoder_all_modes_long_sequences) ... ok
+test_real_hardware_activation_vectors (test_codec.CodecTests.test_real_hardware_activation_vectors) ... ok
+test_reject_corruption_missing_reference_and_transactional_state (test_codec.CodecTests.test_reject_corruption_missing_reference_and_transactional_state) ... ok
+test_zlib_bombs_truncation_concatenation_and_unknown_fields (test_codec.CodecTests.test_zlib_bombs_truncation_concatenation_and_unknown_fields) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.405s
+
+OK

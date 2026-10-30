@@ -1,0 +1,220 @@
+[
+  {
+    "run": "2026-10-29-run2",
+    "restored": true,
+    "backup_sha256": "3ba06fe45ff59c45cc467064ad2c7d011c000c1fb65b55b3827856983229db6c",
+    "firmware_sha256": "37ae60f5f41f8b92c39a5d780322f584682f64e2bdc3b5345128be3d90489287",
+    "device_log_sha256": "5f6e3492083792d67418a6be9b160e10b4a1ed6e7f36fda078c01a89c6e67717",
+    "completed": false,
+    "events": [
+      {
+        "event": "error",
+        "reason": "camera_sample_new_session_required"
+      }
+    ]
+  },
+  {
+    "run": "2026-10-29-camera-check",
+    "restored": true,
+    "backup_sha256": "3ba06fe45ff59c45cc467064ad2c7d011c000c1fb65b55b3827856983229db6c",
+    "firmware_sha256": "6fac7122da5959b7bd5d7c49bd98aa6dc5755d1960db76e57e972cfc1b3e533e",
+    "device_log_sha256": "270c72dd452b2dcdb4a8d588b015896cc64b5f23d10dd7bbdc407e3a4c6ccd6d",
+    "completed": false,
+    "events": [
+      {
+        "event": "transport_error",
+        "config": 0,
+        "frame": 1000,
+        "seq": 0,
+        "esp_error": 28674,
+        "http_status": 0,
+        "sent": 0,
+        "received": 0,
+        "length": -1
+      },
+      {
+        "event": "error",
+        "reason": "camera_sample_new_session_required"
+      }
+    ]
+  },
+  {
+    "run": "2026-10-29-camera-check2",
+    "restored": true,
+    "backup_sha256": "3ba06fe45ff59c45cc467064ad2c7d011c000c1fb65b55b3827856983229db6c",
+    "firmware_sha256": "a82915df09818499dbec67ce6dcc03ad72cdecb91224738dbb9a11453ba5b5b2",
+    "device_log_sha256": "02d634656241b15aa20ddf1bc6ef4ff961b906ba3d97dde5a2b96b5f0217081f",
+    "completed": false,
+    "events": [
+      {
+        "event": "transport_error",
+        "config": 0,
+        "frame": 1000,
+        "seq": 0,
+        "esp_error": 28674,
+        "http_status": 0,
+        "sent": 0,
+        "received": 0,
+        "length": -1
+      },
+      {
+        "event": "error",
+        "reason": "camera_sample_new_session_required"
+      }
+    ]
+  },
+  {
+    "run": "2026-10-29-camera-check3",
+    "restored": true,
+    "backup_sha256": "3ba06fe45ff59c45cc467064ad2c7d011c000c1fb65b55b3827856983229db6c",
+    "firmware_sha256": "eba7dc4e3d0251c22f9bc21cdc36ecc3eeba72858916ace230a444f2057d6fab",
+    "device_log_sha256": "dda44565e8629e9b2d4dc7e689e9029889842c1b7e3f179fbc9528b7568bdd99",
+    "completed": true,
+    "events": [
+      {
+        "event": "health",
+        "phase": "before_camera",
+        "esp_error": 0,
+        "http_status": 200,
+        "wifi_error": 0,
+        "rssi": -79,
+        "channel": 1
+      },
+      {
+        "event": "health",
+        "phase": "after_camera",
+        "esp_error": 0,
+        "http_status": 200,
+        "wifi_error": 0,
+        "rssi": -78,
+        "channel": 1
+      },
+      {
+        "event": "done",
+        "measured_requests": 30,
+        "diagnostic_requests": 30,
+        "camera_only": true
+      }
+    ]
+  },
+  {
+    "run": "2026-10-29-final",
+    "restored": true,
+    "backup_sha256": "3ba06fe45ff59c45cc467064ad2c7d011c000c1fb65b55b3827856983229db6c",
+    "firmware_sha256": "435ce7b9ab392bd9e17524e0e1402ada6649f327c1f465a46a20f3809bf6da03",
+    "device_log_sha256": "4fc93770be7097cbb4fbf4d7835aebee0e66f0e76b3de4c64b347967598eda69",
+    "completed": false,
+    "events": [
+      {
+        "event": "health",
+        "phase": "before_camera",
+        "esp_error": 0,
+        "http_status": 200,
+        "wifi_error": 0,
+        "rssi": -68,
+        "channel": 1
+      },
+      {
+        "event": "health",
+        "phase": "after_camera",
+        "esp_error": 0,
+        "http_status": 200,
+        "wifi_error": 0,
+        "rssi": -68,
+        "channel": 1
+      },
+      {
+        "event": "transport_error",
+        "config": 0,
+        "frame": 1002,
+        "seq": 2,
+        "esp_error": 0,
+        "http_status": -1,
+        "sent": 4688,
+        "received": 0,
+        "length": -28679
+      },
+      {
+        "event": "error",
+        "reason": "camera_sample_new_session_required"
+      }
+    ]
+  },
+  {
+    "run": "2026-10-29-camera-dma",
+    "restored": true,
+    "backup_sha256": "3ba06fe45ff59c45cc467064ad2c7d011c000c1fb65b55b3827856983229db6c",
+    "firmware_sha256": "7988fc83d40d8aa1c6b3e52ae8c524950d99604fb86cb58217e00d3abf8ae791",
+    "device_log_sha256": "4eaf10ed6dea16247d1f65ec5953fbf3fad9ecbc6b460f1247271ff0de05803f",
+    "completed": false,
+    "events": [
+      {
+        "event": "health",
+        "phase": "before_camera",
+        "esp_error": 0,
+        "http_status": 200,
+        "wifi_error": 0,
+        "rssi": -73,
+        "channel": 1
+      },
+      {
+        "event": "health",
+        "phase": "after_camera",
+        "esp_error": 0,
+        "http_status": 200,
+        "wifi_error": 0,
+        "rssi": -72,
+        "channel": 1
+      },
+      {
+        "event": "transport_error",
+        "config": 0,
+        "frame": 1000,
+        "seq": 0,
+        "esp_error": 0,
+        "http_status": -1,
+        "sent": 4688,
+        "received": 0,
+        "length": -28679
+      },
+      {
+        "event": "error",
+        "reason": "camera_sample_new_session_required"
+      }
+    ]
+  },
+  {
+    "run": "2026-10-29-camera20",
+    "restored": true,
+    "backup_sha256": "3ba06fe45ff59c45cc467064ad2c7d011c000c1fb65b55b3827856983229db6c",
+    "firmware_sha256": "f835917d9e637d9dbf792dbf33b279b72b5d86b4765cf4438833c807f53b016f",
+    "device_log_sha256": "bd2e2c0a0332609d3873e5e2e357dcf545721ce8114736a62edd1787bf569575",
+    "completed": true,
+    "events": [
+      {
+        "event": "health",
+        "phase": "before_camera",
+        "esp_error": 0,
+        "http_status": 200,
+        "wifi_error": 0,
+        "rssi": -69,
+        "channel": 1
+      },
+      {
+        "event": "health",
+        "phase": "after_camera",
+        "esp_error": 0,
+        "http_status": 200,
+        "wifi_error": 0,
+        "rssi": -70,
+        "channel": 1
+      },
+      {
+        "event": "done",
+        "measured_requests": 30,
+        "diagnostic_requests": 30,
+        "camera_only": true
+      }
+    ]
+  }
+]
