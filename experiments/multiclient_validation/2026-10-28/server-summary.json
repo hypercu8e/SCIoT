@@ -1,0 +1,943 @@
+{
+  "clients": {
+    "server": {
+      "counts": {
+        "resources": 285
+      },
+      "timings": {}
+    },
+    "sim-1": {
+      "counts": {
+        "registration": 6,
+        "reserved": 1347,
+        "admitted": 1344,
+        "terminal": 1347,
+        "status_200": 1344,
+        "worker_finished": 1344,
+        "rejected": 4,
+        "status_429": 7
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 136.5,
+          "p95": 7112.349999999957,
+          "p99": 17865.69999999998
+        },
+        "worker_us": {
+          "p50": 844.0,
+          "p95": 4608.449999999999,
+          "p99": 6065.98
+        },
+        "elapsed_us": {
+          "p50": 1641.0,
+          "p95": 9957.899999999929,
+          "p99": 22274.23999999998
+        }
+      }
+    },
+    "sim-0": {
+      "counts": {
+        "registration": 7,
+        "reserved": 1378,
+        "admitted": 1376,
+        "terminal": 1378,
+        "status_200": 1376,
+        "worker_finished": 1376,
+        "rejected": 3,
+        "status_429": 5
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 168.5,
+          "p95": 8820.75,
+          "p99": 20144.25
+        },
+        "worker_us": {
+          "p50": 861.0,
+          "p95": 4658.5,
+          "p99": 6010.0
+        },
+        "elapsed_us": {
+          "p50": 1660.0,
+          "p95": 12280.0,
+          "p99": 23672.25
+        }
+      }
+    },
+    "sim-2": {
+      "counts": {
+        "registration": 4,
+        "reserved": 117,
+        "admitted": 115,
+        "terminal": 117,
+        "status_200": 115,
+        "worker_finished": 115,
+        "status_429": 5,
+        "rejected": 3
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 12348.0,
+          "p95": 22890.999999999996,
+          "p99": 29543.28
+        },
+        "worker_us": {
+          "p50": 1949.0,
+          "p95": 5207.299999999999,
+          "p99": 6277.04
+        },
+        "elapsed_us": {
+          "p50": 14731.0,
+          "p95": 26493.0,
+          "p99": 34622.74
+        }
+      }
+    },
+    "sim-3": {
+      "counts": {
+        "registration": 4,
+        "reserved": 117,
+        "admitted": 116,
+        "terminal": 117,
+        "status_200": 116,
+        "worker_finished": 116,
+        "status_429": 4,
+        "rejected": 3
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 12277.5,
+          "p95": 23860.25,
+          "p99": 29269.399999999972
+        },
+        "worker_us": {
+          "p50": 1936.5,
+          "p95": 5042.25,
+          "p99": 6804.849999999995
+        },
+        "elapsed_us": {
+          "p50": 15547.0,
+          "p95": 27253.25,
+          "p99": 33666.09999999998
+        }
+      }
+    },
+    "sim-4": {
+      "counts": {
+        "registration": 3,
+        "reserved": 86,
+        "admitted": 83,
+        "terminal": 86,
+        "status_200": 83,
+        "worker_finished": 83,
+        "rejected": 4,
+        "status_429": 7
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 14659.0,
+          "p95": 23189.299999999992,
+          "p99": 27789.32
+        },
+        "worker_us": {
+          "p50": 2413.0,
+          "p95": 5553.199999999999,
+          "p99": 7312.879999999989
+        },
+        "elapsed_us": {
+          "p50": 17791.0,
+          "p95": 28440.299999999996,
+          "p99": 31983.79999999999
+        }
+      }
+    },
+    "sim-5": {
+      "counts": {
+        "registration": 3,
+        "reserved": 85,
+        "admitted": 83,
+        "terminal": 85,
+        "status_200": 83,
+        "worker_finished": 83,
+        "rejected": 5,
+        "status_429": 7
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 14570.0,
+          "p95": 23984.0,
+          "p99": 25042.45999999999
+        },
+        "worker_us": {
+          "p50": 2156.0,
+          "p95": 4872.599999999999,
+          "p99": 5779.499999999997
+        },
+        "elapsed_us": {
+          "p50": 18184.0,
+          "p95": 27537.399999999994,
+          "p99": 29257.6
+        }
+      }
+    },
+    "sim-6": {
+      "counts": {
+        "registration": 3,
+        "reserved": 87,
+        "admitted": 84,
+        "terminal": 87,
+        "status_200": 84,
+        "worker_finished": 84,
+        "status_429": 6,
+        "rejected": 3
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 14569.5,
+          "p95": 23280.9,
+          "p99": 29442.690000000002
+        },
+        "worker_us": {
+          "p50": 1930.0,
+          "p95": 5431.299999999999,
+          "p99": 6731.680000000004
+        },
+        "elapsed_us": {
+          "p50": 18295.0,
+          "p95": 28047.6,
+          "p99": 32436.070000000003
+        }
+      }
+    },
+    "sim-7": {
+      "counts": {
+        "registration": 3,
+        "reserved": 86,
+        "admitted": 84,
+        "terminal": 86,
+        "status_200": 84,
+        "worker_finished": 84,
+        "rejected": 4,
+        "status_429": 6
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 12821.5,
+          "p95": 21911.85,
+          "p99": 26098.86000000001
+        },
+        "worker_us": {
+          "p50": 1845.5,
+          "p95": 5818.349999999996,
+          "p99": 6549.05
+        },
+        "elapsed_us": {
+          "p50": 16318.5,
+          "p95": 25665.85,
+          "p99": 30027.140000000007
+        }
+      }
+    },
+    "sim-8": {
+      "counts": {
+        "registration": 2,
+        "reserved": 56,
+        "admitted": 54,
+        "terminal": 56,
+        "status_200": 54,
+        "worker_finished": 54,
+        "rejected": 4,
+        "status_429": 6
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 15820.0,
+          "p95": 24239.35,
+          "p99": 26965.229999999996
+        },
+        "worker_us": {
+          "p50": 2372.5,
+          "p95": 6060.999999999998,
+          "p99": 6549.879999999999
+        },
+        "elapsed_us": {
+          "p50": 19789.5,
+          "p95": 28848.249999999985,
+          "p99": 32215.129999999997
+        }
+      }
+    },
+    "sim-9": {
+      "counts": {
+        "registration": 2,
+        "reserved": 55,
+        "admitted": 54,
+        "terminal": 55,
+        "status_200": 54,
+        "worker_finished": 54,
+        "rejected": 5,
+        "status_429": 6
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 11028.0,
+          "p95": 25631.399999999994,
+          "p99": 29589.25
+        },
+        "worker_us": {
+          "p50": 1795.5,
+          "p95": 4830.199999999999,
+          "p99": 5044.11
+        },
+        "elapsed_us": {
+          "p50": 14189.0,
+          "p95": 28238.29999999999,
+          "p99": 35364.4
+        }
+      }
+    },
+    "sim-10": {
+      "counts": {
+        "registration": 2,
+        "rejected": 3,
+        "status_429": 5,
+        "reserved": 57,
+        "admitted": 55,
+        "terminal": 57,
+        "status_200": 55,
+        "worker_finished": 55
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 13119.0,
+          "p95": 24681.399999999987,
+          "p99": 30142.14
+        },
+        "worker_us": {
+          "p50": 1737.0,
+          "p95": 5727.9,
+          "p99": 6571.18
+        },
+        "elapsed_us": {
+          "p50": 15579.0,
+          "p95": 29189.8,
+          "p99": 34435.62
+        }
+      }
+    },
+    "sim-11": {
+      "counts": {
+        "registration": 2,
+        "rejected": 3,
+        "status_429": 3,
+        "reserved": 57,
+        "admitted": 57,
+        "terminal": 57,
+        "status_200": 57,
+        "worker_finished": 57
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 12168.0,
+          "p95": 22428.399999999998,
+          "p99": 26998.199999999983
+        },
+        "worker_us": {
+          "p50": 2008.0,
+          "p95": 5282.999999999998,
+          "p99": 7342.4
+        },
+        "elapsed_us": {
+          "p50": 15390.0,
+          "p95": 26587.19999999999,
+          "p99": 31934.319999999985
+        }
+      }
+    },
+    "sim-12": {
+      "counts": {
+        "registration": 2,
+        "reserved": 57,
+        "admitted": 55,
+        "terminal": 57,
+        "status_200": 55,
+        "worker_finished": 55,
+        "rejected": 3,
+        "status_429": 5
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 14819.0,
+          "p95": 25024.6,
+          "p99": 26753.56
+        },
+        "worker_us": {
+          "p50": 1757.0,
+          "p95": 5158.199999999993,
+          "p99": 7881.140000000002
+        },
+        "elapsed_us": {
+          "p50": 17786.0,
+          "p95": 28794.3,
+          "p99": 30673.800000000003
+        }
+      }
+    },
+    "sim-13": {
+      "counts": {
+        "registration": 2,
+        "rejected": 3,
+        "status_429": 4,
+        "reserved": 57,
+        "admitted": 56,
+        "terminal": 57,
+        "status_200": 56,
+        "worker_finished": 56
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 10012.5,
+          "p95": 25331.75,
+          "p99": 31063.100000000024
+        },
+        "worker_us": {
+          "p50": 1827.0,
+          "p95": 5050.75,
+          "p99": 7585.250000000006
+        },
+        "elapsed_us": {
+          "p50": 13649.0,
+          "p95": 28603.5,
+          "p99": 34521.50000000002
+        }
+      }
+    },
+    "sim-14": {
+      "counts": {
+        "registration": 2,
+        "reserved": 57,
+        "admitted": 55,
+        "terminal": 57,
+        "status_200": 55,
+        "worker_finished": 55,
+        "status_429": 5,
+        "rejected": 3
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 15904.0,
+          "p95": 23994.1,
+          "p99": 27523.440000000002
+        },
+        "worker_us": {
+          "p50": 1971.0,
+          "p95": 5131.499999999999,
+          "p99": 6142.9000000000015
+        },
+        "elapsed_us": {
+          "p50": 18903.0,
+          "p95": 27026.999999999996,
+          "p99": 31175.420000000002
+        }
+      }
+    },
+    "sim-15": {
+      "counts": {
+        "registration": 2,
+        "rejected": 4,
+        "status_429": 7,
+        "reserved": 56,
+        "terminal": 56,
+        "admitted": 53,
+        "status_200": 53,
+        "worker_finished": 53
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 2898.0,
+          "p95": 22934.199999999997,
+          "p99": 29687.159999999974
+        },
+        "worker_us": {
+          "p50": 1489.0,
+          "p95": 4238.999999999998,
+          "p99": 6039.239999999996
+        },
+        "elapsed_us": {
+          "p50": 5141.0,
+          "p95": 25473.599999999995,
+          "p99": 32235.639999999978
+        }
+      }
+    },
+    "sim-16": {
+      "counts": {
+        "registration": 1,
+        "reserved": 26,
+        "admitted": 24,
+        "terminal": 26,
+        "status_200": 24,
+        "worker_finished": 24,
+        "rejected": 4,
+        "status_429": 6
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 11002.0,
+          "p95": 21448.25,
+          "p99": 28377.449999999997
+        },
+        "worker_us": {
+          "p50": 1982.0,
+          "p95": 5587.65,
+          "p99": 6101.23
+        },
+        "elapsed_us": {
+          "p50": 13042.0,
+          "p95": 31355.599999999988,
+          "p99": 33179.92
+        }
+      }
+    },
+    "sim-17": {
+      "counts": {
+        "registration": 1,
+        "reserved": 27,
+        "admitted": 25,
+        "terminal": 27,
+        "status_200": 25,
+        "worker_finished": 25,
+        "rejected": 3,
+        "status_429": 5
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 8818.0,
+          "p95": 19836.199999999993,
+          "p99": 26917.15999999998
+        },
+        "worker_us": {
+          "p50": 2347.0,
+          "p95": 6337.199999999996,
+          "p99": 7383.439999999998
+        },
+        "elapsed_us": {
+          "p50": 13401.0,
+          "p95": 25029.8,
+          "p99": 37430.91999999997
+        }
+      }
+    },
+    "sim-18": {
+      "counts": {
+        "registration": 1,
+        "reserved": 27,
+        "admitted": 27,
+        "terminal": 27,
+        "status_200": 27,
+        "worker_finished": 27,
+        "rejected": 3,
+        "status_429": 3
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 12597.0,
+          "p95": 25267.499999999996,
+          "p99": 27526.339999999997
+        },
+        "worker_us": {
+          "p50": 1556.0,
+          "p95": 6654.499999999998,
+          "p99": 8699.479999999998
+        },
+        "elapsed_us": {
+          "p50": 14821.0,
+          "p95": 31357.399999999998,
+          "p99": 33949.899999999994
+        }
+      }
+    },
+    "sim-19": {
+      "counts": {
+        "registration": 1,
+        "reserved": 29,
+        "admitted": 28,
+        "terminal": 29,
+        "status_200": 28,
+        "worker_finished": 28,
+        "rejected": 1,
+        "status_429": 2
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 15673.5,
+          "p95": 26780.6,
+          "p99": 30772.65
+        },
+        "worker_us": {
+          "p50": 2557.5,
+          "p95": 6331.649999999998,
+          "p99": 7628.620000000001
+        },
+        "elapsed_us": {
+          "p50": 18789.5,
+          "p95": 33046.049999999996,
+          "p99": 35320.87
+        }
+      }
+    },
+    "sim-20": {
+      "counts": {
+        "registration": 1,
+        "reserved": 27,
+        "terminal": 27,
+        "status_429": 6,
+        "rejected": 3,
+        "admitted": 24,
+        "status_200": 24,
+        "worker_finished": 24
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 5660.0,
+          "p95": 31625.549999999985,
+          "p99": 34929.44
+        },
+        "worker_us": {
+          "p50": 1503.0,
+          "p95": 6026.499999999997,
+          "p99": 8225.48
+        },
+        "elapsed_us": {
+          "p50": 7705.5,
+          "p95": 33038.64999999999,
+          "p99": 36773.5
+        }
+      }
+    },
+    "sim-22": {
+      "counts": {
+        "registration": 1,
+        "rejected": 4,
+        "status_429": 5,
+        "reserved": 26,
+        "admitted": 25,
+        "terminal": 26,
+        "status_200": 25,
+        "worker_finished": 25
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 9634.0,
+          "p95": 24299.399999999987,
+          "p99": 27334.679999999993
+        },
+        "worker_us": {
+          "p50": 1292.0,
+          "p95": 3527.399999999999,
+          "p99": 4202.039999999998
+        },
+        "elapsed_us": {
+          "p50": 10641.0,
+          "p95": 28482.79999999998,
+          "p99": 31443.079999999994
+        }
+      }
+    },
+    "sim-23": {
+      "counts": {
+        "registration": 1,
+        "reserved": 30,
+        "terminal": 30,
+        "status_429": 1,
+        "admitted": 29,
+        "status_200": 29,
+        "worker_finished": 29
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 14035.0,
+          "p95": 28841.199999999986,
+          "p99": 35601.759999999995
+        },
+        "worker_us": {
+          "p50": 1841.0,
+          "p95": 5360.599999999999,
+          "p99": 5477.48
+        },
+        "elapsed_us": {
+          "p50": 16689.0,
+          "p95": 31527.799999999996,
+          "p99": 38425.15999999999
+        }
+      }
+    },
+    "sim-21": {
+      "counts": {
+        "registration": 1,
+        "reserved": 26,
+        "terminal": 26,
+        "status_429": 5,
+        "rejected": 4,
+        "admitted": 25,
+        "status_200": 25,
+        "worker_finished": 25
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 8209.0,
+          "p95": 21798.399999999983,
+          "p99": 28754.399999999983
+        },
+        "worker_us": {
+          "p50": 1221.0,
+          "p95": 4052.7999999999997,
+          "p99": 4376.599999999999
+        },
+        "elapsed_us": {
+          "p50": 10087.0,
+          "p95": 23683.999999999993,
+          "p99": 34706.23999999997
+        }
+      }
+    },
+    "sim-25": {
+      "counts": {
+        "registration": 1,
+        "rejected": 4,
+        "status_429": 5,
+        "reserved": 26,
+        "terminal": 26,
+        "admitted": 25,
+        "status_200": 25,
+        "worker_finished": 25
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 9766.0,
+          "p95": 18407.599999999995,
+          "p99": 20483.519999999997
+        },
+        "worker_us": {
+          "p50": 1203.0,
+          "p95": 4242.8,
+          "p99": 4564.4
+        },
+        "elapsed_us": {
+          "p50": 12360.0,
+          "p95": 20137.6,
+          "p99": 21704.959999999995
+        }
+      }
+    },
+    "sim-24": {
+      "counts": {
+        "registration": 1,
+        "rejected": 4,
+        "status_429": 4,
+        "reserved": 26,
+        "admitted": 26,
+        "terminal": 26,
+        "status_200": 26,
+        "worker_finished": 26
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 10750.5,
+          "p95": 27892.75,
+          "p99": 33486.75
+        },
+        "worker_us": {
+          "p50": 1767.0,
+          "p95": 6623.5,
+          "p99": 7469.25
+        },
+        "elapsed_us": {
+          "p50": 13417.5,
+          "p95": 32528.0,
+          "p99": 41686.25
+        }
+      }
+    },
+    "sim-26": {
+      "counts": {
+        "registration": 1,
+        "reserved": 25,
+        "admitted": 25,
+        "terminal": 25,
+        "status_200": 25,
+        "worker_finished": 25,
+        "rejected": 5,
+        "status_429": 5
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 8543.0,
+          "p95": 22463.399999999998,
+          "p99": 24717.919999999995
+        },
+        "worker_us": {
+          "p50": 1471.0,
+          "p95": 3915.7999999999993,
+          "p99": 3994.44
+        },
+        "elapsed_us": {
+          "p50": 10323.0,
+          "p95": 26053.199999999997,
+          "p99": 28531.959999999995
+        }
+      }
+    },
+    "sim-27": {
+      "counts": {
+        "registration": 1,
+        "rejected": 3,
+        "status_429": 3,
+        "reserved": 27,
+        "admitted": 27,
+        "terminal": 27,
+        "status_200": 27,
+        "worker_finished": 27
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 10083.0,
+          "p95": 27510.3,
+          "p99": 32608.07999999999
+        },
+        "worker_us": {
+          "p50": 1454.0,
+          "p95": 4520.399999999999,
+          "p99": 10033.37999999999
+        },
+        "elapsed_us": {
+          "p50": 11585.0,
+          "p95": 32030.599999999995,
+          "p99": 34958.079999999994
+        }
+      }
+    },
+    "sim-28": {
+      "counts": {
+        "registration": 1,
+        "reserved": 30,
+        "admitted": 30,
+        "terminal": 30,
+        "status_200": 30,
+        "worker_finished": 30
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 14422.0,
+          "p95": 26156.949999999993,
+          "p99": 32006.020000000004
+        },
+        "worker_us": {
+          "p50": 1834.5,
+          "p95": 4404.45,
+          "p99": 5843.480000000001
+        },
+        "elapsed_us": {
+          "p50": 17468.5,
+          "p95": 30267.39999999999,
+          "p99": 36887.030000000006
+        }
+      }
+    },
+    "sim-29": {
+      "counts": {
+        "registration": 1,
+        "rejected": 3,
+        "status_429": 4,
+        "reserved": 27,
+        "admitted": 26,
+        "terminal": 27,
+        "status_200": 26,
+        "worker_finished": 26
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 10339.5,
+          "p95": 27285.75,
+          "p99": 28944.75
+        },
+        "worker_us": {
+          "p50": 1583.0,
+          "p95": 4281.5,
+          "p99": 7289.0
+        },
+        "elapsed_us": {
+          "p50": 13346.0,
+          "p95": 31548.25,
+          "p99": 32733.5
+        }
+      }
+    },
+    "sim-30": {
+      "counts": {
+        "registration": 1,
+        "reserved": 29,
+        "admitted": 28,
+        "terminal": 29,
+        "status_200": 28,
+        "worker_finished": 28,
+        "status_429": 2,
+        "rejected": 1
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 15834.5,
+          "p95": 28072.199999999993,
+          "p99": 32101.800000000003
+        },
+        "worker_us": {
+          "p50": 2052.0,
+          "p95": 4977.549999999999,
+          "p99": 5362.02
+        },
+        "elapsed_us": {
+          "p50": 18545.5,
+          "p95": 30510.899999999994,
+          "p99": 35128.590000000004
+        }
+      }
+    },
+    "sim-31": {
+      "counts": {
+        "registration": 1,
+        "reserved": 28,
+        "admitted": 27,
+        "terminal": 28,
+        "status_200": 27,
+        "worker_finished": 27,
+        "rejected": 2,
+        "status_429": 3
+      },
+      "timings": {
+        "queue_us": {
+          "p50": 10998.0,
+          "p95": 22476.0,
+          "p99": 30732.899999999983
+        },
+        "worker_us": {
+          "p50": 1892.0,
+          "p95": 5591.999999999999,
+          "p99": 10384.439999999991
+        },
+        "elapsed_us": {
+          "p50": 13042.0,
+          "p95": 27998.7,
+          "p99": 36702.75999999998
+        }
+      }
+    }
+  },
+  "resource_samples": 285,
+  "rss_bytes": {
+    "min": 525770752,
+    "max": 526684160,
+    "last": 526684160
+  },
+  "max_observed_queue": 5,
+  "scope": "PC observations; not ESP32 hardware validation"
+}

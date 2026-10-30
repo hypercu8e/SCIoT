@@ -1,3 +1,10 @@
+import sys
+
+if __name__ == '__main__' and '--http-v2' in sys.argv:
+    from server.multiclient.run import main
+    main()
+    raise SystemExit(0)
+
 from server.edge.edge_initialization import Edge
 from server.logger.log import logger
 

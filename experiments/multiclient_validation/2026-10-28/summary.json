@@ -1,0 +1,982 @@
+{
+  "date": "2026-10-28",
+  "scope": "PC loopback only; ESP32 reserved for compression; no upload performed",
+  "unit_tests": {
+    "passed": 10,
+    "command": "PYTHONPATH=src TF_CPP_MIN_LOG_LEVEL=3 CUDA_VISIBLE_DEVICES=-1 .venv/bin/python -m unittest discover -s tests/multiclient -v"
+  },
+  "matrix": [
+    {
+      "configuration": {
+        "url": "http://127.0.0.1:8769",
+        "artifacts": "experiments/esp32_representation_benchmark/artifacts",
+        "clients": 1,
+        "requests": 30,
+        "duration": 0,
+        "rate": 0,
+        "output": "/tmp/sciot-multiclient-matrix-1"
+      },
+      "elapsed_s": 0.13567488900025637,
+      "clients": [
+        {
+          "client_id": "sim-0",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 3.9856230000623327,
+            "p95": 6.272120099902166,
+            "p99": 6.898412279660988
+          }
+        }
+      ],
+      "completed_per_second": 221.11681992931878,
+      "scope": "PC HTTP replay, not ESP32/Wi-Fi validation"
+    },
+    {
+      "configuration": {
+        "url": "http://127.0.0.1:8769",
+        "artifacts": "experiments/esp32_representation_benchmark/artifacts",
+        "clients": 2,
+        "requests": 30,
+        "duration": 0,
+        "rate": 0,
+        "output": "/tmp/sciot-multiclient-matrix-2"
+      },
+      "elapsed_s": 0.21354670400069153,
+      "clients": [
+        {
+          "client_id": "sim-0",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 7.075704999806476,
+            "p95": 10.217525600091902,
+            "p99": 11.72725000040373
+          }
+        },
+        {
+          "client_id": "sim-1",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 6.9538604998342635,
+            "p95": 10.735053949974823,
+            "p99": 11.870076830191465
+          }
+        }
+      ],
+      "completed_per_second": 280.96898184766974,
+      "scope": "PC HTTP replay, not ESP32/Wi-Fi validation"
+    },
+    {
+      "configuration": {
+        "url": "http://127.0.0.1:8769",
+        "artifacts": "experiments/esp32_representation_benchmark/artifacts",
+        "clients": 4,
+        "requests": 30,
+        "duration": 0,
+        "rate": 0,
+        "output": "/tmp/sciot-multiclient-matrix-4"
+      },
+      "elapsed_s": 0.2709799430003841,
+      "clients": [
+        {
+          "client_id": "sim-0",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 7.90481149988409,
+            "p95": 14.54640360034318,
+            "p99": 15.340353659994435
+          }
+        },
+        {
+          "client_id": "sim-1",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 8.418706500378903,
+            "p95": 12.246480199837599,
+            "p99": 13.670772500008752
+          }
+        },
+        {
+          "client_id": "sim-2",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 7.854316500470304,
+            "p95": 15.252611099504064,
+            "p99": 16.001118860267525
+          }
+        },
+        {
+          "client_id": "sim-3",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 7.88257500016698,
+            "p95": 13.967946349566773,
+            "p99": 17.540493589958718
+          }
+        }
+      ],
+      "completed_per_second": 442.8372028989242,
+      "scope": "PC HTTP replay, not ESP32/Wi-Fi validation"
+    },
+    {
+      "configuration": {
+        "url": "http://127.0.0.1:8769",
+        "artifacts": "experiments/esp32_representation_benchmark/artifacts",
+        "clients": 8,
+        "requests": 30,
+        "duration": 0,
+        "rate": 0,
+        "output": "/tmp/sciot-multiclient-matrix-8"
+      },
+      "elapsed_s": 0.6406903039996905,
+      "clients": [
+        {
+          "client_id": "sim-0",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 21.009165000123176,
+            "p95": 29.81248570017669,
+            "p99": 31.304628990264973
+          }
+        },
+        {
+          "client_id": "sim-1",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 21.3485465001213,
+            "p95": 27.158023550282444,
+            "p99": 30.195368399708972
+          }
+        },
+        {
+          "client_id": "sim-2",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 19.76595050018659,
+            "p95": 27.990688700128878,
+            "p99": 33.89826122004707
+          }
+        },
+        {
+          "client_id": "sim-3",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 20.094031499866105,
+            "p95": 30.32879104985113,
+            "p99": 31.408478390058008
+          }
+        },
+        {
+          "client_id": "sim-4",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 19.73452099991846,
+            "p95": 30.053359250132416,
+            "p99": 30.46775295972111
+          }
+        },
+        {
+          "client_id": "sim-5",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 20.011601500300458,
+            "p95": 29.144080750438658,
+            "p99": 31.075250280036926
+          }
+        },
+        {
+          "client_id": "sim-6",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 21.212596500390646,
+            "p95": 28.93139175030227,
+            "p99": 30.58157818014479
+          }
+        },
+        {
+          "client_id": "sim-7",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 20.328951999999845,
+            "p95": 28.999956049710807,
+            "p99": 33.625198629615625
+          }
+        }
+      ],
+      "completed_per_second": 374.59596079686565,
+      "scope": "PC HTTP replay, not ESP32/Wi-Fi validation"
+    },
+    {
+      "configuration": {
+        "url": "http://127.0.0.1:8769",
+        "artifacts": "experiments/esp32_representation_benchmark/artifacts",
+        "clients": 16,
+        "requests": 30,
+        "duration": 0,
+        "rate": 0,
+        "output": "/tmp/sciot-multiclient-matrix-16"
+      },
+      "elapsed_s": 1.2755014800004574,
+      "clients": [
+        {
+          "client_id": "sim-0",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 23.792129999947065,
+            "p95": 31.023801500168695,
+            "p99": 33.156451679824386
+          }
+        },
+        {
+          "client_id": "sim-1",
+          "attempted": 30,
+          "completed": 27,
+          "rejected": 3,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 16.322986999512068,
+            "p95": 31.16584170011265,
+            "p99": 34.78302352050377
+          }
+        },
+        {
+          "client_id": "sim-2",
+          "attempted": 30,
+          "completed": 29,
+          "rejected": 1,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 23.37084899954789,
+            "p95": 32.86392799982423,
+            "p99": 46.80819655946832
+          }
+        },
+        {
+          "client_id": "sim-3",
+          "attempted": 30,
+          "completed": 28,
+          "rejected": 2,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 21.744153999861737,
+            "p95": 28.753952250644943,
+            "p99": 31.208252590340635
+          }
+        },
+        {
+          "client_id": "sim-4",
+          "attempted": 30,
+          "completed": 28,
+          "rejected": 2,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 23.34281649973491,
+            "p95": 30.213882650377847,
+            "p99": 36.88532222010508
+          }
+        },
+        {
+          "client_id": "sim-5",
+          "attempted": 30,
+          "completed": 29,
+          "rejected": 1,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 23.12777199949778,
+            "p95": 29.882950999854074,
+            "p99": 31.23367443982715
+          }
+        },
+        {
+          "client_id": "sim-6",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 23.8695195002947,
+            "p95": 31.24425140031235,
+            "p99": 35.33001164998496
+          }
+        },
+        {
+          "client_id": "sim-7",
+          "attempted": 30,
+          "completed": 28,
+          "rejected": 2,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 19.012981500054593,
+            "p95": 29.821271100445298,
+            "p99": 45.81743598998401
+          }
+        },
+        {
+          "client_id": "sim-8",
+          "attempted": 30,
+          "completed": 29,
+          "rejected": 1,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 23.948993999511003,
+            "p95": 31.806613200024,
+            "p99": 35.85911968009895
+          }
+        },
+        {
+          "client_id": "sim-9",
+          "attempted": 30,
+          "completed": 28,
+          "rejected": 2,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 20.02506250028091,
+            "p95": 31.569017099627665,
+            "p99": 44.38152010962768
+          }
+        },
+        {
+          "client_id": "sim-10",
+          "attempted": 30,
+          "completed": 28,
+          "rejected": 2,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 18.3576665003784,
+            "p95": 30.261960450070546,
+            "p99": 41.73209424994639
+          }
+        },
+        {
+          "client_id": "sim-11",
+          "attempted": 30,
+          "completed": 28,
+          "rejected": 2,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 18.579567999950086,
+            "p95": 30.347365149918907,
+            "p99": 40.28265672978706
+          }
+        },
+        {
+          "client_id": "sim-12",
+          "attempted": 30,
+          "completed": 29,
+          "rejected": 1,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 23.350260000370326,
+            "p95": 33.306498999991156,
+            "p99": 49.960631799367526
+          }
+        },
+        {
+          "client_id": "sim-13",
+          "attempted": 30,
+          "completed": 28,
+          "rejected": 2,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 16.510342999936256,
+            "p95": 28.433987749804142,
+            "p99": 31.930738099808877
+          }
+        },
+        {
+          "client_id": "sim-14",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 23.85142149978492,
+            "p95": 32.94296145013504,
+            "p99": 34.47217826004817
+          }
+        },
+        {
+          "client_id": "sim-15",
+          "attempted": 30,
+          "completed": 26,
+          "rejected": 4,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 3.872816000239254,
+            "p95": 7.2323660003803525,
+            "p99": 9.203341500551687
+          }
+        }
+      ],
+      "completed_per_second": 356.7224398672096,
+      "scope": "PC HTTP replay, not ESP32/Wi-Fi validation"
+    },
+    {
+      "configuration": {
+        "url": "http://127.0.0.1:8769",
+        "artifacts": "experiments/esp32_representation_benchmark/artifacts",
+        "clients": 32,
+        "requests": 30,
+        "duration": 0,
+        "rate": 0,
+        "output": "/tmp/sciot-multiclient-matrix-32"
+      },
+      "elapsed_s": 2.133546156000193,
+      "clients": [
+        {
+          "client_id": "sim-0",
+          "attempted": 30,
+          "completed": 25,
+          "rejected": 5,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 20.14374999998836,
+            "p95": 31.807727200248333,
+            "p99": 37.971795760204245
+          }
+        },
+        {
+          "client_id": "sim-1",
+          "attempted": 30,
+          "completed": 26,
+          "rejected": 4,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 21.256473999983427,
+            "p95": 35.74887024956297,
+            "p99": 39.80298774968105
+          }
+        },
+        {
+          "client_id": "sim-2",
+          "attempted": 30,
+          "completed": 26,
+          "rejected": 4,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 21.046274500349682,
+            "p95": 38.35354624948195,
+            "p99": 40.8189625002251
+          }
+        },
+        {
+          "client_id": "sim-3",
+          "attempted": 30,
+          "completed": 28,
+          "rejected": 2,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 24.342267499832815,
+            "p95": 42.76558950004982,
+            "p99": 44.19290546001321
+          }
+        },
+        {
+          "client_id": "sim-4",
+          "attempted": 30,
+          "completed": 25,
+          "rejected": 5,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 21.62715400027082,
+            "p95": 37.2736106000957,
+            "p99": 41.63780000057158
+          }
+        },
+        {
+          "client_id": "sim-5",
+          "attempted": 30,
+          "completed": 24,
+          "rejected": 6,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 23.543357500329876,
+            "p95": 36.87476824952682,
+            "p99": 42.896757479893495
+          }
+        },
+        {
+          "client_id": "sim-6",
+          "attempted": 30,
+          "completed": 24,
+          "rejected": 6,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 18.41761400055475,
+            "p95": 35.97933690034549,
+            "p99": 42.03585954010123
+          }
+        },
+        {
+          "client_id": "sim-7",
+          "attempted": 30,
+          "completed": 26,
+          "rejected": 4,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 19.54576749994885,
+            "p95": 36.76548700013882,
+            "p99": 39.2183697499604
+          }
+        },
+        {
+          "client_id": "sim-8",
+          "attempted": 30,
+          "completed": 25,
+          "rejected": 5,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 22.983621999628667,
+            "p95": 34.309343599852575,
+            "p99": 40.082185040118915
+          }
+        },
+        {
+          "client_id": "sim-9",
+          "attempted": 30,
+          "completed": 26,
+          "rejected": 4,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 18.953495000459952,
+            "p95": 36.691735999511366,
+            "p99": 39.336899749969234
+          }
+        },
+        {
+          "client_id": "sim-10",
+          "attempted": 30,
+          "completed": 27,
+          "rejected": 3,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 21.331309999368386,
+            "p95": 40.18294710022019,
+            "p99": 42.863021759803814
+          }
+        },
+        {
+          "client_id": "sim-11",
+          "attempted": 30,
+          "completed": 29,
+          "rejected": 1,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 22.989262000010058,
+            "p95": 37.589362200196774,
+            "p99": 38.41872532018897
+          }
+        },
+        {
+          "client_id": "sim-12",
+          "attempted": 30,
+          "completed": 26,
+          "rejected": 4,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 22.470037499715545,
+            "p95": 35.49029050032004,
+            "p99": 41.53965275054361
+          }
+        },
+        {
+          "client_id": "sim-13",
+          "attempted": 30,
+          "completed": 28,
+          "rejected": 2,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 19.204270499812992,
+            "p95": 36.29225529962241,
+            "p99": 43.521743539822644
+          }
+        },
+        {
+          "client_id": "sim-14",
+          "attempted": 30,
+          "completed": 25,
+          "rejected": 5,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 19.08069399996748,
+            "p95": 31.050561400297738,
+            "p99": 34.89776824026193
+          }
+        },
+        {
+          "client_id": "sim-15",
+          "attempted": 30,
+          "completed": 27,
+          "rejected": 3,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 16.66976800061093,
+            "p95": 35.82285259944911,
+            "p99": 37.58886409972547
+          }
+        },
+        {
+          "client_id": "sim-16",
+          "attempted": 30,
+          "completed": 24,
+          "rejected": 6,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 16.379857499941863,
+            "p95": 39.2570658499153,
+            "p99": 43.55465910011844
+          }
+        },
+        {
+          "client_id": "sim-17",
+          "attempted": 30,
+          "completed": 25,
+          "rejected": 5,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 16.881904999536346,
+            "p95": 31.706925799517194,
+            "p99": 41.09757492049537
+          }
+        },
+        {
+          "client_id": "sim-18",
+          "attempted": 30,
+          "completed": 27,
+          "rejected": 3,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 18.9766490002512,
+            "p95": 38.88374729976931,
+            "p99": 40.276915180202195
+          }
+        },
+        {
+          "client_id": "sim-19",
+          "attempted": 30,
+          "completed": 28,
+          "rejected": 2,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 24.021505500058993,
+            "p95": 44.49435689971323,
+            "p99": 47.47411546052717
+          }
+        },
+        {
+          "client_id": "sim-20",
+          "attempted": 30,
+          "completed": 24,
+          "rejected": 6,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 12.722150999707083,
+            "p95": 36.7715069503447,
+            "p99": 43.96424683018267
+          }
+        },
+        {
+          "client_id": "sim-21",
+          "attempted": 30,
+          "completed": 25,
+          "rejected": 5,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 18.296070999895164,
+            "p95": 32.78934819954883,
+            "p99": 43.64656540015855
+          }
+        },
+        {
+          "client_id": "sim-22",
+          "attempted": 30,
+          "completed": 25,
+          "rejected": 5,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 13.956173000224226,
+            "p95": 31.446990199765416,
+            "p99": 35.67769223987852
+          }
+        },
+        {
+          "client_id": "sim-23",
+          "attempted": 30,
+          "completed": 29,
+          "rejected": 1,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 20.67360499950155,
+            "p95": 38.29097699999693,
+            "p99": 46.10923460015327
+          }
+        },
+        {
+          "client_id": "sim-24",
+          "attempted": 30,
+          "completed": 26,
+          "rejected": 4,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 17.20849899948007,
+            "p95": 40.18224174978968,
+            "p99": 47.00514475007367
+          }
+        },
+        {
+          "client_id": "sim-25",
+          "attempted": 30,
+          "completed": 25,
+          "rejected": 5,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 16.497934999279096,
+            "p95": 25.297036599658895,
+            "p99": 27.08670523959881
+          }
+        },
+        {
+          "client_id": "sim-26",
+          "attempted": 30,
+          "completed": 25,
+          "rejected": 5,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 17.6940809997177,
+            "p95": 29.891399000189264,
+            "p99": 32.175096559913065
+          }
+        },
+        {
+          "client_id": "sim-27",
+          "attempted": 30,
+          "completed": 27,
+          "rejected": 3,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 18.64106900029583,
+            "p95": 37.232218599820044,
+            "p99": 40.77101845998185
+          }
+        },
+        {
+          "client_id": "sim-28",
+          "attempted": 30,
+          "completed": 30,
+          "rejected": 0,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 22.49903199981418,
+            "p95": 36.062230849711334,
+            "p99": 42.50614382005552
+          }
+        },
+        {
+          "client_id": "sim-29",
+          "attempted": 30,
+          "completed": 26,
+          "rejected": 4,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 18.071770000005927,
+            "p95": 37.78079325070394,
+            "p99": 38.61565325019001
+          }
+        },
+        {
+          "client_id": "sim-30",
+          "attempted": 30,
+          "completed": 28,
+          "rejected": 2,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 24.709822500426526,
+            "p95": 35.878250149971784,
+            "p99": 42.59249745990019
+          }
+        },
+        {
+          "client_id": "sim-31",
+          "attempted": 30,
+          "completed": 27,
+          "rejected": 3,
+          "failed": 0,
+          "missed_scheduled_slots": 0,
+          "latency_ms": {
+            "p50": 18.799004999891622,
+            "p95": 31.18843360034589,
+            "p99": 46.2148767599501
+          }
+        }
+      ],
+      "completed_per_second": 392.7733166884083,
+      "scope": "PC HTTP replay, not ESP32/Wi-Fi validation"
+    }
+  ],
+  "soak_60_seconds": {
+    "configuration": {
+      "url": "http://127.0.0.1:8769",
+      "artifacts": "experiments/esp32_representation_benchmark/artifacts",
+      "clients": 2,
+      "requests": 100,
+      "duration": 60.0,
+      "rate": 20.0,
+      "output": "/tmp/sciot-multiclient-soak60"
+    },
+    "elapsed_s": 60.01484391299982,
+    "clients": [
+      {
+        "client_id": "sim-0",
+        "attempted": 1201,
+        "completed": 1201,
+        "rejected": 0,
+        "failed": 0,
+        "missed_scheduled_slots": 0,
+        "latency_ms": {
+          "p50": 3.6482400000750204,
+          "p95": 9.266938000109803,
+          "p99": 10.628734999954759
+        }
+      },
+      {
+        "client_id": "sim-1",
+        "attempted": 1201,
+        "completed": 1201,
+        "rejected": 0,
+        "failed": 0,
+        "missed_scheduled_slots": 0,
+        "latency_ms": {
+          "p50": 3.5445539997454034,
+          "p95": 9.414817000106268,
+          "p99": 11.368403999767906
+        }
+      }
+    ],
+    "completed_per_second": 40.02343159439098,
+    "scope": "PC HTTP replay, not ESP32/Wi-Fi validation"
+  },
+  "one_hour_test_completed": false,
+  "hardware_test_completed": false,
+  "firmware_build": {
+    "succeeded": true,
+    "static_ram_bytes": 51540,
+    "flash_bytes": 1196518,
+    "binary_bytes": 1196912,
+    "network_configuration": "example placeholders only"
+  },
+  "remaining": [
+    "one physical ESP32 with simulated peers",
+    "two physical ESP32",
+    "reboot/disconnection on hardware",
+    "one-hour stability test"
+  ]
+}

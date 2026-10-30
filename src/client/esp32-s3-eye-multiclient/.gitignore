@@ -1,0 +1,7 @@
+.pio/
+sdkconfig*
+!sdkconfig.defaults
+managed_components/
+dependencies.lock
+include/network.local.h
+components/
