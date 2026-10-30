@@ -1,0 +1,16 @@
+{
+  "protocol_and_object_matching_tests": 6,
+  "sdk_decoder_maps_verified": 250,
+  "complete_hardware_sessions": 2,
+  "hardware_requests_validated": 816,
+  "fixed_predictions_exact_across_sessions": true,
+  "original_flash_backup_sha256": "d6fa42b00aa002a1e74de90dfabe1b2efe4d57ac5ea8f2693e0d5c809623cf38",
+  "original_flash_restore_hash_verified": true,
+  "original_firmware_boot_verified": {
+    "project": "sciot_esp32_client",
+    "version": "0.1.0",
+    "model": "fomo_224"
+  },
+  "restore_log_sha256": "6561fc9b1d2a3283794821b95fb19fa376ed27d13281fb644f1face0f83292af",
+  "restored_boot_log_sha256": "23d49aedc2a29a2b3c3692b019b2e598e4461bdbc653119c6ff49f11270986c7"
+}

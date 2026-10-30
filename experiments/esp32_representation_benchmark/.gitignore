@@ -1,0 +1,11 @@
+.pio/
+include/generated/
+include/network.local.h
+artifacts/
+results/
+__pycache__/
+idf/.pio/
+idf/components/
+idf/managed_components/
+idf/sdkconfig*
+idf/dependencies.lock

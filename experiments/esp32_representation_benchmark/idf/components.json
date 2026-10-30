@@ -1,0 +1,5 @@
+{
+  "esp-tflite-micro": {"url": "https://github.com/espressif/esp-tflite-micro.git", "commit": "dd4085950a119d9e33a6de1d7be1fc7fe29e0cfc"},
+  "esp-nn": {"url": "https://github.com/espressif/esp-nn.git", "commit": "f1bfc45cb0edfdbe8fd4871f3abc0adfc7fe1c47"},
+  "esp32-camera": {"url": "https://github.com/espressif/esp32-camera.git", "commit": "f37e65608f709bd94846dee01d947f02ae07c0b0"}
+}

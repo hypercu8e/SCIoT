@@ -1,0 +1,1191 @@
+{
+  "date": "2026-10-27",
+  "board": "ESP32-S3-EYE 24:EC:4A:0E:B7:6C",
+  "cpu_mhz": 240,
+  "idf_version": "5.4.0",
+  "platformio_platform": "espressif32@6.10.0",
+  "components": {
+    "esp-tflite-micro": {
+      "url": "https://github.com/espressif/esp-tflite-micro.git",
+      "commit": "dd4085950a119d9e33a6de1d7be1fc7fe29e0cfc"
+    },
+    "esp-nn": {
+      "url": "https://github.com/espressif/esp-nn.git",
+      "commit": "f1bfc45cb0edfdbe8fd4871f3abc0adfc7fe1c47"
+    },
+    "esp32-camera": {
+      "url": "https://github.com/espressif/esp32-camera.git",
+      "commit": "f37e65608f709bd94846dee01d947f02ae07c0b0"
+    }
+  },
+  "experiment": {
+    "frames": [
+      48,
+      96,
+      145
+    ],
+    "models": {
+      "float32": {
+        "full": {
+          "sha256": "01b71eb64daa7b7e99409f41f57394f130b86689aef74d28b9cb83873324ea72",
+          "bytes": 84292,
+          "input": {
+            "index": 0,
+            "name": "serving_default_input_1:0",
+            "shape": [
+              1,
+              96,
+              96,
+              1
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 36864,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 70,
+            "name": "StatefulPartitionedCall:0",
+            "shape": [
+              1,
+              12,
+              12,
+              3
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 1728,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          }
+        },
+        "prefix": {
+          "sha256": "8d8c80cb59bb73cb9df928ac5f40bf8a11c0d0c09224dc1e100ed5901babbcde",
+          "bytes": 18032,
+          "input": {
+            "index": 0,
+            "name": "serving_default_input_1:0",
+            "shape": [
+              1,
+              96,
+              96,
+              1
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 36864,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 30,
+            "name": "model_1/block_2_add/add",
+            "shape": [
+              1,
+              24,
+              24,
+              8
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 18432,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          }
+        },
+        "suffix": {
+          "sha256": "e1bd3430355ba342d1e63fd553c05064bbf9bf3866e5a2ddb9d972a153b52ec6",
+          "bytes": 66652,
+          "input": {
+            "index": 25,
+            "name": "model_1/block_2_add/add",
+            "shape": [
+              1,
+              24,
+              24,
+              8
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 18432,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 41,
+            "name": "StatefulPartitionedCall:0",
+            "shape": [
+              1,
+              12,
+              12,
+              3
+            ],
+            "dtype": "float32",
+            "logical_value_bytes": 1728,
+            "scales": [],
+            "zero_points": [],
+            "quantized_dimension": 0
+          }
+        },
+        "desktop_split_vs_full_max_error": 0.0
+      },
+      "int8": {
+        "full": {
+          "sha256": "2a20659a928e2158f0e5a26083c5b109d2be3024812e5bc0314272bdf72e0a2e",
+          "bytes": 57088,
+          "input": {
+            "index": 0,
+            "name": "serving_default_input_1:0",
+            "shape": [
+              1,
+              96,
+              96,
+              1
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 9216,
+            "scales": [
+              0.0036874895449727774
+            ],
+            "zero_points": [
+              -128
+            ],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 70,
+            "name": "StatefulPartitionedCall:0",
+            "shape": [
+              1,
+              12,
+              12,
+              3
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 432,
+            "scales": [
+              0.00390625
+            ],
+            "zero_points": [
+              -128
+            ],
+            "quantized_dimension": 0
+          }
+        },
+        "prefix": {
+          "sha256": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+          "bytes": 16400,
+          "input": {
+            "index": 0,
+            "name": "serving_default_input_1:0",
+            "shape": [
+              1,
+              96,
+              96,
+              1
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 9216,
+            "scales": [
+              0.0036874895449727774
+            ],
+            "zero_points": [
+              -128
+            ],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 30,
+            "name": "model_1/block_2_add/add",
+            "shape": [
+              1,
+              24,
+              24,
+              8
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 4608,
+            "scales": [
+              0.06843240559101105
+            ],
+            "zero_points": [
+              -20
+            ],
+            "quantized_dimension": 0
+          }
+        },
+        "suffix": {
+          "sha256": "4e9307867c93b8df38deee74d7babe3cfdfcea25f8570482a0a3e82e1d8be68d",
+          "bytes": 41168,
+          "input": {
+            "index": 25,
+            "name": "model_1/block_2_add/add",
+            "shape": [
+              1,
+              24,
+              24,
+              8
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 4608,
+            "scales": [
+              0.06843240559101105
+            ],
+            "zero_points": [
+              -20
+            ],
+            "quantized_dimension": 0
+          },
+          "output": {
+            "index": 41,
+            "name": "StatefulPartitionedCall:0",
+            "shape": [
+              1,
+              12,
+              12,
+              3
+            ],
+            "dtype": "int8",
+            "logical_value_bytes": 432,
+            "scales": [
+              0.00390625
+            ],
+            "zero_points": [
+              -128
+            ],
+            "quantized_dimension": 0
+          }
+        },
+        "desktop_split_vs_full_max_error": 0.0
+      }
+    },
+    "source_input_sha256": "9950248bf367bece38432b62b3fd0d93e967a9c70066e7bd946e7e114decf864",
+    "scope": "Archived candidate grayscale FOMO, split at block_2_add; one experimental HTTP request per inference",
+    "inputs_sha256": "9c95212b7f480fd84da3206de4183da3065a92a5a4036279fb51b2885cd0bd30",
+    "experiment_sha256": "e875f73df1adb5ca7d12dd8301472f50939d04224d321e5cbb0e82f1105a99b0"
+  },
+  "quality_inputs_sha256": "490f6ac9fd164d238ea5fbba4dd3dd3e59ab587b1dee0beed19cb18a7994ca2f",
+  "decoder_verification": {
+    "sdk_revision": "c90298a297f6361a07f179173bbcd22790bb013f",
+    "source_sha256": "b49bcdb2345d6efdb9d3d78b2fb5c2bf1dc7fe9d11d9853e38b68ce094db0f29",
+    "random_seed": 20261027,
+    "maps_compared": 250,
+    "matching": "exact counts/boxes/channels; scores atol 1e-7",
+    "passed": true
+  },
+  "firmware_sha256": "f441de93b618c2c18990b4aa0d3fc22fc6b3a5b81adbce477a048de2b7911d84",
+  "fixed_prediction_comparisons_across_runs": 288,
+  "fixed_predictions_exact_across_runs": true,
+  "runs": [
+    {
+      "run": "2026-10-27-espnn-run1",
+      "raw_summary_sha256": "e0736c0a52706dec2c9c4db89e2fe199315344ac827a58ed8bc5fce5ed76012a",
+      "device_log_sha256": "c0833fb7e8b69d8356cd0bf0089a09e8f663fad69178cefa0eebf56d64cb5644",
+      "server_log_sha256": "22fb58cc7d282a0240d8ca1d574bff858539397b276cd1d8c591f988d761cbd4",
+      "samples": 408,
+      "timing": {
+        "embedded": {
+          "float32": {
+            "input_prepare_us": {
+              "count": 60,
+              "min": 1573.0,
+              "p50": 1599.0,
+              "p95": 1953.15,
+              "max": 2577.0
+            },
+            "invoke_us": {
+              "count": 60,
+              "min": 812303.0,
+              "p50": 813696.5,
+              "p95": 816312.65,
+              "max": 819418.0
+            },
+            "packing_us": {
+              "count": 60,
+              "min": 4442.0,
+              "p50": 4444.5,
+              "p95": 4479.6,
+              "max": 4496.0
+            },
+            "request_response_us": {
+              "count": 60,
+              "min": 25813.0,
+              "p50": 40194.5,
+              "p95": 84311.09999999999,
+              "max": 97359.0
+            },
+            "observed_cycle_us": {
+              "count": 60,
+              "min": 846824.0,
+              "p50": 859921.5,
+              "p95": 907134.25,
+              "max": 916785.0
+            },
+            "server_invoke_us": {
+              "count": 60,
+              "min": 153.0,
+              "p50": 183.0,
+              "p95": 207.1,
+              "max": 224.0
+            },
+            "server_post_us": {
+              "count": 60,
+              "min": 79.0,
+              "p50": 91.0,
+              "p95": 107.24999999999999,
+              "max": 122.0
+            }
+          },
+          "int8": {
+            "input_prepare_us": {
+              "count": 60,
+              "min": 38867.0,
+              "p50": 39112.0,
+              "p95": 39633.4,
+              "max": 39839.0
+            },
+            "invoke_us": {
+              "count": 60,
+              "min": 94333.0,
+              "p50": 94639.5,
+              "p95": 95849.5,
+              "max": 96302.0
+            },
+            "packing_us": {
+              "count": 60,
+              "min": 1046.0,
+              "p50": 1047.0,
+              "p95": 1054.3999999999999,
+              "max": 1257.0
+            },
+            "request_response_us": {
+              "count": 60,
+              "min": 20050.0,
+              "p50": 26630.5,
+              "p95": 42844.79999999999,
+              "max": 58310.0
+            },
+            "observed_cycle_us": {
+              "count": 60,
+              "min": 154739.0,
+              "p50": 161759.0,
+              "p95": 178032.3,
+              "max": 193113.0
+            },
+            "server_invoke_us": {
+              "count": 60,
+              "min": 281.0,
+              "p50": 319.5,
+              "p95": 367.25,
+              "max": 374.0
+            },
+            "server_post_us": {
+              "count": 60,
+              "min": 89.0,
+              "p50": 109.5,
+              "p95": 153.8999999999999,
+              "max": 205.0
+            }
+          }
+        },
+        "camera_alternating": {
+          "float32": {
+            "input_prepare_us": {
+              "count": 20,
+              "min": 1581.0,
+              "p50": 1727.0,
+              "p95": 1844.5000000000002,
+              "max": 2196.0
+            },
+            "invoke_us": {
+              "count": 20,
+              "min": 813529.0,
+              "p50": 814744.5,
+              "p95": 815986.25,
+              "max": 816029.0
+            },
+            "packing_us": {
+              "count": 20,
+              "min": 4442.0,
+              "p50": 4448.0,
+              "p95": 4496.75,
+              "max": 4530.0
+            },
+            "request_response_us": {
+              "count": 20,
+              "min": 94119.0,
+              "p50": 233244.5,
+              "p95": 503823.1500000003,
+              "max": 952587.0
+            },
+            "observed_cycle_us": {
+              "count": 20,
+              "min": 923775.0,
+              "p50": 1062682.5,
+              "p95": 1332739.6500000004,
+              "max": 1782406.0
+            },
+            "server_invoke_us": {
+              "count": 20,
+              "min": 174.0,
+              "p50": 185.0,
+              "p95": 196.30000000000004,
+              "max": 240.0
+            },
+            "server_post_us": {
+              "count": 20,
+              "min": 79.0,
+              "p50": 87.0,
+              "p95": 122.95000000000003,
+              "max": 160.0
+            }
+          },
+          "int8": {
+            "input_prepare_us": {
+              "count": 20,
+              "min": 38804.0,
+              "p50": 39026.5,
+              "p95": 39710.2,
+              "max": 39771.0
+            },
+            "invoke_us": {
+              "count": 20,
+              "min": 94947.0,
+              "p50": 95356.5,
+              "p95": 96547.85,
+              "max": 97020.0
+            },
+            "packing_us": {
+              "count": 20,
+              "min": 1046.0,
+              "p50": 1047.0,
+              "p95": 1054.35,
+              "max": 1080.0
+            },
+            "request_response_us": {
+              "count": 20,
+              "min": 52412.0,
+              "p50": 131461.5,
+              "p95": 255636.75000000006,
+              "max": 331727.0
+            },
+            "observed_cycle_us": {
+              "count": 20,
+              "min": 196582.0,
+              "p50": 275624.5,
+              "p95": 399902.6500000001,
+              "max": 475953.0
+            },
+            "server_invoke_us": {
+              "count": 20,
+              "min": 313.0,
+              "p50": 328.0,
+              "p95": 365.05,
+              "max": 366.0
+            },
+            "server_post_us": {
+              "count": 20,
+              "min": 102.0,
+              "p50": 121.0,
+              "p95": 137.75,
+              "max": 152.0
+            }
+          }
+        }
+      },
+      "throughput": [
+        {
+          "event": "throughput",
+          "mode": "float32",
+          "round": 0,
+          "frames": 20,
+          "elapsed_us": 19004814,
+          "frames_per_second": 1.0523649429034139
+        },
+        {
+          "event": "throughput",
+          "mode": "int8",
+          "round": 0,
+          "frames": 20,
+          "elapsed_us": 4090368,
+          "frames_per_second": 4.8895356114657655
+        },
+        {
+          "event": "throughput",
+          "mode": "int8",
+          "round": 1,
+          "frames": 20,
+          "elapsed_us": 3991610,
+          "frames_per_second": 5.010509543768054
+        },
+        {
+          "event": "throughput",
+          "mode": "float32",
+          "round": 1,
+          "frames": 20,
+          "elapsed_us": 17863794,
+          "frames_per_second": 1.1195829956391123
+        }
+      ],
+      "network": {
+        "float32": {
+          "activation_bytes": {
+            "count": 204,
+            "min": 18432.0,
+            "p50": 18432.0,
+            "p95": 18432.0,
+            "max": 18432.0
+          },
+          "request_body_bytes": {
+            "count": 204,
+            "min": 18464.0,
+            "p50": 18464.0,
+            "p95": 18464.0,
+            "max": 18464.0
+          },
+          "response_body_bytes": {
+            "count": 204,
+            "min": 1760.0,
+            "p50": 1760.0,
+            "p95": 1760.0,
+            "max": 1760.0
+          },
+          "http_total_bytes": {
+            "count": 204,
+            "min": 20647.0,
+            "p50": 20647.0,
+            "p95": 20647.0,
+            "max": 20647.0
+          }
+        },
+        "int8": {
+          "activation_bytes": {
+            "count": 204,
+            "min": 4608.0,
+            "p50": 4608.0,
+            "p95": 4608.0,
+            "max": 4608.0
+          },
+          "request_body_bytes": {
+            "count": 204,
+            "min": 4640.0,
+            "p50": 4640.0,
+            "p95": 4640.0,
+            "max": 4640.0
+          },
+          "response_body_bytes": {
+            "count": 204,
+            "min": 1760.0,
+            "p50": 1760.0,
+            "p95": 1760.0,
+            "max": 1760.0
+          },
+          "http_total_bytes": {
+            "count": 204,
+            "min": 6822.0,
+            "p50": 6822.0,
+            "p95": 6822.0,
+            "max": 6822.0
+          }
+        }
+      },
+      "quality": {
+        "float32": {
+          "tp": 111,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.940677966101695,
+          "recall": 0.9910714285714286,
+          "f1": 0.9652173913043478
+        },
+        "int8": {
+          "tp": 110,
+          "fp": 5,
+          "fn": 2,
+          "precision": 0.9565217391304348,
+          "recall": 0.9821428571428571,
+          "f1": 0.9691629955947136
+        },
+        "images": 84,
+        "threshold": 0.5,
+        "matched_objects_lost_vs_float32": 1,
+        "matched_objects_gained_vs_float32": 0,
+        "metric": "Class-agnostic, predicted center inside annotated box, maximum one-to-one matching",
+        "class_mapping_verified": false
+      },
+      "allocations": [
+        {
+          "event": "allocated",
+          "mode": "float32",
+          "arena_used_bytes": 907272,
+          "model_sha256": "8d8c80cb59bb73cb9df928ac5f40bf8a11c0d0c09224dc1e100ed5901babbcde",
+          "input_bytes": 36864,
+          "output_bytes": 18432
+        },
+        {
+          "event": "allocated",
+          "mode": "int8",
+          "arena_used_bytes": 229820,
+          "model_sha256": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+          "input_bytes": 9216,
+          "output_bytes": 4608
+        }
+      ],
+      "desktop_fidelity": {
+        "float32": {
+          "maximum_score_error_vs_desktop_full": 3.2186508178710938e-06,
+          "per_image_max_error": {
+            "count": 84,
+            "min": 9.208633855450898e-12,
+            "p50": 5.960464477539062e-07,
+            "p95": 2.4944543838500973e-06,
+            "max": 3.2186508178710938e-06
+          },
+          "desktop_class_agnostic_quality": {
+            "tp": 111,
+            "fp": 7,
+            "fn": 1,
+            "precision": 0.940677966101695,
+            "recall": 0.9910714285714286,
+            "f1": 0.9652173913043478
+          }
+        },
+        "int8": {
+          "maximum_score_error_vs_desktop_full": 0.16796875,
+          "per_image_max_error": {
+            "count": 84,
+            "min": 0.0,
+            "p50": 0.01171875,
+            "p95": 0.08535156249999998,
+            "max": 0.16796875
+          },
+          "desktop_class_agnostic_quality": {
+            "tp": 109,
+            "fp": 7,
+            "fn": 3,
+            "precision": 0.9396551724137931,
+            "recall": 0.9732142857142857,
+            "f1": 0.956140350877193
+          }
+        }
+      },
+      "kernel_evidence": [
+        {
+          "event": "kernel_check",
+          "mode": "float32",
+          "esp32s3_conv_calls": 0,
+          "esp32s3_depthwise_calls": 0
+        },
+        {
+          "event": "kernel_check",
+          "mode": "int8",
+          "esp32s3_conv_calls": 6,
+          "esp32s3_depthwise_calls": 3
+        }
+      ],
+      "wifi_rssi_dbm": {
+        "min": -77,
+        "median": -72.0,
+        "max": -69
+      },
+      "stability": [
+        {
+          "mode": "float32",
+          "frame": 48,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        },
+        {
+          "mode": "float32",
+          "frame": 96,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        },
+        {
+          "mode": "float32",
+          "frame": 145,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        },
+        {
+          "mode": "int8",
+          "frame": 48,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        },
+        {
+          "mode": "int8",
+          "frame": 96,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        },
+        {
+          "mode": "int8",
+          "frame": 145,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        }
+      ]
+    },
+    {
+      "run": "2026-10-27-espnn-run2",
+      "raw_summary_sha256": "dff87eec9dd0ebfa92c7819f880bcbb310f7c44de51e42f0ea4d3ea4182f38c1",
+      "device_log_sha256": "9456f610cc98a3f2a1d8b49f97804a5b52ff6602bf72244b20c755e4b2d7a036",
+      "server_log_sha256": "58c06debe2bf5fcf7e030680ca247ce9b0dd1743b8fc426c50462c7623fa482a",
+      "samples": 408,
+      "timing": {
+        "embedded": {
+          "float32": {
+            "input_prepare_us": {
+              "count": 60,
+              "min": 1573.0,
+              "p50": 1599.5,
+              "p95": 1790.4499999999994,
+              "max": 2229.0
+            },
+            "invoke_us": {
+              "count": 60,
+              "min": 812353.0,
+              "p50": 813432.5,
+              "p95": 814830.75,
+              "max": 817576.0
+            },
+            "packing_us": {
+              "count": 60,
+              "min": 4442.0,
+              "p50": 4445.5,
+              "p95": 4481.0,
+              "max": 4500.0
+            },
+            "request_response_us": {
+              "count": 60,
+              "min": 29049.0,
+              "p50": 42318.5,
+              "p95": 64419.2,
+              "max": 73572.0
+            },
+            "observed_cycle_us": {
+              "count": 60,
+              "min": 848086.0,
+              "p50": 862060.0,
+              "p95": 884168.85,
+              "max": 893486.0
+            },
+            "server_invoke_us": {
+              "count": 60,
+              "min": 153.0,
+              "p50": 186.0,
+              "p95": 222.0,
+              "max": 245.0
+            },
+            "server_post_us": {
+              "count": 60,
+              "min": 76.0,
+              "p50": 92.0,
+              "p95": 147.04999999999995,
+              "max": 172.0
+            }
+          },
+          "int8": {
+            "input_prepare_us": {
+              "count": 60,
+              "min": 38867.0,
+              "p50": 39054.0,
+              "p95": 40013.35,
+              "max": 40624.0
+            },
+            "invoke_us": {
+              "count": 60,
+              "min": 94376.0,
+              "p50": 94631.0,
+              "p95": 96037.0,
+              "max": 96141.0
+            },
+            "packing_us": {
+              "count": 60,
+              "min": 1046.0,
+              "p50": 1047.0,
+              "p95": 1053.0,
+              "max": 1082.0
+            },
+            "request_response_us": {
+              "count": 60,
+              "min": 17202.0,
+              "p50": 24003.5,
+              "p95": 38934.95,
+              "max": 83944.0
+            },
+            "observed_cycle_us": {
+              "count": 60,
+              "min": 152691.0,
+              "p50": 159198.0,
+              "p95": 174759.9,
+              "max": 218987.0
+            },
+            "server_invoke_us": {
+              "count": 60,
+              "min": 289.0,
+              "p50": 325.0,
+              "p95": 373.05,
+              "max": 420.0
+            },
+            "server_post_us": {
+              "count": 60,
+              "min": 89.0,
+              "p50": 134.0,
+              "p95": 166.94999999999993,
+              "max": 203.0
+            }
+          }
+        },
+        "camera_alternating": {
+          "float32": {
+            "input_prepare_us": {
+              "count": 20,
+              "min": 1583.0,
+              "p50": 1727.0,
+              "p95": 1734.8,
+              "max": 1788.0
+            },
+            "invoke_us": {
+              "count": 20,
+              "min": 813367.0,
+              "p50": 814887.0,
+              "p95": 820269.55,
+              "max": 820679.0
+            },
+            "packing_us": {
+              "count": 20,
+              "min": 4442.0,
+              "p50": 4448.0,
+              "p95": 4482.900000000001,
+              "max": 4614.0
+            },
+            "request_response_us": {
+              "count": 20,
+              "min": 42906.0,
+              "p50": 76154.5,
+              "p95": 136859.6000000001,
+              "max": 275913.0
+            },
+            "observed_cycle_us": {
+              "count": 20,
+              "min": 872233.0,
+              "p50": 908005.0,
+              "p95": 972230.7500000002,
+              "max": 1218447.0
+            },
+            "server_invoke_us": {
+              "count": 20,
+              "min": 153.0,
+              "p50": 182.0,
+              "p95": 209.35000000000002,
+              "max": 235.0
+            },
+            "server_post_us": {
+              "count": 20,
+              "min": 77.0,
+              "p50": 85.0,
+              "p95": 89.65,
+              "max": 102.0
+            }
+          },
+          "int8": {
+            "input_prepare_us": {
+              "count": 20,
+              "min": 38803.0,
+              "p50": 38947.0,
+              "p95": 39494.2,
+              "max": 39973.0
+            },
+            "invoke_us": {
+              "count": 20,
+              "min": 94898.0,
+              "p50": 95271.0,
+              "p95": 96325.9,
+              "max": 97217.0
+            },
+            "packing_us": {
+              "count": 20,
+              "min": 1046.0,
+              "p50": 1047.0,
+              "p95": 1064.4,
+              "max": 1072.0
+            },
+            "request_response_us": {
+              "count": 20,
+              "min": 20673.0,
+              "p50": 37328.0,
+              "p95": 55430.600000000006,
+              "max": 61332.0
+            },
+            "observed_cycle_us": {
+              "count": 20,
+              "min": 166120.0,
+              "p50": 181254.0,
+              "p95": 200256.0,
+              "max": 204873.0
+            },
+            "server_invoke_us": {
+              "count": 20,
+              "min": 287.0,
+              "p50": 316.0,
+              "p95": 333.2,
+              "max": 337.0
+            },
+            "server_post_us": {
+              "count": 20,
+              "min": 90.0,
+              "p50": 102.5,
+              "p95": 143.0,
+              "max": 143.0
+            }
+          }
+        }
+      },
+      "throughput": [
+        {
+          "event": "throughput",
+          "mode": "float32",
+          "round": 0,
+          "frames": 20,
+          "elapsed_us": 17784112,
+          "frames_per_second": 1.1245993052675332
+        },
+        {
+          "event": "throughput",
+          "mode": "int8",
+          "round": 0,
+          "frames": 20,
+          "elapsed_us": 3645195,
+          "frames_per_second": 5.486674924112427
+        },
+        {
+          "event": "throughput",
+          "mode": "int8",
+          "round": 1,
+          "frames": 20,
+          "elapsed_us": 3607996,
+          "frames_per_second": 5.5432433960569805
+        },
+        {
+          "event": "throughput",
+          "mode": "float32",
+          "round": 1,
+          "frames": 20,
+          "elapsed_us": 17554961,
+          "frames_per_second": 1.1392790903950172
+        }
+      ],
+      "network": {
+        "float32": {
+          "activation_bytes": {
+            "count": 204,
+            "min": 18432.0,
+            "p50": 18432.0,
+            "p95": 18432.0,
+            "max": 18432.0
+          },
+          "request_body_bytes": {
+            "count": 204,
+            "min": 18464.0,
+            "p50": 18464.0,
+            "p95": 18464.0,
+            "max": 18464.0
+          },
+          "response_body_bytes": {
+            "count": 204,
+            "min": 1760.0,
+            "p50": 1760.0,
+            "p95": 1760.0,
+            "max": 1760.0
+          },
+          "http_total_bytes": {
+            "count": 204,
+            "min": 20647.0,
+            "p50": 20647.0,
+            "p95": 20647.0,
+            "max": 20647.0
+          }
+        },
+        "int8": {
+          "activation_bytes": {
+            "count": 204,
+            "min": 4608.0,
+            "p50": 4608.0,
+            "p95": 4608.0,
+            "max": 4608.0
+          },
+          "request_body_bytes": {
+            "count": 204,
+            "min": 4640.0,
+            "p50": 4640.0,
+            "p95": 4640.0,
+            "max": 4640.0
+          },
+          "response_body_bytes": {
+            "count": 204,
+            "min": 1760.0,
+            "p50": 1760.0,
+            "p95": 1760.0,
+            "max": 1760.0
+          },
+          "http_total_bytes": {
+            "count": 204,
+            "min": 6822.0,
+            "p50": 6822.0,
+            "p95": 6822.0,
+            "max": 6822.0
+          }
+        }
+      },
+      "quality": {
+        "float32": {
+          "tp": 111,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.940677966101695,
+          "recall": 0.9910714285714286,
+          "f1": 0.9652173913043478
+        },
+        "int8": {
+          "tp": 110,
+          "fp": 5,
+          "fn": 2,
+          "precision": 0.9565217391304348,
+          "recall": 0.9821428571428571,
+          "f1": 0.9691629955947136
+        },
+        "images": 84,
+        "threshold": 0.5,
+        "matched_objects_lost_vs_float32": 1,
+        "matched_objects_gained_vs_float32": 0,
+        "metric": "Class-agnostic, predicted center inside annotated box, maximum one-to-one matching",
+        "class_mapping_verified": false
+      },
+      "allocations": [
+        {
+          "event": "allocated",
+          "mode": "float32",
+          "arena_used_bytes": 907272,
+          "model_sha256": "8d8c80cb59bb73cb9df928ac5f40bf8a11c0d0c09224dc1e100ed5901babbcde",
+          "input_bytes": 36864,
+          "output_bytes": 18432
+        },
+        {
+          "event": "allocated",
+          "mode": "int8",
+          "arena_used_bytes": 229820,
+          "model_sha256": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+          "input_bytes": 9216,
+          "output_bytes": 4608
+        }
+      ],
+      "desktop_fidelity": {
+        "float32": {
+          "maximum_score_error_vs_desktop_full": 3.2186508178710938e-06,
+          "per_image_max_error": {
+            "count": 84,
+            "min": 9.208633855450898e-12,
+            "p50": 5.960464477539062e-07,
+            "p95": 2.4944543838500973e-06,
+            "max": 3.2186508178710938e-06
+          },
+          "desktop_class_agnostic_quality": {
+            "tp": 111,
+            "fp": 7,
+            "fn": 1,
+            "precision": 0.940677966101695,
+            "recall": 0.9910714285714286,
+            "f1": 0.9652173913043478
+          }
+        },
+        "int8": {
+          "maximum_score_error_vs_desktop_full": 0.16796875,
+          "per_image_max_error": {
+            "count": 84,
+            "min": 0.0,
+            "p50": 0.01171875,
+            "p95": 0.08535156249999998,
+            "max": 0.16796875
+          },
+          "desktop_class_agnostic_quality": {
+            "tp": 109,
+            "fp": 7,
+            "fn": 3,
+            "precision": 0.9396551724137931,
+            "recall": 0.9732142857142857,
+            "f1": 0.956140350877193
+          }
+        }
+      },
+      "kernel_evidence": [
+        {
+          "event": "kernel_check",
+          "mode": "float32",
+          "esp32s3_conv_calls": 0,
+          "esp32s3_depthwise_calls": 0
+        },
+        {
+          "event": "kernel_check",
+          "mode": "int8",
+          "esp32s3_conv_calls": 6,
+          "esp32s3_depthwise_calls": 3
+        }
+      ],
+      "wifi_rssi_dbm": {
+        "min": -76,
+        "median": -68.0,
+        "max": -60
+      },
+      "stability": [
+        {
+          "mode": "float32",
+          "frame": 48,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        },
+        {
+          "mode": "float32",
+          "frame": 96,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        },
+        {
+          "mode": "float32",
+          "frame": 145,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        },
+        {
+          "mode": "int8",
+          "frame": 48,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        },
+        {
+          "mode": "int8",
+          "frame": 96,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        },
+        {
+          "mode": "int8",
+          "frame": 145,
+          "exact_bytes_equal": true,
+          "repetitions": 20
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "One physical board, one Wi-Fi, fixed block_2_add cut, experimental HTTP endpoint",
+    "Class-channel order unconfirmed: object matching ignores class",
+    "Public test set relationship to exported H5 training set unverified",
+    "Camera timing frames are different; identical inputs apply to embedded/annotated comparisons",
+    "HTTP bytes include headers/body in both directions; TCP/IP, retransmissions and Wi-Fi airtime unmeasured",
+    "Both model arenas resident in PSRAM; individual arena is not whole-application peak RAM",
+    "Reply returns all 432 final scores for both modes; compact object replies not evaluated"
+  ]
+}
