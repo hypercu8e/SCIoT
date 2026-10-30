@@ -1,0 +1,5 @@
+artifacts/
+exports/
+results/
+__pycache__/
+*.local.*

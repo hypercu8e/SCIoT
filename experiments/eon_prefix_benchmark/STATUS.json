@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-28",
+  "status": "blocked_by_service_plan",
+  "failure_kind": "enterprise_required_for_imported_model",
+  "model": "int8-prefix.tflite",
+  "model_sha256": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+  "upload_succeeded": true,
+  "freeform_configuration_succeeded": true,
+  "input": {"shape": [1, 96, 96, 1], "dtype": "int8", "scale": 0.0036874895449727774, "zero_point": -128},
+  "output": {"shape": [1, 24, 24, 8], "dtype": "int8", "scale": 0.06843240559101105, "zero_point": -20},
+  "engine_requested": "tflite-eon",
+  "model_type_requested": "int8",
+  "target_requested": "zip",
+  "service_message": "The EON Compiler is only available for pretrained models for enterprise projects. You can either:\n\n1. Deploy without the EON Compiler enabled (at the cost of more RAM and ROM) (use `tflite` engine, if calling from the API).\n2. Train your complete project in Edge Impulse, which will give access to the EON compiler on the free and pro tier.\n3. Go to https://www.edgeimpulse.com/pricing for information on our Enterprise Plan.",
+  "eon_library_downloaded": false,
+  "firmware_built": false,
+  "hardware_validated": false,
+  "performance_measured": false,
+  "training_or_recalibration_performed": false,
+  "paid_plan_activated": false,
+  "edgeimpulse_version": "1.0.20",
+  "edgeimpulse_api_version": "1.96.4"
+}

@@ -1,0 +1,3 @@
+# Isolated tools environment; do not install into the TensorFlow environment.
+edgeimpulse==1.0.20
+edgeimpulse-api==1.96.4

@@ -1,4 +1,5 @@
 # Python-generated files
+/sciot_eon_api_key
 __pycache__/
 *.py[oc]
 build/
