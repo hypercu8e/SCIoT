@@ -1,6 +1,6 @@
 # Diario del tirocinio SCIoT
 
-Aggiornato il 29 ottobre 2026. Titolo del tirocinio: **Multi Device Split Computing**.
+Aggiornato il 1 novembre 2026. Titolo del tirocinio: **Multi Device Split Computing**.
 Tirocinio interno da 300 ore, con possibile sviluppo in tesi triennale in Informatica
 a UNIMORE, referente prof. Luca Bedogni.
 
@@ -610,3 +610,89 @@ mantenendo ferma l'applicazione fra le due operazioni.
 
 Per riprendere: [recap](RECAP_LAVORO_FORK.md), [scaletta](SCALETTA_TIROCINIO.md)
 e [archivi degli esperimenti](experiments/activation_compression/README.md).
+
+
+## Codec Rice INT8 — 30 ottobre 2026
+
+Preparato un esperimento isolato con raw, miniz1, Rice indipendente e temporale,
+sottrazioni INT16 e ricostruzione esatta INT8; controllo secondario D+DZ4 con
+miniz6 o packing di due simboli per byte. Ingressi rigenerati con hash identici,
+stessi modelli della campagna precedente verificati tramite digest, nessuna
+nuova calibrazione. Sui 146 frame desktop Rice temporale richiede 2534,06 B/frame.
+
+Dopo la correzione dei permessi Linux della seriale, una prima diagnosi Wi-Fi
+ha richiesto la correzione del nome della rete; nessuna misura è stata accettata
+in quella prova e il firmware originale è stato ripristinato e verificato.
+La campagna completa successiva ha completato 5616 richieste e 360 diagnostiche,
+con attivazioni e uscite lossless identiche al raw prodotto dalla scheda.
+D+DZ4 con miniz e con packing ricostruisce esattamente gli stessi tensori con
+perdita. Report: [campagna Python](experiments/esp32_lossless_codec_benchmark/hardware_python_2026-10-30/report.md).
+
+Il costo del decoder Rice Python (circa 12 ms temporale) ha motivato un decoder
+C++ per il percorso misurato, mantenendo Python indipendente nell'audit.
+Nella campagna nativa ordinaria, 3504 richieste, le mediane temporali rispetto
+al raw variano fra -1,4% e +1,6%; non superano il criterio predefinito di almeno
+-5% in tutte le tre coppie, con p95 non oltre +5%.
+
+Completata anche la campagna con proxy del corpo applicativo a 128 kbit/s:
+3504 richieste, mediane Rice temporale inferiori del 23–31% rispetto al raw,
+criterio superato in tutte le tre coppie. Una riga USB ha perso soltanto il
+prefisso identificativo; tutti i tempi sono presenti. Recupero stretto e
+dichiarato da header e contesto sequenziale, con hash e log originale invariato;
+nessun tempo stimato. La suite complessiva di 18 test include quattro controlli
+specifici per questo recupero, oltre a encoder/decoder, miniz e TCP/proxy reali.
+Ogni campagna completata ha ripristino integrale della flash e avvio originale
+verificati. Il proxy non simula contesa radio o perdita di pacchetti.
+
+Conclusa la prova a 512 kbit/s: altre 3504 richieste, nessun recupero seriale
+necessario; mediane Rice temporale inferiori del 7,3–9,1% nelle tre coppie,
+criterio superato. Anche questa campagna ha ripristino e avvio originale
+verificati. Totale delle quattro campagne: 16128 richieste misurate e
+360 diagnostiche. Le mediane aggregate con proxy scendono del 26,91% a
+128 kbit/s e dell'8,51% a 512 kbit/s; sulla rete ordinaria il criterio non è
+superato. Questi numeri non confrontano direttamente latenze assolute di
+sessioni radio diverse e non simulano contesa o ritrasmissioni Wi-Fi.
+
+Il filone post-hoc su questo modello/split è ora delimitato da una conclusione
+operativa: raw per la latenza ordinaria, Rice temporale opzionale in banda
+ridotta. La rassegna bibliografica è mirata, non esaustiva; rANS e bottleneck
+addestrati restano sviluppi distinti. [Rapporto unico](experiments/esp32_lossless_codec_benchmark/report.md),
+[dati e riproduzione](experiments/esp32_lossless_codec_benchmark/README.md).
+
+
+## Stima offline della soglia — 1 novembre 2026
+
+Rianalizzati i CSV nativi del 30 ottobre, senza collegare la scheda e senza
+nuove misure. Un fit T(R)=a/R+b sui proxy 128/512 kbit/s stima circa 0,70 Mbit/s
+per il guadagno del 5% sulla sola mediana. Nove abbinamenti dei tre blocchi per
+regime danno sensibilità 0,60–0,85 Mbit/s, non un intervallo di confidenza.
+Il pareggio del fit è circa 1,2 Mbit/s (sensibilità 0,87–2,16); il modello ideale
+CPU+byte, escludendo differenze di trasporto, darebbe invece 4,13 Mbit/s.
+Non è una soglia hardware verificata: mancano punti intermedi e il p95 non
+è previsto. Dati, formule, hash e grafico nella [stima offline](experiments/esp32_lossless_codec_benchmark/offline_threshold_2026-11-01/report.md).
+
+
+## Soglia Rice misurata sulla scheda — 1 novembre 2026
+
+Dopo la stima offline, eseguita una nuova campagna isolata sull'hotspot a
+2,4 GHz, con stesso modello/split INT8, ESP-NN e 146 ingressi canonici.
+Solo raw e Rice temporale, decoder C++, sei giri in ordine alternato per rate:
+1752 richieste a ciascuno dei rate 600, 800, 900 e 1000 kbit/s, totale 7008.
+Il proxy limita il corpo della richiesta, non misura la velocità PHY Wi-Fi.
+
+600 e 800 superano il criterio predefinito nelle tre coppie (mediana almeno
+-5%, p95 non oltre +5%); 900 e 1000 non lo superano. Massimo punto verificato
+favorevole 800 kbit/s, con mediana aggregata da 221,67 a 207,77 ms (-6,27%).
+Fascia osservata 800–900 kbit/s: non un intervallo di confidenza né il pareggio.
+A 900 la prima coppia ha guadagno mediano 4,43% e p95 +13,02%; a 1000 una
+coppia guadagna 4,87%, sotto il margine del 5%. Le mediane aggregate rimangono
+migliori del raw anche a questi due rate.
+
+Ventuno test superati; tutti i pacchetti ricostruiti dal decoder Python
+indipendente, attivazioni e uscite identiche al raw INT8. Log seriali completi,
+nessun recupero e nessun tempo stimato. Backup integrale verificato prima del
+flash, ripristino degli 8 MB e avvio originale verificati dopo ogni punto.
+La rete differisce da ottobre: non si uniscono i campioni di reti diverse per
+decidere la fascia e non si presenta la prova come validazione dello stesso fit.
+[Rapporto e grafico](experiments/esp32_rice_threshold_benchmark/sweep_2026-11-01/report.md),
+[protocollo e riproduzione](experiments/esp32_rice_threshold_benchmark/README.md).

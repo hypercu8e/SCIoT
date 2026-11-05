@@ -1,10 +1,39 @@
 # SCIoT — recap del lavoro sul fork
 
-**Stato al 29 ottobre 2026.** Questo documento riunisce ciò che abbiamo studiato,
+**Stato al 1 novembre 2026.** Questo documento riunisce ciò che abbiamo studiato,
 realizzato e capito dall'inizio del lavoro sul fork. Il dettaglio cronologico è
 nel [diario](DIARIO_TIROCINIO.md); qui conta soprattutto il filo del ragionamento.
 Le date delle attività seguono i resoconti conservati, mentre i commit possono
 essere successivi. Non ricostruiamo ore svolte o date amministrative mancanti.
+
+Aggiornamento del 1 novembre — completata la [misura hardware della soglia Rice](experiments/esp32_rice_threshold_benchmark/sweep_2026-11-01/report.md).
+Sull'hotspot attuale, 7008 richieste a 600/800/900/1000 kbit/s: 600 e 800
+superano il criterio (mediana almeno -5% e p95 non oltre +5% in tutte le tre
+coppie), 900 e 1000 no. Massimo punto verificato favorevole 800 kbit/s,
+mediana aggregata -6,27%; fascia osservata 800–900 kbit/s, non intervallo di
+confidenza né pareggio universale. Anche sopra la fascia le mediane aggregate
+restano migliori: è il margine richiesto a non essere uniforme. Ventuno test
+superati, nessun recupero seriale, tensori/uscite lossless e ripristino/avvio
+originale verificati dopo ciascun punto.
+
+La precedente [stima offline](experiments/esp32_lossless_codec_benchmark/offline_threshold_2026-11-01/report.md)
+usava soltanto i proxy di ottobre: circa 0,7 Mbit/s per il 5% sulla sola mediana,
+sensibilità 0,6–0,85 (non intervallo di confidenza). Il nuovo hotspot e il
+criterio comprendente il p95 impediscono di trattare le nuove prove come una
+validazione a condizioni identiche del fit precedente.
+
+Aggiornamento del 30 ottobre — conclusa l'[ultima verifica dei codec lossless INT8](experiments/esp32_lossless_codec_benchmark/report.md).
+Quattro campagne, 16128 richieste fisiche misurate e 360 diagnostiche;
+originale ripristinato e verificato dopo ogni campagna. Rice temporale:
+2533,96 B/frame contro 4608 raw (-45,01%), con attivazioni e uscite identiche
+al raw INT8. Il decoder C++ riduce il costo server da circa 12 a 0,4 ms.
+Sulla rete ordinaria non supera il criterio predefinito di latenza; con proxy
+128/512 kbit/s le mediane aggregate migliorano del 26,91% e dell'8,51%,
+con criterio superato nelle tre coppie. Diciotto test superati. Un prefisso USB
+troncato a 128 kbit/s è stato recuperato con tempi integri e tracciabilità
+esplicita. Raw resta il riferimento per la latenza ordinaria; Rice è una
+possibilità per banda ridotta. Risultato limitato a questa scheda, modello,
+split e video; integrazione SCIoT e accuratezza annotata rimangono separate.
 
 Aggiornamento del 18 ottobre: raccolti 84 input di test pubblici
 Beer/can e le sequenze OTB Coke/Liquor; eseguite inferenze su 148 input e una

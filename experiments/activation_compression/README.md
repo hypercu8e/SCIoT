@@ -1,11 +1,20 @@
 # Primo confronto della compressione delle attivazioni
 
-## Stato corrente — 29 ottobre 2026
+## Stato corrente — 1 novembre 2026
 
 Questa cartella conserva le prove PC del 15–19 ottobre. I paragrafi datati sotto
 sono resoconti storici: il runtime Arduino 1.0.0 e i suoi limiti INT16 non
 identificano il runtime ESP-IDF/ESP-NN usato successivamente.
 
+- [Soglia Rice misurata sulla scheda](../esp32_rice_threshold_benchmark/sweep_2026-11-01/report.md):
+  7008 richieste sull'hotspot attuale; 600/800 kbit/s superano il criterio,
+  900/1000 no. Fascia osservata 800–900 per il margine del 5% con vincolo p95,
+  non pareggio universale. Ventuno test; ripristino e avvio originale verificati.
+- [Codec lossless INT8 e Rice sulla scheda](../esp32_lossless_codec_benchmark/report.md):
+  quattro campagne, 16128 richieste misurate e 360 diagnostiche. Payload -45,01%
+  senza perdita aggiuntiva; nessun vantaggio ordinario secondo il criterio,
+  mediane -26,91%/-8,51% con proxy 128/512 kbit/s. Originale ripristinato;
+  recupero esplicito di un prefisso seriale con tempi integri.
 - [FLOAT32 / INT8 con ESP-NN sulla scheda](../esp32_representation_benchmark/espnn_2026-10-27/report.md):
   tempi completi e HTTP favorevoli a INT8 nella configurazione provata.
 - [INT8 raw / zlib sulla scheda](../esp32_int8_compression_benchmark/2026-10-28/report.md):

@@ -148,6 +148,37 @@ Questa direzione corrisponde alla seconda proposta in [POSSIBILI_ARGOMENTI_TESI.
 * **Contributo:** Utilizzo della quantizzazione vettoriale (codebook di vettori di attivazione) al confine di split, permettendo di trasmettere solo gli indici del codebook anziché tensori float completi.
 * **Collegamento con SCIoT:** Alternativa alla quantizzazione scalare uniforme testata in [experiments/activation_compression/lossy_2026-10-17/](experiments/activation_compression/lossy_2026-10-17/).
 
+### 4.5 Compressione leggera e clipping senza riaddestramento
+
+R. A. Cohen, H. Choi, I. V. Bajić, *Lightweight Compression of Intermediate Neural Network Features for Collaborative Intelligence*, IEEE OJCAS 2, 350–362, 2021. [Testo degli autori](https://arxiv.org/html/2105.07102v1).
+Studia intervalli di clipping e quantizzazione vincolata dall'entropia per
+attivazioni ReLU/leaky-ReLU, con binarizzazione e codifica entropica. Non richiede
+riaddestramento dei pesi. È pertinente alla scelta P99 del nostro adattamento,
+ma risultati su tensori float e altre architetture non predicono FOMO già INT8.
+
+### 4.6 rANS e rappresentazioni sparse
+
+*Range Asymmetric Numeral Systems-Based Lightweight Intermediate Feature
+Compression for Split Computing of Deep Neural Networks*, preprint 2025.
+[Testo](https://arxiv.org/html/2511.11664v1).
+Combina quantizzazione intera asimmetrica, rappresentazione CSR e rANS senza
+ulteriore fine-tuning. Le prove sono su server AMD EPYC con GPU NVIDIA A6000;
+i tempi riportati non dimostrano fattibilità o vantaggio su ESP32.
+Motiva l'esame di codifiche entropiche alternative a DEFLATE; questa campagna
+sceglie Rice come controllo semplice, non implementa il metodo rANS del paper.
+
+### 4.7 Encoder addestrati mantenendo il modello del task congelato
+
+J. Huang et al., *SemanticNN: Compressive and Error-Resilient Semantic Offloading
+for Extremely Weak Devices*, AAAI 2026.
+[Paper](https://ojs.aaai.org/index.php/AAAI/article/download/39351/43312).
+Addestra encoder/decoder dedicati mantenendo congelata la rete del task e considera
+errori di trasmissione. Resta una direzione futura: non equivale a compressione
+lossless post-hoc e richiede una propria campagna di addestramento e verifica.
+
+Ricognizione mirata del 30 ottobre, non revisione sistematica esaustiva.
+Nuovo confronto: [codec interi lossless](experiments/esp32_lossless_codec_benchmark/README.md).
+
 ---
 
 ## 5. Direzione 3: Selezione dei Frame ed Early Exiting (Video Analytics)
