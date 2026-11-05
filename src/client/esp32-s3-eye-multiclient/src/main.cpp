@@ -106,6 +106,12 @@ uint32_t crc32(const uint8_t* p,size_t n) {
   return ~crc;
 }
 void fail(const char* reason) {printf("{\"event\":\"error\",\"reason\":\"%s\"}\n",reason);fflush(stdout);}
+void memory() {
+  printf("{\"event\":\"memory\",\"uptime_us\":%lld,\"internal_free\":%u,\"internal_min_free\":%u,\"psram_free\":%u,\"psram_min_free\":%u}\n",
+    esp_timer_get_time(),unsigned(heap_caps_get_free_size(MALLOC_CAP_INTERNAL|MALLOC_CAP_8BIT)),
+    unsigned(heap_caps_get_minimum_free_size(MALLOC_CAP_INTERNAL|MALLOC_CAP_8BIT)),
+    unsigned(heap_caps_get_free_size(MALLOC_CAP_SPIRAM)),unsigned(heap_caps_get_minimum_free_size(MALLOC_CAP_SPIRAM)));
+}
 void input(int mode) {
   auto& m=models[mode];
   if(!mode) memcpy(m.input->data.f,canonical,kPixels*sizeof(float));
@@ -191,7 +197,7 @@ bool sample(int mode,int frame,int repetition,const char* source,Sample& s,
   if(strcmp(replyIdentity.client,clientId)!=0 || strcmp(replyIdentity.session,sessionId)!=0 ||
      strcmp(replyIdentity.sequence,sequenceText)!=0 || received!=kReplyBytes || reply[0]!=0x31524353 || reply[1]!=1 ||
      reply[2]!=uint32_t(frame) || reply[3]!=uint32_t(repetition) || reply[4]!=432) {
-    printf("{\"event\":\"error\",\"reason\":\"http_response\",\"code\":%d,\"received\":%d,\"length\":%lld}\n",int(status),received,length);sessionId[0]=0;return false;
+    printf("{\"event\":\"error\",\"reason\":\"http_response\",\"code\":%d,\"http_status\":%d,\"received\":%d,\"length\":%lld}\n",int(status),httpStatus,received,length);sessionId[0]=0;return false;
   }
   wifi_ap_record_t ap={};esp_wifi_sta_get_ap_info(&ap);
   printf("{\"event\":\"correlation\",\"client_id\":\"%s\",\"session_id\":\"%s\",\"request_id\":%llu,\"frame\":%d,\"iteration\":%d}\n",
@@ -224,11 +230,14 @@ bool capture(Sample& s,int mode,int frame,int iteration) {
     const uint16_t p=(uint16_t(fb->buf[2*i])<<8)|fb->buf[2*i+1];
     canonical[i]=(float((p>>11)&31)/31.0f)*.299f+(float((p>>5)&63)/63.0f)*.587f+(float(p&31)/31.0f)*.114f;
   }
-  esp_camera_fb_return(fb);
   const int64_t processed=esp_timer_get_time();
-  return sample(mode,frame,iteration,"camera",s,start,acquired-start,processed-acquired);
+  // Keep the single frame leased through inference/HTTP, as in the validated
+  // representation benchmark; returning it early permits concurrent refilling.
+  const bool ok=sample(mode,frame,iteration,"camera",s,start,acquired-start,processed-acquired);
+  esp_camera_fb_return(fb);
+  return ok;
 }
-void run() {
+void run(char command) {
   Sample row;
   for(int f=0;f<3;++f) {
     memcpy(canonical,kFrames[f],kPixels*sizeof(float));
@@ -237,17 +246,28 @@ void run() {
   }
   if(!cameraInit()) {fail("camera_init");return;}
   const int64_t start=esp_timer_get_time();
-  int completed=0;
-  for(int n=0;n<MULTICLIENT_CAMERA_FRAMES;++n) {
+  const int frames=command=='s'?20:MULTICLIENT_CAMERA_FRAMES;
+  const int64_t duration=command=='h'?3600000000LL:command=='i'?180000000LL:0;
+  int completed=0,n=0;
+  memory();
+  for(;duration?(esp_timer_get_time()-start<duration):(n<frames);++n) {
     if(capture(row,1,1000+n,n)) { emit(row); ++completed; }
+    if(n%50==49) memory();
     fflush(stdout);
   }
   printf("{\"event\":\"done\",\"camera_attempted\":%d,\"camera_completed\":%d,\"elapsed_us\":%lld}\n",
-         MULTICLIENT_CAMERA_FRAMES,completed,esp_timer_get_time()-start);
+         n,completed,esp_timer_get_time()-start);
   esp_camera_deinit();
+  memory();
 }
-void wifiEvent(void*,esp_event_base_t base,int32_t event,void*) {
+void wifiEvent(void*,esp_event_base_t base,int32_t event,void* data) {
   if(base==WIFI_EVENT && event==WIFI_EVENT_STA_START) esp_wifi_connect();
+  if(base==WIFI_EVENT && event==WIFI_EVENT_STA_DISCONNECTED) {
+    const auto* reason=static_cast<wifi_event_sta_disconnected_t*>(data);
+    printf("{\"event\":\"wifi_disconnected\",\"reason\":%u}\n",unsigned(reason->reason));
+    xEventGroupClearBits(wifiEvents,1);
+    esp_wifi_connect();
+  }
   if(base==IP_EVENT && event==IP_EVENT_STA_GOT_IP) xEventGroupSetBits(wifiEvents,1);
 }
 }
@@ -297,6 +317,12 @@ extern "C" void app_main() {
   printf("{\"event\":\"ready\",\"command\":\"g\"}\n");
   fcntl(fileno(stdin),F_SETFL,O_NONBLOCK);
   for(;;) {
-    int c=getchar();if(c=='g') {run();break;} if(c=='r') esp_restart();clearerr(stdin);vTaskDelay(pdMS_TO_TICKS(10));
+    int c=getchar();
+    if(c=='g' || c=='s' || c=='i' || c=='h') {
+      run(char(c));printf("{\"event\":\"ready\",\"command\":\"g/s/i/h\"}\n");
+    }
+    if(c=='r') esp_restart();
+    clearerr(stdin);
+    vTaskDelay(pdMS_TO_TICKS(10));
   }
 }
