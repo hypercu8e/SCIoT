@@ -48,3 +48,18 @@ un'ora prima di dichiarare completata la validazione hardware.
 
 La build riuscita dimostra compilazione e link, non Wi-Fi, camera, stabilità,
 correttezza hardware o prestazioni con due ESP32.
+
+## Campagna hardware del 5 novembre
+
+Il client aggiunge i comandi seriali `s` (60 input incorporati e 20 frame camera),
+`g` (60 input e il numero configurato di frame, normalmente 1.000), `i` (60 input
+e tre minuti camera), `h` (60 input e un'ora camera). Dopo ogni esecuzione torna
+in attesa; registra RAM interna e PSRAM libere, correnti e minime dalla partenza.
+Il framebuffer resta acquisito durante inferenza e invio; le disconnessioni
+Wi-Fi sono registrate e causano un nuovo tentativo di connessione.
+
+Le due prove iniziali si sono fermate nella verifica individuale di A per
+problemi di trasmissione con camera attiva. Entrambe le flash sono state
+ripristinate e verificate; le prove simultanee e di un'ora restano aperte.
+[Report](../../../experiments/multiclient_hardware/2026-11-05/report.md) ·
+[Ripresa sul laptop](../../../RIPRESA_MULTICLIENT_LAPTOP.md).

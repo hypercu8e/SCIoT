@@ -696,3 +696,30 @@ La rete differisce da ottobre: non si uniscono i campioni di reti diverse per
 decidere la fascia e non si presenta la prova come validazione dello stesso fit.
 [Rapporto e grafico](experiments/esp32_rice_threshold_benchmark/sweep_2026-11-01/report.md),
 [protocollo e riproduzione](experiments/esp32_rice_threshold_benchmark/README.md).
+
+## Prime prove HTTP v2 fisiche e passaggio al laptop — 5 novembre 2026
+
+Collegate e identificate due ESP32-S3-EYE; salvati e verificati separatamente
+gli 8 MiB di flash di entrambe. Preparati runner automatico con ripristino in
+`finally`, archiviazione delle richieste/risposte, comandi firmware per prove
+brevi e temporizzate, letture heap e associazione USB stabile per MAC.
+
+Venti test server superati e build firmware riuscita. Due tentativi si fermano
+nel controllo individuale di A: 60 input incorporati completati in ciascuno;
+nessun completamento camera nel primo, uno da circa 6,3 secondi seguito da HTTP
+408 nel secondo. Il secondo trattiene il framebuffer durante inferenza/invio
+e aggiunge log/riconnessione Wi-Fi, senza risolvere il problema. Causa non
+isolata; nessun timeout aumentato. Replay del suffisso esatto sui punteggi di
+tutte le 60 e 61 richieste archiviate, rispettivamente.
+
+Entrambe le flash originali ripristinate e verificate prima del boot dopo
+ciascun tentativo. La successiva preparazione per partire da B completa solo
+i backup, senza installare firmware sperimentale; entrambe vengono riavviate
+sul firmware originale prima del passaggio al laptop vicino al router.
+Nessuna prova simultanea o di stabilità di un'ora completata. Preparato un
+piccolo archivio versionato con gli artefatti di modello necessari; backup,
+credenziali e log integrali rimangono esclusi da Git.
+
+[Diagnostica](experiments/multiclient_hardware/2026-11-05/report.md) ·
+[Procedura](experiments/multiclient_hardware/README.md) ·
+[Punto di ripresa sul laptop](RIPRESA_MULTICLIENT_LAPTOP.md).
