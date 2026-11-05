@@ -1,0 +1,2 @@
+# Preserve verbatim tool output, including trailing spaces.
+*.log -whitespace

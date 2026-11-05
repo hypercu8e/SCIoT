@@ -1,0 +1,7 @@
+{
+  "experiments/esp32_representation_benchmark/artifacts/int8-prefix.tflite": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+  "experiments/esp32_representation_benchmark/artifacts/int8-suffix.tflite": "4e9307867c93b8df38deee74d7babe3cfdfcea25f8570482a0a3e82e1d8be68d",
+  "experiments/esp32_representation_benchmark/artifacts/inputs.npz": "9c95212b7f480fd84da3206de4183da3065a92a5a4036279fb51b2885cd0bd30",
+  "experiments/esp32_representation_benchmark/artifacts/manifest.json": "083f69b849b940cdbd007cba51fec8e1aa0c67d6fa8889c77e8b5c2d39c69c40",
+  "experiments/esp32_representation_benchmark/include/generated/assets.h": "b39b58f511db4cbc21549d4a9a049dd60f79a9b81b2e1aea12b6076dea38ddc3"
+}

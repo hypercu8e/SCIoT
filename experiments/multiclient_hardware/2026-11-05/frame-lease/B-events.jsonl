@@ -1,0 +1,4 @@
+{"event": "boot", "experiment_sha256": "e875f73df1adb5ca7d12dd8301472f50939d04224d321e5cbb0e82f1105a99b0", "cpu_mhz": 240, "runtime": "esp-tflite-micro-dd40859", "arena_capacity_each": 1048576, "arena_in_psram": true, "esp_nn_enabled": true, "repetitions": 20}
+{"event": "allocated", "mode": "int8", "arena_used_bytes": 229820, "model_sha256": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c", "input_bytes": 9216, "output_bytes": 4608}
+{"event": "kernel_check", "mode": "int8", "esp32s3_conv_calls": 6, "esp32s3_depthwise_calls": 3}
+{"event": "ready", "command": "g"}

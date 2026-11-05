@@ -1,0 +1,10 @@
+{
+  "A/serial.log": "b67470d0982ff36569f3904cb252ec59ee1aea4c81e2e4176aac533b6eb79bbf",
+  "A/restored-boot.log": "3a51984496bb3d6e9be91484d02e046501a52a99cadb493fb08e05f5d20b0117",
+  "A/restore.log": "1c3d93f1a45252ee0e1890ad7a620c3fb7bad5568501b47f3a364c8353ee2331",
+  "B/serial.log": "83dcc50c4eb2856ba689c8b3fed17fadda04430fa58a77b17b843b5360e7d3bf",
+  "B/restored-boot.log": "a100bf1a3497f2d1b4173bc5a0712ce413714ed8671bc6b2f4459c0ba4ae57c6",
+  "B/restore.log": "1d092c80b595e7dbc0cb62d5aaac5b25129ee218f670b43dfda53a2400303f64",
+  "server/inference.bin": "f208a2fea43e2117d680f98bc4ec68bb44b2cec29ea08e5982cba4b4f0ef3e2d",
+  "server/server.jsonl": "398f98a393af2f0152307afce392bbc85a402acc52c03bb43c5c1a6780d851df"
+}

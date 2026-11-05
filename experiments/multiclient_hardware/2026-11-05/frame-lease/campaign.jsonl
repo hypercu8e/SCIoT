@@ -1,0 +1,7 @@
+{"event": "server_ready", "monotonic": 14344.125439049}
+{"event": "firmware_installed", "monotonic": 14359.34676959, "board": "A"}
+{"event": "firmware_installed", "monotonic": 14373.417418192, "board": "B"}
+{"event": "progress", "monotonic": 14409.940299322, "stage": "single_A", "elapsed": 30, "samples": {"A": 60}, "errors": {"A": 0}}
+{"event": "campaign_error", "monotonic": 14419.44244005, "error": "RuntimeError('Device error: {\"A\": {\"counts\": {\"boot\": 1, \"allocated\": 1, \"kernel_check\": 1, \"ready\": 1, \"registration\": 1, \"correlation\": 61, \"sample\": 61, \"camera_init\": 1, \"memory\": 1, \"error\": 1}, \"errors\": [{\"event\": \"error\", \"reason\": \"http_response\", \"code\": 0, \"http_status\": 408, \"received\": 0, \"length\": 24}], \"last_sample\": 14415.581961797, \"done\": false, \"done_row\": null}}')"}
+{"event": "original_restored", "monotonic": 14515.740014599, "board": "A"}
+{"event": "original_restored", "monotonic": 14607.316445238, "board": "B"}

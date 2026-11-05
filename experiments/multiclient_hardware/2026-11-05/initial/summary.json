@@ -1,0 +1,47 @@
+{
+  "run": "2026-11-05",
+  "result": "interrupted_during_single_A",
+  "multi_board_validated": false,
+  "one_hour_completed": false,
+  "boards": {
+    "A": {
+      "mac": "24:ec:4a:0e:b7:6c",
+      "embedded_completed": 60,
+      "camera_completed": 0,
+      "errors": [
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": -1,
+          "received": 0,
+          "length": -28679
+        }
+      ],
+      "firmware_sha256": "47227f9ea8d6c163c659701bf8e4aa3142b5c547c157b616c07de48cf54f278e",
+      "backup_sha256": "0c8235f455d3b848838d40b2cba96d90585363f8d7a6fb0897757ccdf04862ad",
+      "restored_digest_verified_before_boot": true,
+      "original_boot_verified": true,
+      "camera_cycle_ms": [],
+      "embedded_cycle_p50_ms": 391.246
+    },
+    "B": {
+      "mac": "24:ec:4a:0e:c3:14",
+      "embedded_completed": 0,
+      "camera_completed": 0,
+      "errors": [],
+      "firmware_sha256": "47227f9ea8d6c163c659701bf8e4aa3142b5c547c157b616c07de48cf54f278e",
+      "backup_sha256": "123966b1a84b29a9a2431e03a1491c60c240dc904459c5a7498d13dfb56e06a2",
+      "restored_digest_verified_before_boot": true,
+      "original_boot_verified": true,
+      "camera_cycle_ms": [],
+      "embedded_cycle_p50_ms": null
+    }
+  },
+  "archived_requests": 60,
+  "archived_suffix_scores_replayed_exact": true,
+  "scope": "Partial diagnostic only; no annotated accuracy or completed hardware multi-client validation",
+  "server_terminal_statuses": {
+    "200": 60
+  }
+}

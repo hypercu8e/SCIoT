@@ -1,0 +1,17 @@
+{
+  "src/server/multiclient/protocol.py": "9234adc2cae047189760cdab48eeab233b98ffd9191d45d5cd70c7b79df62123",
+  "src/server/multiclient/fomo.py": "e40ad30a2aa517f8de0dfd271b73db4f9a5250665890d59d59f67b1a76bb78e8",
+  "src/server/multiclient/__init__.py": "7763a6d1019ec1dc7f5983a2e6f72c1a70c2b1801b85995b09e70877f5dc365e",
+  "src/server/multiclient/service.py": "7f949900765afdef3a2457393767e1ea5e8921938e19169448fa5d710a1b1812",
+  "src/server/multiclient/engine.py": "b45d591c7dc9924d9679a61e17991fe1db29bc5eec70bd5314df4c5f4fbff72e",
+  "src/server/multiclient/http.py": "3fbef69845cc16f13124a72c66213cb81402431ed2158c361efa46b7025ee506",
+  "src/server/multiclient/run.py": "71782d2fe33a3aa2add31e669861c1aadea24f855595e5c93c8e5218af0b0ca5",
+  "src/client/esp32-s3-eye-multiclient/src/CMakeLists.txt": "d9f884aadf577a85e5b961eb573c4010fd7c119266d63e9e016e935f355f1e0d",
+  "src/client/esp32-s3-eye-multiclient/src/kernel_probe.cpp": "8121459f730cc67b767a2cdc4f85bb2dc7cbf4eb80049e84de51d42b488f785e",
+  "src/client/esp32-s3-eye-multiclient/src/main.cpp": "93af421eda2edf26c64576914d397f1e881cd3d3e0c649e7f0859c586695846b",
+  "experiments/multiclient_hardware/campaign.py": "3ebbba581272e9b14da6670d5c0a9442b1266c4f495c5a01903df2b935ebbc7e",
+  "experiments/multiclient_hardware/audit_server.py": "b83110d7174a8583fb3a9c2543835b79a9f63c68d7fd8d65711584beb93c2f9c",
+  "experiments/multiclient_hardware/analyze.py": "ff030fb67f78ba64a03c428da06229782fecbbc1de29d0c0d24e6a341642b4a4",
+  "experiments/multiclient_hardware/flash_board.py": "16f4a9b71836fc74416ba721ef1855dbfb68c172d613fdead6a99183f1598d56",
+  "experiments/multiclient_hardware/prepare.py": "30acf13a8f769066339e0d8788cf065ed438364df5a729bc90d099605c4a9317"
+}
