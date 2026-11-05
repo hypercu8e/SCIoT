@@ -1,0 +1,7 @@
+{
+  "status": "incomplete",
+  "reason": "Battery discharging at 17%; CPU energy preference power; timings vary substantially. Repeat under external power and stable profile.",
+  "completed_http_trials": 51,
+  "verified_http_responses": 2049981,
+  "inference_errors": 0
+}

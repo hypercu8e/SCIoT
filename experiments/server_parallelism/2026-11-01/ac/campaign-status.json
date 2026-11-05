@@ -1,0 +1,18 @@
+{
+  "status": "complete",
+  "http_trials": 144,
+  "matrix_trials": 120,
+  "rate_trials": 24,
+  "engine_trials": 30,
+  "verified_http_responses": 5783532,
+  "failed_requests_in_completed_trials": 0,
+  "unit_tests_passed": 20,
+  "energy_scopes": [
+    "ac:[('powersave', 'balance_performance')]",
+    "battery:[('powersave', 'balance_power')]",
+    "transition"
+  ],
+  "started_utc": "2026-11-01T14:45:08.066185+00:00",
+  "finished_utc": "2026-11-01T16:44:49.924137+00:00",
+  "energy_policy": "Initial AC campaign; continued on battery and through energy changes at explicit user request. Comparisons stratified by energy scope; transition samples excluded from stable comparisons."
+}
