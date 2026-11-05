@@ -1,0 +1,12 @@
+{
+  "backend": "native",
+  "rate_kbps": 512,
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "source_sha256": {
+    "server_native.py": "3c7d87fbee3380f202cdcb4e89995daadd241b2bedc26579e432dc1c3af45224",
+    "server.py": "4c2aad05eaa79d0ab60b1501469d5230825419051690ce9b400bec5144ee38a7",
+    "protocol.py": "bf3eda82ae624fd7cbf2ac843874f7084435aead75e4968ed9f5cb0d83f335d2",
+    "native_decoder.py": "e602bda08aaeb9186102d7bb3732e6e56cdacfe769ac0880970133fa9a29cdfd",
+    "include/rice_decoder.h": "da15f95996b3d05fe046a80cea3a0eb7e190b37a5e87d7d53dc4a3c7a8be55f6"
+  }
+}

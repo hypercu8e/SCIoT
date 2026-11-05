@@ -1,0 +1,23 @@
+{
+  "build": "PlatformIO 6.1.18 / espressif32 6.10.0 / ESP-IDF 5.4.0",
+  "firmware_sha256": "4041165e8f393b3314ff03cced0b4f41e615b5c047b403d156cfd0cdd1d798a9",
+  "elf_sha256": "29448e870c350c22bdb767eb6b5c328b538b8958350f7e491fe01fb208277c8e",
+  "native_tests_passed": 10,
+  "prefix_model_sha256": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+  "suffix_model_sha256": "4e9307867c93b8df38deee74d7babe3cfdfcea25f8570482a0a3e82e1d8be68d",
+  "video_input_binary_sha256": "de3ac62a9b0dc4b063452029bf8cc602d5b5407862de12b3030a9830cab23467",
+  "camera_xclk_hz": 20000000,
+  "http_timeout_ms": 60000,
+  "experiment_sha256": "3480c0a8ee7dd33b8cf2245d7cbb53bdaeae6a85d93d67c0bf3167bd93c2d8e4",
+  "source_sha256": {
+    "idf/src/main.cpp": "79796ec4182446a4b1c0e0e65f979f6c2af03eb319981427ea4910485a9b9983",
+    "include/codec.h": "c222f5ba9b4957889d8944605b0529f6558a7c33fcfcee58cb6c65ef6de34205",
+    "include/legacy_codec.h": "ea3035360f7e273e10dbe6130e26bb796b000927452c198e9bd29594656dbd74",
+    "include/generated/assets.h": "97bd13b685d0fb886ef2a62a89be63018f4c45cf70c73f5b5d1df5fff7a56cf3",
+    "idf/platformio.ini": "d1052e283bfbaf628bcba2d847aa02686c086ecc3642ca7124d23c61b864e4e2",
+    "idf/src/CMakeLists.txt": "0b598941b955447b11d8b439388c3888401e161c4b63ff16eb614150c273c8cc",
+    "protocol.py": "bf3eda82ae624fd7cbf2ac843874f7084435aead75e4968ed9f5cb0d83f335d2",
+    "server.py": "4c2aad05eaa79d0ab60b1501469d5230825419051690ce9b400bec5144ee38a7",
+    "run_hardware.py": "6302a0a26c8e85f9831be48363849998ae03005a8c6aec7aff03574f95e81e35"
+  }
+}

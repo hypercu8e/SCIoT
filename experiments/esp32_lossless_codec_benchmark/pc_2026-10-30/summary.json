@@ -1,0 +1,75 @@
+{
+  "frames": 146,
+  "provenance": "desktop prefix, not ESP32 activations",
+  "experiment_sha256": "3480c0a8ee7dd33b8cf2245d7cbb53bdaeae6a85d93d67c0bf3167bd93c2d8e4",
+  "rows": [
+    {
+      "mode": "raw",
+      "payload_mean": 4608.0,
+      "payload_total": 672768,
+      "application_total": 684448,
+      "host_encode_median_ms": 0.003712,
+      "frames_with_changed_output": 0,
+      "raw_fallbacks": 0,
+      "lossless": true
+    },
+    {
+      "mode": "zlib1",
+      "payload_mean": 3934.253424657534,
+      "payload_total": 574401,
+      "application_total": 586081,
+      "host_encode_median_ms": 0.055654499999999996,
+      "frames_with_changed_output": 0,
+      "raw_fallbacks": 0,
+      "lossless": true
+    },
+    {
+      "mode": "rice_independent",
+      "payload_mean": 3895.445205479452,
+      "payload_total": 568735,
+      "application_total": 580415,
+      "host_encode_median_ms": 0.060984,
+      "frames_with_changed_output": 0,
+      "raw_fallbacks": 0,
+      "lossless": true
+    },
+    {
+      "mode": "rice_temporal",
+      "payload_mean": 2534.0616438356165,
+      "payload_total": 369973,
+      "application_total": 381653,
+      "host_encode_median_ms": 0.062527,
+      "frames_with_changed_output": 0,
+      "raw_fallbacks": 0,
+      "lossless": true
+    },
+    {
+      "mode": "deadzone4_zlib",
+      "payload_mean": 1935.7191780821918,
+      "payload_total": 282615,
+      "application_total": 294295,
+      "host_encode_median_ms": 0.197751,
+      "frames_with_changed_output": 136,
+      "raw_fallbacks": 0,
+      "lossless": false
+    },
+    {
+      "mode": "deadzone4_packed",
+      "payload_mean": 2304.0,
+      "payload_total": 336384,
+      "application_total": 348064,
+      "host_encode_median_ms": 0.09987750000000001,
+      "frames_with_changed_output": 136,
+      "raw_fallbacks": 0,
+      "lossless": false
+    }
+  ],
+  "selected_lossless": [
+    "raw",
+    "zlib1",
+    "rice_independent",
+    "rice_temporal"
+  ],
+  "lossy_packing_identical": true,
+  "lossless_outputs_identical": true
+}

@@ -1,0 +1,19 @@
+test_corrupt_packets (test_codec.CodecTests.test_corrupt_packets) ... ok
+test_lossless_extremes_noise_long_sequence (test_codec.CodecTests.test_lossless_extremes_noise_long_sequence) ... ok
+test_packing_preserves_lossy_reconstruction (test_codec.CodecTests.test_packing_preserves_lossy_reconstruction) ... ok
+test_rice_integer_boundaries (test_codec.CodecTests.test_rice_integer_boundaries) ... ok
+test_rice_python_reference_bitstream (test_codec.CodecTests.test_rice_python_reference_bitstream) ... ok
+test_sequence_restart_and_transactional_failure (test_codec.CodecTests.test_sequence_restart_and_transactional_failure) ... ok
+test_zlib_bounds (test_codec.CodecTests.test_zlib_bounds) ... ok
+test_lossless_suffix_and_reconnect (test_integration.IntegrationTests.test_lossless_suffix_and_reconnect) ... ok
+test_paced_proxy (test_integration.IntegrationTests.test_paced_proxy) ... ok
+test_lossless_suffix_and_reconnect (test_integration.NativeIntegrationTests.test_lossless_suffix_and_reconnect) ... ok
+test_paced_proxy (test_integration.NativeIntegrationTests.test_paced_proxy) ... ok
+test_actual_miniz_levels_and_repeated_reset (test_miniz.MinizTests.test_actual_miniz_levels_and_repeated_reset) ... ok
+test_invalid_matches_python (test_native_decoder.NativeDecoderTests.test_invalid_matches_python) ... ok
+test_valid_exact_against_python (test_native_decoder.NativeDecoderTests.test_valid_exact_against_python) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 5.705s
+
+OK

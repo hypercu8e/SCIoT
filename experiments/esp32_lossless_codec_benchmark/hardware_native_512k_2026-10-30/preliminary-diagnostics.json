@@ -1,0 +1,11 @@
+[
+  {
+    "stage": "wifi-preliminary",
+    "cause": "SSID capitalization differed from visible active network",
+    "measured_requests": 0,
+    "restored": true,
+    "restored_digest_verified_before_boot": true,
+    "backup_sha256": "e7b99f1a916cb7b897c06575c214a2840a40f6130ff5663ef3b085c5bab35fc9",
+    "firmware_sha256": "4041165e8f393b3314ff03cced0b4f41e615b5c047b403d156cfd0cdd1d798a9"
+  }
+]

@@ -1,0 +1,192 @@
+{
+  "kind": "OFFLINE ESTIMATE, not a new hardware measurement",
+  "scope": "Only Rice temporal with native C++ server decoder and this FOMO/split/video",
+  "observed_cycle_p50_ms": {
+    "0": {
+      "raw": 177.3595,
+      "rice_temporal": 178.843
+    },
+    "128": {
+      "raw": 478.13300000000004,
+      "rice_temporal": 349.446
+    },
+    "512": {
+      "raw": 241.8495,
+      "rice_temporal": 221.25900000000001
+    }
+  },
+  "fits": {
+    "raw": {
+      "a_ms_mbps": 40.32571733333334,
+      "b_ms": 163.08833333333334
+    },
+    "rice_temporal": {
+      "a_ms_mbps": 21.877248,
+      "b_ms": 178.53000000000003
+    }
+  },
+  "point_estimates": {
+    "zero_gain_mbps": 1.1947200863464633,
+    "five_percent_median_gain_mbps": 0.6963945344036608
+  },
+  "nine_combination_sensitivity": {
+    "zero_gain_mbps": {
+      "min": 0.8715448943429174,
+      "median": 1.2140813386009812,
+      "max": 2.1574654764776926
+    },
+    "five_percent_median_gain_mbps": {
+      "min": 0.5986726813590915,
+      "median": 0.700155318543177,
+      "max": 0.8515190578750826
+    }
+  },
+  "sensitivity_fits": [
+    {
+      "fits": {
+        "raw": {
+          "a_ms_mbps": 40.38724266666666,
+          "b_ms": 163.7986666666667
+        },
+        "rice_temporal": {
+          "a_ms_mbps": 19.186005333333334,
+          "b_ms": 183.00533333333334
+        }
+      },
+      "zero_gain_mbps": 1.1038478306143706,
+      "five_percent_median_gain_mbps": 0.700155318543177
+    },
+    {
+      "fits": {
+        "raw": {
+          "a_ms_mbps": 40.53546666666666,
+          "b_ms": 162.64066666666668
+        },
+        "rice_temporal": {
+          "a_ms_mbps": 19.302997333333337,
+          "b_ms": 182.09133333333332
+        }
+      },
+      "zero_gain_mbps": 1.0916062517137377,
+      "five_percent_median_gain_mbps": 0.6962949965014303
+    },
+    {
+      "fits": {
+        "raw": {
+          "a_ms_mbps": 40.62694399999999,
+          "b_ms": 161.92600000000004
+        },
+        "rice_temporal": {
+          "a_ms_mbps": 18.657621333333335,
+          "b_ms": 187.13333333333333
+        }
+      },
+      "zero_gain_mbps": 0.8715448943429174,
+      "five_percent_median_gain_mbps": 0.5986726813590915
+    },
+    {
+      "fits": {
+        "raw": {
+          "a_ms_mbps": 40.41386666666667,
+          "b_ms": 163.74666666666667
+        },
+        "rice_temporal": {
+          "a_ms_mbps": 22.549418666666664,
+          "b_ms": 176.43616666666668
+        }
+      },
+      "zero_gain_mbps": 1.4078133890224196,
+      "five_percent_median_gain_mbps": 0.7589156082100573
+    },
+    {
+      "fits": {
+        "raw": {
+          "a_ms_mbps": 40.56209066666667,
+          "b_ms": 162.58866666666665
+        },
+        "rice_temporal": {
+          "a_ms_mbps": 22.666410666666668,
+          "b_ms": 175.52216666666666
+        }
+      },
+      "zero_gain_mbps": 1.3836687671550616,
+      "five_percent_median_gain_mbps": 0.7533411997062769
+    },
+    {
+      "fits": {
+        "raw": {
+          "a_ms_mbps": 40.653568,
+          "b_ms": 161.87400000000002
+        },
+        "rice_temporal": {
+          "a_ms_mbps": 22.021034666666665,
+          "b_ms": 180.56416666666667
+        }
+      },
+      "zero_gain_mbps": 0.9969163820547361,
+      "five_percent_median_gain_mbps": 0.6197706679145162
+    },
+    {
+      "fits": {
+        "raw": {
+          "a_ms_mbps": 39.52264533333333,
+          "b_ms": 165.48733333333337
+        },
+        "rice_temporal": {
+          "a_ms_mbps": 24.61815466666667,
+          "b_ms": 172.39566666666667
+        }
+      },
+      "zero_gain_mbps": 2.1574654764776926,
+      "five_percent_median_gain_mbps": 0.8515190578750826
+    },
+    {
+      "fits": {
+        "raw": {
+          "a_ms_mbps": 39.67086933333333,
+          "b_ms": 164.32933333333335
+        },
+        "rice_temporal": {
+          "a_ms_mbps": 24.735146666666672,
+          "b_ms": 171.48166666666665
+        }
+      },
+      "zero_gain_mbps": 2.088230787155714,
+      "five_percent_median_gain_mbps": 0.8427580032273186
+    },
+    {
+      "fits": {
+        "raw": {
+          "a_ms_mbps": 39.76234666666666,
+          "b_ms": 163.61466666666672
+        },
+        "rice_temporal": {
+          "a_ms_mbps": 24.08977066666667,
+          "b_ms": 176.52366666666666
+        }
+      },
+      "zero_gain_mbps": 1.2140813386009812,
+      "five_percent_median_gain_mbps": 0.648868264495206
+    }
+  ],
+  "sensitivity_is_confidence_interval": false,
+  "compute_only_model": {
+    "extra_cpu_p50_ms": 4.018000000000001,
+    "saved_payload_mean_bytes": 2074.041095890411,
+    "ideal_zero_gain_mbps": 4.129499444281554
+  },
+  "assumptions": [
+    "Each capped method follows T(R)=a/R+b between or beyond two configured proxy rates.",
+    "The nine fits combine the three two-round blocks at each rate; this is sensitivity, not a confidence interval.",
+    "Ordinary Wi-Fi has unknown uplink goodput and is not the infinite-rate limit of the proxy experiment.",
+    "The 5% estimate concerns only the median; the original p95 condition is not predicted.",
+    "The CPU-only model excludes differences in transport/stack/proxy costs and is optimistic.",
+    "Only 128 and 512 kbit/s were measured with a rate cap. No actual switch threshold was observed."
+  ],
+  "source_sha256": {
+    "hardware_native_network_2026-10-30/frames.csv": "58aca0a9c78b8561b69d34b8b4f7404ddadf3da082c86e93e4388e2c1b333350",
+    "hardware_native_128k_2026-10-30/frames.csv": "6ad619342e19d66fddde44586c55ec08c3dc7e317d1c2482959f2647ec01c527",
+    "hardware_native_512k_2026-10-30/frames.csv": "3cce130e1a4caf9c62c83a575a125dbe9827930a043a10d8d5db23d158394f93"
+  },
+  "script_sha256": "1bbcbc71f96327926f6f3c9a3775ccdd3d22ba4f89a7ae1f723db6a24348ab23"
+}

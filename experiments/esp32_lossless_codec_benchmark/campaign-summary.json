@@ -1,0 +1,391 @@
+{
+  "measured_requests": 16128,
+  "diagnostic_requests": 360,
+  "campaigns": [
+    {
+      "condition": "Wi-Fi ordinaria, Python",
+      "folder": "hardware_python_2026-10-30",
+      "decoder": "python",
+      "serial_recovery": null,
+      "bandwidth": null,
+      "methods": {
+        "deadzone4_packed": {
+          "payload_mean": 2304.0,
+          "cycle_p50_ms": 217.75,
+          "cycle_p95_ms": 271.514,
+          "encode_p50_ms": 29.88,
+          "server_decode_p50_ms": 0.541
+        },
+        "deadzone4_zlib": {
+          "payload_mean": 1934.3287671232877,
+          "cycle_p50_ms": 228.3745,
+          "cycle_p95_ms": 279.1465,
+          "encode_p50_ms": 38.182,
+          "server_decode_p50_ms": 0.46
+        },
+        "raw": {
+          "payload_mean": 4608.0,
+          "cycle_p50_ms": 191.091,
+          "cycle_p95_ms": 260.1885,
+          "encode_p50_ms": 0.02,
+          "server_decode_p50_ms": 0.171
+        },
+        "rice_independent": {
+          "payload_mean": 3895.6027397260273,
+          "cycle_p50_ms": 198.6245,
+          "cycle_p95_ms": 277.33575,
+          "encode_p50_ms": 4.417,
+          "server_decode_p50_ms": 8.4925
+        },
+        "rice_temporal": {
+          "payload_mean": 2533.958904109589,
+          "cycle_p50_ms": 198.773,
+          "cycle_p95_ms": 272.31325,
+          "encode_p50_ms": 3.805,
+          "server_decode_p50_ms": 11.72
+        },
+        "zlib1": {
+          "payload_mean": 3934.1164383561645,
+          "cycle_p50_ms": 190.593,
+          "cycle_p95_ms": 263.656,
+          "encode_p50_ms": 6.796,
+          "server_decode_p50_ms": 0.249
+        }
+      },
+      "acceptance": {
+        "rice_independent": {
+          "pairs": [
+            {
+              "pair": 0,
+              "median_ratio": 1.0621375191573912,
+              "p95_ratio": 0.9807141009066345,
+              "passes": false
+            },
+            {
+              "pair": 1,
+              "median_ratio": 1.0549604757049256,
+              "p95_ratio": 1.073092863449566,
+              "passes": false
+            },
+            {
+              "pair": 2,
+              "median_ratio": 1.026924523966437,
+              "p95_ratio": 1.0520086738166512,
+              "passes": false
+            }
+          ],
+          "passes": false
+        },
+        "rice_temporal": {
+          "pairs": [
+            {
+              "pair": 0,
+              "median_ratio": 1.0634602058215465,
+              "p95_ratio": 0.9280927486419744,
+              "passes": false
+            },
+            {
+              "pair": 1,
+              "median_ratio": 1.0396126316214551,
+              "p95_ratio": 1.0978305699909263,
+              "passes": false
+            },
+            {
+              "pair": 2,
+              "median_ratio": 1.0394260074286739,
+              "p95_ratio": 1.0801830374379786,
+              "passes": false
+            }
+          ],
+          "passes": false
+        }
+      },
+      "rice_payload_saving_percent": 45.0095723934551,
+      "rice_cycle_change_percent": 4.020074205483248
+    },
+    {
+      "condition": "Wi-Fi ordinaria, C++",
+      "folder": "hardware_native_network_2026-10-30",
+      "decoder": "native",
+      "serial_recovery": null,
+      "bandwidth": null,
+      "methods": {
+        "raw": {
+          "payload_mean": 4608.0,
+          "cycle_p50_ms": 177.3595,
+          "cycle_p95_ms": 260.5695,
+          "encode_p50_ms": 0.022,
+          "server_decode_p50_ms": 0.223
+        },
+        "rice_independent": {
+          "payload_mean": 3895.6027397260273,
+          "cycle_p50_ms": 179.1585,
+          "cycle_p95_ms": 262.58325,
+          "encode_p50_ms": 4.418,
+          "server_decode_p50_ms": 0.4235
+        },
+        "rice_temporal": {
+          "payload_mean": 2533.958904109589,
+          "cycle_p50_ms": 178.843,
+          "cycle_p95_ms": 262.857,
+          "encode_p50_ms": 3.8055,
+          "server_decode_p50_ms": 0.42
+        },
+        "zlib1": {
+          "payload_mean": 3934.1164383561645,
+          "cycle_p50_ms": 182.107,
+          "cycle_p95_ms": 259.5845,
+          "encode_p50_ms": 6.798,
+          "server_decode_p50_ms": 0.29
+        }
+      },
+      "acceptance": {
+        "rice_independent": {
+          "pairs": [
+            {
+              "pair": 0,
+              "median_ratio": 1.006326188606055,
+              "p95_ratio": 0.9788735289896261,
+              "passes": false
+            },
+            {
+              "pair": 1,
+              "median_ratio": 1.0167697532159035,
+              "p95_ratio": 0.9993128428307458,
+              "passes": false
+            },
+            {
+              "pair": 2,
+              "median_ratio": 1.0062250245433553,
+              "p95_ratio": 1.0537513833303926,
+              "passes": false
+            }
+          ],
+          "passes": false
+        },
+        "rice_temporal": {
+          "pairs": [
+            {
+              "pair": 0,
+              "median_ratio": 1.0162564048760707,
+              "p95_ratio": 0.990789897973907,
+              "passes": false
+            },
+            {
+              "pair": 1,
+              "median_ratio": 1.0136147945733578,
+              "p95_ratio": 0.9973091092388073,
+              "passes": false
+            },
+            {
+              "pair": 2,
+              "median_ratio": 0.9857828293303467,
+              "p95_ratio": 1.0283976207973275,
+              "passes": false
+            }
+          ],
+          "passes": false
+        }
+      },
+      "rice_payload_saving_percent": 45.0095723934551,
+      "rice_cycle_change_percent": 0.8364367287909458
+    },
+    {
+      "condition": "Proxy 128 kbit/s, C++",
+      "folder": "hardware_native_128k_2026-10-30",
+      "decoder": "native",
+      "serial_recovery": {
+        "device_log_sha256": "a3e59c4a07d1156e43b9a745c9887a68acb449942be68134e70297e4489c803a",
+        "records": [
+          {
+            "line": 1989,
+            "fragment_sha256": "0ccb86826cf0f445e3b7bccb02410a10fbd6da10c7f8da8540ac030224ad49d7",
+            "server_name": "001899-0-709005768-2-0",
+            "request_sha256": "88c371c2ce3e52821d42df34fd1f0c7e5c0acfa4d17602a9083274f1ec85e5ad",
+            "response_sha256": "84a421aa1bd034abb23bbaa45748ed5297f32f0c0443f1e6b70a5eaffde77f11"
+          }
+        ],
+        "method": "Only identity prefix restored from archived request and adjacent sequence records; all timers retained verbatim",
+        "recovered_records": 1
+      },
+      "bandwidth": {
+        "target_kbps": 128,
+        "effective_kbps_p50": 127.83097640907772,
+        "effective_kbps_min": 109.59837850970972,
+        "requests": 3504
+      },
+      "methods": {
+        "raw": {
+          "payload_mean": 4608.0,
+          "cycle_p50_ms": 478.133,
+          "cycle_p95_ms": 532.194,
+          "encode_p50_ms": 0.02,
+          "server_decode_p50_ms": 0.251
+        },
+        "rice_independent": {
+          "payload_mean": 3895.6027397260273,
+          "cycle_p50_ms": 432.651,
+          "cycle_p95_ms": 510.30125,
+          "encode_p50_ms": 4.417,
+          "server_decode_p50_ms": 0.482
+        },
+        "rice_temporal": {
+          "payload_mean": 2533.958904109589,
+          "cycle_p50_ms": 349.446,
+          "cycle_p95_ms": 504.3925,
+          "encode_p50_ms": 3.813,
+          "server_decode_p50_ms": 0.455
+        },
+        "zlib1": {
+          "payload_mean": 3934.1164383561645,
+          "cycle_p50_ms": 441.3865,
+          "cycle_p95_ms": 514.43475,
+          "encode_p50_ms": 6.798,
+          "server_decode_p50_ms": 0.339
+        }
+      },
+      "acceptance": {
+        "rice_independent": {
+          "pairs": [
+            {
+              "pair": 0,
+              "median_ratio": 0.9079943837571246,
+              "p95_ratio": 0.9797812361516723,
+              "passes": true
+            },
+            {
+              "pair": 1,
+              "median_ratio": 0.9127179444398098,
+              "p95_ratio": 0.9434537024351675,
+              "passes": true
+            },
+            {
+              "pair": 2,
+              "median_ratio": 0.9010338254705245,
+              "p95_ratio": 0.980962508136733,
+              "passes": true
+            }
+          ],
+          "passes": true
+        },
+        "rice_temporal": {
+          "pairs": [
+            {
+              "pair": 0,
+              "median_ratio": 0.6945114369403577,
+              "p95_ratio": 0.9721709415119092,
+              "passes": true
+            },
+            {
+              "pair": 1,
+              "median_ratio": 0.7353872945691166,
+              "p95_ratio": 0.9233866833783312,
+              "passes": true
+            },
+            {
+              "pair": 2,
+              "median_ratio": 0.7690434320559696,
+              "p95_ratio": 0.976516359543033,
+              "passes": true
+            }
+          ],
+          "passes": true
+        }
+      },
+      "rice_payload_saving_percent": 45.0095723934551,
+      "rice_cycle_change_percent": -26.91447777082945
+    },
+    {
+      "condition": "Proxy 512 kbit/s, C++",
+      "folder": "hardware_native_512k_2026-10-30",
+      "decoder": "native",
+      "serial_recovery": null,
+      "bandwidth": {
+        "target_kbps": 512,
+        "effective_kbps_p50": 509.5752907035928,
+        "effective_kbps_min": 174.19838444988724,
+        "requests": 3504
+      },
+      "methods": {
+        "raw": {
+          "payload_mean": 4608.0,
+          "cycle_p50_ms": 241.8495,
+          "cycle_p95_ms": 295.38675,
+          "encode_p50_ms": 0.022,
+          "server_decode_p50_ms": 0.242
+        },
+        "rice_independent": {
+          "payload_mean": 3895.6027397260273,
+          "cycle_p50_ms": 237.172,
+          "cycle_p95_ms": 287.51875,
+          "encode_p50_ms": 4.417,
+          "server_decode_p50_ms": 0.478
+        },
+        "rice_temporal": {
+          "payload_mean": 2533.958904109589,
+          "cycle_p50_ms": 221.259,
+          "cycle_p95_ms": 279.27725,
+          "encode_p50_ms": 3.807,
+          "server_decode_p50_ms": 0.457
+        },
+        "zlib1": {
+          "payload_mean": 3934.1164383561645,
+          "cycle_p50_ms": 238.633,
+          "cycle_p95_ms": 295.48425,
+          "encode_p50_ms": 6.7875,
+          "server_decode_p50_ms": 0.333
+        }
+      },
+      "acceptance": {
+        "rice_independent": {
+          "pairs": [
+            {
+              "pair": 0,
+              "median_ratio": 0.9796068897313335,
+              "p95_ratio": 1.0007744401369407,
+              "passes": false
+            },
+            {
+              "pair": 1,
+              "median_ratio": 0.9779580375623161,
+              "p95_ratio": 0.9424922935036639,
+              "passes": false
+            },
+            {
+              "pair": 2,
+              "median_ratio": 0.9876013105350523,
+              "p95_ratio": 0.9940317266632384,
+              "passes": false
+            }
+          ],
+          "passes": false
+        },
+        "rice_temporal": {
+          "pairs": [
+            {
+              "pair": 0,
+              "median_ratio": 0.9085132685017306,
+              "p95_ratio": 0.9505498137162066,
+              "passes": true
+            },
+            {
+              "pair": 1,
+              "median_ratio": 0.9089414688714142,
+              "p95_ratio": 0.9605718699323544,
+              "passes": true
+            },
+            {
+              "pair": 2,
+              "median_ratio": 0.926633661519715,
+              "p95_ratio": 0.9258158580263324,
+              "passes": true
+            }
+          ],
+          "passes": true
+        }
+      },
+      "rice_payload_saving_percent": 45.0095723934551,
+      "rice_cycle_change_percent": -8.513765792362616
+    }
+  ]
+}
