@@ -1,0 +1,10 @@
+artifacts/
+results/
+include/generated/
+include/network.local.h
+idf/.pio/
+idf/components/
+idf/managed_components/
+idf/vendor/
+idf/sdkconfig*
+!idf/sdkconfig.defaults

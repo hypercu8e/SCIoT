@@ -1,0 +1,168 @@
+{
+  "points": [
+    {
+      "rate_kbps": 600,
+      "passes": true,
+      "median_ms": {
+        "raw": 240.122,
+        "rice_temporal": 219.5885
+      },
+      "median_change_percent": -8.55127810029902,
+      "acceptance": {
+        "pairs": [
+          {
+            "pair": 0,
+            "median_ratio": 0.9096876400512783,
+            "p95_ratio": 0.9715729925808807,
+            "passes": true
+          },
+          {
+            "pair": 1,
+            "median_ratio": 0.9127593026354545,
+            "p95_ratio": 1.0269237184104474,
+            "passes": true
+          },
+          {
+            "pair": 2,
+            "median_ratio": 0.9076282847407079,
+            "p95_ratio": 0.9466178811634378,
+            "passes": true
+          }
+        ],
+        "passes": true
+      },
+      "effective_rate": {
+        "target_kbps": 600,
+        "effective_kbps_p50": 598.2584530025872,
+        "effective_kbps_min": 3.8043920970089826,
+        "requests": 1752
+      },
+      "report": "hardware_2026-11-01_600k/report.md"
+    },
+    {
+      "rate_kbps": 800,
+      "passes": true,
+      "median_ms": {
+        "raw": 221.6725,
+        "rice_temporal": 207.767
+      },
+      "median_change_percent": -6.27299281597854,
+      "acceptance": {
+        "pairs": [
+          {
+            "pair": 0,
+            "median_ratio": 0.9291845252157088,
+            "p95_ratio": 0.8953156706038571,
+            "passes": true
+          },
+          {
+            "pair": 1,
+            "median_ratio": 0.9335870698173909,
+            "p95_ratio": 1.0425344948135866,
+            "passes": true
+          },
+          {
+            "pair": 2,
+            "median_ratio": 0.9454765942744101,
+            "p95_ratio": 1.0470189440028386,
+            "passes": true
+          }
+        ],
+        "passes": true
+      },
+      "effective_rate": {
+        "target_kbps": 800,
+        "effective_kbps_p50": 797.898390860479,
+        "effective_kbps_min": 54.145931792680265,
+        "requests": 1752
+      },
+      "report": "hardware_2026-11-01_800k/report.md"
+    },
+    {
+      "rate_kbps": 900,
+      "passes": false,
+      "median_ms": {
+        "raw": 216.9895,
+        "rice_temporal": 204.637
+      },
+      "median_change_percent": -5.692671765223656,
+      "acceptance": {
+        "pairs": [
+          {
+            "pair": 0,
+            "median_ratio": 0.9557139227055372,
+            "p95_ratio": 1.130198192706652,
+            "passes": false
+          },
+          {
+            "pair": 1,
+            "median_ratio": 0.9388027910053216,
+            "p95_ratio": 0.9844555516759708,
+            "passes": true
+          },
+          {
+            "pair": 2,
+            "median_ratio": 0.9362877145923975,
+            "p95_ratio": 0.8968515834276614,
+            "passes": true
+          }
+        ],
+        "passes": false
+      },
+      "effective_rate": {
+        "target_kbps": 900,
+        "effective_kbps_p50": 897.2978669398706,
+        "effective_kbps_min": 115.8007266674386,
+        "requests": 1752
+      },
+      "report": "hardware_2026-11-01_900k/report.md"
+    },
+    {
+      "rate_kbps": 1000,
+      "passes": false,
+      "median_ms": {
+        "raw": 213.2485,
+        "rice_temporal": 202.21
+      },
+      "median_change_percent": -5.176355285031309,
+      "acceptance": {
+        "pairs": [
+          {
+            "pair": 0,
+            "median_ratio": 0.9467119915051166,
+            "p95_ratio": 0.9733369869574832,
+            "passes": true
+          },
+          {
+            "pair": 1,
+            "median_ratio": 0.9512578949225504,
+            "p95_ratio": 1.0338744108173545,
+            "passes": false
+          },
+          {
+            "pair": 2,
+            "median_ratio": 0.9466323742163639,
+            "p95_ratio": 0.9734952986639652,
+            "passes": true
+          }
+        ],
+        "passes": false
+      },
+      "effective_rate": {
+        "target_kbps": 1000,
+        "effective_kbps_p50": 996.6913787546164,
+        "effective_kbps_min": 9.026484590930387,
+        "requests": 1752
+      },
+      "report": "hardware_2026-11-01_1000k/report.md"
+    }
+  ],
+  "stop_reason": "observed transition bracket 800\u2013900 kbit/s (not a confidence interval)",
+  "observed_bracket_kbps": {
+    "highest_passing": 800,
+    "lowest_failing": 900,
+    "width": 100
+  },
+  "serial_prefix_recoveries": 0,
+  "measured_requests": 7008
+}
