@@ -1,4 +1,4 @@
-# SCIoT HTTP v2: N dispositivi, un worker
+# SCIoT HTTP v2: N dispositivi e worker configurabili
 
 Il server accetta richieste concorrenti e completa un'inferenza alla volta.
 Il percorso INT8 usa il prefisso ESP-NN già provato e il suffisso congelato
@@ -30,7 +30,7 @@ Equivalente: `python -m server.multiclient.run`, con lo stesso `PYTHONPATH=src`.
 Usare una directory di output nuova: vi finiscono configurazione, manifest e
 metriche `server.jsonl`. Non avviare più processi Uvicorn per questa modalità.
 
-Opzioni: `--max-clients 32`, `--queue-size 8`, `--max-receiving 8`,
+Opzioni: `--inference-workers 1`, `--inference-threads 1`, `--max-clients 32`, `--queue-size 8`, `--max-receiving 8`,
 `--timeout 10`, `--idle 60`, `--host`, `--port`, `--artifacts`, `--output`.
 Il logger scrive record brevi in ordine, senza dump dei tensori. Le scritture
 sincrone delle metriche contribuiscono al costo complessivo del servizio.
@@ -63,7 +63,7 @@ e di lunghezza valida. Il client deve confrontarli prima di accettare il risulta
 ## Ammissione, scadenze e riconnessioni
 
 Massimo una richiesta pendente per dispositivo, anche attraverso il cambio di
-sessione. La FIFO contiene al massimo 8 lavori in attesa, oltre a uno in esecuzione.
+sessione. La FIFO contiene al massimo 8 lavori in attesa, oltre ai lavori in esecuzione (al massimo `--inference-workers`).
 Al massimo 8 corpi vengono ricevuti contemporaneamente (registrazioni incluse).
 I corpi hanno dimensione limitata anche senza Content-Length. Ricezione massima
 3 secondi; scadenza inferenza 10 secondi dall'ingresso nel gestore HTTP. Il firmware
@@ -122,3 +122,31 @@ per client; attesa FIFO, occupazione worker e latenza server p50/p95/p99;
 RSS Linux, sessioni, coda e ricezioni campionati ogni secondo.
 Il throughput è complessivo: 32 client simulati non dimostrano 32 flussi video
 reali né riproducono contesa Wi-Fi o costo del prefisso su 32 schede.
+
+## Parallelismo CPU
+
+`--inference-workers W` crea W interpreti indipendenti, ciascuno costruito ed
+eseguito su un thread dedicato. `--inference-threads T` passa T al parametro
+`num_threads` di TFLite; il parallelismo effettivo dipende dai kernel. Entrambi
+richiedono interi positivi e valgono 1 per impostazione predefinita. Il processo
+HTTP resta unico: i worker di inferenza non sono processi Uvicorn.
+
+La coda FIFO è condivisa. L'assegnazione rispetta l'ordine di ammissione, ma le
+risposte possono completarsi in ordine diverso. I limiti di sessione, la singola
+richiesta pendente per client e le scadenze restano applicati a ogni lavoro.
+Il timeout di un lavoro in esecuzione non libera anticipatamente il suo worker.
+
+Esempio: `PYTHONPATH=src .venv/bin/python -m server.multiclient.run
+--output /tmp/sciot-w4-t1 --inference-workers 4 --inference-threads 1`
+(eseguire il comando su una sola riga).
+
+Le metriche aggiungono `worker_started`, `worker_id`, `active_workers` e
+`cpu_cores`: tempo CPU del processo diviso tempo reale fra campioni, quindi
+1.0 indica l'equivalente di un core occupato. Comprende tutti i thread del
+processo, anche HTTP e logging. `running` resta disponibile come booleano nei
+campioni per compatibilità. L'analizzatore legge anche i log precedenti.
+
+La campagna riproducibile è descritta in
+[server_parallelism](../../../experiments/server_parallelism/2026-11-01/README.md).
+
+Campagna completata: [risultati del parallelismo](../../../experiments/server_parallelism/2026-11-01/ac/README.md). 144 prove HTTP, 30 prove del motore, condizioni energetiche separate.

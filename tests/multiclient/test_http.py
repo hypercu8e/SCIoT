@@ -71,3 +71,41 @@ class HTTPTests(unittest.IsolatedAsyncioTestCase):
     def test_crc_rejects_corruption(self):
         invalid=bytearray(body());invalid[-1]=1
         with self.assertRaises(ValueError):parse(invalid)
+
+    async def test_two_workers_return_correlated_responses_out_of_order(self):
+        gate = threading.Event()
+        entered = threading.Event()
+        def factory():
+            def engine(data):
+                if data[-1] == 1:
+                    entered.set()
+                    gate.wait(3)
+                return data[32:]
+            return engine
+        app = create_app(factory, 'hash', inference_workers=2)
+        async with app.router.lifespan_context(app):
+            headers = {}
+            for cid in ('a', 'b'):
+                status, _, data = await post(app, '/api/v2/registration',
+                    json.dumps({'client_id':cid, 'model_sha256':'hash'}).encode())
+                self.assertEqual(status, 200)
+                headers[cid] = [(b'x-client-id',cid.encode()),
+                    (b'x-session-id',json.loads(data)['session_id'].encode()),
+                    (b'x-request-id',b'0'), (b'x-model-sha256',b'hash')]
+            slow = asyncio.create_task(post(app, '/api/v2/infer', body(1), headers['a']))
+            try:
+                async with asyncio.timeout(2):
+                    while not entered.is_set():
+                        await asyncio.sleep(.001)
+                async with asyncio.timeout(2):
+                    status, reply, data = await post(app, '/api/v2/infer', body(2), headers['b'])
+                self.assertEqual(status, 200)
+                self.assertEqual(reply[b'x-client-id'], b'b')
+                self.assertEqual(data, bytes([2])*4608)
+                self.assertFalse(slow.done())
+            finally:
+                gate.set()
+            status, reply, data = await slow
+            self.assertEqual(status, 200)
+            self.assertEqual(reply[b'x-client-id'], b'a')
+            self.assertEqual(data, bytes([1])*4608)

@@ -1,4 +1,4 @@
-"""All registry mutations run on one asyncio loop; one thread owns the engine."""
+"""All registry mutations run on one asyncio loop; each engine belongs to one dedicated thread."""
 import asyncio
 from collections import deque
 from concurrent.futures import ThreadPoolExecutor
@@ -41,16 +41,20 @@ class Job:
 
 class Service:
     def __init__(self, factory, model_hash, *, max_clients=32, queue_size=8,
-                 max_receiving=8, timeout=10., idle=60., metrics=None):
+                 max_receiving=8, timeout=10., idle=60., metrics=None, inference_workers=1):
         if min(max_clients, queue_size, max_receiving, timeout, idle) <= 0:
             raise ValueError('Limits must be positive')
+        if not isinstance(inference_workers, int) or isinstance(inference_workers, bool) or inference_workers < 1:
+            raise ValueError('inference_workers must be a positive integer')
         self.factory, self.model_hash = factory, model_hash
         self.max_clients, self.queue_size = max_clients, queue_size
         self.max_receiving, self.timeout, self.idle = max_receiving, timeout, idle
         self.clients, self.queue = {}, deque()
-        self.receiving, self.running = 0, None
+        self.receiving = 0
+        self.active = {}
         self.wake = asyncio.Event()
-        self.executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix='sciot-inference')
+        self.executors = [ThreadPoolExecutor(max_workers=1, thread_name_prefix=f'sciot-inference-{i}')
+                          for i in range(inference_workers)]
         self.metrics = metrics
         self.closed = False
 
@@ -63,13 +67,22 @@ class Service:
             self.metrics.write(json.dumps(row) + '\n')
             self.metrics.flush()
 
+    @property
+    def running(self):
+        """Compatibility view: first active job, or None."""
+        return next(iter(self.active.values()), None)
+
     async def start(self):
+        self.engines = []
         try:
-            self.engine = await asyncio.get_running_loop().run_in_executor(self.executor, self.factory)
+            for executor in self.executors:
+                self.engines.append(await asyncio.get_running_loop().run_in_executor(executor, self.factory))
         except BaseException:
-            self.executor.shutdown(wait=True)
+            for executor in self.executors:
+                executor.shutdown(wait=True)
+            self.engines.clear()
             raise
-        self.worker = asyncio.create_task(self.work())
+        self.workers = [asyncio.create_task(self.work(i)) for i in range(len(self.engines))]
         self.cleaner = asyncio.create_task(self.cleanup())
 
     async def close(self):
@@ -80,8 +93,10 @@ class Service:
         self.wake.set()
         self.cleaner.cancel()
         await asyncio.gather(self.cleaner, return_exceptions=True)
-        await self.worker  # Do not destroy buffers while Invoke is running.
-        self.executor.shutdown(wait=True)
+        await asyncio.gather(*self.workers)
+        for executor in self.executors:
+            executor.shutdown(wait=True)
+        self.engines.clear()
 
     def purge(self):
         now = time.monotonic()
@@ -93,6 +108,7 @@ class Service:
                 self.cancel(job, 504, 'deadline_exceeded')
 
     async def cleanup(self):
+        previous_time, previous_cpu = time.monotonic(), time.process_time()
         while True:
             await asyncio.sleep(min(1., self.idle))
             self.purge()
@@ -100,7 +116,10 @@ class Service:
                 rss = int(Path('/proc/self/statm').read_text().split()[1]) * os.sysconf('SC_PAGE_SIZE')
             except (OSError, ValueError, IndexError):
                 rss = None
-            self.emit('resources', rss_bytes=rss, clients=len(self.clients),
+            now, cpu = time.monotonic(), time.process_time()
+            cpu_cores = (cpu-previous_cpu)/(now-previous_time)
+            previous_time, previous_cpu = now, cpu
+            self.emit('resources', cpu_cores=cpu_cores, active_workers=len(self.active), rss_bytes=rss, clients=len(self.clients),
                       queue_depth=len(self.queue), receiving=self.receiving,
                       running=self.running is not None)
 
@@ -194,7 +213,7 @@ class Service:
             raise result
         return result
 
-    async def work(self):
+    async def work(self, worker_id):
         while not self.closed:
             await self.wake.wait()
             self.wake.clear()
@@ -204,10 +223,11 @@ class Service:
                     self.cancel(job, 504, 'deadline_exceeded')
                     continue
                 self.queue.popleft()
-                self.running = job
+                self.active[worker_id] = job
+                self.emit("worker_started", job, worker_id=worker_id, active_workers=len(self.active))
                 job.state, job.started = 'running', time.monotonic()
                 try:
-                    result = await asyncio.get_running_loop().run_in_executor(self.executor, self.engine, job.body)
+                    result = await asyncio.get_running_loop().run_in_executor(self.executors[worker_id], self.engines[worker_id], job.body)
                 except Exception as error:
                     self.emit('engine_error', job, error_type=type(error).__name__)
                     self.cancel(job, 500, 'inference_failed')
@@ -219,11 +239,12 @@ class Service:
                         self.cancel(job, 504, 'deadline_exceeded')
                     elif not job.future.done():
                         job.future.set_result(result)
-                        self.emit('terminal', job, status=200, response_body_bytes=len(result),
+                        self.emit('terminal', job, worker_id=worker_id, status=200, response_body_bytes=len(result),
                                   queue_us=int((job.started-job.queued)*1e6),
                                   worker_us=int((time.monotonic()-job.started)*1e6),
                                   elapsed_us=int((time.monotonic()-job.entered)*1e6))
                 finally:
-                    self.emit('worker_finished', job, worker_us=int((time.monotonic()-job.started)*1e6))
-                    job.state, self.running = 'finished', None
+                    self.emit('worker_finished', job, worker_id=worker_id, worker_us=int((time.monotonic()-job.started)*1e6))
+                    job.state = 'finished'
+                    del self.active[worker_id]
                     self.release(job)

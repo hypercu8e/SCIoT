@@ -8,7 +8,9 @@ from .protocol import parse, response
 
 
 class Suffix:
-    def __init__(self, artifacts):
+    def __init__(self, artifacts, num_threads=1):
+        if not isinstance(num_threads, int) or isinstance(num_threads, bool) or num_threads < 1:
+            raise ValueError("num_threads must be a positive integer")
         import numpy as np
         import tensorflow as tf
         from .fomo import decode
@@ -23,7 +25,7 @@ class Suffix:
         for key in ('shape', 'dtype', 'scales', 'zero_points'):
             if models['prefix']['output'][key] != models['suffix']['input'][key]:
                 raise ValueError('Boundary mismatch')
-        self.runtime = tf.lite.Interpreter(model_content=data, num_threads=1,
+        self.runtime = tf.lite.Interpreter(model_content=data, num_threads=num_threads,
             experimental_op_resolver_type=tf.lite.experimental.OpResolverType.BUILTIN_WITHOUT_DEFAULT_DELEGATES)
         self.runtime.allocate_tensors()
         self.input = self.runtime.get_input_details()[0]

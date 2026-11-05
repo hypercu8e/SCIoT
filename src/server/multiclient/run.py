@@ -17,7 +17,11 @@ def main():
     parser.add_argument('--max-receiving', type=int, default=8)
     parser.add_argument('--timeout', type=float, default=10.)
     parser.add_argument('--idle', type=float, default=60.)
+    parser.add_argument('--inference-workers', type=int, default=1)
+    parser.add_argument('--inference-threads', type=int, default=1)
     args = parser.parse_args()
+    if min(args.inference_workers, args.inference_threads) < 1:
+        parser.error('Inference workers and threads must be positive')
     for key, value in {'CUDA_VISIBLE_DEVICES': '-1', 'TF_CPP_MIN_LOG_LEVEL': '3',
                        'TF_NUM_INTRAOP_THREADS': '1', 'TF_NUM_INTEROP_THREADS': '1'}.items():
         os.environ.setdefault(key, value)
@@ -29,10 +33,10 @@ def main():
     (args.output/'manifest.json').write_text(json.dumps({'configuration': vars(args),
         'model_manifest': manifest}, default=str, indent=2)+'\n')
     with (args.output/'server.jsonl').open('x') as metrics:
-        app = create_app(lambda: Suffix(args.artifacts), manifest['models']['int8']['prefix']['sha256'],
+        app = create_app(lambda: Suffix(args.artifacts, args.inference_threads), manifest['models']['int8']['prefix']['sha256'],
                          max_clients=args.max_clients, queue_size=args.queue_size,
                          max_receiving=args.max_receiving, timeout=args.timeout, idle=args.idle,
-                         metrics=metrics)
+                         metrics=metrics, inference_workers=args.inference_workers)
         uvicorn.run(app, host=args.host, port=args.port, workers=1)
 
 

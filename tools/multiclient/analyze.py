@@ -23,6 +23,8 @@ def analyze(path):
             'rss_bytes':{'min':min(r['rss_bytes'] for r in resources if r['rss_bytes'] is not None),
                          'max':max(r['rss_bytes'] for r in resources if r['rss_bytes'] is not None),
                          'last':resources[-1]['rss_bytes']} if resources and any(r['rss_bytes'] is not None for r in resources) else {},
+            'max_active_workers':max((r.get('active_workers', int(bool(r.get('running')))) for r in resources),default=0),
+            'cpu_cores_mean':float(np.mean([r['cpu_cores'] for r in resources if 'cpu_cores' in r])) if any('cpu_cores' in r for r in resources) else None,
             'max_observed_queue':max((r['queue_depth'] for r in resources),default=0),
             'scope':'PC observations; not ESP32 hardware validation'}
 
