@@ -103,3 +103,51 @@ Per riaprire il lavoro con l'agente sul laptop:
 > Leggi RIPRESA_MULTICLIENT_LAPTOP.md e riprendi la verifica delle due ESP32.
 > Il lavoro precedente è già autorizzato: backup verificati, prove hardware e
 > ripristino delle flash originali. Parti da B e usa aggiornamenti sintetici.
+
+## Esito sul laptop — 5 novembre 2026 (`2026-11-05-laptop-B-first`)
+
+- Backup di A e B verificati; firmware installato su entrambe; flash originali
+  ripristinate su entrambe a fine prova.
+- **B individuale: superata** — 60 input incorporati + 20/20 frame camera in 24,5 s,
+  RSSI −57/−59 dBm, nessun errore.
+- **A individuale: fallita come sul PC fisso** — 60 input incorporati riusciti
+  (RSSI −59/−61 dBm), camera inizializzata (status 0), poi la prima richiesta camera
+  non riceve risposta (`http_response`, `http_status` −1, `length` −28679) dopo ~18 s.
+- Con segnale buono e B riuscita nello stesso punto, il segnale debole non spiega
+  più il guasto: il sospetto si sposta su A (camera/percorso di acquisizione o
+  scheda). Causa non dimostrata. Le fasi successive non sono state eseguite.
+
+### Ripetizione `2026-11-05-laptop-swap`
+
+Stesso esito: B 20/20 frame camera; A fallisce alla prima richiesta camera, ora
+con HTTP 408 dal server (corpo non ricevuto entro 3 s). Flash originali
+ripristinate. Lo scambio fisico delle camere non è registrato: se è stato fatto,
+il guasto segue la scheda A e non il modulo camera.
+
+### Diagnostica software su A (solo prove individuali, `--single-only`)
+
+Flag di diagnostica nel firmware, disattivati di default; dopo le prove è stato
+ricompilato il firmware normale. Flash originali ripristinate dopo ogni prova.
+
+| Directory | Variante | A |
+|---|---|---|
+| `2026-11-05-laptop-xclk-pause` | pausa LEDC dell'XCLK durante l'invio | **non valida**: su S3 l'XCLK non usa LEDC (`LEDC is not initialized`); 408 |
+| `2026-11-05-laptop-camera-deinit` (`MULTICLIENT_DEINIT_CAMERA=1`) | driver camera spento durante inferenza e HTTP | fallisce alla prima richiesta |
+| `2026-11-05-laptop-embedded-after-camera` (`MULTICLIENT_EMBEDDED_AFTER_CAMERA=1`) | un frame camera, deinit, poi di nuovo gli input incorporati | **anche gli input incorporati falliscono** |
+
+Conclusione provvisoria: non dipende dal contenuto dei frame né dalla camera attiva
+durante l'invio. Dopo la prima inizializzazione della camera A smette di completare
+richieste HTTP, mentre B con lo stesso firmware, nello stesso punto, funziona.
+Ipotesi più probabile: problema hardware di A (alimentazione/assorbimento del
+sensore che resta alimentato, o RF della scheda). Non dimostrata. Prove possibili:
+altro cavo/porta USB o hub alimentato per A; misura dell'RSSI e dei disconnect
+Wi-Fi subito dopo `camera_init`.
+
+### Cavi/porte USB scambiati (`2026-11-05-laptop-A-recabled`)
+
+Firmware normale, `--single-only`, A per prima. **A: 20/20 frame camera.**
+**B: HTTP 408 alla prima richiesta camera.** Il guasto segue il cavo/porta USB,
+non la scheda: indica alimentazione insufficiente sul collegamento con la camera
+attiva (non misurata). Prima della campagna completa serve un collegamento con
+alimentazione adeguata per entrambe (cavo corto/di qualità, porta diversa o hub
+alimentato) e una nuova prova individuale di entrambe.
