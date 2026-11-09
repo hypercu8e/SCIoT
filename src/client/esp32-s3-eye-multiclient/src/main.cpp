@@ -46,6 +46,14 @@ uint8_t response[kReplyBytes];
 EventGroupHandle_t wifiEvents;
 
 
+// Diagnostic only: stop the camera driver while each frame is processed and sent.
+#ifndef MULTICLIENT_DEINIT_CAMERA
+#define MULTICLIENT_DEINIT_CAMERA 0
+#endif
+// Diagnostic only: after one camera frame, resend the embedded inputs instead.
+#ifndef MULTICLIENT_EMBEDDED_AFTER_CAMERA
+#define MULTICLIENT_EMBEDDED_AFTER_CAMERA 0
+#endif
 #ifndef MULTICLIENT_CAMERA_FRAMES
 #define MULTICLIENT_CAMERA_FRAMES 1000
 #endif
@@ -216,7 +224,7 @@ bool cameraInit() {
   c.pixel_format=PIXFORMAT_RGB565;c.frame_size=FRAMESIZE_96X96;
   c.fb_count=1;c.fb_location=CAMERA_FB_IN_PSRAM;c.grab_mode=CAMERA_GRAB_WHEN_EMPTY;
   const esp_err_t result=esp_camera_init(&c);
-  printf("{\"event\":\"camera_init\",\"status\":%d}\n",int(result));return result==ESP_OK;
+  printf("{\"event\":\"camera_init\",\"status\":%d,\"deinit_camera\":%d}\n",int(result),MULTICLIENT_DEINIT_CAMERA);return result==ESP_OK;
 }
 bool capture(Sample& s,int mode,int frame,int iteration) {
   const int64_t start=esp_timer_get_time();
@@ -233,6 +241,12 @@ bool capture(Sample& s,int mode,int frame,int iteration) {
   const int64_t processed=esp_timer_get_time();
   // Keep the single frame leased through inference/HTTP, as in the validated
   // representation benchmark; returning it early permits concurrent refilling.
+  if(MULTICLIENT_DEINIT_CAMERA) {
+    esp_camera_fb_return(fb);esp_camera_deinit();
+    const bool ok=sample(mode,frame,iteration,"camera",s,start,acquired-start,processed-acquired);
+    if(!cameraInit()) {fail("camera_init");return false;}
+    return ok;
+  }
   const bool ok=sample(mode,frame,iteration,"camera",s,start,acquired-start,processed-acquired);
   esp_camera_fb_return(fb);
   return ok;
@@ -245,6 +259,19 @@ void run(char command) {
     for(int n=0;n<kRepeats;++n) { if(sample(1,kFrameIds[f],n,"embedded",row)) emit(row); }
   }
   if(!cameraInit()) {fail("camera_init");return;}
+  if(MULTICLIENT_EMBEDDED_AFTER_CAMERA) {
+    camera_fb_t* fb=esp_camera_fb_get();
+    printf("{\"event\":\"diagnostic_frame\",\"ok\":%d}\n",fb?1:0);
+    if(fb) esp_camera_fb_return(fb);
+    esp_camera_deinit();
+    int ok=0;
+    for(int f=0;f<3;++f) {
+      memcpy(canonical,kFrames[f],kPixels*sizeof(float));
+      for(int n=0;n<kRepeats;++n) if(sample(1,kFrameIds[f],100+n,"embedded_after_camera",row)) {emit(row);++ok;}
+    }
+    printf("{\"event\":\"diagnostic_done\",\"embedded_after_camera_completed\":%d}\n",ok);
+    return;
+  }
   const int64_t start=esp_timer_get_time();
   const int frames=command=='s'?20:MULTICLIENT_CAMERA_FRAMES;
   const int64_t duration=command=='h'?3600000000LL:command=='i'?180000000LL:0;
