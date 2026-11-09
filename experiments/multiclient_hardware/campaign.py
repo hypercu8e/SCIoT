@@ -129,6 +129,8 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run', type=Path, required=True)
     p.add_argument('--first-board', choices=('A', 'B'), default='A')
+    p.add_argument('--single-only', action='store_true',
+                   help='diagnostic: stop after the individual stages')
     a = p.parse_args()
     run = a.run.resolve()
     if (run/'campaign.jsonl').exists():
@@ -211,6 +213,9 @@ def main():
         for name in [a.first_board]+[n for n in BOARDS if n!=a.first_board]:
             boards[name].start('s')
             monitor('single_'+name, [name], 180)
+        if a.single_only:
+            emit('single_only_stop')
+            return
         load_log = (run/'simulated-process.log').open('x')
         load = subprocess.Popen([str(ROOT/'.venv/bin/python'), '-u', 'tools/multiclient/load.py',
             '--clients', '1', '--duration', '150', '--rate', '10', '--output', str(run/'simulated')],
