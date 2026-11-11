@@ -1,6 +1,6 @@
 # Diario del tirocinio SCIoT
 
-Aggiornato il 1 novembre 2026. Titolo del tirocinio: **Multi Device Split Computing**.
+Aggiornato il 9 novembre 2026. Titolo del tirocinio: **Multi Device Split Computing**.
 Tirocinio interno da 300 ore, con possibile sviluppo in tesi triennale in Informatica
 a UNIMORE, referente prof. Luca Bedogni.
 
@@ -14,6 +14,8 @@ vengono inventate. Le prime attività tecniche documentate risalgono al 15 ottob
 Non è un registro ufficiale delle presenze.
 Le sezioni datate descrivono le evidenze disponibili in quel momento; lo stato
 attuale e le attività successive sono riportati in fondo al documento.
+
+Per riprendere dalla fine del 9 novembre: [punto di ripresa operativo](RIPRESA_LAVORO.md), con riepilogo delle ultime quattro giornate.
 
 ## Obiettivo iniziale
 
@@ -723,3 +725,156 @@ credenziali e log integrali rimangono esclusi da Git.
 [Diagnostica](experiments/multiclient_hardware/2026-11-05/report.md) ·
 [Procedura](experiments/multiclient_hardware/README.md) ·
 [Punto di ripresa sul laptop](RIPRESA_MULTICLIENT_LAPTOP.md).
+
+
+## Validazione hardware multi-client sul fisso — 9 novembre 2026
+
+Configurata la rete con hotspot Pixel 9a e inoltro USB ADB della porta 8000,
+dopo aver verificato che il passaggio diretto hotspot → tethering USB non
+raggiungeva il server. Le prime prove individuali completano 60 input fissi e
+20 frame camera per scheda, con 160 risposte ricalcolate esattamente sul PC.
+
+La prima campagna completa si interrompe su HTTP 410 di B, rimasta inattiva
+oltre i 60 secondi di validità della sessione. Corretto il firmware per registrare
+una nuova sessione all'inizio di ogni comando; nessun timeout aumentato.
+Build riuscita e 21 test server superati, incluso il recupero tramite nuova
+registrazione dopo la scadenza. Tentativo interrotto e ripristini conservati.
+
+La nuova campagna completa supera le prove individuali, A con client PC
+simulato, 1.000 frame camera per scheda insieme e il riavvio isolato di A:
+B completa 35 richieste durante il riavvio. Nell'ora continua A completa
+14.137 frame e B 14.162, senza errori dispositivo o rifiuti. Tutte le 34.296
+richieste archiviate ricevono HTTP 200 e hanno punteggi del suffisso identici
+al replay indipendente. Attivazioni degli input fissi identiche fra schede e fasi.
+Entrambe le flash originali da 8 MiB ripristinate, verificate prima del boot e
+avviate sul firmware originale.
+
+Validazione riferita al servizio sperimentale HTTP v2 INT8 raw, ESP-NN,
+split `block_2_add`, un worker/thread CPU e rete Pixel + ADB. Non misura
+accuratezza annotata, energia, capacità massima o vantaggio dello split.
+[Rapporto completo e dati](experiments/multiclient_hardware/2026-11-09-pixel-adb-full/report.md).
+
+
+## Ottimizzazione input e acquisizione camera — 9 novembre 2026
+
+Implementato un esperimento separato per conversione RGB565 → INT8 mediante LUT
+in PSRAM e restituzione anticipata del framebuffer. Verificati tutti i 65.536
+colori RGB565 e input/attivazioni di 100 frame reali, anche con camera attiva
+durante l'inferenza: nessuna differenza. Nel run locale valido, tre ripetizioni
+da 200 frame per variante, il ciclo passa da circa 195 a 98 ms e la cadenza da
+5,00 a 9,62 attivazioni/s; età del frame p95 circa 194 contro 197 ms. Conversione
+con buffer trattenuto da 47,174 a 1,291 ms. Costo LUT: 64 KiB in PSRAM e circa
+327 ms di inizializzazione. Non si tratta di predizioni complete ricevute dal
+server: HTTP e suffisso sono esclusi dalla diagnostica locale.
+
+Misurati 2.600 frame camera, incluso un controllo grayscale esplorativo escluso
+dalla selezione perché cambia l'ingresso del modello e manca la valutazione
+qualitativa. Cinque test analizzatore e build superati; audit finale senza avvisi
+watchdog o righe corrotte. Un primo run locale è stato invalidato per watchdog
+e una riga persa; quello valido include pause periodiche per il task idle.
+
+Il nuovo confronto HTTP è interrotto da 408, riprodotto anche con il vecchio
+firmware già collaudato. Non invalida l'ora multi-client completata prima, ma
+impedisce di confermare il guadagno sul ciclo completo e sulle due schede.
+Causa non isolata. Firmware originali ripristinati/confermati; nessuna campagna
+lasciata attiva e inoltro ADB temporaneo rimosso. Prima di nuove misure complete,
+ripartire dalla stabilità del riferimento HTTP senza aumentare i timeout.
+
+[Report e audit](experiments/esp32_input_camera_benchmark/2026-11-09/report.md) ·
+[Filoni software](FILONI_OTTIMIZZAZIONE_SOFTWARE.md) ·
+[Punto di ripresa e riepilogo giornate](RIPRESA_LAVORO.md).
+
+## Screening HTTP delle ottimizzazioni — 10 novembre 2026
+
+Ripristinato il collegamento hotspot Pixel 9a + USB/ADB e identificato entrambe
+le ESP32-S3-EYE. Due controlli individuali del client precedente in ordine A/B
+e B/A completano 320 richieste. Aggiunta al runner sperimentale la modalità
+`--http-smoke-only`: tre ripetizioni da 20 frame camera per ciascuna delle
+quattro varianti RGB565, precedute da input incorporati e warmup. Altre 1.200
+richieste completate; 240 frame camera misurati. Verificati senza differenze
+65.536 colori RGB565 e input/attivazioni di 100 frame reali.
+
+Tutte le 1.520 risposte hanno punteggi del suffisso identici al replay;
+zero errori dispositivo e HTTP 408. Persistono oscillazioni del trasporto:
+uno scambio del riferimento impiega 5,2 s, contro circa 0,15 s nel servizio
+server. Causa dei precedenti 408 non isolata; nessuna stabilità prolungata
+stabilita dalle prove brevi.
+
+Mediane descrittive delle statistiche di tre serie: sola LUT con buffer
+trattenuto, ciclo p50 da 438,614 a 322,488 ms (circa -26,5%), cadenza da 2,177
+a 2,745 risultati/s e età p95 da 572,467 a 487,465 ms. LUT + rilascio anticipato
+riduce ulteriormente il p50, ma peggiora la freschezza e registra un intervallo
+fra risultati da 5 s. Nessuna selezione o promozione; confronto completo e
+conferma multi-client della variante ancora da eseguire.
+
+Cinque test analizzatore, compilazione Python e build di entrambi i firmware
+superati. Backup aggiornati e verificati prima dei flash; firmware originali
+e boot confermati alla chiusura. Server spento, seriali libere e inoltro ADB
+rimosso. Nessun commit o push.
+
+[Report, statistiche e audit](experiments/esp32_input_camera_benchmark/2026-11-10/report.md)
+· [punto di ripresa](RIPRESA_LAVORO.md).
+
+### Seguito del 10 novembre — confronto lungo originale/LUT
+
+Completate tre ripetizioni da 1.000 frame per versione su A, poi 1.000 frame
+per versione su ciascuna delle due schede insieme. Criteri individuali e
+simultanei superati: mediana dei p50 del ciclo 336,232 → 244,757 ms (-27,2%),
+p95 e freschezza entro i margini. Escluse le varianti con rilascio anticipato.
+
+Ora continua interrotta dopo circa 34 minuti: A riceve HTTP 408 per corpo non
+ricevuto entro 3 s; B non registra errori nel tratto osservato. Disconnessioni
+Wi-Fi di A rilevate soltanto all'avvio, senza coincidenza con il guasto.
+Causa non isolata; nessuna promozione al client operativo.
+
+Replay esatto su 23.829 risposte riuscite; 2 terminali 408, il secondo durante
+l'arresto. Preservati 5.349/7.225 frame camera di A/B prima dello stop. Durante
+il ripristino sequenziale il vecchio runner lasciava B inviare dopo la chiusura
+del log: separate 295 risposte successive allo stop, una ancora correlata e
+294 senza campione seriale. Corretto l'audit: 240 warmup effettivi, non 534.
+
+Runner corretto per resettare entrambe le schede prima di chiudere i log e
+ripristinare; errori di reset/chiusura non saltano i ripristini. Nuovo percorso
+verificato staticamente, non con una nuova campagna hardware. Sette test
+analizzatore superati. Entrambe le flash originali ripristinate e verificate,
+boot confermati, server spento e inoltro ADB rimosso. Nessun commit/push.
+
+[Report lungo e audit](experiments/esp32_input_camera_benchmark/2026-11-10/lut-hold-full-report.md).
+
+### Chiusura concordata del filone LUT
+
+L'utente considera sufficiente la valutazione: LUT utile e numericamente
+identica, con beneficio della conversione locale indipendente dalla rete.
+Il guadagno end-to-end misurato resta riferito alla configurazione provata.
+Timeout probabilmente dovuto al particolare percorso Pixel/hotspot/USB-ADB,
+senza causa isolata; nessun altro test di rete richiesto e nessuna ripetizione
+automatica dell'ora. Conservati esito interrotto, log e audit. Codice LUT nel
+progetto sperimentale; nessuna integrazione nel client operativo eseguita.
+
+## Profilazione per operatore sulla ESP32 — 10 novembre 2026
+
+Creato esperimento separato, senza camera/Wi-Fi/HTTP, sul prefisso INT8
+congelato con ESP-NN. Scheda B, tre input fissi, tre round alternati
+normale/profilato sulla stessa arena PSRAM: 540 inferenze misurate,
+90 warmup, 2.970 record di operatori. Tempo normale 93,762 ms, profilato
+93,874 ms, scostamento +0,119%; arena effettiva 229.820 byte.
+
+La prima convoluzione costa 23,439 ms (25,0%), l'espansione 1×1 del nodo 3
+18,017 ms (19,2%), il PAD 14,628 ms (15,6%). Gli scope operatori coprono
+99,906% di Invoke; entrypoint ESP-NN 82,776%. PAD generico con cicli per
+singolo elemento: candidato a futura copia per righe, da verificare
+numericamente e misurare; nessuna nuova ottimizzazione applicata.
+
+Attivazioni normali/profilate identiche su dispositivo e identiche alle tre
+attivazioni canoniche del precedente firmware ESP32. Il confronto aggiuntivo
+con TFLite PC rileva differenze già presenti (massimo 4 livelli INT8):
+674/680/587 elementi diversi su 4.608 per i tre input. Primo audit stretto
+fallito conservato; audit finale distingue confronto PC e continuità con il
+backend ESP32. Nessuna nuova misura di accuratezza né causa numerica isolata.
+
+Cinque test dell'analizzatore superati, build e misure hardware riuscite.
+Backup integrale verificato prima del flash; ripristino integrale della
+flash originale B verificato e boot originale confermato. Nessun server
+avviato, nessun commit/push. Report, CSV, mappa dei tensori e snapshot salvati.
+
+[Report della profilazione](experiments/esp32_layer_profile/2026-11-10/report.md).

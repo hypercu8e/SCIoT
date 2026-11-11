@@ -13,6 +13,10 @@ Questo documento raccoglie proposte di **tesi triennale** collegate al tirocinio
 
 La revisione conserva le undici direzioni precedenti, corregge riferimenti e affermazioni tecniche e aggiunge sei direzioni. Le difficoltà sono stime progettuali, non garanzie di completamento nelle ore disponibili.
 
+## Filoni software operativi — 9 novembre 2026
+
+Il [catalogo delle ottimizzazioni software](FILONI_OTTIMIZZAZIONE_SOFTWARE.md) raccoglie le dieci direzioni discusse e le priorità misurate. La [campagna hardware completata](experiments/multiclient_hardware/2026-11-09-pixel-adb-full/report.md) aggiorna lo stato storico sopra: due ESP32 validate nella configurazione provata. Il lavoro iniziale riguarda conversione input e acquisizione camera.
+
 ## Come leggere le evidenze
 
 - **Codice ispezionato:** comportamento dedotto dai sorgenti del checkout; non prova di prestazioni, concorrenza o funzionamento fisico su ESP32.
