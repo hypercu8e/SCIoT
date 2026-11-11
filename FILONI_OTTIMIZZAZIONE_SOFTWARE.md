@@ -1,6 +1,18 @@
 # Filoni di ottimizzazione software SCIoT
 
-Aggiornamento: 10 novembre 2026. Le direzioni proposte non sono vantaggi già dimostrati né dichiarazioni di novità scientifica; gli esiti misurati sono distinti sotto.
+Aggiornamento: 11 novembre 2026. Le direzioni proposte non sono vantaggi già dimostrati né dichiarazioni di novità scientifica; gli esiti misurati sono distinti sotto.
+
+**Memoria, 11 novembre:** [attivazioni in RAM interna](experiments/esp32_memory_benchmark/2026-11-11/report.md)
+portano `Invoke()` da 84,723 a 62,289 ms (−26,5%), 17,5 ms su operatori
+diversi dal PAD; depthwise −30/−55%. Limite superiore senza Wi-Fi/camera:
+il picco di 226 KB non entra nel client (minimo libero 194 KB). Rimuovendo
+il nodo PAD il picco scenderebbe a circa 138 KB: prossimo passo da approvare.
+
+**PAD veloce, 11 novembre:** [copie per righe al posto del kernel TFLM](experiments/esp32_pad_benchmark/2026-11-11/report.md),
+stessi byte su 32 input e 1.260 esecuzioni. Nodo PAD 14,647 → 5,209 ms,
+`Invoke()` del prefisso 93,913 → 84,482 ms (−10,0%). Ora il PAD costa quanto
+una copia in PSRAM (4,9 ms); in RAM interna la stessa copia richiede 0,3 ms.
+Solo progetto sperimentale, non promosso al client operativo.
 
 **Profilazione completata:** [11 operatori del prefisso](experiments/esp32_layer_profile/2026-11-10/report.md),
 93,762 ms in modalità normale, strumentazione +0,119%. Prima convoluzione
@@ -51,8 +63,8 @@ Le mediane delle fasi non sono additive. La mediana di ciclo meno HTTP, calcolat
 |---|---|---|---|
 | 1. Conversione input | RGB565 → INT8 mediante tabella, evitando float e double per ogni pixel | Identici byte sullo stesso frame, tempi, memoria e startup | Implementato; correttezza e tempi locali verificati |
 | 2. Acquisizione camera | Restituire il buffer dopo conversione per consentire acquisizione durante il lavoro successivo; grayscale nativo separato | Attesa, età del frame, FPS, stabilità; grayscale richiede successiva verifica qualità | Implementato; compromesso FPS/età misurato localmente |
-| 3. Memoria | Misurare buffer critici in RAM interna rispetto a PSRAM | Latenza, memoria minima e stabilità Wi-Fi/camera | Proposta |
-| 4. Profilazione layer | Attribuire i ~95 ms del prefisso a operatori e copie | Tempi per operatore, kernel effettivamente usati | Completata su B, input fissi; [report](experiments/esp32_layer_profile/2026-11-10/report.md) |
+| 3. Memoria | Misurare buffer critici in RAM interna rispetto a PSRAM | Latenza, memoria minima e stabilità Wi-Fi/camera | Limite superiore misurato: −22,4 ms sul prefisso, [report](experiments/esp32_memory_benchmark/2026-11-11/report.md). Da rendere compatibile con la RAM del client |
+| 4. Profilazione layer | Attribuire i ~95 ms del prefisso a operatori e copie | Tempi per operatore, kernel effettivamente usati | Completata su B, input fissi; [report](experiments/esp32_layer_profile/2026-11-10/report.md). PAD ottimizzato: −9,4 ms, [report](experiments/esp32_pad_benchmark/2026-11-11/report.md) |
 | 5. Pipeline | Sovrapporre inferenza e invio con proprietà dei buffer esplicita | FPS, latenza, età, RAM e contesa | Proposta; distinta dal rilascio anticipato camera |
 | 6. HTTP persistente | Confrontare riuso della connessione e apertura per richiesta | p50/p95/p99, riconnessioni e ciclo completo | Proposta |
 | 7. Split statici alternativi | Confrontare pochi tagli validi sulla scheda | Calcolo, byte, RAM e latenza completa | Proposta |

@@ -1,6 +1,47 @@
-# Punto di ripresa SCIoT — aggiornamento del 10 novembre 2026
+# Punto di ripresa SCIoT — aggiornamento dell'11 novembre 2026
 
-## Ultimo lavoro: profilazione locale del prefisso completata
+## Ultimo lavoro: attivazioni in RAM interna, il filone merita
+
+Esperimento `experiments/esp32_memory_benchmark/`, scheda B, senza
+Wi-Fi/camera/HTTP. Stessa API TFLM a due arene, PAD veloce in entrambe;
+cambia solo la memoria delle attivazioni. `Invoke()` 84,723 → 62,289 ms
+(−26,5%); 17,5 ms dagli operatori diversi dal PAD, oltre la soglia di 5 ms
+fissata prima. Zero differenze, attivazioni canoniche identiche al
+precedente firmware. Blocco interno contiguo all'avvio 278.528 byte.
+
+Vincolo: picco attivazioni 225.840 byte, il client con Wi-Fi/camera ha
+minimo 194 KB liberi. Senza nodo PAD il picco sarebbe circa 138 KB.
+Prossimi passi da approvare: (1) rimuovere il PAD dal grafo con padding
+SAME nella depthwise, verifica byte per byte; (2) prova di capienza nel
+client con Wi-Fi e camera; (3) poi portare tutto nel client e misurare il
+ciclo completo. Flash B ripristinata e verificata, boot confermato.
+Esperimenti PAD e memoria non ancora committati.
+[Report](experiments/esp32_memory_benchmark/2026-11-11/report.md).
+
+## PAD veloce, criteri superati — 11 novembre
+
+Esperimento separato `experiments/esp32_pad_benchmark/`, solo scheda B,
+senza camera/Wi-Fi/HTTP. Il PAD del nodo 4 usa copie per righe e riempimento
+del bordo al posto del kernel TFLM; preparazione e parametri restano TFLM.
+Modello, split, componenti e arena invariati.
+
+Correttezza: 3.687.936 byte del tensore PAD confrontati su 32 input, zero
+diversi; zero differenze sulle 1.260 esecuzioni della misura; attivazioni
+canoniche identiche al precedente firmware ESP32. Test su PC contro il kernel
+TFLM su 2.001 casi; 11 test superati.
+
+Tempi (mediana dei p50 di tre round): PAD 14,647 → 5,209 ms (−64,4%),
+`Invoke()` 93,913 → 84,482 ms (−9,431 ms, −10,0%); altri operatori invariati.
+Calibrazione: il PAD veloce costa quasi quanto una copia in PSRAM
+(5,0 contro 4,9 ms); in RAM interna la copia richiede 0,3 ms.
+
+Prossimi passi possibili, da decidere: promuovere PAD (e LUT) nel client
+operativo e misurare il ciclo completo; oppure filone memoria, buffer critici
+in RAM interna. Flash originale B ripristinata e verificata, boot confermato.
+Il lavoro fino al 10 novembre è stato committato e pushato l'11 novembre.
+[Report](experiments/esp32_pad_benchmark/2026-11-11/report.md).
+
+## Profilazione locale del prefisso completata — 10 novembre
 
 Esperimento separato `experiments/esp32_layer_profile/`, solo scheda B,
 senza camera/Wi-Fi/HTTP. Tre input fissi, tre round normale/profilato:

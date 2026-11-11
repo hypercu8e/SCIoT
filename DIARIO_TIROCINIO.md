@@ -878,3 +878,43 @@ flash originale B verificato e boot originale confermato. Nessun server
 avviato, nessun commit/push. Report, CSV, mappa dei tensori e snapshot salvati.
 
 [Report della profilazione](experiments/esp32_layer_profile/2026-11-10/report.md).
+
+## PAD veloce sulla ESP32 — 11 novembre 2026
+
+Commit tematici e push del lavoro fino al 10 novembre. Creato esperimento
+separato per il nodo PAD, che la profilazione indicava a 14,6 ms. Il kernel
+TFLM visita ogni byte con controlli dei limiti; la nuova esecuzione copia ogni
+riga e riempie riga e colonna di bordo con lo zero point (−128). Registrata
+con preparazione TFLM invariata, senza modificare modello o componenti.
+
+Verifica su PC contro il kernel TFLM: forma del modello e 2.000 casi casuali
+identici. Sulla scheda B: 32 input con confronto integrale del tensore PAD
+dentro il nodo, poi 1.080 inferenze misurate e 180 warmup alternando kernel
+originale e veloce. Zero byte diversi; attivazioni canoniche identiche al
+precedente firmware ESP32.
+
+PAD 14,647 → 5,209 ms, `Invoke()` del prefisso 93,913 → 84,482 ms (−10,0%),
+riduzione coerente con quella del nodo; altri operatori invariati. Criteri
+fissati prima della misura superati. La calibrazione mostra che il PAD veloce
+è ora limitato dalla PSRAM (copia 4,9 ms, 0,3 ms in RAM interna). Ripristino
+integrale della flash B verificato e boot originale confermato. Risultato
+limitato al prefisso: non misurato il ciclo completo.
+
+[Report del PAD veloce](experiments/esp32_pad_benchmark/2026-11-11/report.md).
+
+### Seguito dell'11 novembre — attivazioni in RAM interna
+
+Verificato prima il vincolo: il picco delle attivazioni (225.840 byte al
+nodo PAD) supera la RAM interna libera del client con Wi-Fi e camera
+(minimo 194 KB). La prova è quindi un limite superiore, senza Wi-Fi né camera.
+Stessa API TFLM a due arene per entrambe le varianti; cambia solo la memoria
+delle attivazioni e dello scratch ESP-NN. 1.080 inferenze misurate sulla
+scheda B, zero differenze.
+
+`Invoke()` 84,723 → 62,289 ms (−26,5%). Il guadagno sugli operatori diversi
+dal PAD è 17,5 ms, oltre la soglia di 5 ms fissata prima: le depthwise
+guadagnano 30–55%, la prima convoluzione solo 2,6%. Senza il nodo PAD il
+picco scenderebbe a circa 138 KB: rimozione del nodo e prova di capienza nel
+client sono i prossimi passi da approvare. Flash B ripristinata e verificata.
+
+[Report attivazioni in RAM interna](experiments/esp32_memory_benchmark/2026-11-11/report.md).
