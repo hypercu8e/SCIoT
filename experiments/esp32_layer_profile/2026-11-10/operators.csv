@@ -1,0 +1,12 @@
+index,operator,output_tensor,output_bytes,macs,p50_us,p95_us,mean_us,share_of_invoke_pct,esp_nn_share_of_operator_pct
+0,CONV_2D,model_1/Conv1_relu/Relu6;model_1/bn_Conv1/FusedBatchNormV3;model_1/block_5_project/Conv2D;model_1/Conv1/Conv2D,36864,331776,23439.0,23446.0,23435.966666666667,24.967609281682847,99.38152990868262
+1,DEPTHWISE_CONV_2D,model_1/expanded_conv_depthwise_relu/Relu6;model_1/expanded_conv_depthwise_BN/FusedBatchNormV3;model_1/block_5_project/Conv2D;model_1/expanded_conv_depthwise/depthwise,36864,331776,8589.0,8597.0,8589.066666666668,9.150399626257908,98.97932254959794
+2,CONV_2D,model_1/expanded_conv_project_BN/FusedBatchNormV3;model_1/block_2_project/Conv2D;model_1/expanded_conv_project/Conv2D,18432,294912,3802.0,3804.0,3802.7,4.051223026805894,98.96408886863037
+3,CONV_2D,model_1/block_1_expand_relu/Relu6;model_1/block_1_expand_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_1_expand/Conv2D,110592,884736,18017.0,18017.0,18016.514814814815,19.193972619603784,99.80748116080329
+4,PAD,model_1/block_1_pad/Pad,115248,,14628.0,14629.0,14627.707407407408,15.583691871109483,0.0
+5,DEPTHWISE_CONV_2D,model_1/block_1_depthwise_relu/Relu6;model_1/block_1_depthwise_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_1_depthwise/depthwise,27648,248832,9462.0,9462.0,9461.537037037036,10.079889739769442,99.53766027366159
+6,CONV_2D,model_1/block_1_project_BN/FusedBatchNormV3;model_1/block_2_project/Conv2D;model_1/block_1_project/Conv2D,4608,221184,1470.0,1471.0,1470.0592592592593,1.566134042096491,96.70635600479699
+7,CONV_2D,model_1/block_2_expand_relu/Relu6;model_1/block_2_expand_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_2_expand/Conv2D,27648,221184,4331.0,4332.0,4331.337037037037,4.614408799353527,99.09180383099564
+8,DEPTHWISE_CONV_2D,model_1/block_2_depthwise_relu/Relu6;model_1/block_2_depthwise_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_2_depthwise/depthwise,27648,248832,7713.0,7713.0,7712.7037037037035,8.216762522254069,99.3922964997623
+9,CONV_2D,model_1/block_2_project_BN/FusedBatchNormV3;model_1/block_2_project/Conv2D,4608,221184,1402.0,1402.0,1401.5074074074073,1.4931020278033813,97.23842317927523
+10,ADD,model_1/block_2_add/add,4608,,929.0,931.0,928.2222222222222,0.9888855919897979,0.0
