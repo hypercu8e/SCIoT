@@ -1,0 +1,772 @@
+{
+  "scope": "Long original versus LUT, framebuffer held; no automatic production promotion.",
+  "measurements_complete": false,
+  "performance_and_hour_validated": false,
+  "one_hour_memory_screen_passed": false,
+  "candidate": 1,
+  "confirmation": {
+    "A": {
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "memory_stable": true,
+        "median_gain": true,
+        "cycle_tail": true,
+        "frame_age": true
+      }
+    },
+    "B": {
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "memory_stable": true,
+        "median_gain": true,
+        "cycle_tail": true,
+        "frame_age": true
+      }
+    }
+  },
+  "hour_completed": false,
+  "archive": {
+    "archived": 23829,
+    "measured_samples_matched": 23295,
+    "unmatched_archived_requests": 534,
+    "unmeasured_warmup_requests": 240,
+    "unmatched_other_requests": 294,
+    "scores_exact": true,
+    "validation": {
+      "A": {
+        "exhaustive": [
+          {
+            "event": "exhaustive_validation",
+            "colors": 65536,
+            "mismatches": 0
+          }
+        ],
+        "paired": 100
+      },
+      "B": {
+        "exhaustive": [],
+        "paired": 0
+      }
+    },
+    "restored": {
+      "A": true,
+      "B": true
+    },
+    "measurements_complete": false
+  },
+  "boards": {
+    "A": {
+      "events": {
+        "boot": 2,
+        "allocated": 2,
+        "lut_ready": 2,
+        "kernel_check": 2,
+        "ready": 11,
+        "exhaustive_validation": 1,
+        "camera_init": 10,
+        "paired_validation": 100,
+        "validation_done": 1,
+        "wifi_disconnected": 2,
+        "configured": 9,
+        "registration": 10,
+        "run_config": 9,
+        "correlation": 14069,
+        "frame_timing": 13889,
+        "measurement_transport": 13889,
+        "sample": 13889,
+        "memory": 284,
+        "done": 8,
+        "error": 1
+      },
+      "original_boot_confirmed": true
+    },
+    "B": {
+      "events": {
+        "boot": 1,
+        "allocated": 1,
+        "lut_ready": 1,
+        "kernel_check": 1,
+        "ready": 3,
+        "configured": 3,
+        "registration": 3,
+        "run_config": 3,
+        "correlation": 9466,
+        "frame_timing": 9406,
+        "measurement_transport": 9406,
+        "sample": 9406,
+        "camera_init": 3,
+        "memory": 189,
+        "done": 2
+      },
+      "original_boot_confirmed": true
+    }
+  },
+  "embedded_activations_sha256_identical": true,
+  "terminal_statuses": {
+    "200": 23829,
+    "408": 2
+  },
+  "stages": {
+    "single_r1_reference_hold": {
+      "A": {
+        "frames": 1000,
+        "metrics_ms": {
+          "acquisition_us": {
+            "p50": 78.513,
+            "p95": 96.2581,
+            "p99": 97.98623
+          },
+          "preprocessing_us": {
+            "p50": 8.629,
+            "p95": 8.98115,
+            "p99": 9.232009999999999
+          },
+          "input_prepare_us": {
+            "p50": 38.581,
+            "p95": 39.0006,
+            "p99": 39.31746
+          },
+          "invoke_us": {
+            "p50": 94.708,
+            "p95": 95.51705,
+            "p99": 95.84913
+          },
+          "packing_us": {
+            "p50": 1.061,
+            "p95": 1.067,
+            "p99": 1.22204
+          },
+          "request_response_us": {
+            "p50": 115.26599999999999,
+            "p95": 308.60464999999994,
+            "p99": 841.7560499999998
+          },
+          "observed_cycle_us": {
+            "p50": 336.23199999999997,
+            "p95": 515.6766499999999,
+            "p99": 1061.2700999999997
+          },
+          "age_at_delivery_us": {
+            "p50": 50.136,
+            "p95": 50.162,
+            "p99": 50.216010000000004
+          },
+          "age_at_result_us": {
+            "p50": 308.5185,
+            "p95": 502.57134999999994,
+            "p99": 1035.1525699999997
+          }
+        },
+        "fps": 2.654622436518604,
+        "result_gap_p95_ms": 519.7762000000001,
+        "max_result_gap_ms": 3106.301,
+        "memory_stable": true,
+        "internal_min_free": 193007,
+        "psram_min_free": 7210596
+      }
+    },
+    "single_r1_lut_hold": {
+      "A": {
+        "frames": 1000,
+        "metrics_ms": {
+          "acquisition_us": {
+            "p50": 82.52250000000001,
+            "p95": 96.1229,
+            "p99": 97.65229000000001
+          },
+          "preprocessing_us": {
+            "p50": 1.274,
+            "p95": 1.284,
+            "p99": 1.443
+          },
+          "input_prepare_us": {
+            "p50": 0.003,
+            "p95": 0.003,
+            "p99": 0.003
+          },
+          "invoke_us": {
+            "p50": 94.779,
+            "p95": 95.656,
+            "p99": 95.92951000000001
+          },
+          "packing_us": {
+            "p50": 1.061,
+            "p95": 1.067,
+            "p99": 1.2260199999999999
+          },
+          "request_response_us": {
+            "p50": 64.941,
+            "p95": 122.57179999999998,
+            "p99": 356.49125
+          },
+          "observed_cycle_us": {
+            "p50": 244.75650000000002,
+            "p95": 307.6754999999999,
+            "p99": 511.3186699999998
+          },
+          "age_at_delivery_us": {
+            "p50": 50.133,
+            "p95": 50.149,
+            "p99": 50.168
+          },
+          "age_at_result_us": {
+            "p50": 212.46699999999998,
+            "p95": 270.10845,
+            "p99": 504.27246999999994
+          }
+        },
+        "fps": 3.8754720142583854,
+        "result_gap_p95_ms": 312.13680000000005,
+        "max_result_gap_ms": 960.082,
+        "memory_stable": true,
+        "internal_min_free": 193007,
+        "psram_min_free": 7210596
+      }
+    },
+    "single_r2_lut_hold": {
+      "A": {
+        "frames": 1000,
+        "metrics_ms": {
+          "acquisition_us": {
+            "p50": 75.017,
+            "p95": 96.13215,
+            "p99": 97.98639
+          },
+          "preprocessing_us": {
+            "p50": 1.273,
+            "p95": 1.36405,
+            "p99": 1.7080499999999998
+          },
+          "input_prepare_us": {
+            "p50": 0.003,
+            "p95": 0.003,
+            "p99": 0.003
+          },
+          "invoke_us": {
+            "p50": 94.887,
+            "p95": 96.08725,
+            "p99": 96.53613
+          },
+          "packing_us": {
+            "p50": 1.061,
+            "p95": 1.067,
+            "p99": 1.22804
+          },
+          "request_response_us": {
+            "p50": 195.489,
+            "p95": 366.37314999999995,
+            "p99": 1074.6396999999993
+          },
+          "observed_cycle_us": {
+            "p50": 371.885,
+            "p95": 545.3866999999999,
+            "p99": 1269.3444099999997
+          },
+          "age_at_delivery_us": {
+            "p50": 50.14,
+            "p95": 50.17105,
+            "p99": 50.383010000000006
+          },
+          "age_at_result_us": {
+            "p50": 344.19899999999996,
+            "p95": 513.6929,
+            "p99": 1223.9868599999993
+          }
+        },
+        "fps": 2.4892154057327174,
+        "result_gap_p95_ms": 549.4146,
+        "max_result_gap_ms": 3020.964,
+        "memory_stable": true,
+        "internal_min_free": 192847,
+        "psram_min_free": 7210596
+      }
+    },
+    "single_r2_reference_hold": {
+      "A": {
+        "frames": 1000,
+        "metrics_ms": {
+          "acquisition_us": {
+            "p50": 59.768,
+            "p95": 96.48774999999999,
+            "p99": 97.92224999999999
+          },
+          "preprocessing_us": {
+            "p50": 8.628,
+            "p95": 8.801,
+            "p99": 8.84223
+          },
+          "input_prepare_us": {
+            "p50": 38.598,
+            "p95": 38.90215,
+            "p99": 39.32004
+          },
+          "invoke_us": {
+            "p50": 94.723,
+            "p95": 95.50105,
+            "p99": 95.71803
+          },
+          "packing_us": {
+            "p50": 1.061,
+            "p95": 1.067,
+            "p99": 1.19401
+          },
+          "request_response_us": {
+            "p50": 49.2875,
+            "p95": 98.36454999999997,
+            "p99": 188.26722999999984
+          },
+          "observed_cycle_us": {
+            "p50": 255.5565,
+            "p95": 315.83934999999997,
+            "p99": 385.44909999999976
+          },
+          "age_at_delivery_us": {
+            "p50": 50.133,
+            "p95": 50.15,
+            "p99": 50.16502
+          },
+          "age_at_result_us": {
+            "p50": 242.6625,
+            "p95": 291.88095,
+            "p99": 381.66609999999986
+          }
+        },
+        "fps": 3.6731546404758704,
+        "result_gap_p95_ms": 319.87940000000003,
+        "max_result_gap_ms": 1735.296,
+        "memory_stable": true,
+        "internal_min_free": 191979,
+        "psram_min_free": 7210596
+      }
+    },
+    "single_r3_reference_hold": {
+      "A": {
+        "frames": 1000,
+        "metrics_ms": {
+          "acquisition_us": {
+            "p50": 76.8775,
+            "p95": 96.0565,
+            "p99": 97.83811
+          },
+          "preprocessing_us": {
+            "p50": 8.629,
+            "p95": 9.030199999999999,
+            "p99": 9.23902
+          },
+          "input_prepare_us": {
+            "p50": 38.637,
+            "p95": 39.1045,
+            "p99": 39.40802
+          },
+          "invoke_us": {
+            "p50": 94.7175,
+            "p95": 95.53415000000001,
+            "p99": 95.91389
+          },
+          "packing_us": {
+            "p50": 1.061,
+            "p95": 1.0670499999999998,
+            "p99": 1.22201
+          },
+          "request_response_us": {
+            "p50": 155.42399999999998,
+            "p95": 296.59759999999983,
+            "p99": 1068.85143
+          },
+          "observed_cycle_us": {
+            "p50": 375.927,
+            "p95": 512.1647499999999,
+            "p99": 1275.3195499999997
+          },
+          "age_at_delivery_us": {
+            "p50": 50.14,
+            "p95": 50.167,
+            "p99": 50.288109999999996
+          },
+          "age_at_result_us": {
+            "p50": 349.0145,
+            "p95": 489.9080999999998,
+            "p99": 1262.73802
+          }
+        },
+        "fps": 2.448581564151452,
+        "result_gap_p95_ms": 516.1308,
+        "max_result_gap_ms": 5498.303,
+        "memory_stable": true,
+        "internal_min_free": 191979,
+        "psram_min_free": 7210596
+      }
+    },
+    "single_r3_lut_hold": {
+      "A": {
+        "frames": 1000,
+        "metrics_ms": {
+          "acquisition_us": {
+            "p50": 74.8355,
+            "p95": 96.86564999999999,
+            "p99": 97.81106
+          },
+          "preprocessing_us": {
+            "p50": 1.276,
+            "p95": 1.289,
+            "p99": 1.44603
+          },
+          "input_prepare_us": {
+            "p50": 0.003,
+            "p95": 0.003,
+            "p99": 0.003
+          },
+          "invoke_us": {
+            "p50": 94.789,
+            "p95": 95.563,
+            "p99": 95.82809
+          },
+          "packing_us": {
+            "p50": 1.061,
+            "p95": 1.067,
+            "p99": 1.0980100000000002
+          },
+          "request_response_us": {
+            "p50": 52.2875,
+            "p95": 106.25504999999995,
+            "p99": 221.08664
+          },
+          "observed_cycle_us": {
+            "p50": 229.293,
+            "p95": 280.0624,
+            "p99": 392.3883799999999
+          },
+          "age_at_delivery_us": {
+            "p50": 50.133,
+            "p95": 50.151,
+            "p99": 50.16502
+          },
+          "age_at_result_us": {
+            "p50": 199.7825,
+            "p95": 253.55454999999995,
+            "p99": 368.53779999999995
+          }
+        },
+        "fps": 4.208843044659364,
+        "result_gap_p95_ms": 284.4734,
+        "max_result_gap_ms": 1116.272,
+        "memory_stable": true,
+        "internal_min_free": 191979,
+        "psram_min_free": 7210596
+      }
+    },
+    "two_reference_hold": {
+      "A": {
+        "frames": 1000,
+        "metrics_ms": {
+          "acquisition_us": {
+            "p50": 74.25,
+            "p95": 95.64835000000001,
+            "p99": 97.30758
+          },
+          "preprocessing_us": {
+            "p50": 8.629,
+            "p95": 8.99805,
+            "p99": 9.14713
+          },
+          "input_prepare_us": {
+            "p50": 38.616,
+            "p95": 39.16785,
+            "p99": 39.45318
+          },
+          "invoke_us": {
+            "p50": 94.77,
+            "p95": 95.61829999999999,
+            "p99": 96.03502
+          },
+          "packing_us": {
+            "p50": 1.061,
+            "p95": 1.067,
+            "p99": 1.22001
+          },
+          "request_response_us": {
+            "p50": 157.3135,
+            "p95": 353.6762999999999,
+            "p99": 850.5844999999993
+          },
+          "observed_cycle_us": {
+            "p50": 377.20799999999997,
+            "p95": 564.3708999999998,
+            "p99": 1052.0592499999993
+          },
+          "age_at_delivery_us": {
+            "p50": 50.1405,
+            "p95": 50.167,
+            "p99": 50.42101
+          },
+          "age_at_result_us": {
+            "p50": 350.805,
+            "p95": 547.2488999999999,
+            "p99": 1043.9353899999992
+          }
+        },
+        "fps": 2.4258034151640597,
+        "result_gap_p95_ms": 568.6799000000001,
+        "max_result_gap_ms": 3049.016,
+        "memory_stable": true,
+        "internal_min_free": 191979,
+        "psram_min_free": 7210596
+      },
+      "B": {
+        "frames": 1000,
+        "metrics_ms": {
+          "acquisition_us": {
+            "p50": 61.4565,
+            "p95": 94.30805000000001,
+            "p99": 95.34401
+          },
+          "preprocessing_us": {
+            "p50": 8.627,
+            "p95": 8.80205,
+            "p99": 8.841399999999998
+          },
+          "input_prepare_us": {
+            "p50": 38.6115,
+            "p95": 38.894149999999996,
+            "p99": 39.34202
+          },
+          "invoke_us": {
+            "p50": 94.725,
+            "p95": 95.55335,
+            "p99": 95.82612999999999
+          },
+          "packing_us": {
+            "p50": 1.061,
+            "p95": 1.067,
+            "p99": 1.21703
+          },
+          "request_response_us": {
+            "p50": 53.4475,
+            "p95": 112.94539999999999,
+            "p99": 289.2034399999999
+          },
+          "observed_cycle_us": {
+            "p50": 265.59950000000003,
+            "p95": 333.12994999999995,
+            "p99": 493.70042999999964
+          },
+          "age_at_delivery_us": {
+            "p50": 50.132,
+            "p95": 50.147,
+            "p99": 50.15701
+          },
+          "age_at_result_us": {
+            "p50": 246.887,
+            "p95": 306.4845,
+            "p99": 482.9581899999999
+          }
+        },
+        "fps": 3.5276177707286944,
+        "result_gap_p95_ms": 340.0783,
+        "max_result_gap_ms": 1350.576,
+        "memory_stable": true,
+        "internal_min_free": 194763,
+        "psram_min_free": 7210596
+      }
+    },
+    "two_lut_hold": {
+      "A": {
+        "frames": 1000,
+        "metrics_ms": {
+          "acquisition_us": {
+            "p50": 61.5675,
+            "p95": 94.22915,
+            "p99": 97.50104
+          },
+          "preprocessing_us": {
+            "p50": 1.272,
+            "p95": 1.284,
+            "p99": 1.444
+          },
+          "input_prepare_us": {
+            "p50": 0.003,
+            "p95": 0.003,
+            "p99": 0.003
+          },
+          "invoke_us": {
+            "p50": 94.7735,
+            "p95": 95.51910000000001,
+            "p99": 95.72913
+          },
+          "packing_us": {
+            "p50": 1.061,
+            "p95": 1.067,
+            "p99": 1.2290100000000002
+          },
+          "request_response_us": {
+            "p50": 41.056,
+            "p95": 81.60199999999995,
+            "p99": 172.20386999999977
+          },
+          "observed_cycle_us": {
+            "p50": 204.772,
+            "p95": 252.59095,
+            "p99": 357.24298
+          },
+          "age_at_delivery_us": {
+            "p50": 50.132,
+            "p95": 50.14605,
+            "p99": 50.166039999999995
+          },
+          "age_at_result_us": {
+            "p50": 188.4855,
+            "p95": 229.07189999999994,
+            "p99": 319.51000999999974
+          }
+        },
+        "fps": 4.600075534253302,
+        "result_gap_p95_ms": 257.033,
+        "max_result_gap_ms": 754.596,
+        "memory_stable": true,
+        "internal_min_free": 191979,
+        "psram_min_free": 7210596
+      },
+      "B": {
+        "frames": 1000,
+        "metrics_ms": {
+          "acquisition_us": {
+            "p50": 59.8775,
+            "p95": 91.98975,
+            "p99": 94.72802
+          },
+          "preprocessing_us": {
+            "p50": 1.293,
+            "p95": 1.307,
+            "p99": 1.46302
+          },
+          "input_prepare_us": {
+            "p50": 0.003,
+            "p95": 0.003,
+            "p99": 0.003
+          },
+          "invoke_us": {
+            "p50": 94.784,
+            "p95": 95.50505,
+            "p99": 95.75801
+          },
+          "packing_us": {
+            "p50": 1.061,
+            "p95": 1.067,
+            "p99": 1.225
+          },
+          "request_response_us": {
+            "p50": 38.4245,
+            "p95": 74.4906,
+            "p99": 164.91674999999998
+          },
+          "observed_cycle_us": {
+            "p50": 198.1805,
+            "p95": 241.92924999999994,
+            "p99": 354.73690999999997
+          },
+          "age_at_delivery_us": {
+            "p50": 50.13,
+            "p95": 50.144,
+            "p99": 50.157039999999995
+          },
+          "age_at_result_us": {
+            "p50": 185.899,
+            "p95": 221.8501,
+            "p99": 312.4086
+          }
+        },
+        "fps": 4.6679643763387455,
+        "result_gap_p95_ms": 249.41010000000003,
+        "max_result_gap_ms": 509.912,
+        "memory_stable": true,
+        "internal_min_free": 194763,
+        "psram_min_free": 7210596
+      }
+    }
+  },
+  "campaign_errors": [
+    {
+      "event": "campaign_error",
+      "monotonic": 7132.887203791,
+      "error": "RuntimeError('Device error/rejection {\"A\": {\"counts\": {\"boot\": 2, \"allocated\": 2, \"lut_ready\": 2, \"kernel_check\": 2, \"ready\": 11, \"exhaustive_validation\": 1, \"camera_init\": 10, \"paired_validation\": 100, \"validation_done\": 1, \"wifi_disconnected\": 2, \"configured\": 9, \"registration\": 9, \"run_config\": 9, \"correlation\": 14069, \"frame_timing\": 13889, \"measurement_transport\": 13889, \"sample\": 13889, \"memory\": 284, \"done\": 8, \"error\": 1}, \"errors\": [{\"event\": \"error\", \"reason\": \"http_response\", \"code\": 0, \"http_status\": 408, \"received\": 0, \"length\": 24}], \"last_sample\": 7128.903849508, \"done\": false, \"done_row\": {\"event\": \"done\", \"camera_attempted\": 1000, \"camera_completed\": 1000, \"elapsed_us\": 217371167}}, \"B\": {\"counts\": {\"boot\": 1, \"allocated\": 1, \"lut_ready\": 1, \"kernel_check\": 1, \"ready\": 3, \"configured\": 3, \"registration\": 3, \"run_config\": 3, \"correlation\": 9465, \"frame_timing\": 9405, \"measurement_transport\": 9405, \"sample\": 9405, \"camera_init\": 3, \"memory\": 189, \"done\": 2}, \"errors\": [], \"last_sample\": 7132.495602212, \"done\": false, \"done_row\": {\"event\": \"done\", \"camera_attempted\": 1000, \"camera_completed\": 1000, \"elapsed_us\": 214210151}}}')"
+    }
+  ],
+  "partial_hour": {
+    "A": {
+      "phase_elapsed_s": 2046.2892393019993,
+      "frames": 5349,
+      "observed_result_span_s": 2021.824211,
+      "metrics_ms": {
+        "observed_cycle_us": {
+          "p50": 340.023,
+          "p95": 537.3992000000001,
+          "p99": 1137.440640000003
+        },
+        "request_response_us": {
+          "p50": 166.515,
+          "p95": 365.98660000000007,
+          "p99": 976.9766400000045
+        },
+        "age_at_result_us": {
+          "p50": 314.137,
+          "p95": 513.4966000000001,
+          "p99": 1124.5506400000043
+        }
+      },
+      "fps": 2.645135996939548,
+      "max_result_gap_ms": 5523.145,
+      "errors": [
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        }
+      ]
+    },
+    "B": {
+      "phase_elapsed_s": 2046.2892393019993,
+      "frames": 7225,
+      "observed_result_span_s": 2028.271542,
+      "metrics_ms": {
+        "observed_cycle_us": {
+          "p50": 255.252,
+          "p95": 354.63160000000005,
+          "p99": 685.3848400000014
+        },
+        "request_response_us": {
+          "p50": 84.139,
+          "p95": 180.44400000000005,
+          "p99": 513.1682000000015
+        },
+        "age_at_result_us": {
+          "p50": 231.601,
+          "p95": 327.77479999999997,
+          "p99": 661.5918400000019
+        }
+      },
+      "fps": 3.5616532847848834,
+      "max_result_gap_ms": 3711.529,
+      "errors": []
+    }
+  },
+  "wifi_disconnects": [
+    {
+      "board": "A",
+      "host_monotonic": 2281.067950306,
+      "reason": 203,
+      "seconds_relative_to_hour_start": -2805.5300141830003
+    },
+    {
+      "board": "A",
+      "host_monotonic": 2283.471187818,
+      "reason": 205,
+      "seconds_relative_to_hour_start": -2803.1267766710002
+    }
+  ],
+  "successful_responses_after_stop": 295
+}

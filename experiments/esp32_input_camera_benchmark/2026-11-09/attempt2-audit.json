@@ -1,0 +1,27 @@
+{
+  "archived": 1229,
+  "measured_samples_matched": 1189,
+  "unmeasured_warmup_requests": 40,
+  "scores_exact": true,
+  "validation": {
+    "A": {
+      "exhaustive": [
+        {
+          "event": "exhaustive_validation",
+          "colors": 65536,
+          "mismatches": 0
+        }
+      ],
+      "paired": 100
+    },
+    "B": {
+      "exhaustive": [],
+      "paired": 0
+    }
+  },
+  "restored": {
+    "A": true,
+    "B": false
+  },
+  "measurements_complete": false
+}

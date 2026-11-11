@@ -1,0 +1,8 @@
+results/
+artifacts/
+idf/.pio/
+idf/sdkconfig*
+!idf/sdkconfig.defaults
+idf/components/
+idf/managed_components/
+idf/dependencies.lock

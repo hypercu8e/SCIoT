@@ -1,0 +1,840 @@
+{
+  "scope": "Short HTTP diagnostics only; not full optimization or stability validation.",
+  "baselines": [
+    {
+      "run": "experiments/multiclient_hardware/results/2026-11-10-http-baseline-01",
+      "order": "AB",
+      "archived": 160,
+      "boards": {
+        "A": {
+          "embedded": 60,
+          "camera": 20,
+          "cycle_p50_ms": 323.5985,
+          "http_max_ms": 383.521,
+          "worst_http_server_elapsed_ms": 254.343,
+          "errors": 0
+        },
+        "B": {
+          "embedded": 60,
+          "camera": 20,
+          "cycle_p50_ms": 389.35699999999997,
+          "http_max_ms": 5189.053,
+          "worst_http_server_elapsed_ms": 149.902,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "run": "experiments/multiclient_hardware/results/2026-11-10-http-baseline-02",
+      "order": "BA",
+      "archived": 160,
+      "boards": {
+        "A": {
+          "embedded": 60,
+          "camera": 20,
+          "cycle_p50_ms": 441.8465,
+          "http_max_ms": 425.05,
+          "worst_http_server_elapsed_ms": 192.182,
+          "errors": 0
+        },
+        "B": {
+          "embedded": 60,
+          "camera": 20,
+          "cycle_p50_ms": 438.7265,
+          "http_max_ms": 415.409,
+          "worst_http_server_elapsed_ms": 203.316,
+          "errors": 0
+        }
+      }
+    }
+  ],
+  "smoke": {
+    "run": "experiments/esp32_input_camera_benchmark/results/2026-11-10-http-smoke-01",
+    "complete": true,
+    "stages_completed": 12,
+    "archive_audit": {
+      "archived": 1200,
+      "measured_samples_matched": 960,
+      "unmeasured_warmup_requests": 240,
+      "scores_exact": true,
+      "validation": {
+        "A": {
+          "exhaustive": [
+            {
+              "event": "exhaustive_validation",
+              "colors": 65536,
+              "mismatches": 0
+            }
+          ],
+          "paired": 100
+        },
+        "B": {
+          "exhaustive": [],
+          "paired": 0
+        }
+      },
+      "restored": {
+        "A": true,
+        "B": false
+      },
+      "measurements_complete": true
+    },
+    "B_unchanged_original_boot_confirmed": true,
+    "variant_statistics": {
+      "reference_hold": {
+        "repetitions": 3,
+        "frames_per_repetition": [
+          20,
+          20,
+          20
+        ],
+        "cycle_p50_ms_median": 438.61400000000003,
+        "cycle_p95_ms_median": 593.6025500000003,
+        "age_p95_ms_median": 572.4670000000002,
+        "fps_median": 2.1769697680770985,
+        "max_result_gap_ms": 1029.179
+      },
+      "lut_hold": {
+        "repetitions": 3,
+        "frames_per_repetition": [
+          20,
+          20,
+          20
+        ],
+        "cycle_p50_ms_median": 322.4875,
+        "cycle_p95_ms_median": 509.48145000000005,
+        "age_p95_ms_median": 487.4653500000003,
+        "fps_median": 2.744812340791855,
+        "max_result_gap_ms": 875.42
+      },
+      "reference_early": {
+        "repetitions": 3,
+        "frames_per_repetition": [
+          20,
+          20,
+          20
+        ],
+        "cycle_p50_ms_median": 308.644,
+        "cycle_p95_ms_median": 510.07585,
+        "age_p95_ms_median": 817.7135499999999,
+        "fps_median": 3.1952417133087874,
+        "max_result_gap_ms": 1694.124
+      },
+      "lut_early": {
+        "repetitions": 3,
+        "frames_per_repetition": [
+          20,
+          20,
+          20
+        ],
+        "cycle_p50_ms_median": 291.5615,
+        "cycle_p95_ms_median": 576.0338,
+        "age_p95_ms_median": 1010.66385,
+        "fps_median": 2.426822054805561,
+        "max_result_gap_ms": 5004.318
+      }
+    },
+    "errors": [],
+    "server_terminal_statuses": {
+      "200": 1200
+    },
+    "completed_stage_statistics": {
+      "smoke_r1_reference_hold": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 84.56,
+              "p95": 97.40815,
+              "p99": 98.00323
+            },
+            "preprocessing_us": {
+              "p50": 8.616,
+              "p95": 8.98905,
+              "p99": 9.02021
+            },
+            "input_prepare_us": {
+              "p50": 38.674499999999995,
+              "p95": 38.9222,
+              "p99": 39.57884
+            },
+            "invoke_us": {
+              "p50": 94.57249999999999,
+              "p95": 95.23435,
+              "p99": 95.31567
+            },
+            "packing_us": {
+              "p50": 1.06,
+              "p95": 1.066,
+              "p99": 1.066
+            },
+            "request_response_us": {
+              "p50": 212.4085,
+              "p95": 458.4866000000001,
+              "p99": 598.6853199999998
+            },
+            "observed_cycle_us": {
+              "p50": 433.821,
+              "p95": 696.0193500000001,
+              "p99": 829.1614699999998
+            },
+            "age_at_delivery_us": {
+              "p50": 50.136,
+              "p95": 50.15675,
+              "p99": 50.198550000000004
+            },
+            "age_at_result_us": {
+              "p50": 405.6465,
+              "p95": 651.8730500000001,
+              "p99": 791.8050099999998
+            }
+          },
+          "fps": 2.1769697680770985,
+          "result_gap_p95_ms": 709.2219000000002,
+          "max_result_gap_ms": 866.784,
+          "memory_stable": true,
+          "internal_min_free": 198091,
+          "psram_min_free": 7210596
+        }
+      },
+      "smoke_r1_lut_hold": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 67.922,
+              "p95": 91.68974999999999,
+              "p99": 93.50995
+            },
+            "preprocessing_us": {
+              "p50": 1.2715,
+              "p95": 1.30325,
+              "p99": 1.33745
+            },
+            "input_prepare_us": {
+              "p50": 0.003,
+              "p95": 0.003,
+              "p99": 0.003
+            },
+            "invoke_us": {
+              "p50": 95.101,
+              "p95": 95.9567,
+              "p99": 96.02814000000001
+            },
+            "packing_us": {
+              "p50": 1.06,
+              "p95": 1.0707000000000002,
+              "p99": 1.20294
+            },
+            "request_response_us": {
+              "p50": 223.294,
+              "p95": 355.41110000000003,
+              "p99": 381.83021999999994
+            },
+            "observed_cycle_us": {
+              "p50": 389.19050000000004,
+              "p95": 509.48145000000005,
+              "p99": 531.2394899999999
+            },
+            "age_at_delivery_us": {
+              "p50": 50.136,
+              "p95": 50.1552,
+              "p99": 50.17344
+            },
+            "age_at_result_us": {
+              "p50": 370.4665,
+              "p95": 503.36645000000004,
+              "p99": 529.80609
+            }
+          },
+          "fps": 2.4614125009959005,
+          "result_gap_p95_ms": 515.2307,
+          "max_result_gap_ms": 540.617,
+          "memory_stable": true,
+          "internal_min_free": 197891,
+          "psram_min_free": 7210596
+        }
+      },
+      "smoke_r1_reference_early": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 0.034,
+              "p95": 0.034,
+              "p99": 0.034
+            },
+            "preprocessing_us": {
+              "p50": 9.182,
+              "p95": 9.64575,
+              "p99": 9.94595
+            },
+            "input_prepare_us": {
+              "p50": 39.0,
+              "p95": 39.534150000000004,
+              "p99": 39.77963
+            },
+            "invoke_us": {
+              "p50": 95.07300000000001,
+              "p95": 96.1579,
+              "p99": 96.33878
+            },
+            "packing_us": {
+              "p50": 1.06,
+              "p95": 1.0934,
+              "p99": 1.09948
+            },
+            "request_response_us": {
+              "p50": 163.975,
+              "p95": 323.04725,
+              "p99": 356.8558499999999
+            },
+            "observed_cycle_us": {
+              "p50": 308.644,
+              "p95": 467.91425000000004,
+              "p99": 501.92044999999996
+            },
+            "age_at_delivery_us": {
+              "p50": 282.0815,
+              "p95": 426.23480000000006,
+              "p99": 463.03095999999994
+            },
+            "age_at_result_us": {
+              "p50": 567.6075000000001,
+              "p95": 768.0799,
+              "p99": 769.27918
+            }
+          },
+          "fps": 3.1952417133087874,
+          "result_gap_p95_ms": 474.25640000000004,
+          "max_result_gap_ms": 514.436,
+          "memory_stable": true,
+          "internal_min_free": 193027,
+          "psram_min_free": 7210596
+        }
+      },
+      "smoke_r1_lut_early": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 0.034,
+              "p95": 0.034,
+              "p99": 0.034
+            },
+            "preprocessing_us": {
+              "p50": 1.5125,
+              "p95": 1.8101500000000001,
+              "p99": 1.81243
+            },
+            "input_prepare_us": {
+              "p50": 0.003,
+              "p95": 0.003,
+              "p99": 0.003
+            },
+            "invoke_us": {
+              "p50": 96.5135,
+              "p95": 97.21934999999999,
+              "p99": 97.40706999999999
+            },
+            "packing_us": {
+              "p50": 1.06,
+              "p95": 1.066,
+              "p99": 1.066
+            },
+            "request_response_us": {
+              "p50": 295.91499999999996,
+              "p95": 477.2866000000001,
+              "p99": 518.0469199999999
+            },
+            "observed_cycle_us": {
+              "p50": 395.16949999999997,
+              "p95": 576.0338,
+              "p99": 617.7699599999999
+            },
+            "age_at_delivery_us": {
+              "p50": 359.25149999999996,
+              "p95": 567.7432,
+              "p99": 595.9118399999999
+            },
+            "age_at_result_us": {
+              "p50": 766.713,
+              "p95": 1010.66385,
+              "p99": 1011.4823700000001
+            }
+          },
+          "fps": 2.426822054805561,
+          "result_gap_p95_ms": 582.7096000000001,
+          "max_result_gap_ms": 632.17,
+          "memory_stable": true,
+          "internal_min_free": 193027,
+          "psram_min_free": 7210596
+        }
+      },
+      "smoke_r2_lut_early": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 0.034,
+              "p95": 0.034,
+              "p99": 0.034
+            },
+            "preprocessing_us": {
+              "p50": 1.5145,
+              "p95": 1.7579,
+              "p99": 1.80198
+            },
+            "input_prepare_us": {
+              "p50": 0.003,
+              "p95": 0.003,
+              "p99": 0.003
+            },
+            "invoke_us": {
+              "p50": 96.356,
+              "p95": 96.88300000000001,
+              "p99": 96.9894
+            },
+            "packing_us": {
+              "p50": 1.06,
+              "p95": 1.2547000000000001,
+              "p99": 1.29574
+            },
+            "request_response_us": {
+              "p50": 192.2065,
+              "p95": 1118.4867000000029,
+              "p99": 4144.771739999995
+            },
+            "observed_cycle_us": {
+              "p50": 291.5615,
+              "p95": 1217.5689500000028,
+              "p99": 4243.356189999995
+            },
+            "age_at_delivery_us": {
+              "p50": 252.678,
+              "p95": 1176.9133500000028,
+              "p99": 4220.1866699999955
+            },
+            "age_at_result_us": {
+              "p50": 581.366,
+              "p95": 5275.812550000001,
+              "p99": 5836.336109999998
+            }
+          },
+          "fps": 1.6546534472048418,
+          "result_gap_p95_ms": 1421.1885000000057,
+          "max_result_gap_ms": 5004.318,
+          "memory_stable": true,
+          "internal_min_free": 193027,
+          "psram_min_free": 7210596
+        }
+      },
+      "smoke_r2_reference_early": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 0.034,
+              "p95": 0.034,
+              "p99": 0.034
+            },
+            "preprocessing_us": {
+              "p50": 8.7645,
+              "p95": 9.12475,
+              "p99": 9.27295
+            },
+            "input_prepare_us": {
+              "p50": 39.2745,
+              "p95": 39.90625,
+              "p99": 39.97085
+            },
+            "invoke_us": {
+              "p50": 95.5645,
+              "p95": 96.92479999999999,
+              "p99": 97.60575999999999
+            },
+            "packing_us": {
+              "p50": 1.06,
+              "p95": 1.0671,
+              "p99": 1.0990199999999999
+            },
+            "request_response_us": {
+              "p50": 243.8945,
+              "p95": 429.38095000000084,
+              "p99": 1322.1825899999985
+            },
+            "observed_cycle_us": {
+              "p50": 389.23,
+              "p95": 574.8218500000008,
+              "p99": 1467.0747699999984
+            },
+            "age_at_delivery_us": {
+              "p50": 357.02250000000004,
+              "p95": 566.9516500000008,
+              "p99": 1452.2247299999983
+            },
+            "age_at_result_us": {
+              "p50": 774.617,
+              "p95": 2015.67495,
+              "p99": 2058.55339
+            }
+          },
+          "fps": 2.1445864373870496,
+          "result_gap_p95_ms": 635.9850000000017,
+          "max_result_gap_ms": 1694.124,
+          "memory_stable": true,
+          "internal_min_free": 193027,
+          "psram_min_free": 7210596
+        }
+      },
+      "smoke_r2_lut_hold": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 75.7575,
+              "p95": 97.4117,
+              "p99": 97.43754
+            },
+            "preprocessing_us": {
+              "p50": 1.2719999999999998,
+              "p95": 1.5681000000000003,
+              "p99": 1.8128199999999997
+            },
+            "input_prepare_us": {
+              "p50": 0.003,
+              "p95": 0.003,
+              "p99": 0.003
+            },
+            "invoke_us": {
+              "p50": 94.5555,
+              "p95": 95.45665,
+              "p99": 96.16573
+            },
+            "packing_us": {
+              "p50": 1.06,
+              "p95": 1.0690500000000003,
+              "p99": 1.20661
+            },
+            "request_response_us": {
+              "p50": 159.284,
+              "p95": 339.7968000000003,
+              "p99": 626.2833599999994
+            },
+            "observed_cycle_us": {
+              "p50": 322.4875,
+              "p95": 528.4166000000002,
+              "p99": 802.7705199999996
+            },
+            "age_at_delivery_us": {
+              "p50": 50.138000000000005,
+              "p95": 50.1774,
+              "p99": 50.305080000000004
+            },
+            "age_at_result_us": {
+              "p50": 307.129,
+              "p95": 487.4653500000003,
+              "p99": 775.0090699999995
+            }
+          },
+          "fps": 2.744812340791855,
+          "result_gap_p95_ms": 550.4804000000005,
+          "max_result_gap_ms": 875.42,
+          "memory_stable": true,
+          "internal_min_free": 193027,
+          "psram_min_free": 7210596
+        }
+      },
+      "smoke_r2_reference_hold": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 72.0495,
+              "p95": 95.42015,
+              "p99": 96.24323
+            },
+            "preprocessing_us": {
+              "p50": 8.6175,
+              "p95": 9.05035,
+              "p99": 9.055670000000001
+            },
+            "input_prepare_us": {
+              "p50": 38.6945,
+              "p95": 39.22295,
+              "p99": 39.267790000000005
+            },
+            "invoke_us": {
+              "p50": 94.43549999999999,
+              "p95": 95.2274,
+              "p99": 95.93267999999999
+            },
+            "packing_us": {
+              "p50": 1.06,
+              "p95": 1.1001,
+              "p99": 1.1928199999999998
+            },
+            "request_response_us": {
+              "p50": 218.6485,
+              "p95": 378.2090500000003,
+              "p99": 704.1586099999995
+            },
+            "observed_cycle_us": {
+              "p50": 438.61400000000003,
+              "p95": 593.6025500000003,
+              "p99": 938.7573099999995
+            },
+            "age_at_delivery_us": {
+              "p50": 50.1325,
+              "p95": 50.1582,
+              "p99": 50.16124
+            },
+            "age_at_result_us": {
+              "p50": 411.8425,
+              "p95": 572.4670000000002,
+              "p99": 897.4885999999995
+            }
+          },
+          "fps": 2.1089227522685072,
+          "result_gap_p95_ms": 620.3234000000007,
+          "max_result_gap_ms": 1029.179,
+          "memory_stable": true,
+          "internal_min_free": 193027,
+          "psram_min_free": 7210596
+        }
+      },
+      "smoke_r3_lut_hold": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 81.658,
+              "p95": 93.80145,
+              "p99": 95.66269
+            },
+            "preprocessing_us": {
+              "p50": 1.274,
+              "p95": 1.278,
+              "p99": 1.278
+            },
+            "input_prepare_us": {
+              "p50": 0.003,
+              "p95": 0.003,
+              "p99": 0.003
+            },
+            "invoke_us": {
+              "p50": 94.583,
+              "p95": 95.46945,
+              "p99": 95.52189
+            },
+            "packing_us": {
+              "p50": 1.06,
+              "p95": 1.06355,
+              "p99": 1.08711
+            },
+            "request_response_us": {
+              "p50": 120.7465,
+              "p95": 290.4166,
+              "p99": 310.41371999999996
+            },
+            "observed_cycle_us": {
+              "p50": 308.85249999999996,
+              "p95": 480.81765,
+              "p99": 497.21313
+            },
+            "age_at_delivery_us": {
+              "p50": 50.138,
+              "p95": 50.153,
+              "p99": 50.153
+            },
+            "age_at_result_us": {
+              "p50": 268.30899999999997,
+              "p95": 437.5249,
+              "p99": 457.78497999999996
+            }
+          },
+          "fps": 3.040032102739005,
+          "result_gap_p95_ms": 486.0255,
+          "max_result_gap_ms": 505.353,
+          "memory_stable": true,
+          "internal_min_free": 192599,
+          "psram_min_free": 7210596
+        }
+      },
+      "smoke_r3_reference_hold": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 70.863,
+              "p95": 92.05720000000001,
+              "p99": 93.32184000000001
+            },
+            "preprocessing_us": {
+              "p50": 8.6165,
+              "p95": 8.844550000000002,
+              "p99": 8.98971
+            },
+            "input_prepare_us": {
+              "p50": 38.74,
+              "p95": 39.14055,
+              "p99": 39.14891
+            },
+            "invoke_us": {
+              "p50": 94.547,
+              "p95": 95.28620000000001,
+              "p99": 95.31964
+            },
+            "packing_us": {
+              "p50": 1.06,
+              "p95": 1.07325,
+              "p99": 1.1682499999999998
+            },
+            "request_response_us": {
+              "p50": 222.9435,
+              "p95": 340.4174500000001,
+              "p99": 414.82828999999987
+            },
+            "observed_cycle_us": {
+              "p50": 441.698,
+              "p95": 573.5529,
+              "p99": 618.64978
+            },
+            "age_at_delivery_us": {
+              "p50": 50.1395,
+              "p95": 50.159749999999995,
+              "p99": 50.201550000000005
+            },
+            "age_at_result_us": {
+              "p50": 416.1735,
+              "p95": 534.3497500000001,
+              "p99": 608.9019499999998
+            }
+          },
+          "fps": 2.2451901232904796,
+          "result_gap_p95_ms": 580.5534,
+          "max_result_gap_ms": 633.936,
+          "memory_stable": true,
+          "internal_min_free": 192599,
+          "psram_min_free": 7210596
+        }
+      },
+      "smoke_r3_lut_early": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 0.034,
+              "p95": 0.034,
+              "p99": 0.034
+            },
+            "preprocessing_us": {
+              "p50": 1.6795,
+              "p95": 1.9052,
+              "p99": 1.90824
+            },
+            "input_prepare_us": {
+              "p50": 0.003,
+              "p95": 0.003,
+              "p99": 0.003
+            },
+            "invoke_us": {
+              "p50": 95.963,
+              "p95": 96.9396,
+              "p99": 96.94872
+            },
+            "packing_us": {
+              "p50": 1.061,
+              "p95": 1.0652,
+              "p99": 1.0682399999999999
+            },
+            "request_response_us": {
+              "p50": 139.72,
+              "p95": 239.05720000000002,
+              "p99": 270.6002399999999
+            },
+            "observed_cycle_us": {
+              "p50": 238.72500000000002,
+              "p95": 337.83650000000006,
+              "p99": 369.59689999999995
+            },
+            "age_at_delivery_us": {
+              "p50": 217.147,
+              "p95": 353.21675000000005,
+              "p99": 436.63054999999986
+            },
+            "age_at_result_us": {
+              "p50": 461.5415,
+              "p95": 598.49935,
+              "p99": 715.8182699999998
+            }
+          },
+          "fps": 4.0073414495355495,
+          "result_gap_p95_ms": 343.9090000000001,
+          "max_result_gap_ms": 381.502,
+          "memory_stable": true,
+          "internal_min_free": 192599,
+          "psram_min_free": 7210596
+        }
+      },
+      "smoke_r3_reference_early": {
+        "A": {
+          "frames": 20,
+          "metrics_ms": {
+            "acquisition_us": {
+              "p50": 0.0335,
+              "p95": 0.03520000000000002,
+              "p99": 0.053439999999999974
+            },
+            "preprocessing_us": {
+              "p50": 9.1155,
+              "p95": 9.5554,
+              "p99": 9.591880000000002
+            },
+            "input_prepare_us": {
+              "p50": 39.1485,
+              "p95": 39.957300000000004,
+              "p99": 40.00746
+            },
+            "invoke_us": {
+              "p50": 95.17,
+              "p95": 96.5287,
+              "p99": 96.78254
+            },
+            "packing_us": {
+              "p50": 1.06,
+              "p95": 1.0678500000000002,
+              "p99": 1.0959699999999999
+            },
+            "request_response_us": {
+              "p50": 150.674,
+              "p95": 365.2256,
+              "p99": 378.26111999999995
+            },
+            "observed_cycle_us": {
+              "p50": 295.49300000000005,
+              "p95": 510.07585,
+              "p99": 522.9783699999999
+            },
+            "age_at_delivery_us": {
+              "p50": 268.89549999999997,
+              "p95": 472.20455,
+              "p99": 475.20731
+            },
+            "age_at_result_us": {
+              "p50": 554.4300000000001,
+              "p95": 817.7135499999999,
+              "p99": 817.78271
+            }
+          },
+          "fps": 3.195908698607475,
+          "result_gap_p95_ms": 514.8706000000001,
+          "max_result_gap_ms": 530.158,
+          "memory_stable": true,
+          "internal_min_free": 192599,
+          "psram_min_free": 7210596
+        }
+      }
+    }
+  }
+}

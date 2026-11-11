@@ -1,0 +1,22 @@
+{
+  "A": {
+    "passed": true,
+    "checks": {
+      "complete": true,
+      "memory_stable": true,
+      "median_gain": true,
+      "cycle_tail": true,
+      "frame_age": true
+    }
+  },
+  "B": {
+    "passed": true,
+    "checks": {
+      "complete": true,
+      "memory_stable": true,
+      "median_gain": true,
+      "cycle_tail": true,
+      "frame_age": true
+    }
+  }
+}

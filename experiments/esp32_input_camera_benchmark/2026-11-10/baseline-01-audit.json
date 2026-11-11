@@ -1,0 +1,180 @@
+{
+  "archived_requests": 160,
+  "suffix_replay_exact": true,
+  "boards": {
+    "A": {
+      "client_id": "eye-24ec4a0eb76c",
+      "samples": 80,
+      "events": {
+        "boot": 1,
+        "allocated": 1,
+        "kernel_check": 1,
+        "ready": 2,
+        "registration": 1,
+        "correlation": 80,
+        "sample": 80,
+        "camera_init": 1,
+        "memory": 2,
+        "done": 1
+      },
+      "installed_sha256": "28f8d9582ec70aa18cd6c2a561a211b8f634fda5d23faaec553ab0ad9c393b76",
+      "restored": true,
+      "backup_sha256": "39d60fced818cf3fef9ab028dce4c12f5bfa12d08d5c10db66ca689f43c8e7e2",
+      "internal_min_free": 198823,
+      "psram_min_free": 7276136
+    },
+    "B": {
+      "client_id": "eye-24ec4a0ec314",
+      "samples": 80,
+      "events": {
+        "boot": 1,
+        "allocated": 1,
+        "kernel_check": 1,
+        "ready": 2,
+        "registration": 1,
+        "correlation": 80,
+        "sample": 80,
+        "camera_init": 1,
+        "memory": 2,
+        "done": 1
+      },
+      "installed_sha256": "28f8d9582ec70aa18cd6c2a561a211b8f634fda5d23faaec553ab0ad9c393b76",
+      "restored": true,
+      "backup_sha256": "0ddd21c898a6c81d9406cf5cd5904aba9320bce9f197e74e67ccd7d4984f1d36",
+      "internal_min_free": 197703,
+      "psram_min_free": 7276136
+    }
+  },
+  "stages": {
+    "single_A": {
+      "duration_s": 20.0043439399999,
+      "boards": {
+        "A": {
+          "embedded": 60,
+          "camera": 20,
+          "camera_cycle_ms": {
+            "p50": 323.5985,
+            "p95": 550.70495,
+            "p99": 582.59379
+          },
+          "camera_network_ms": {
+            "p50": 113.72749999999999,
+            "p95": 316.97825000000006,
+            "p99": 370.21244999999993
+          },
+          "max_camera_gap_s": 0.6010655240000915,
+          "rssi_dbm": {
+            "p50": -31.0,
+            "p95": -29.0,
+            "p99": -29.0
+          },
+          "memory_first": {
+            "event": "memory",
+            "uptime_us": 16833504,
+            "internal_free": 217435,
+            "internal_min_free": 217347,
+            "psram_free": 7276272,
+            "psram_min_free": 7276272
+          },
+          "memory_last": {
+            "event": "memory",
+            "uptime_us": 24233319,
+            "internal_free": 249107,
+            "internal_min_free": 198823,
+            "psram_free": 7295872,
+            "psram_min_free": 7276136
+          }
+        },
+        "B": {
+          "embedded": 0,
+          "camera": 0,
+          "camera_cycle_ms": {},
+          "camera_network_ms": {},
+          "max_camera_gap_s": 0,
+          "rssi_dbm": {},
+          "memory_first": null,
+          "memory_last": null
+        }
+      },
+      "server_queue_ms": {
+        "A": {
+          "p50": 0.07050000000000001,
+          "p95": 0.11819999999999999,
+          "p99": 0.13788999999999996
+        },
+        "B": {}
+      }
+    },
+    "single_B": {
+      "duration_s": 24.505538678999983,
+      "boards": {
+        "A": {
+          "embedded": 0,
+          "camera": 0,
+          "camera_cycle_ms": {},
+          "camera_network_ms": {},
+          "max_camera_gap_s": 0,
+          "rssi_dbm": {},
+          "memory_first": null,
+          "memory_last": null
+        },
+        "B": {
+          "embedded": 60,
+          "camera": 20,
+          "camera_cycle_ms": {
+            "p50": 389.35699999999997,
+            "p95": 780.9071500000034,
+            "p99": 4490.651829999993
+          },
+          "camera_network_ms": {
+            "p50": 159.3095,
+            "p95": 579.0592500000034,
+            "p99": 4267.054249999994
+          },
+          "max_camera_gap_s": 5.40626841400001,
+          "rssi_dbm": {
+            "p50": -33.5,
+            "p95": -32.0,
+            "p99": -32.0
+          },
+          "memory_first": {
+            "event": "memory",
+            "uptime_us": 36183490,
+            "internal_free": 217575,
+            "internal_min_free": 217487,
+            "psram_free": 7276272,
+            "psram_min_free": 7276272
+          },
+          "memory_last": {
+            "event": "memory",
+            "uptime_us": 48983776,
+            "internal_free": 249475,
+            "internal_min_free": 197703,
+            "psram_free": 7295872,
+            "psram_min_free": 7276136
+          }
+        }
+      },
+      "server_queue_ms": {
+        "A": {},
+        "B": {
+          "p50": 0.0595,
+          "p95": 0.11804999999999999,
+          "p99": 0.14183999999999997
+        }
+      }
+    }
+  },
+  "scope": "Two physical ESP32-S3-EYE, frozen INT8 block_2_add, raw HTTP v2; archive I/O included. No annotated accuracy evaluation. Individual short diagnostics only; no simultaneous, restart or one-hour validation.",
+  "full_campaign_verified": false,
+  "embedded_activation_exact_across_boards_and_phases": true,
+  "device_archive_link": "FNV32 for activation and complete reply; CRC32 verified for requests; suffix scores replayed byte for byte. FNV32 is not a cryptographic equality proof.",
+  "server": {
+    "terminal_statuses": {
+      "200": 160
+    },
+    "max_sampled_queue": 0,
+    "rss_max_bytes": 522891264,
+    "archive_io_included": true
+  }
+}
