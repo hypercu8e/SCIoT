@@ -252,6 +252,10 @@ bool capture(Sample& s,int mode,int frame,int iteration) {
   return ok;
 }
 void run(char command) {
+  // Commands may be separated by more than the server's idle-session timeout.
+  // Register before producing samples so each run starts with a live session.
+  sessionId[0]=0;
+  if(!registerClient()) {fail("registration");return;}
   Sample row;
   for(int f=0;f<3;++f) {
     memcpy(canonical,kFrames[f],kPixels*sizeof(float));

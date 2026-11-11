@@ -105,6 +105,20 @@ class ServiceTests(unittest.IsolatedAsyncioTestCase):
         self.service.register('b', 'hash')
         self.assertEqual(set(self.service.clients), {'b'})
 
+    async def test_expired_client_can_reregister_and_restart_sequence(self):
+        session = self.service.register('a', 'hash')
+        first = self.service.reserve('a', session, 17, 'hash')
+        self.assertEqual(await self.service.infer(first, b'before-idle'), b'before-idle')
+        self.service.clients['a'].touched -= self.service.idle + 1
+        self.service.purge()
+        with self.assertRaises(ServiceError) as error:
+            self.service.reserve('a', session, 18, 'hash')
+        self.assertEqual(error.exception.status, 410)
+        renewed = self.service.register('a', 'hash')
+        self.assertNotEqual(renewed, session)
+        next_run = self.service.reserve('a', renewed, 0, 'hash')
+        self.assertEqual(await self.service.infer(next_run, b'after-idle'), b'after-idle')
+
     async def test_cancellation_removes_queued_request(self):
         a = asyncio.create_task(self.service.infer(self.job('a'), b'hold'))
         await until(lambda: self.service.running is not None)
