@@ -1,0 +1,6 @@
+/results/
+/idf/.pio/
+/idf/components/
+/idf/sdkconfig*
+!/idf/sdkconfig.defaults
+__pycache__/
