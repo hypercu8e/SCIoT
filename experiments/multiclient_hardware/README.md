@@ -1,5 +1,11 @@
 # HTTP v2 con due ESP32-S3-EYE reali
 
+**9 novembre 2026: campagna completa superata sul fisso**, con hotspot Pixel 9a
+e inoltro ADB su USB: due schede da 1.000 frame ciascuna, riavvio isolato e un'ora
+di camera continua; 34.296 richieste con replay esatto del suffisso e ripristini
+verificati. Corretto il rinnovo della sessione all'avvio di ogni comando.
+[Risultati, primo tentativo interrotto e limiti](2026-11-09-pixel-adb-full/report.md).
+
 Campagna del 5 novembre 2026. Un solo modello INT8 congelato, split
 `block_2_add`, attivazioni raw da 4.608 byte, ESP-NN, un worker e un thread
 di inferenza. Il server e la coda sono quelli di

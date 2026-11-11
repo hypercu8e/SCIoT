@@ -1,0 +1,48 @@
+{
+  "scope": "Interrupted first full attempt; not a completed hardware campaign",
+  "run": "2026-11-09-pixel-adb-full",
+  "stages_completed": [
+    {
+      "stage": "single_B",
+      "elapsed": 17.003401950999887,
+      "samples": {
+        "B": 80
+      }
+    },
+    {
+      "stage": "single_A",
+      "elapsed": 17.503547658000116,
+      "samples": {
+        "A": 80
+      }
+    },
+    {
+      "stage": "A_plus_simulated",
+      "elapsed": 267.55564226700017,
+      "samples": {
+        "A": 1060
+      }
+    }
+  ],
+  "error": "RuntimeError('Device error: {\"A\": {\"counts\": {\"boot\": 1, \"allocated\": 1, \"kernel_check\": 1, \"ready\": 3, \"registration\": 1, \"correlation\": 1143, \"sample\": 1143, \"camera_init\": 2, \"memory\": 24, \"done\": 2}, \"errors\": [], \"last_sample\": 4169.922028898, \"done\": false, \"done_row\": {\"event\": \"done\", \"camera_attempted\": 1000, \"camera_completed\": 1000, \"elapsed_us\": 255444680}}, \"B\": {\"counts\": {\"boot\": 1, \"allocated\": 1, \"kernel_check\": 1, \"ready\": 2, \"registration\": 2, \"correlation\": 81, \"sample\": 81, \"camera_init\": 1, \"memory\": 2, \"done\": 1, \"error\": 1}, \"errors\": [{\"event\": \"error\", \"reason\": \"http_response\", \"code\": 0, \"http_status\": 410, \"received\": 0, \"length\": 27}], \"last_sample\": 4169.849513601, \"done\": false, \"done_row\": {\"event\": \"done\", \"camera_attempted\": 20, \"camera_completed\": 20, \"elapsed_us\": 5031178}}}')",
+  "completion": {
+    "measurements_complete": false,
+    "restore_failures": {}
+  },
+  "boards": {
+    "A": {
+      "mac": "24:ec:4a:0e:b7:6c",
+      "backup_sha256": "88042e1af02026cb0c6646090aa07c3c766943728e7944a35b00277faa06d97a",
+      "installed_sha256": "608cbb776b0d374de5453c4cdd2c31439b6c6c039d188fdaf04aa7454d827678",
+      "restored": true,
+      "restored_digest_verified_before_boot": true
+    },
+    "B": {
+      "mac": "24:ec:4a:0e:c3:14",
+      "backup_sha256": "df7b33a341da496f4ba5e45ee40de078a7aefa8c0fa821f9a0fb684d18e9d1ec",
+      "installed_sha256": "608cbb776b0d374de5453c4cdd2c31439b6c6c039d188fdaf04aa7454d827678",
+      "restored": true,
+      "restored_digest_verified_before_boot": true
+    }
+  }
+}

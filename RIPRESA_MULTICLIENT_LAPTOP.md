@@ -151,3 +151,30 @@ non la scheda: indica alimentazione insufficiente sul collegamento con la camera
 attiva (non misurata). Prima della campagna completa serve un collegamento con
 alimentazione adeguata per entrambe (cavo corto/di qualità, porta diversa o hub
 alimentato) e una nuova prova individuale di entrambe.
+
+## Ripresa sul fisso con Pixel 9a — 9 novembre 2026
+
+Sul fisso entrambe le schede hanno completato le prove individuali:
+60 input incorporati e 20/20 frame camera ciascuna, senza errori dispositivo.
+Il Pixel vicino alle schede fornisce l'hotspot a 2,4 GHz. Il collegamento diretto
+dall'hotspot al fisso tramite tethering USB non è riuscito; funziona invece
+l'inoltro `adb reverse tcp:8000 tcp:8000`, con Debug USB autorizzato sul telefono.
+Le ESP32 contattano l'indirizzo del **Pixel nell'hotspot** sulla porta 8000;
+ADB inoltra le richieste al server sul fisso. Nessuna credenziale è versionata.
+Tutte le 160 risposte sono state verificate tramite replay esatto del suffisso.
+Entrambe le flash originali sono state ripristinate e verificate, con avvio
+originale controllato. L'inoltro ADB resta predisposto per la prossima prova.
+
+La rete include ora il trasporto ADB: i tempi descrivono questa configurazione.
+La campagna completa successiva ha superato le prove simultanee da 1.000 frame,
+il riavvio isolato e l'ora di stabilità: A 14.137 frame camera, B 14.162 nell'ora;
+34.296 richieste archiviate con replay esatto del suffisso, tutte HTTP 200.
+Entrambe le flash originali ripristinate e verificate. È stato corretto il
+firmware: nuova registrazione prima di ogni comando, per non riutilizzare una
+sessione scaduta durante l'attesa fra fasi; 21 test server superati.
+Il tentativo precedente, interrotto su HTTP 410, è conservato separatamente.
+Prima di riprendere, ricontrollare gli indirizzi del Pixel
+e l'inoltro: possono cambiare dopo riavvii o riconnessioni.
+
+[Procedura, tentativi e risultati del 9 novembre](experiments/multiclient_hardware/2026-11-09-pixel-usb/report.md).
+[Campagna completa e conclusioni](experiments/multiclient_hardware/2026-11-09-pixel-adb-full/report.md).

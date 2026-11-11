@@ -1,0 +1,5 @@
+{
+  "short_run_cannot_validate_full_campaign": "rejected as required",
+  "missing_individual_stage": "rejected as required",
+  "missing_camera_sample": "rejected as required"
+}

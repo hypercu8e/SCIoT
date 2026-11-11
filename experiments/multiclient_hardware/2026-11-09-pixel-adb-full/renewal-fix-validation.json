@@ -1,0 +1,17 @@
+{
+  "server_tests": {
+    "command": "PYTHONPATH=src TF_CPP_MIN_LOG_LEVEL=3 CUDA_VISIBLE_DEVICES=-1 .venv/bin/python -m unittest discover -s tests/multiclient -v",
+    "tests_passed": 21,
+    "includes": "expired client rejects stale session, then re-registration restarts request sequence at zero"
+  },
+  "firmware_build": {
+    "passed": true,
+    "ram_static_bytes": 51540,
+    "flash_program_bytes": 1196774
+  },
+  "fix": "register a fresh session at the start of every serial run command; server idle timeout remains 60 seconds",
+  "source_sha256": {
+    "src/client/esp32-s3-eye-multiclient/src/main.cpp": "ab3ad842b18a0d1c4aedd0bc24d72c0629b5756e5de7bb74654b822fb5ff344c",
+    "tests/multiclient/test_service.py": "4ba49517ac2e18d1d872981ad109b7458d9ced7de03b78c3378e4b5c8bbfed76"
+  }
+}

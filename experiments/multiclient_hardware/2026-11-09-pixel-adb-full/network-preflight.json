@@ -1,0 +1,17 @@
+{
+  "transport": "ESP32 -> Pixel 9a hotspot -> adb reverse tcp:8000 tcp:8000 -> desktop HTTP v2 server",
+  "hotspot_server_base_url": "http://10.158.38.173:8000",
+  "desktop_usb_ip": "10.186.241.84",
+  "pixel_usb_ip": "10.186.241.81",
+  "inference_workers": 1,
+  "inference_threads": 1,
+  "source_smoke_run": "2026-11-09-pixel-adb-smoke",
+  "same_firmware_as_successful_smoke": false,
+  "annotated_camera_accuracy_evaluated": false,
+  "clock_reference": {
+    "utc": "2026-11-09T09:17:27.334418+00:00",
+    "host_monotonic": 4428.97207146
+  },
+  "firmware_change": "Fresh registration before each run command",
+  "previous_interrupted_run": "2026-11-09-pixel-adb-full"
+}
