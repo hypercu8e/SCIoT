@@ -24,14 +24,21 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--single-only', action='store_true',
+                   help='audit only a completed individual diagnostic, not a full campaign')
     a = p.parse_args()
     run = a.run
     completion = json.loads((run/'completion.json').read_text())
-    assert completion['measurements_complete'] and not completion['restore_failures']
+    assert not completion['restore_failures']
+    assert completion['measurements_complete'] == (not a.single_only)
     campaign = [json.loads(s) for s in (run/'campaign.jsonl').read_text().splitlines()]
     assert not any(r['event'] in ('campaign_error', 'restore_failed') for r in campaign)
     stages = {r['stage']: r for r in campaign if r['event']=='stage_completed'}
-    assert set(stages)=={'single_A','single_B','A_plus_simulated','two_boards_1000','reboot_isolation','two_boards_one_hour'}
+    if a.single_only:
+        assert any(r['event']=='single_only_stop' for r in campaign)
+        assert set(stages)=={'single_A','single_B'}
+    else:
+        assert set(stages)=={'single_A','single_B','A_plus_simulated','two_boards_1000','reboot_isolation','two_boards_one_hour'}
     import tensorflow as tf
     artifacts = Path('experiments/esp32_representation_benchmark/artifacts')
     manifest = json.loads((artifacts/'manifest.json').read_text())
@@ -78,6 +85,9 @@ def main():
             terminals[key]=r
     result = dict(archived_requests=archived, suffix_replay_exact=True, boards={}, stages={},
                   scope='Two physical ESP32-S3-EYE, frozen INT8 block_2_add, raw HTTP v2; archive I/O included. No annotated accuracy evaluation.')
+    result['full_campaign_verified'] = not a.single_only
+    if a.single_only:
+        result['scope'] += ' Individual short diagnostics only; no simultaneous, restart or one-hour validation.'
     embedded=defaultdict(set)
     board_rows={}
     for name in 'AB':
@@ -108,6 +118,12 @@ def main():
                     embedded[row['frame']].add(digest)
                 matched+=1;correlation=None
         assert matched==counts['sample']==counts['correlation']
+        if a.single_only:
+            samples=[e['row'] for e in rows if e['row']['event']=='sample']
+            assert Counter(r['source'] for r in samples)=={'embedded':60,'camera':20}
+            done=[e['row'] for e in rows if e['row']['event']=='done']
+            assert len(done)==1 and done[0]['camera_attempted']==done[0]['camera_completed']==20
+            assert stages['single_'+name]['samples']=={name:80}
         memories=[r['row'] for r in rows if r['row']['event']=='memory']
         result['boards'][name]=dict(client_id=cid, samples=matched, events=dict(counts),
             installed_sha256=hardware['installed_sha256'],restored=True,backup_sha256=hardware['backup_sha256'],
@@ -146,12 +162,15 @@ def main():
             cid=result['boards'][name]['client_id']
             stage_queues[name]=percentiles([r['queue_us']/1000 for r in successful if r['client_id']==cid])
         result['stages'][stage]=dict(duration_s=event['elapsed'],boards=stats,server_queue_ms=stage_queues)
-    reset=next(r for r in campaign if r['event']=='reset_A_while_B_runs')
-    resumed=next(r for r in campaign if r['event']=='A_restarted')
-    b_samples=[e['host_monotonic'] for e in board_rows['B'] if e['row']['event']=='sample' and
-               reset['monotonic']<=e['host_monotonic']<=resumed['monotonic']]
-    assert b_samples, 'B did not complete requests during A restart'
-    result['B_requests_during_A_restart']=len(b_samples)
+    if a.single_only:
+        assert archived==160 and sum(len(v) for v in matches.values())==0
+    else:
+        reset=next(r for r in campaign if r['event']=='reset_A_while_B_runs')
+        resumed=next(r for r in campaign if r['event']=='A_restarted')
+        b_samples=[e['host_monotonic'] for e in board_rows['B'] if e['row']['event']=='sample' and
+                   reset['monotonic']<=e['host_monotonic']<=resumed['monotonic']]
+        assert b_samples, 'B did not complete requests during A restart'
+        result['B_requests_during_A_restart']=len(b_samples)
     resources=[r for r in server_rows if r['event']=='resources']
     result['server']=dict(terminal_statuses=dict(Counter(str(r['status']) for r in terminals.values())),
         max_sampled_queue=max(r['queue_depth'] for r in resources),rss_max_bytes=max(r['rss_bytes'] for r in resources),
