@@ -955,3 +955,33 @@ byte, uguali al calcolo; costo +0 / +44 / +81 / +187 µs su 62,3 ms. Scelta
 capienza nel client con Wi-Fi e camera. Flash B ripristinata.
 
 [Report buffer a strisce](experiments/esp32_dwstrip_benchmark/2026-11-12/report.md).
+
+### Seguito del 12 novembre — capienza nel client e ciclo camera
+
+Prova di capienza nel client reale, con Wi-Fi, camera e HTTP: un blocco di
+152 KiB tenuto in RAM interna (attivazioni del prefisso senza PAD più
+margine). Fasi N, R, N, R sulla scheda B. Senza blocco il client completa
+1.000 frame. Con il blocco, Wi-Fi e lwIP restano senza RAM interna: minimo
+libero 11–23 KB, timeout HTTP 408, fasi incomplete. **Non entra.**
+
+Ripetuta con i buffer Wi-Fi/lwIP in PSRAM (`CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP`):
+la rete regge anche col blocco (1.000/1.000 frame), ma il minimo libero si
+ferma a 26,7 KB contro 32 KB richiesti. Le impostazioni che ESP-IDF associa
+all'opzione aggiungono buffer statici (+13,7 KB interni).
+
+Valutato il costo/beneficio: il filone vale circa 22 ms su un ciclo di
+280–580 ms. **Filone chiuso.** Scomposto il ciclo camera dai log: attesa
+frame ~75 ms, conversione ingresso ~47 ms, inferenza ~95 ms, HTTP 20–65 ms.
+Preparata una prova con due leve, tabella RGB565 → int8 e connessione HTTP
+riusata, in ordine ABBA. Tabella 46,3 → 0,8 ms con stessi byte: conferma la
+misura del 10 novembre, mai portata nel client. Keep-alive: apertura della
+connessione 12–13 → 2 ms.
+
+Prova interrotta: con la camera accesa e la scheda su una porta del portatile
+le richieste si bloccano (secondi, 408), mentre a camera spenta durano 20–33
+ms. È lo stesso guasto del 5 novembre, legato a cavo e porta USB. Da
+ripetere con un'alimentazione adeguata. Flash B ripristinata dopo ogni prova.
+
+[Report capienza](experiments/esp32_client_fit_benchmark/2026-11-12/report.md),
+[report con buffer di rete in PSRAM](experiments/esp32_client_fit_benchmark/2026-11-12/report-psramnet.md),
+[prova del ciclo](experiments/esp32_cycle_benchmark/README.md).

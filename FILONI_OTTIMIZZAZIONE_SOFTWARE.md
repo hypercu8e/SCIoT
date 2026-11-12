@@ -2,6 +2,14 @@
 
 Aggiornamento: 12 novembre 2026. Le direzioni proposte non sono vantaggi già dimostrati né dichiarazioni di novità scientifica; gli esiti misurati sono distinti sotto.
 
+**Capienza e ciclo, 12 novembre (sera):** RAM interna nel client [non entra](experiments/esp32_client_fit_benchmark/2026-11-12/report.md);
+con buffer di rete in PSRAM [la rete regge ma mancano ~6 KB](experiments/esp32_client_fit_benchmark/2026-11-12/report-psramnet.md).
+Guadagno ~22 ms su 280–580 ms: **filone 3 chiuso**. Prossime leve: tabella
+(filone 1, riconfermata 46,3 → 0,8 ms, da portare nel client) e HTTP
+persistente (filone 6, apertura 12 → 2 ms). La [prova del ciclo](experiments/esp32_cycle_benchmark/README.md)
+è da ripetere con un'alimentazione adeguata: a camera accesa, su una porta
+del portatile, le richieste si bloccano.
+
 **Buffer a strisce, 12 novembre:** [depthwise con 5 righe per striscia](experiments/esp32_dwstrip_benchmark/2026-11-12/report.md)
 (patch a una copia di ESP-NN): picco attivazioni senza PAD 178.688 →
 150.464 byte, sotto il limite del client (161.323), stessi byte, +81 µs su
@@ -75,10 +83,10 @@ Le mediane delle fasi non sono additive. La mediana di ciclo meno HTTP, calcolat
 |---|---|---|---|
 | 1. Conversione input | RGB565 → INT8 mediante tabella, evitando float e double per ogni pixel | Identici byte sullo stesso frame, tempi, memoria e startup | Implementato; correttezza e tempi locali verificati |
 | 2. Acquisizione camera | Restituire il buffer dopo conversione per consentire acquisizione durante il lavoro successivo; grayscale nativo separato | Attesa, età del frame, FPS, stabilità; grayscale richiede successiva verifica qualità | Implementato; compromesso FPS/età misurato localmente |
-| 3. Memoria | Misurare buffer critici in RAM interna rispetto a PSRAM | Latenza, memoria minima e stabilità Wi-Fi/camera | Limite superiore misurato: −22,4 ms sul prefisso, [report](experiments/esp32_memory_benchmark/2026-11-11/report.md). Da rendere compatibile con la RAM del client |
+| 3. Memoria | Misurare buffer critici in RAM interna rispetto a PSRAM | Latenza, memoria minima e stabilità Wi-Fi/camera | Limite superiore −22,4 ms sul prefisso, [report](experiments/esp32_memory_benchmark/2026-11-11/report.md). Nel client entra solo con buffer di rete in PSRAM e margine 26,7 KB < 32: **chiuso** il 12 novembre |
 | 4. Profilazione layer | Attribuire i ~95 ms del prefisso a operatori e copie | Tempi per operatore, kernel effettivamente usati | Completata su B, input fissi; [report](experiments/esp32_layer_profile/2026-11-10/report.md). PAD ottimizzato: −9,4 ms, [report](experiments/esp32_pad_benchmark/2026-11-11/report.md) |
 | 5. Pipeline | Sovrapporre inferenza e invio con proprietà dei buffer esplicita | FPS, latenza, età, RAM e contesa | Proposta; distinta dal rilascio anticipato camera |
-| 6. HTTP persistente | Confrontare riuso della connessione e apertura per richiesta | p50/p95/p99, riconnessioni e ciclo completo | Proposta |
+| 6. HTTP persistente | Confrontare riuso della connessione e apertura per richiesta | p50/p95/p99, riconnessioni e ciclo completo | Implementato in [prova del ciclo](experiments/esp32_cycle_benchmark/README.md): apertura 12 → 2 ms; ciclo completo da rimisurare |
 | 7. Split statici alternativi | Confrontare pochi tagli validi sulla scheda | Calcolo, byte, RAM e latenza completa | Proposta |
 | 8. Selezione frame | Evitare prefisso e invio per frame ridondanti | Eventi persi, ritardo, qualità, traffico e FPS utili | Proposta; vedi [temi](TEMI_DI_TESI_E_RICERCA.md) |
 | 9. Compilazione specifica | Generare esecuzione e riuso memoria per modello/split, con ESP-NN | Equivalenza, RAM, flash e tempi contro TFLM + ESP-NN | Proposta; [precedente EON](experiments/eon_prefix_benchmark/README.md) |

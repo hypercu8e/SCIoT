@@ -1,6 +1,57 @@
-# Punto di ripresa SCIoT — aggiornamento del 12 novembre 2026
+# Punto di ripresa SCIoT — aggiornamento del 12 novembre 2026 (sera)
 
-## Da dove ricominciare (dopo il 12 novembre)
+## Da dove ricominciare (13 novembre)
+
+**Situazione.** Il filone "attivazioni in RAM interna" è **chiuso**. È
+fattibile solo con i buffer Wi-Fi/lwIP in PSRAM, con 26,7 KB di margine
+contro i 32 richiesti, e il guadagno (~22 ms di inferenza) è piccolo rispetto
+al ciclo camera. Dalla scomposizione del ciclo (circa 280 ms in condizioni
+buone) le leve grandi sono altre:
+
+| Passo del ciclo camera | p50 | Leva |
+|---|---:|---|
+| Attesa/acquisizione frame | ~75 ms | rilascio anticipato o pipeline (filone 2/5) |
+| RGB565 → float + float → int8 | **~47 ms** | **tabella: 0,8 ms**, stessi byte (filone 1) |
+| Inferenza prefisso | ~95 ms | RAM interna −22 ms (chiuso) |
+| Richiesta HTTP | 20–65 ms, **secondi con camera accesa e alimentazione scarsa** | keep-alive circa −10 ms; alimentazione |
+
+**Prossima cosa da fare, in ordine:**
+1. **Alimentazione.** Con la camera accesa e la scheda su una porta del
+   portatile, le richieste si bloccano (408, secondi): stesso guasto del 5
+   novembre, che seguiva cavo e porta USB. Collegare la scheda B con un hub
+   alimentato o un cavo corto e buono, oppure usare il PC fisso. Verifica
+   rapida: nel run, le richieste a camera accesa devono restare vicine a
+   quelle a camera spenta (20–33 ms).
+2. **Ripetere la prova del ciclo** `experiments/esp32_cycle_benchmark/`
+   (README con criteri già fissati, firmware pronto, ~30 min): misura sul
+   ciclo intero la tabella, il keep-alive e le due insieme.
+3. Se confermate, **portare tabella e keep-alive nel client operativo**
+   `src/client/esp32-s3-eye-multiclient` (mai fatto, nemmeno dopo il 10
+   novembre). Modifica piccola, stessi byte inviati.
+
+**Stato hardware e ambiente:** scheda B con firmware originale ripristinato,
+boot confermato. Ultimo backup verificato di B (`--seed`):
+`experiments/esp32_client_fit_benchmark/results/2026-11-12-board-B-02/board/original-flash.bin`.
+Build come sotto. Per `esp32_client_fit_benchmark` ed `esp32_cycle_benchmark`
+serve il component manager attivo: si compila **senza** `IDF_COMPONENT_MANAGER=0`.
+Le cartelle `idf/components`, `managed_components` e `include/network.local.h`
+si copiano dal client (README di ogni esperimento).
+
+## Lavoro del 12 novembre, pomeriggio
+
+- **Prova di capienza nel client** (`experiments/esp32_client_fit_benchmark/`):
+  con 152 KiB tenuti in RAM interna la rete si blocca (min. libero 11–23 KB,
+  408, fasi R incomplete). [Report](experiments/esp32_client_fit_benchmark/2026-11-12/report.md).
+- **Stessa prova con buffer Wi-Fi/lwIP in PSRAM:** la rete regge (1.000/1.000
+  frame con la riserva), ma il minimo libero resta 26,7 KB < 32 KB. Con
+  l'opzione, ESP-IDF aggiunge buffer statici (+13,7 KB interni).
+  [Report](experiments/esp32_client_fit_benchmark/2026-11-12/report-psramnet.md).
+- **Prova del ciclo** (`experiments/esp32_cycle_benchmark/`), interrotta:
+  tabella 46,3 → 0,8 ms (conferma il 10 novembre); keep-alive: apertura della
+  connessione da 12–13 a 2 ms; fasi 1, 3 e 4 bloccate dalla camera accesa
+  (alimentazione). Dettagli nel README dell'esperimento.
+
+## Stato del mattino del 12 novembre (superato)
 
 **Obiettivo in corso:** far entrare le attivazioni del prefisso nella RAM
 interna del client operativo (`Invoke()` da 84,7 a ~62,4 ms). Nel banco di
