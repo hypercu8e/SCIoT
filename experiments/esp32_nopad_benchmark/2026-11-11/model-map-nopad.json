@@ -1,0 +1,575 @@
+{
+  "model_sha256": "43419ffa6fd970cf705ee730fce32a51436c32d0248254b34215a4ee07853b97",
+  "nodes": [
+    {
+      "index": 0,
+      "op": "CONV_2D",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "serving_default_input_1:0",
+          "shape": [
+            1,
+            96,
+            96,
+            1
+          ],
+          "dtype": "INT8",
+          "bytes": 9216,
+          "constant": false
+        },
+        {
+          "index": 18,
+          "name": "model_1/Conv1/Conv2D",
+          "shape": [
+            16,
+            3,
+            3,
+            1
+          ],
+          "dtype": "INT8",
+          "bytes": 144,
+          "constant": true
+        },
+        {
+          "index": 17,
+          "name": "model_1/bn_Conv1/FusedBatchNormV3",
+          "shape": [
+            16
+          ],
+          "dtype": "INT32",
+          "bytes": 64,
+          "constant": true
+        }
+      ],
+      "outputs": [
+        {
+          "index": 19,
+          "name": "model_1/Conv1_relu/Relu6;model_1/bn_Conv1/FusedBatchNormV3;model_1/block_5_project/Conv2D;model_1/Conv1/Conv2D",
+          "shape": [
+            1,
+            48,
+            48,
+            16
+          ],
+          "dtype": "INT8",
+          "bytes": 36864,
+          "constant": false
+        }
+      ],
+      "macs": 331776
+    },
+    {
+      "index": 1,
+      "op": "DEPTHWISE_CONV_2D",
+      "inputs": [
+        {
+          "index": 19,
+          "name": "model_1/Conv1_relu/Relu6;model_1/bn_Conv1/FusedBatchNormV3;model_1/block_5_project/Conv2D;model_1/Conv1/Conv2D",
+          "shape": [
+            1,
+            48,
+            48,
+            16
+          ],
+          "dtype": "INT8",
+          "bytes": 36864,
+          "constant": false
+        },
+        {
+          "index": 16,
+          "name": "model_1/expanded_conv_depthwise_BN/FusedBatchNormV3;model_1/expanded_conv_depthwise/depthwise;model_1/block_5_project/Conv2D",
+          "shape": [
+            1,
+            3,
+            3,
+            16
+          ],
+          "dtype": "INT8",
+          "bytes": 144,
+          "constant": true
+        },
+        {
+          "index": 15,
+          "name": "model_1/expanded_conv_depthwise_BN/FusedBatchNormV3",
+          "shape": [
+            16
+          ],
+          "dtype": "INT32",
+          "bytes": 64,
+          "constant": true
+        }
+      ],
+      "outputs": [
+        {
+          "index": 20,
+          "name": "model_1/expanded_conv_depthwise_relu/Relu6;model_1/expanded_conv_depthwise_BN/FusedBatchNormV3;model_1/block_5_project/Conv2D;model_1/expanded_conv_depthwise/depthwise",
+          "shape": [
+            1,
+            48,
+            48,
+            16
+          ],
+          "dtype": "INT8",
+          "bytes": 36864,
+          "constant": false
+        }
+      ],
+      "macs": 331776
+    },
+    {
+      "index": 2,
+      "op": "CONV_2D",
+      "inputs": [
+        {
+          "index": 20,
+          "name": "model_1/expanded_conv_depthwise_relu/Relu6;model_1/expanded_conv_depthwise_BN/FusedBatchNormV3;model_1/block_5_project/Conv2D;model_1/expanded_conv_depthwise/depthwise",
+          "shape": [
+            1,
+            48,
+            48,
+            16
+          ],
+          "dtype": "INT8",
+          "bytes": 36864,
+          "constant": false
+        },
+        {
+          "index": 14,
+          "name": "model_1/expanded_conv_project/Conv2D",
+          "shape": [
+            8,
+            1,
+            1,
+            16
+          ],
+          "dtype": "INT8",
+          "bytes": 128,
+          "constant": true
+        },
+        {
+          "index": 13,
+          "name": "model_1/expanded_conv_project_BN/FusedBatchNormV3",
+          "shape": [
+            8
+          ],
+          "dtype": "INT32",
+          "bytes": 32,
+          "constant": true
+        }
+      ],
+      "outputs": [
+        {
+          "index": 21,
+          "name": "model_1/expanded_conv_project_BN/FusedBatchNormV3;model_1/block_2_project/Conv2D;model_1/expanded_conv_project/Conv2D",
+          "shape": [
+            1,
+            48,
+            48,
+            8
+          ],
+          "dtype": "INT8",
+          "bytes": 18432,
+          "constant": false
+        }
+      ],
+      "macs": 294912
+    },
+    {
+      "index": 3,
+      "op": "CONV_2D",
+      "inputs": [
+        {
+          "index": 21,
+          "name": "model_1/expanded_conv_project_BN/FusedBatchNormV3;model_1/block_2_project/Conv2D;model_1/expanded_conv_project/Conv2D",
+          "shape": [
+            1,
+            48,
+            48,
+            8
+          ],
+          "dtype": "INT8",
+          "bytes": 18432,
+          "constant": false
+        },
+        {
+          "index": 12,
+          "name": "model_1/block_1_expand/Conv2D",
+          "shape": [
+            48,
+            1,
+            1,
+            8
+          ],
+          "dtype": "INT8",
+          "bytes": 384,
+          "constant": true
+        },
+        {
+          "index": 11,
+          "name": "model_1/block_1_expand_BN/FusedBatchNormV3",
+          "shape": [
+            48
+          ],
+          "dtype": "INT32",
+          "bytes": 192,
+          "constant": true
+        }
+      ],
+      "outputs": [
+        {
+          "index": 22,
+          "name": "model_1/block_1_expand_relu/Relu6;model_1/block_1_expand_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_1_expand/Conv2D",
+          "shape": [
+            1,
+            48,
+            48,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 110592,
+          "constant": false
+        }
+      ],
+      "macs": 884736
+    },
+    {
+      "index": 4,
+      "op": "DEPTHWISE_CONV_2D",
+      "inputs": [
+        {
+          "index": 22,
+          "name": "model_1/block_1_expand_relu/Relu6;model_1/block_1_expand_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_1_expand/Conv2D",
+          "shape": [
+            1,
+            48,
+            48,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 110592,
+          "constant": false
+        },
+        {
+          "index": 10,
+          "name": "model_1/block_1_depthwise_BN/FusedBatchNormV3;model_1/block_1_depthwise/depthwise;model_1/block_3_depthwise/depthwise",
+          "shape": [
+            1,
+            3,
+            3,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 432,
+          "constant": true
+        },
+        {
+          "index": 9,
+          "name": "model_1/block_1_depthwise_BN/FusedBatchNormV3",
+          "shape": [
+            48
+          ],
+          "dtype": "INT32",
+          "bytes": 192,
+          "constant": true
+        }
+      ],
+      "outputs": [
+        {
+          "index": 23,
+          "name": "model_1/block_1_depthwise_relu/Relu6;model_1/block_1_depthwise_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_1_depthwise/depthwise",
+          "shape": [
+            1,
+            24,
+            24,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 27648,
+          "constant": false
+        }
+      ],
+      "macs": 248832
+    },
+    {
+      "index": 5,
+      "op": "CONV_2D",
+      "inputs": [
+        {
+          "index": 23,
+          "name": "model_1/block_1_depthwise_relu/Relu6;model_1/block_1_depthwise_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_1_depthwise/depthwise",
+          "shape": [
+            1,
+            24,
+            24,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 27648,
+          "constant": false
+        },
+        {
+          "index": 8,
+          "name": "model_1/block_1_project/Conv2D",
+          "shape": [
+            8,
+            1,
+            1,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 384,
+          "constant": true
+        },
+        {
+          "index": 7,
+          "name": "model_1/block_1_project_BN/FusedBatchNormV3",
+          "shape": [
+            8
+          ],
+          "dtype": "INT32",
+          "bytes": 32,
+          "constant": true
+        }
+      ],
+      "outputs": [
+        {
+          "index": 24,
+          "name": "model_1/block_1_project_BN/FusedBatchNormV3;model_1/block_2_project/Conv2D;model_1/block_1_project/Conv2D",
+          "shape": [
+            1,
+            24,
+            24,
+            8
+          ],
+          "dtype": "INT8",
+          "bytes": 4608,
+          "constant": false
+        }
+      ],
+      "macs": 221184
+    },
+    {
+      "index": 6,
+      "op": "CONV_2D",
+      "inputs": [
+        {
+          "index": 24,
+          "name": "model_1/block_1_project_BN/FusedBatchNormV3;model_1/block_2_project/Conv2D;model_1/block_1_project/Conv2D",
+          "shape": [
+            1,
+            24,
+            24,
+            8
+          ],
+          "dtype": "INT8",
+          "bytes": 4608,
+          "constant": false
+        },
+        {
+          "index": 6,
+          "name": "model_1/block_2_expand/Conv2D",
+          "shape": [
+            48,
+            1,
+            1,
+            8
+          ],
+          "dtype": "INT8",
+          "bytes": 384,
+          "constant": true
+        },
+        {
+          "index": 5,
+          "name": "model_1/block_2_expand_BN/FusedBatchNormV3",
+          "shape": [
+            48
+          ],
+          "dtype": "INT32",
+          "bytes": 192,
+          "constant": true
+        }
+      ],
+      "outputs": [
+        {
+          "index": 25,
+          "name": "model_1/block_2_expand_relu/Relu6;model_1/block_2_expand_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_2_expand/Conv2D",
+          "shape": [
+            1,
+            24,
+            24,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 27648,
+          "constant": false
+        }
+      ],
+      "macs": 221184
+    },
+    {
+      "index": 7,
+      "op": "DEPTHWISE_CONV_2D",
+      "inputs": [
+        {
+          "index": 25,
+          "name": "model_1/block_2_expand_relu/Relu6;model_1/block_2_expand_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_2_expand/Conv2D",
+          "shape": [
+            1,
+            24,
+            24,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 27648,
+          "constant": false
+        },
+        {
+          "index": 4,
+          "name": "model_1/block_2_depthwise_BN/FusedBatchNormV3;model_1/block_2_depthwise/depthwise;model_1/block_3_depthwise/depthwise",
+          "shape": [
+            1,
+            3,
+            3,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 432,
+          "constant": true
+        },
+        {
+          "index": 3,
+          "name": "model_1/block_2_depthwise_BN/FusedBatchNormV3",
+          "shape": [
+            48
+          ],
+          "dtype": "INT32",
+          "bytes": 192,
+          "constant": true
+        }
+      ],
+      "outputs": [
+        {
+          "index": 26,
+          "name": "model_1/block_2_depthwise_relu/Relu6;model_1/block_2_depthwise_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_2_depthwise/depthwise",
+          "shape": [
+            1,
+            24,
+            24,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 27648,
+          "constant": false
+        }
+      ],
+      "macs": 248832
+    },
+    {
+      "index": 8,
+      "op": "CONV_2D",
+      "inputs": [
+        {
+          "index": 26,
+          "name": "model_1/block_2_depthwise_relu/Relu6;model_1/block_2_depthwise_BN/FusedBatchNormV3;model_1/block_3_depthwise/depthwise;model_1/block_2_depthwise/depthwise",
+          "shape": [
+            1,
+            24,
+            24,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 27648,
+          "constant": false
+        },
+        {
+          "index": 2,
+          "name": "model_1/block_2_project/Conv2D",
+          "shape": [
+            8,
+            1,
+            1,
+            48
+          ],
+          "dtype": "INT8",
+          "bytes": 384,
+          "constant": true
+        },
+        {
+          "index": 1,
+          "name": "model_1/block_2_project_BN/FusedBatchNormV3",
+          "shape": [
+            8
+          ],
+          "dtype": "INT32",
+          "bytes": 32,
+          "constant": true
+        }
+      ],
+      "outputs": [
+        {
+          "index": 27,
+          "name": "model_1/block_2_project_BN/FusedBatchNormV3;model_1/block_2_project/Conv2D",
+          "shape": [
+            1,
+            24,
+            24,
+            8
+          ],
+          "dtype": "INT8",
+          "bytes": 4608,
+          "constant": false
+        }
+      ],
+      "macs": 221184
+    },
+    {
+      "index": 9,
+      "op": "ADD",
+      "inputs": [
+        {
+          "index": 24,
+          "name": "model_1/block_1_project_BN/FusedBatchNormV3;model_1/block_2_project/Conv2D;model_1/block_1_project/Conv2D",
+          "shape": [
+            1,
+            24,
+            24,
+            8
+          ],
+          "dtype": "INT8",
+          "bytes": 4608,
+          "constant": false
+        },
+        {
+          "index": 27,
+          "name": "model_1/block_2_project_BN/FusedBatchNormV3;model_1/block_2_project/Conv2D",
+          "shape": [
+            1,
+            24,
+            24,
+            8
+          ],
+          "dtype": "INT8",
+          "bytes": 4608,
+          "constant": false
+        }
+      ],
+      "outputs": [
+        {
+          "index": 28,
+          "name": "model_1/block_2_add/add",
+          "shape": [
+            1,
+            24,
+            24,
+            8
+          ],
+          "dtype": "INT8",
+          "bytes": 4608,
+          "constant": false
+        }
+      ],
+      "macs": null
+    }
+  ]
+}

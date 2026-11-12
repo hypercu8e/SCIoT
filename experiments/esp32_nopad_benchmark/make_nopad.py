@@ -1,0 +1,98 @@
+"""Rewrite the frozen INT8 prefix without its PAD node.
+
+The PAD (one row bottom, one column right, value = zero point) followed by a
+VALID stride-2 3x3 depthwise is replaced by the same depthwise with SAME
+padding, which on a 48x48 input pads exactly bottom/right by one. Weights,
+quantization and every other operator are copied unchanged. The script stops
+if the graph is not exactly the expected shape.
+"""
+import argparse
+import hashlib
+import math
+import os
+from pathlib import Path
+os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL','3')
+import flatbuffers
+from tensorflow.lite.python import schema_py_generated as schema
+
+ROOT=Path(__file__).resolve().parents[2]
+HERE=Path(__file__).resolve().parent
+SOURCE=ROOT/'experiments/esp32_representation_benchmark/artifacts/int8-prefix.tflite'
+SOURCE_SHA='d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c'
+TARGET=HERE/'artifacts/int8-prefix-nopad.tflite'
+HEADER=HERE/'include/generated/nopad_model.h'
+PAD_INDEX=4
+
+def sha(data):return hashlib.sha256(data).hexdigest()
+
+def c_array(name,data):
+    # Same layout as experiments/esp32_representation_benchmark/prepare.py.
+    rows=[f'alignas(16) static const uint8_t {name}[] = {{']
+    rows+=['  '+','.join(str(v) for v in data[i:i+24])+',' for i in range(0,len(data),24)]
+    return '\n'.join(rows+['};'])
+
+def op_name(model,op):
+    code=model.operatorCodes[op.opcodeIndex]
+    value=max(code.builtinCode,code.deprecatedBuiltinCode)
+    return next(k for k,v in vars(schema.BuiltinOperator).items() if v==value)
+
+def same_padding(size,stride,kernel):
+    out=math.ceil(size/stride);total=max((out-1)*stride+kernel-size,0)
+    return out,total//2,total-total//2
+
+def build(source=SOURCE):
+    data=source.read_bytes()
+    if sha(data)!=SOURCE_SHA:raise ValueError('Frozen prefix changed')
+    model=schema.ModelT.InitFromObj(schema.Model.GetRootAsModel(data,0))
+    if len(model.subgraphs)!=1:raise ValueError('Expected one subgraph')
+    g=model.subgraphs[0];ops=g.operators;t=g.tensors
+    pad,dw=ops[PAD_INDEX],ops[PAD_INDEX+1]
+    if op_name(model,pad)!='PAD' or op_name(model,dw)!='DEPTHWISE_CONV_2D':raise ValueError('Unexpected operators')
+    pad_in,pad_const=list(pad.inputs);pad_out=pad.outputs[0]
+    if list(dw.inputs)[0]!=pad_out:raise ValueError('Depthwise does not consume PAD output')
+    users=[i for i,op in enumerate(ops) if pad_out in list(op.inputs) or pad_const in list(op.inputs)]
+    if users!=[PAD_INDEX,PAD_INDEX+1] or pad_out in list(g.outputs):raise ValueError('PAD tensors used elsewhere')
+    paddings=bytes(model.buffers[t[pad_const].buffer].data)
+    if [int.from_bytes(paddings[i:i+4],'little',signed=True) for i in range(0,32,4)]!=[0,0,0,1,0,1,0,0]:
+        raise ValueError('Unexpected paddings')
+    qi,qo=t[pad_in].quantization,t[pad_out].quantization
+    if list(qi.zeroPoint)!=[-128] or list(qo.zeroPoint)!=[-128] or list(qi.scale)!=list(qo.scale):
+        raise ValueError('PAD value is not the shared zero point')
+    opts=dw.builtinOptions
+    filt=list(t[dw.inputs[1]].shape)
+    if (opts.padding,opts.strideW,opts.strideH,opts.depthMultiplier)!=(schema.Padding.VALID,2,2,1) or filt[1:3]!=[3,3]:
+        raise ValueError('Unexpected depthwise configuration')
+    if list(t[pad_in].shape)!=[1,48,48,48] or list(t[pad_out].shape)!=[1,49,49,48]:raise ValueError('Unexpected PAD shapes')
+    out_shape=list(t[dw.outputs[0]].shape)
+    for size,out in ((48,out_shape[1]),(48,out_shape[2])):
+        o,before,after=same_padding(size,2,3)
+        if (o,before,after)!=(out,0,1):raise ValueError('SAME padding would differ from the PAD node')
+    # Rewrite: depthwise reads the PAD input with SAME padding; PAD disappears.
+    dw.inputs=[pad_in]+[int(i) for i in dw.inputs[1:]];opts.padding=schema.Padding.SAME
+    del ops[PAD_INDEX]
+    removed=sorted((pad_const,pad_out))
+    model.buffers[t[pad_const].buffer].data=None
+    for index in reversed(removed):del t[index]
+    remap=lambda i:i if i<0 else i-sum(r<i for r in removed)
+    for op in ops:
+        op.inputs=[remap(int(i)) for i in op.inputs];op.outputs=[remap(int(i)) for i in op.outputs]
+    g.inputs=[remap(int(i)) for i in g.inputs];g.outputs=[remap(int(i)) for i in g.outputs]
+    # Drop the now unused PAD operator code.
+    used=sorted({op.opcodeIndex for op in ops});codes={old:new for new,old in enumerate(used)}
+    model.operatorCodes=[model.operatorCodes[i] for i in used]
+    for op in ops:op.opcodeIndex=codes[op.opcodeIndex]
+    builder=flatbuffers.Builder(0)
+    builder.Finish(model.Pack(builder),file_identifier=b'TFL3')
+    return bytes(builder.Output())
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__);p.parse_args()
+    data=build()
+    TARGET.parent.mkdir(parents=True,exist_ok=True);TARGET.write_bytes(data)
+    HEADER.parent.mkdir(parents=True,exist_ok=True)
+    HEADER.write_text('\n'.join(['#pragma once','#include <stdint.h>',
+        f'// Generated by make_nopad.py from {SOURCE_SHA}.',c_array('kNoPadModel',data),
+        f'static const char kNoPadSha[] = "{sha(data)}";',''])+'\n')
+    print(f'{TARGET.relative_to(ROOT)} {len(data)} bytes sha256 {sha(data)}')
+
+if __name__=='__main__':main()

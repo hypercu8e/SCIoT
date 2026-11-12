@@ -1,0 +1,851 @@
+{
+  "measured_invocations": 2160,
+  "warmup_invocations": 360,
+  "operator_records": 11340,
+  "activation_peak_bytes": {
+    "pad": 225840,
+    "nopad": 178688
+  },
+  "arena_used": {
+    "pad": 229836,
+    "nopad": 182556
+  },
+  "heap": {
+    "boot": {
+      "internal_free": 373435,
+      "internal_largest_block": 278528,
+      "internal_min": 373347,
+      "psram_free": 8386188
+    },
+    "allocated": {
+      "internal_free": 127671,
+      "internal_largest_block": 33792,
+      "internal_min": 127671,
+      "psram_free": 8033404
+    },
+    "after_run": {
+      "internal_free": 127451,
+      "internal_largest_block": 33792,
+      "internal_min": 127363,
+      "psram_free": 8033404
+    }
+  },
+  "invoke_median_of_round_p50_us": {
+    "pad-psram": {
+      "plain": 84701.0,
+      "profiled": 84876.0
+    },
+    "pad-internal": {
+      "plain": 62268.0,
+      "profiled": 62446.0
+    },
+    "nopad-psram": {
+      "plain": 82993.0,
+      "profiled": 83222.0
+    },
+    "nopad-internal": {
+      "plain": 62244.0,
+      "profiled": 62448.0
+    }
+  },
+  "rounds": {
+    "pad-psram": {
+      "plain": [
+        {
+          "round": 1,
+          "invoke_us": {
+            "p50": 84701.0,
+            "p95": 84721.0,
+            "mean": 84690.22222222222,
+            "minimum": 84331,
+            "maximum": 84721
+          }
+        },
+        {
+          "round": 2,
+          "invoke_us": {
+            "p50": 84701.0,
+            "p95": 84722.0,
+            "mean": 84690.41111111111,
+            "minimum": 84320,
+            "maximum": 84722
+          }
+        },
+        {
+          "round": 3,
+          "invoke_us": {
+            "p50": 84701.0,
+            "p95": 84722.0,
+            "mean": 84690.41111111111,
+            "minimum": 84320,
+            "maximum": 84722
+          }
+        }
+      ],
+      "profiled": [
+        {
+          "round": 1,
+          "invoke_us": {
+            "p50": 84876.0,
+            "p95": 84898.0,
+            "mean": 84865.65555555555,
+            "minimum": 84511,
+            "maximum": 84910
+          }
+        },
+        {
+          "round": 2,
+          "invoke_us": {
+            "p50": 84873.5,
+            "p95": 84894.0,
+            "mean": 84863.05555555556,
+            "minimum": 84511,
+            "maximum": 84906
+          }
+        },
+        {
+          "round": 3,
+          "invoke_us": {
+            "p50": 84876.0,
+            "p95": 84898.0,
+            "mean": 84865.65555555555,
+            "minimum": 84511,
+            "maximum": 84910
+          }
+        }
+      ]
+    },
+    "pad-internal": {
+      "plain": [
+        {
+          "round": 1,
+          "invoke_us": {
+            "p50": 62268.0,
+            "p95": 62288.3,
+            "mean": 62258.2,
+            "minimum": 61908,
+            "maximum": 62291
+          }
+        },
+        {
+          "round": 2,
+          "invoke_us": {
+            "p50": 62269.0,
+            "p95": 62288.3,
+            "mean": 62257.96666666667,
+            "minimum": 61908,
+            "maximum": 62291
+          }
+        },
+        {
+          "round": 3,
+          "invoke_us": {
+            "p50": 62268.0,
+            "p95": 62288.3,
+            "mean": 62257.88888888889,
+            "minimum": 61908,
+            "maximum": 62291
+          }
+        }
+      ],
+      "profiled": [
+        {
+          "round": 1,
+          "invoke_us": {
+            "p50": 62446.0,
+            "p95": 62459.65,
+            "mean": 62433.9,
+            "minimum": 62102,
+            "maximum": 62461
+          }
+        },
+        {
+          "round": 2,
+          "invoke_us": {
+            "p50": 62446.0,
+            "p95": 62454.0,
+            "mean": 62434.02222222222,
+            "minimum": 62100,
+            "maximum": 62455
+          }
+        },
+        {
+          "round": 3,
+          "invoke_us": {
+            "p50": 62446.0,
+            "p95": 62454.0,
+            "mean": 62434.02222222222,
+            "minimum": 62100,
+            "maximum": 62455
+          }
+        }
+      ]
+    },
+    "nopad-psram": {
+      "plain": [
+        {
+          "round": 1,
+          "invoke_us": {
+            "p50": 82985.0,
+            "p95": 83004.0,
+            "mean": 82979.74444444444,
+            "minimum": 82650,
+            "maximum": 83004
+          }
+        },
+        {
+          "round": 2,
+          "invoke_us": {
+            "p50": 82993.0,
+            "p95": 83017.0,
+            "mean": 82988.43333333333,
+            "minimum": 82649,
+            "maximum": 83017
+          }
+        },
+        {
+          "round": 3,
+          "invoke_us": {
+            "p50": 82993.0,
+            "p95": 83017.0,
+            "mean": 82988.43333333333,
+            "minimum": 82649,
+            "maximum": 83017
+          }
+        }
+      ],
+      "profiled": [
+        {
+          "round": 1,
+          "invoke_us": {
+            "p50": 83222.0,
+            "p95": 83243.0,
+            "mean": 83216.54444444444,
+            "minimum": 82867,
+            "maximum": 83243
+          }
+        },
+        {
+          "round": 2,
+          "invoke_us": {
+            "p50": 83222.0,
+            "p95": 83243.0,
+            "mean": 83216.54444444444,
+            "minimum": 82867,
+            "maximum": 83243
+          }
+        },
+        {
+          "round": 3,
+          "invoke_us": {
+            "p50": 83222.0,
+            "p95": 83243.0,
+            "mean": 83216.54444444444,
+            "minimum": 82867,
+            "maximum": 83243
+          }
+        }
+      ]
+    },
+    "nopad-internal": {
+      "plain": [
+        {
+          "round": 1,
+          "invoke_us": {
+            "p50": 62243.0,
+            "p95": 62262.75,
+            "mean": 62235.03333333333,
+            "minimum": 61916,
+            "maximum": 62265
+          }
+        },
+        {
+          "round": 2,
+          "invoke_us": {
+            "p50": 62244.0,
+            "p95": 62262.2,
+            "mean": 62234.833333333336,
+            "minimum": 61916,
+            "maximum": 62264
+          }
+        },
+        {
+          "round": 3,
+          "invoke_us": {
+            "p50": 62244.0,
+            "p95": 62262.2,
+            "mean": 62234.833333333336,
+            "minimum": 61916,
+            "maximum": 62264
+          }
+        }
+      ],
+      "profiled": [
+        {
+          "round": 1,
+          "invoke_us": {
+            "p50": 62451.0,
+            "p95": 62467.55,
+            "mean": 62440.944444444445,
+            "minimum": 62111,
+            "maximum": 62468
+          }
+        },
+        {
+          "round": 2,
+          "invoke_us": {
+            "p50": 62448.0,
+            "p95": 62468.75,
+            "mean": 62438.5,
+            "minimum": 62111,
+            "maximum": 62471
+          }
+        },
+        {
+          "round": 3,
+          "invoke_us": {
+            "p50": 62448.0,
+            "p95": 62468.75,
+            "mean": 62438.5,
+            "minimum": 62111,
+            "maximum": 62471
+          }
+        }
+      ]
+    }
+  },
+  "instrumentation_difference_pct": {
+    "pad-psram": 0.20660913094296962,
+    "pad-internal": 0.28586111646431434,
+    "nopad-psram": 0.27592688539996857,
+    "nopad-internal": 0.3277424330055956
+  },
+  "versus_memory_benchmark_pct": {
+    "pad-psram": -0.025966974729407788,
+    "pad-internal": -0.033713817849057026
+  },
+  "nopad_plain_gain_us": {
+    "psram": 1708.0,
+    "internal": 24.0
+  },
+  "nopad_faster_every_round_and_frame": {
+    "psram": true,
+    "internal": true
+  },
+  "internal_plain_gain_us": {
+    "pad": 22433.0,
+    "nopad": 20749.0
+  },
+  "pad_pair_vs_merged_depthwise": {
+    "psram": {
+      "pad_node_us": 5249.5,
+      "pad_depthwise_us": 9533.0,
+      "pad_pair_us": 14782.5,
+      "nopad_depthwise_us": 13421.0,
+      "gain_us": 1361.5
+    },
+    "internal": {
+      "pad_node_us": 345.5,
+      "pad_depthwise_us": 4334.0,
+      "pad_pair_us": 4679.5,
+      "nopad_depthwise_us": 4697.0,
+      "gain_us": -17.5
+    }
+  },
+  "nodes": {
+    "pad-psram": [
+      {
+        "index": 0,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          16
+        ],
+        "median_of_round_p50_us": 23435.0
+      },
+      {
+        "index": 1,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          16
+        ],
+        "median_of_round_p50_us": 8651.0
+      },
+      {
+        "index": 2,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          8
+        ],
+        "median_of_round_p50_us": 3847.0
+      },
+      {
+        "index": 3,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          48
+        ],
+        "median_of_round_p50_us": 18059.0
+      },
+      {
+        "index": 4,
+        "op": "PAD",
+        "output_shape": [
+          1,
+          49,
+          49,
+          48
+        ],
+        "median_of_round_p50_us": 5249.5
+      },
+      {
+        "index": 5,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 9533.0
+      },
+      {
+        "index": 6,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 1519.0
+      },
+      {
+        "index": 7,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 4335.0
+      },
+      {
+        "index": 8,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 7762.0
+      },
+      {
+        "index": 9,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 1434.0
+      },
+      {
+        "index": 10,
+        "op": "ADD",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 933.0
+      }
+    ],
+    "pad-internal": [
+      {
+        "index": 0,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          16
+        ],
+        "median_of_round_p50_us": 22830.0
+      },
+      {
+        "index": 1,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          16
+        ],
+        "median_of_round_p50_us": 6048.0
+      },
+      {
+        "index": 2,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          8
+        ],
+        "median_of_round_p50_us": 2828.0
+      },
+      {
+        "index": 3,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          48
+        ],
+        "median_of_round_p50_us": 15145.0
+      },
+      {
+        "index": 4,
+        "op": "PAD",
+        "output_shape": [
+          1,
+          49,
+          49,
+          48
+        ],
+        "median_of_round_p50_us": 345.5
+      },
+      {
+        "index": 5,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 4334.0
+      },
+      {
+        "index": 6,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 893.0
+      },
+      {
+        "index": 7,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 3802.0
+      },
+      {
+        "index": 8,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 4430.0
+      },
+      {
+        "index": 9,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 893.0
+      },
+      {
+        "index": 10,
+        "op": "ADD",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 817.0
+      }
+    ],
+    "nopad-psram": [
+      {
+        "index": 0,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          16
+        ],
+        "median_of_round_p50_us": 23428.0
+      },
+      {
+        "index": 1,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          16
+        ],
+        "median_of_round_p50_us": 8665.0
+      },
+      {
+        "index": 2,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          8
+        ],
+        "median_of_round_p50_us": 3836.5
+      },
+      {
+        "index": 3,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          48
+        ],
+        "median_of_round_p50_us": 17888.0
+      },
+      {
+        "index": 4,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 13421.0
+      },
+      {
+        "index": 5,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 1470.0
+      },
+      {
+        "index": 6,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 4339.0
+      },
+      {
+        "index": 7,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 7711.0
+      },
+      {
+        "index": 8,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 1429.0
+      },
+      {
+        "index": 9,
+        "op": "ADD",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 930.0
+      }
+    ],
+    "nopad-internal": [
+      {
+        "index": 0,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          16
+        ],
+        "median_of_round_p50_us": 22823.0
+      },
+      {
+        "index": 1,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          16
+        ],
+        "median_of_round_p50_us": 6061.0
+      },
+      {
+        "index": 2,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          8
+        ],
+        "median_of_round_p50_us": 2827.0
+      },
+      {
+        "index": 3,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          48,
+          48,
+          48
+        ],
+        "median_of_round_p50_us": 15145.0
+      },
+      {
+        "index": 4,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 4697.0
+      },
+      {
+        "index": 5,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 889.0
+      },
+      {
+        "index": 6,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 3798.0
+      },
+      {
+        "index": 7,
+        "op": "DEPTHWISE_CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          48
+        ],
+        "median_of_round_p50_us": 4425.0
+      },
+      {
+        "index": 8,
+        "op": "CONV_2D",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 893.0
+      },
+      {
+        "index": 9,
+        "op": "ADD",
+        "output_shape": [
+          1,
+          24,
+          24,
+          8
+        ],
+        "median_of_round_p50_us": 816.0
+      }
+    ]
+  },
+  "fit": {
+    "client_internal_min_free": 194091,
+    "reserve": 32768,
+    "limit": 161323,
+    "nopad_activation_peak": 178688,
+    "fits_with_reserve": false,
+    "next_step": "free_client_internal_ram"
+  },
+  "model_sha256": "d41048c7accf408e57d1f6a7882ee5acebd1e6d3e9a0ba008746481cfb05b30c",
+  "nopad_model_sha256": "43419ffa6fd970cf705ee730fce32a51436c32d0248254b34215a4ee07853b97",
+  "legacy_device_comparison": {
+    "archive": "experiments/esp32_input_camera_benchmark/results/2026-11-10-lut-hold-full-01/server/inference.bin",
+    "activation_sha256": {
+      "48": "ca31d893640364eb3a5ce1e11c6d3e60cc17c67daf7ae2bb1b7b3214a14b4843",
+      "96": "79469910971100f8831dafabdf781c3cae94a71cb843c58720e55b3fee98c8d1",
+      "145": "bbe58f0df99f25fe4c471c60add85f500bd416d78837b8c1b613b6b1ef74215b"
+    },
+    "manifest_sha256": "dcc2880e3503a774d4dfa336444351dc3095c8ef5f0afccf95dd7025cf0946dc",
+    "exact": true
+  },
+  "all_activations_match_original_model": true,
+  "original_flash_and_boot_verified": true,
+  "board": "B",
+  "mac": "24:ec:4a:0e:c3:14"
+}
