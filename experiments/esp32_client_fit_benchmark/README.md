@@ -53,6 +53,36 @@ Limiti: una sola scheda (il 9 novembre i minimi di A e B differivano di
 1,3 KB); 1.000 frame per fase, non un'ora; la riserva non è un'arena TFLM
 vera, quindi non misura il tempo né l'accesso concorrente alla RAM interna.
 
+## Seconda prova: buffer Wi-Fi/lwIP in PSRAM
+
+Dopo la prima prova (il blocco toglie RAM interna alla rete), stesso firmware
+compilato con `CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP=y` (ambiente PlatformIO
+`psramnet`, [`sdkconfig.defaults.psramnet`](idf/sdkconfig.defaults.psramnet)).
+Wi-Fi e lwIP allocano prima in PSRAM, in RAM interna solo se la PSRAM manca.
+Con l'opzione attiva, ESP-IDF cambia anche i suoi default Wi-Fi: 16 buffer
+RX statici (prima 10), 16 buffer TX statici al posto di 32 dinamici, finestra
+BA RX 16 (prima 6), nessun pbuf fuori ordine trattenuto. Si tiene la
+configurazione raccomandata da Espressif per quell'opzione, senza ritocchi.
+
+Stesse fasi N, R, N, R e stessa scheda. Criteri, fissati prima della misura:
+
+- **Funzionamento, per ogni fase:** come sopra, ma con al massimo **10 frame
+  camera persi (1%)** per errori HTTP transitori (`http_response`, stato 408
+  o 410). La prima prova ha perso 3 frame in una fase N per questi errori.
+  Il runner chiude la fase all'undicesimo errore.
+- **Margine, fasi R:** minimo interno libero ≥ 32.768 byte, invariato.
+- **Rete, fasi R:** ciclo camera p50 della fase R peggiore ≤ **1,10 ×** la
+  media dei p50 delle fasi N dello stesso run.
+- **Esito:** come sopra (entra / non entra / problema dell'ambiente).
+- **Riportato:** costo dell'opzione sulla rete, cioè il ciclo p50 delle fasi N
+  contro quelle N della prima prova (277–284 ms; giorno e ora diversi).
+
+```sh
+$T/pio run -d experiments/esp32_client_fit_benchmark/idf -e psramnet
+$T/python experiments/esp32_client_fit_benchmark/run.py --env psramnet --max-errors 10 --run experiments/esp32_client_fit_benchmark/results/NUOVO_RUN --board B --seed BACKUP_VERIFICATO
+.venv/bin/python experiments/esp32_client_fit_benchmark/analyze.py --criteria tolerant --run experiments/esp32_client_fit_benchmark/results/NUOVO_RUN --output experiments/esp32_client_fit_benchmark/results/NUOVO_RUN/audit.json
+```
+
 ## Riproduzione
 
 ```sh

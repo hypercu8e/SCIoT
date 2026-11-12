@@ -67,9 +67,10 @@ def wait_server(process,port,deadline):
         except OSError:time.sleep(.5)
     raise TimeoutError('Server not listening')
 
-def phase(link,index,mode,raw,events):
-    """Reset, choose the mode, run 'g' once. Returns the phase outcome."""
-    reset(link);pending=bytearray();scan=b'';state='boot';deadline=time.monotonic()+PHASE_SECONDS
+def phase(link,index,mode,raw,events,max_errors=None):
+    """Reset, choose the mode, run 'g' once. Returns the phase outcome.
+    With max_errors, the phase stops as failed at the first error beyond it."""
+    reset(link);pending=bytearray();scan=b'';state='boot';deadline=time.monotonic()+PHASE_SECONDS;errors=0
     while time.monotonic()<deadline:
         data=link.read(65536)
         if not data:continue
@@ -86,6 +87,9 @@ def phase(link,index,mode,raw,events):
             if e in ('reserve','registration','camera_init','done','wifi_disconnected') or (e=='error'):
                 print(json.dumps({**row,"phase":index,"phase_mode":mode}),flush=True)
             if e=='error' and row.get('reason') in FATAL:return dict(phase=index,mode=mode,ok=False,reason=row['reason'])
+            if e=='error':
+                errors+=1
+                if max_errors is not None and errors>max_errors:return dict(phase=index,mode=mode,ok=False,reason='too_many_errors')
             if e=='mode_prompt' and state=='boot':link.write(mode.encode());link.flush();state='mode'
             elif e=='ready' and state=='mode':link.write(b'g');link.flush();state='running'
             elif e=='registration' and state=='running':state='registered'
@@ -96,13 +100,14 @@ def phase(link,index,mode,raw,events):
 def main():
     p=argparse.ArgumentParser();p.add_argument('--run',type=Path,required=True)
     p.add_argument('--board',choices=MACS,default='B');p.add_argument('--seed',type=Path);p.add_argument('--port',type=int,default=8000)
+    p.add_argument('--env',choices=('espnn','psramnet'),default='espnn');p.add_argument('--max-errors',type=int)
     a=p.parse_args();run=a.run.resolve();run.mkdir(parents=True,exist_ok=False)
     directory=run/'board';directory.mkdir()
     mac=MACS[a.board];port=f'/dev/serial/by-id/usb-Espressif_USB_JTAG_serial_debug_unit_{mac.upper()}-if00'
     if not os.access(port,os.R_OK|os.W_OK):raise RuntimeError('Serial permission unavailable')
     if subprocess.run(['fuser',port],capture_output=True).returncode==0:raise RuntimeError('Serial occupied')
     sources=[HERE/f for f in ('run.py','analyze.py','README.md')]+list((HERE/'idf/src').glob('*'))
-    sources+=[HERE/'idf'/f for f in ('CMakeLists.txt','sdkconfig.defaults','platformio.ini','partitions.csv')]
+    sources+=[HERE/'idf'/f for f in ('CMakeLists.txt','sdkconfig.defaults','sdkconfig.defaults.psramnet','platformio.ini','partitions.csv','sdkconfig.'+a.env)]
     sources+=[SERVER,COMMON]
     hashes={}
     for source in sources:
@@ -112,7 +117,7 @@ def main():
         if component.is_file() and '.git' not in component.parts:hashes[str(component.relative_to(ROOT))]=sha(component)
     firmware=run/'firmware';firmware.mkdir()  # contains Wi-Fi credentials: results/ is ignored by Git
     for name in ('bootloader.bin','partitions.bin','firmware.bin'):
-        source=HERE/'idf/.pio/build/espnn'/name;shutil.copyfile(source,firmware/name)
+        source=HERE/'idf/.pio/build'/a.env/name;shutil.copyfile(source,firmware/name)
         hashes[str(source.relative_to(ROOT))]=sha(source)
     (run/'source-sha256.json').write_text(json.dumps(hashes,indent=2)+'\n')
     (run/'git-state.txt').write_text(subprocess.check_output(['git','status','--short'],cwd=ROOT,text=True))
@@ -140,7 +145,7 @@ def main():
         with (directory/'serial.log').open('xb') as raw,(directory/'events.jsonl').open('x') as events:
             for index,mode in enumerate(PHASES,1):
                 if server.poll() is not None:raise RuntimeError('Server exited')
-                outcome=phase(link,index,mode,raw,events);outcomes.append(outcome)
+                outcome=phase(link,index,mode,raw,events,a.max_errors);outcomes.append(outcome)
                 print(json.dumps(dict(event='phase_end',**outcome)),flush=True)
                 if outcome['reason'] in ('registration','wifi_connection'):
                     raise RuntimeError('Board cannot register: check firewall / SERVER_BASE_URL')
@@ -165,7 +170,7 @@ def main():
         except BaseException as exc:restore_error=repr(exc)
         complete=len(outcomes)==len(PHASES)
         (run/'completion.json').write_text(json.dumps(dict(phases_attempted=len(outcomes),all_phases_attempted=complete,outcomes=outcomes,
-            error=error,restore_error=restore_error,original_boot_confirmed=boot,board=a.board),indent=2)+'\n')
+            error=error,restore_error=restore_error,original_boot_confirmed=boot,board=a.board,env=a.env,max_errors=a.max_errors),indent=2)+'\n')
         print('Original firmware restored and boot confirmed' if not restore_error and boot else 'Restoration needs attention: '+str(restore_error),flush=True)
     if error or restore_error:raise RuntimeError(json.dumps(dict(error=error,restore_error=restore_error)))
 

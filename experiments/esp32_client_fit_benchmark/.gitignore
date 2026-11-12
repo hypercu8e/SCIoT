@@ -7,3 +7,4 @@
 /idf/sdkconfig*
 !/idf/sdkconfig.defaults
 __pycache__/
+!/idf/sdkconfig.defaults.psramnet
