@@ -1,0 +1,1104 @@
+{
+  "phases": [
+    {
+      "phase": 1,
+      "mode": "N",
+      "reserve": {
+        "event": "reserve",
+        "mode": "N",
+        "requested": 0,
+        "held": false,
+        "address": "0x0",
+        "internal_largest_before": 208896,
+        "internal_free_after": 302223,
+        "internal_largest_after": 208896
+      },
+      "embedded_completed": 60,
+      "camera_completed": 1000,
+      "done": {
+        "event": "done",
+        "camera_attempted": 1000,
+        "camera_completed": 1000,
+        "elapsed_us": 308001087
+      },
+      "errors": [],
+      "rejected": 0,
+      "registrations": [
+        true
+      ],
+      "camera_init_status": [
+        0
+      ],
+      "wifi_disconnections": 0,
+      "internal_min_free": 196807,
+      "internal_largest_block_min": 110592,
+      "internal_free_min_sampled": 215551,
+      "memory_samples": 23,
+      "server_statuses": {
+        "200": 1060
+      },
+      "server_requests": 1060,
+      "camera_cycle_us": {
+        "p50": 283940.0,
+        "p95": 438528.1
+      },
+      "camera_network_us": {
+        "p50": 65002.0,
+        "p95": 213126.9
+      },
+      "invoke_us_p50": 94829.5,
+      "functional_ok": true,
+      "runner_outcome": {
+        "phase": 1,
+        "mode": "N",
+        "ok": true,
+        "reason": null
+      }
+    },
+    {
+      "phase": 2,
+      "mode": "R",
+      "reserve": {
+        "event": "reserve",
+        "mode": "R",
+        "requested": 155648,
+        "held": true,
+        "address": "0x3fcb6670",
+        "internal_largest_before": 208896,
+        "internal_free_after": 146571,
+        "internal_largest_after": 53248
+      },
+      "embedded_completed": 60,
+      "camera_completed": 360,
+      "done": null,
+      "errors": [
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": -1,
+          "received": 0,
+          "length": -28679
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 28674,
+          "http_status": 0,
+          "received": 0,
+          "length": -1
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": -1,
+          "received": 0,
+          "length": -28679
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        }
+      ],
+      "rejected": 0,
+      "registrations": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        true
+      ],
+      "camera_init_status": [
+        0
+      ],
+      "wifi_disconnections": 0,
+      "internal_min_free": 22751,
+      "internal_largest_block_min": 31744,
+      "internal_free_min_sampled": 53991,
+      "memory_samples": 10,
+      "server_statuses": {
+        "200": 420,
+        "408": 48
+      },
+      "server_requests": 468,
+      "camera_cycle_us": {
+        "p50": 1556670.0,
+        "p95": 4559969.350000001
+      },
+      "camera_network_us": {
+        "p50": 1288655.5,
+        "p95": 3950546.2
+      },
+      "invoke_us_p50": 95371.0,
+      "functional_ok": false,
+      "headroom_ok": false,
+      "runner_outcome": {
+        "phase": 2,
+        "mode": "R",
+        "ok": false,
+        "reason": "timeout_in_registered"
+      }
+    },
+    {
+      "phase": 3,
+      "mode": "N",
+      "reserve": {
+        "event": "reserve",
+        "mode": "N",
+        "requested": 0,
+        "held": false,
+        "address": "0x0",
+        "internal_largest_before": 208896,
+        "internal_free_after": 302223,
+        "internal_largest_after": 208896
+      },
+      "embedded_completed": 60,
+      "camera_completed": 997,
+      "done": {
+        "event": "done",
+        "camera_attempted": 1000,
+        "camera_completed": 997,
+        "elapsed_us": 342200434
+      },
+      "errors": [
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        }
+      ],
+      "rejected": 0,
+      "registrations": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "camera_init_status": [
+        0
+      ],
+      "wifi_disconnections": 0,
+      "internal_min_free": 193363,
+      "internal_largest_block_min": 112640,
+      "internal_free_min_sampled": 215919,
+      "memory_samples": 23,
+      "server_statuses": {
+        "200": 1057,
+        "408": 3
+      },
+      "server_requests": 1060,
+      "camera_cycle_us": {
+        "p50": 276743.0,
+        "p95": 430200.20000000007
+      },
+      "camera_network_us": {
+        "p50": 58063.0,
+        "p95": 203669.80000000005
+      },
+      "invoke_us_p50": 94856.0,
+      "functional_ok": false,
+      "runner_outcome": {
+        "phase": 3,
+        "mode": "N",
+        "ok": true,
+        "reason": null
+      }
+    },
+    {
+      "phase": 4,
+      "mode": "R",
+      "reserve": {
+        "event": "reserve",
+        "mode": "R",
+        "requested": 155648,
+        "held": true,
+        "address": "0x3fcb6670",
+        "internal_largest_before": 208896,
+        "internal_free_after": 146571,
+        "internal_largest_after": 53248
+      },
+      "embedded_completed": 60,
+      "camera_completed": 4,
+      "done": null,
+      "errors": [
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": -1,
+          "received": 0,
+          "length": -28679
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": -1,
+          "received": 0,
+          "length": -28679
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": -1,
+          "received": 0,
+          "length": -28679
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 410,
+          "received": 0,
+          "length": 27
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": -1,
+          "received": 0,
+          "length": -28679
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": -1,
+          "received": 0,
+          "length": -28679
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 28674,
+          "http_status": 0,
+          "received": 0,
+          "length": -1
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": -1,
+          "received": 0,
+          "length": -28679
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 410,
+          "received": 0,
+          "length": 28
+        }
+      ],
+      "rejected": 0,
+      "registrations": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true
+      ],
+      "camera_init_status": [
+        0
+      ],
+      "wifi_disconnections": 0,
+      "internal_min_free": 11831,
+      "internal_largest_block_min": 31744,
+      "internal_free_min_sampled": 53667,
+      "memory_samples": 3,
+      "server_statuses": {
+        "200": 64,
+        "408": 29,
+        "410": 2
+      },
+      "server_requests": 95,
+      "camera_cycle_us": {
+        "p50": 8705234.0,
+        "p95": 16970094.05
+      },
+      "camera_network_us": {
+        "p50": 3470791.5,
+        "p95": 7961813.9
+      },
+      "invoke_us_p50": 94576.5,
+      "functional_ok": false,
+      "headroom_ok": false,
+      "runner_outcome": {
+        "phase": 4,
+        "mode": "R",
+        "ok": false,
+        "reason": "timeout_in_registered"
+      }
+    }
+  ],
+  "reserve_bytes": 155648,
+  "min_free_floor": 32768,
+  "controls_ok": false,
+  "reserve_phases_ok": false,
+  "verdict": "environment_problem",
+  "internal_min_free": {
+    "N": [
+      196807,
+      193363
+    ],
+    "R": [
+      22751,
+      11831
+    ]
+  },
+  "internal_largest_block_min": {
+    "N": [
+      110592,
+      112640
+    ],
+    "R": [
+      31744,
+      31744
+    ]
+  },
+  "camera_cycle_p50_us": {
+    "N": [
+      283940.0,
+      276743.0
+    ],
+    "R": [
+      1556670.0,
+      8705234.0
+    ]
+  },
+  "run_error": null,
+  "board": "B",
+  "mac": "24:ec:4a:0e:c3:14",
+  "original_flash_and_boot_verified": true
+}
