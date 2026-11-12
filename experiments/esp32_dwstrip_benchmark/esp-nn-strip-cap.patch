@@ -1,0 +1,56 @@
+--- a/include/esp_nn_esp32s3.h
++++ b/include/esp_nn_esp32s3.h
+@@ -147,6 +147,18 @@
+ void esp_nn_set_depthwise_conv_scratch_buf_esp32s3(const void *buf);
+ 
+ /**
++ * @brief       SCIoT: cap on padded input rows per strip for the strip-tiled
++ *              3x3 depthwise (padded input over 40 KB). 0 = upstream budget.
++ *
++ * @note        Read by both the scratch-size query and the kernel: change it
++ *              only before AllocateTensors, never between Prepare and Invoke.
++ *              last_rows/count report the rows per strip and strips executed.
++ */
++extern int esp_nn_dw_strip_max_rows;
++extern volatile uint32_t esp_nn_dw_strip_last_rows;
++extern volatile uint32_t esp_nn_dw_strip_count;
++
++/**
+  * @brief       Prefer a caller-owned buffer for depthwise workspace
+  *
+  * @note        The buffer must remain valid until it is replaced or cleared
+--- a/src/convolution/esp_nn_depthwise_conv_s8_esp32s3.c
++++ b/src/convolution/esp_nn_depthwise_conv_s8_esp32s3.c
+@@ -14,6 +14,11 @@
+ static uint8_t *preferred_scratch_buffer = NULL;
+ static size_t preferred_scratch_size = 0;
+ 
++/* SCIoT strip cap (see esp_nn_esp32s3.h). 0 keeps the upstream 40 KB budget. */
++int esp_nn_dw_strip_max_rows = 0;
++volatile uint32_t esp_nn_dw_strip_last_rows = 0;
++volatile uint32_t esp_nn_dw_strip_count = 0;
++
+ extern void esp_nn_depthwise_conv_s16_mult8_3x3_esp32s3(const int16_t *input_data,
+                                                         const uint16_t input_wd,
+                                                         const uint16_t input_ht,
+@@ -413,8 +418,10 @@
+         strip_rows = 3; /* caller guarantees at least filter_ht rows fit */
+     }
+     const int out_rows_per_strip = (strip_rows - 3) / j->stride_ht + 1;
++    esp_nn_dw_strip_last_rows = (uint32_t)strip_rows;
+ 
+     for (int out_y = j->out_y_begin; out_y < j->out_y_end; ) {
++        esp_nn_dw_strip_count++;
+         int n_out = out_rows_per_strip;
+         if (n_out > j->out_y_end - out_y) {
+             n_out = j->out_y_end - out_y;
+@@ -655,6 +662,9 @@
+                          * to one output row per assembly call. */
+                         int row_bytes = (input_wd + pad_width) * channels;
+                         int rows = (40 * 1024 - filter_size - 32) / row_bytes;
++                        if (esp_nn_dw_strip_max_rows > 0 && rows > esp_nn_dw_strip_max_rows) {
++                            rows = esp_nn_dw_strip_max_rows;
++                        }
+                         if (rows < filter_ht) {
+                             rows = filter_ht;
+                         }
