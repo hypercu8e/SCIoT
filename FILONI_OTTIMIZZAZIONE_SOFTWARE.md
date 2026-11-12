@@ -1,6 +1,11 @@
 # Filoni di ottimizzazione software SCIoT
 
-Aggiornamento: 11 novembre 2026. Le direzioni proposte non sono vantaggi già dimostrati né dichiarazioni di novità scientifica; gli esiti misurati sono distinti sotto.
+Aggiornamento: 12 novembre 2026. Le direzioni proposte non sono vantaggi già dimostrati né dichiarazioni di novità scientifica; gli esiti misurati sono distinti sotto.
+
+**Buffer a strisce, 12 novembre:** [depthwise con 5 righe per striscia](experiments/esp32_dwstrip_benchmark/2026-11-12/report.md)
+(patch a una copia di ESP-NN): picco attivazioni senza PAD 178.688 →
+150.464 byte, sotto il limite del client (161.323), stessi byte, +81 µs su
+62,3 ms. Prossimo passo: prova di capienza nel client con Wi-Fi e camera.
 
 **Senza nodo PAD, 11 novembre:** [modello riscritto con padding SAME](experiments/esp32_nopad_benchmark/2026-11-11/report.md),
 stessi byte su PC e scheda. Picco attivazioni 225.840 → 178.688 byte (il

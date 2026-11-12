@@ -935,3 +935,23 @@ in RAM interna. Leve rimaste: buffer Wi-Fi/lwIP in PSRAM nel client o
 buffer a strisce più piccolo in ESP-NN, da decidere. Flash B ripristinata.
 
 [Report prefisso senza PAD](experiments/esp32_nopad_benchmark/2026-11-11/report.md).
+
+## Buffer a strisce della depthwise — 12 novembre 2026
+
+Scelta la strada del buffer a strisce più piccolo. Dal codice ESP-NN: la
+depthwise del nodo 4 (49×49×48 col bordo) lavora a strisce di 17 righe da
+2.352 byte, buffer di 40.448 byte; il kernel ricava le righe dalla
+dimensione del buffer. Patch di poche righe a una copia di ESP-NN per
+limitare le righe, con contatori controllati a ogni inferenza.
+
+Su questo PC mancavano le cartelle `results/` (ignorate da Git, rimaste
+sull'altro PC): usato l'ambiente di build già presente nell'esperimento
+lossless, backup completo di 8 MiB della scheda B.
+
+Misura con quattro varianti (17, 7, 5, 3 righe), 2.160 inferenze, tutte
+identiche al modello originale. Picchi 178.688 / 155.168 / 150.464 / 145.760
+byte, uguali al calcolo; costo +0 / +44 / +81 / +187 µs su 62,3 ms. Scelta
+5 righe: 10.859 byte di margine sul limite. Prossimo passo: prova di
+capienza nel client con Wi-Fi e camera. Flash B ripristinata.
+
+[Report buffer a strisce](experiments/esp32_dwstrip_benchmark/2026-11-12/report.md).
