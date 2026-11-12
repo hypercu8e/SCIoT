@@ -918,3 +918,20 @@ picco scenderebbe a circa 138 KB: rimozione del nodo e prova di capienza nel
 client sono i prossimi passi da approvare. Flash B ripristinata e verificata.
 
 [Report attivazioni in RAM interna](experiments/esp32_memory_benchmark/2026-11-11/report.md).
+
+### Seguito dell'11 novembre — prefisso senza nodo PAD
+
+Committati e pushati gli esperimenti PAD e memoria. Riscritto il prefisso
+togliendo il nodo PAD e facendo il bordo nella depthwise con padding SAME;
+lo script verifica la struttura e lascia invariati pesi e quantizzazioni.
+Uscite identiche su PC per 503 input, con controprova a pesi alterati.
+
+Dal codice ESP-NN emerso che la depthwise con padding su ingressi grandi
+usa un buffer a strisce di circa 40 KB: stima del picco 179 KB invece di
+138. Misura sulla scheda B con quattro varianti (modello × memoria), 2.160
+inferenze, tutte identiche al modello originale. Picco 178.688 byte, sopra
+il limite di capienza fissato (161.323). Tempo −1,7 ms in PSRAM, invariato
+in RAM interna. Leve rimaste: buffer Wi-Fi/lwIP in PSRAM nel client o
+buffer a strisce più piccolo in ESP-NN, da decidere. Flash B ripristinata.
+
+[Report prefisso senza PAD](experiments/esp32_nopad_benchmark/2026-11-11/report.md).

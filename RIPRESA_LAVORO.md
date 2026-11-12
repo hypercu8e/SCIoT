@@ -1,6 +1,71 @@
 # Punto di ripresa SCIoT — aggiornamento dell'11 novembre 2026
 
-## Ultimo lavoro: attivazioni in RAM interna, il filone merita
+## Da dove ricominciare (12 novembre)
+
+**Obiettivo in corso:** far entrare le attivazioni del prefisso nella RAM
+interna del client operativo. Il guadagno misurato è grande: `Invoke()` da
+84,7 a 62,3 ms (−26%). Però serve spazio: oggi il picco senza PAD è
+178.688 byte e il limite fissato è 161.323 (minimo libero del client
+194.091 − riserva 32 KB).
+
+**Esperimento senza PAD committato e pushato il 12 novembre**
+(`results/`, `artifacts/`, `include/generated/` e `idf/components/` restano
+ignorati da Git).
+
+**Prima cosa da fare: scegliere una delle due strade** (nessuna ancora approvata):
+
+1. **Consigliata: buffer a strisce più piccolo in ESP-NN.** La depthwise con
+   padding riserva circa 40 KB (`esp_nn_get_depthwise_conv_scratch_size_esp32s3`
+   e ramo strip-tiled in `esp_nn_depthwise_conv_s8_esp32s3.c`, budget fisso
+   di 40 KB, 17 righe da 2.352 byte). Con 3–4 righe il picco scenderebbe verso
+   145 KB. Prova locale sulla scheda B, senza rete: copia del componente
+   nell'esperimento (mai modificare quello del client), stessi controlli byte
+   per byte, misura del tempo della depthwise in PSRAM e in RAM interna.
+   Scratch size e kernel devono restare coerenti: il kernel ricava l'altezza
+   della striscia dalla dimensione dello scratch.
+2. **Buffer Wi-Fi/lwIP in PSRAM nel client** (`CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP`).
+   Libera RAM interna ma tocca la rete, già fragile (HTTP 408 col percorso Pixel/ADB).
+
+**Dopo, in ogni caso:** prova di capienza nel client con Wi-Fi e camera attivi
+(blocco interno contiguo più grande, minimo libero, stabilità). Solo dopo:
+porting di LUT + modello senza PAD (o PAD veloce) + arena interna nel client,
+e misura del ciclo completo. Prima del porting: il modello senza PAD cambia
+SHA-256, che il client usa per registrarsi al server (manifest da aggiornare).
+
+**Stato hardware e ambiente:** scheda B con firmware originale ripristinato e
+verificato, boot confermato; nessun server, Pixel o inoltro ADB attivo.
+Ultimo backup verificato di B:
+`experiments/esp32_nopad_benchmark/results/2026-11-11-B-01/board/original-flash.bin`
+(usabile come `--seed`). Build: `experiments/esp32_deadzone_benchmark/results/build-tools/bin/pio`
+con `PLATFORMIO_CORE_DIR` assoluto e `IDF_COMPONENT_MANAGER=0`, analisi con `.venv/bin/python`.
+
+**Risultati di oggi, in ordine:**
+[PAD veloce](experiments/esp32_pad_benchmark/2026-11-11/report.md) (−9,4 ms) →
+[attivazioni in RAM interna](experiments/esp32_memory_benchmark/2026-11-11/report.md) (−22,4 ms, limite superiore) →
+[prefisso senza PAD](experiments/esp32_nopad_benchmark/2026-11-11/report.md) (−47 KB di picco, stessi byte).
+
+## Ultimo lavoro: prefisso senza nodo PAD
+
+Esperimento `experiments/esp32_nopad_benchmark/`, scheda B, senza rete né
+camera. `make_nopad.py` riscrive il prefisso congelato togliendo il PAD e
+mettendo padding SAME nella depthwise (SHA-256 `43419ffa…3b97`, file
+ignorato da Git e rigenerabile). Stessi byte su PC (503 input) e scheda
+(4 varianti, 2.160 inferenze misurate).
+
+Picco attivazioni 225.840 → 178.688 byte: sopra il limite di 161.323
+(minimo libero del client 194.091 − riserva 32 KB). Il buffer a strisce
+ESP-NN della depthwise con padding pesa circa 40 KB. Tempo: −1,7 ms con
+attivazioni in PSRAM, invariato in RAM interna (62,24 ms).
+
+Decisione aperta per la prossima sessione, entrambe da approvare:
+(a) liberare RAM interna nel client spostando i buffer Wi-Fi/lwIP in PSRAM
+(`CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP`), con il rischio sulla rete già
+fragile; (b) ridurre il buffer a strisce della depthwise nel componente
+ESP-NN (picco verso 145 KB), modificando un componente congelato.
+Flash B ripristinata e verificata, boot confermato. Committato e pushato il 12 novembre.
+[Report](experiments/esp32_nopad_benchmark/2026-11-11/report.md).
+
+## Attivazioni in RAM interna, il filone merita — 11 novembre
 
 Esperimento `experiments/esp32_memory_benchmark/`, scheda B, senza
 Wi-Fi/camera/HTTP. Stessa API TFLM a due arene, PAD veloce in entrambe;
@@ -15,7 +80,7 @@ Prossimi passi da approvare: (1) rimuovere il PAD dal grafo con padding
 SAME nella depthwise, verifica byte per byte; (2) prova di capienza nel
 client con Wi-Fi e camera; (3) poi portare tutto nel client e misurare il
 ciclo completo. Flash B ripristinata e verificata, boot confermato.
-Esperimenti PAD e memoria non ancora committati.
+Esperimenti PAD e memoria committati e pushati l'11 novembre.
 [Report](experiments/esp32_memory_benchmark/2026-11-11/report.md).
 
 ## PAD veloce, criteri superati — 11 novembre

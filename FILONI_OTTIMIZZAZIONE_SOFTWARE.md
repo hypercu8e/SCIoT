@@ -2,6 +2,13 @@
 
 Aggiornamento: 11 novembre 2026. Le direzioni proposte non sono vantaggi già dimostrati né dichiarazioni di novità scientifica; gli esiti misurati sono distinti sotto.
 
+**Senza nodo PAD, 11 novembre:** [modello riscritto con padding SAME](experiments/esp32_nopad_benchmark/2026-11-11/report.md),
+stessi byte su PC e scheda. Picco attivazioni 225.840 → 178.688 byte (il
+buffer a strisce ESP-NN della depthwise pesa ~40 KB): ancora sopra il limite
+del client (161.323). Tempo −1,7 ms in PSRAM, invariato in RAM interna.
+Leve rimaste: buffer Wi-Fi/lwIP in PSRAM nel client, oppure buffer a strisce
+più piccolo in ESP-NN.
+
 **Memoria, 11 novembre:** [attivazioni in RAM interna](experiments/esp32_memory_benchmark/2026-11-11/report.md)
 portano `Invoke()` da 84,723 a 62,289 ms (−26,5%), 17,5 ms su operatori
 diversi dal PAD; depthwise −30/−55%. Limite superiore senza Wi-Fi/camera:
