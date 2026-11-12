@@ -3,6 +3,9 @@
 **12 novembre 2026:** con 152 KiB tenuti in RAM interna la rete si blocca
 (minimo libero 11–23 KB, HTTP 408, fasi R incomplete): **non entra** così
 com'è. [Report](2026-11-12/report.md).
+Con i buffer Wi-Fi/lwIP in PSRAM la rete regge (1.000/1.000 frame con la
+riserva), ma il minimo libero si ferma a 26,7 KB, sotto i 32 KB: ancora **non
+entra**, mancano ~6 KB. [Report](2026-11-12/report-psramnet.md).
 
 Domanda: con Wi-Fi, camera e HTTP v2 attivi, il client regge un blocco
 contiguo in RAM interna della dimensione dell'arena delle attivazioni del

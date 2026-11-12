@@ -1,0 +1,300 @@
+{
+  "phases": [
+    {
+      "phase": 1,
+      "mode": "N",
+      "reserve": {
+        "event": "reserve",
+        "mode": "N",
+        "requested": 0,
+        "held": false,
+        "address": "0x0",
+        "internal_largest_before": 204800,
+        "internal_free_after": 301967,
+        "internal_largest_after": 204800
+      },
+      "embedded_completed": 60,
+      "camera_completed": 1000,
+      "done": {
+        "event": "done",
+        "camera_attempted": 1000,
+        "camera_completed": 1000,
+        "elapsed_us": 439168513
+      },
+      "errors": [],
+      "rejected": 0,
+      "registrations": [
+        true
+      ],
+      "camera_init_status": [
+        0
+      ],
+      "wifi_disconnections": 0,
+      "internal_min_free": 183039,
+      "internal_largest_block_min": 94208,
+      "internal_free_min_sampled": 189683,
+      "memory_samples": 23,
+      "server_statuses": {
+        "200": 1060
+      },
+      "server_requests": 1060,
+      "camera_cycle_us": {
+        "p50": 315763.5,
+        "p95": 921404.2
+      },
+      "camera_network_us": {
+        "p50": 98334.5,
+        "p95": 700802.2999999999
+      },
+      "invoke_us_p50": 94689.0,
+      "functional_ok": true,
+      "runner_outcome": {
+        "phase": 1,
+        "mode": "N",
+        "ok": true,
+        "reason": null
+      }
+    },
+    {
+      "phase": 2,
+      "mode": "R",
+      "reserve": {
+        "event": "reserve",
+        "mode": "R",
+        "requested": 155648,
+        "held": true,
+        "address": "0x3fcb6770",
+        "internal_largest_before": 204800,
+        "internal_free_after": 146315,
+        "internal_largest_after": 52224
+      },
+      "embedded_completed": 60,
+      "camera_completed": 1000,
+      "done": {
+        "event": "done",
+        "camera_attempted": 1000,
+        "camera_completed": 1000,
+        "elapsed_us": 393755327
+      },
+      "errors": [],
+      "rejected": 0,
+      "registrations": [
+        true
+      ],
+      "camera_init_status": [
+        0
+      ],
+      "wifi_disconnections": 0,
+      "internal_min_free": 26779,
+      "internal_largest_block_min": 21504,
+      "internal_free_min_sampled": 33531,
+      "memory_samples": 23,
+      "server_statuses": {
+        "200": 1060
+      },
+      "server_requests": 1060,
+      "camera_cycle_us": {
+        "p50": 362074.5,
+        "p95": 550873.2
+      },
+      "camera_network_us": {
+        "p50": 144632.5,
+        "p95": 336192.7
+      },
+      "invoke_us_p50": 94829.0,
+      "functional_ok": true,
+      "headroom_ok": false,
+      "runner_outcome": {
+        "phase": 2,
+        "mode": "R",
+        "ok": true,
+        "reason": null
+      }
+    },
+    {
+      "phase": 3,
+      "mode": "N",
+      "reserve": {
+        "event": "reserve",
+        "mode": "N",
+        "requested": 0,
+        "held": false,
+        "address": "0x0",
+        "internal_largest_before": 204800,
+        "internal_free_after": 301967,
+        "internal_largest_after": 204800
+      },
+      "embedded_completed": 60,
+      "camera_completed": 999,
+      "done": {
+        "event": "done",
+        "camera_attempted": 1000,
+        "camera_completed": 999,
+        "elapsed_us": 675841772
+      },
+      "errors": [
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        }
+      ],
+      "rejected": 0,
+      "registrations": [
+        true,
+        true
+      ],
+      "camera_init_status": [
+        0
+      ],
+      "wifi_disconnections": 0,
+      "internal_min_free": 183043,
+      "internal_largest_block_min": 94208,
+      "internal_free_min_sampled": 189683,
+      "memory_samples": 23,
+      "server_statuses": {
+        "200": 1059,
+        "408": 1
+      },
+      "server_requests": 1060,
+      "camera_cycle_us": {
+        "p50": 579559.0,
+        "p95": 1203379.5
+      },
+      "camera_network_us": {
+        "p50": 361473.0,
+        "p95": 990818.7000000001
+      },
+      "invoke_us_p50": 94985.0,
+      "functional_ok": true,
+      "runner_outcome": {
+        "phase": 3,
+        "mode": "N",
+        "ok": true,
+        "reason": null
+      }
+    },
+    {
+      "phase": 4,
+      "mode": "R",
+      "reserve": {
+        "event": "reserve",
+        "mode": "R",
+        "requested": 155648,
+        "held": true,
+        "address": "0x3fcb6770",
+        "internal_largest_before": 204800,
+        "internal_free_after": 146315,
+        "internal_largest_after": 52224
+      },
+      "embedded_completed": 60,
+      "camera_completed": 997,
+      "done": {
+        "event": "done",
+        "camera_attempted": 1000,
+        "camera_completed": 997,
+        "elapsed_us": 742947909
+      },
+      "errors": [
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        },
+        {
+          "event": "error",
+          "reason": "http_response",
+          "code": 0,
+          "http_status": 408,
+          "received": 0,
+          "length": 24
+        }
+      ],
+      "rejected": 0,
+      "registrations": [
+        true,
+        true,
+        false,
+        true
+      ],
+      "camera_init_status": [
+        0
+      ],
+      "wifi_disconnections": 0,
+      "internal_min_free": 26651,
+      "internal_largest_block_min": 21504,
+      "internal_free_min_sampled": 33531,
+      "memory_samples": 23,
+      "server_statuses": {
+        "200": 1057,
+        "408": 2
+      },
+      "server_requests": 1059,
+      "camera_cycle_us": {
+        "p50": 573609.0,
+        "p95": 1654810.0000000014
+      },
+      "camera_network_us": {
+        "p50": 353193.0,
+        "p95": 1448063.8
+      },
+      "invoke_us_p50": 95040.0,
+      "functional_ok": false,
+      "headroom_ok": false,
+      "runner_outcome": {
+        "phase": 4,
+        "mode": "R",
+        "ok": true,
+        "reason": null
+      }
+    }
+  ],
+  "reserve_bytes": 155648,
+  "min_free_floor": 32768,
+  "criteria": "tolerant",
+  "reserve_to_control_cycle_p50": 1.2813461071289953,
+  "controls_ok": true,
+  "reserve_phases_ok": false,
+  "verdict": "does_not_fit",
+  "internal_min_free": {
+    "N": [
+      183039,
+      183043
+    ],
+    "R": [
+      26779,
+      26651
+    ]
+  },
+  "internal_largest_block_min": {
+    "N": [
+      94208,
+      94208
+    ],
+    "R": [
+      21504,
+      21504
+    ]
+  },
+  "camera_cycle_p50_us": {
+    "N": [
+      315763.5,
+      579559.0
+    ],
+    "R": [
+      362074.5,
+      573609.0
+    ]
+  },
+  "run_error": null,
+  "board": "B",
+  "env": "psramnet",
+  "mac": "24:ec:4a:0e:c3:14",
+  "original_flash_and_boot_verified": true
+}
