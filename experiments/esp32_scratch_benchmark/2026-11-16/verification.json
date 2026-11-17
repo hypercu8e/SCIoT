@@ -1,0 +1,32 @@
+{
+  "run": "experiments/esp32_scratch_benchmark/results/2026-11-16-B-01",
+  "completion": {
+    "measurements_complete": true,
+    "error": null,
+    "restore_error": null,
+    "original_boot_confirmed": true,
+    "board": "B"
+  },
+  "hardware": {
+    "mac": "24:ec:4a:0e:c3:14",
+    "port": "/dev/serial/by-id/usb-Espressif_USB_JTAG_serial_debug_unit_24:EC:4A:0E:C3:14-if00",
+    "flash_bytes": 8388608,
+    "backup_sha256": "a132e1e55b6a663ebf8e8295de9a7442cec36ba8dba6333a39f54280ed397050",
+    "backup_verified": true,
+    "restored": true,
+    "installed_sha256": "f2eb3c8b5ed1541bd525d08988146a638548e6e435e035f13568bde000a74399",
+    "restored_digest_verified_before_boot": true
+  },
+  "files_sha256": {
+    "source-sha256.json": "256ccb0eecb57cda18e79c22c620b0c02a64ff45689a6024db1eb577984d6eb7",
+    "board/events.jsonl": "73499b4a4eef6752a5ae146fca2f5703ad21c353147b8f41b39244d2f89a9dbb",
+    "board/serial.log": "9b36bac04e3975d5d7f2466c37ce42bd4077fd15f8a409f93425c85b3aec53c3",
+    "firmware/firmware.bin": "f2eb3c8b5ed1541bd525d08988146a638548e6e435e035f13568bde000a74399"
+  },
+  "analyzer_tests_passed": 12,
+  "physical_invocations": 6685,
+  "measured_invocations": 5400,
+  "warmup_invocations": 900,
+  "validation_invocations": 350,
+  "reference_invocations": 35
+}
