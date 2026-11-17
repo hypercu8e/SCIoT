@@ -1,0 +1,13 @@
+test_disconnect_releases_connection (test_ws_socket.RealSocketTests.test_disconnect_releases_connection) ... /home/gabriele/Desktop/github/SCIoT/.venv/lib/python3.11/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+  warnings.warn(  # deprecated in 14.0 - 2024-11-09
+/home/gabriele/Desktop/github/SCIoT/.venv/lib/python3.11/site-packages/uvicorn/protocols/websockets/websockets_impl.py:41: UvicornDeprecationWarning: The `websockets` implementation is deprecated, and `--ws websockets` will point at the `websockets-sansio` implementation in a future release. Use `--ws websockets-sansio` or `--ws auto` to switch now.
+  warnings.warn(
+/home/gabriele/Desktop/github/SCIoT/.venv/lib/python3.11/site-packages/websockets/legacy/server.py:1178: DeprecationWarning: remove second argument of ws_handler
+  warnings.warn("remove second argument of ws_handler", DeprecationWarning)
+ok
+test_fragmented_request_and_size_limit (test_ws_socket.RealSocketTests.test_fragmented_request_and_size_limit) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.436s
+
+OK

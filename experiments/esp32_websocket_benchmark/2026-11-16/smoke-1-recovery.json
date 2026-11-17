@@ -1,0 +1,10 @@
+{
+  "mac": "24:ec:4a:0e:c3:14",
+  "port": "/dev/serial/by-id/usb-Espressif_USB_JTAG_serial_debug_unit_24:EC:4A:0E:C3:14-if00",
+  "flash_bytes": 8388608,
+  "backup_sha256": "0853de7a0ab875e189614ef72a46571a3ed09d548949dd7b67e623dcc9e88fac",
+  "backup_verified": true,
+  "restored": true,
+  "installed_sha256": "05d01c381f6c874ebe739858e8bd10ce26d6f19827890085b86a736b33160cb9",
+  "restored_digest_verified_before_boot": true
+}

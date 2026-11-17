@@ -1,0 +1,7 @@
+{
+  "clients": 32,
+  "requests": 3200,
+  "completed": 3088,
+  "rejected": 112,
+  "scope": "Synthetic PC activations over real fragmented WebSocket messages"
+}

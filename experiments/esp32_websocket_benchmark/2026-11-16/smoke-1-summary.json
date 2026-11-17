@@ -1,0 +1,36 @@
+{
+  "restored": true,
+  "boots": [
+    {
+      "file": "round-1.events.jsonl",
+      "mode": "w",
+      "complete": false,
+      "attempted": 79,
+      "completed": 78,
+      "minimum_internal_free": 45815,
+      "phases": {
+        "deterministic": {
+          "completed": 0,
+          "request_response_ms": {}
+        },
+        "camera": {
+          "completed": 0,
+          "request_response_ms": {}
+        }
+      },
+      "errors": [
+        {
+          "event": "error",
+          "reason": "deterministic_exchange"
+        }
+      ]
+    }
+  ],
+  "campaign_complete": false,
+  "promotion_eligible": false,
+  "limitations": [
+    "Fault-recovery campaign and traffic capture are separate acceptance requirements.",
+    "Response CRCs do not establish full byte equality of camera scores."
+  ],
+  "error": "RuntimeError('Firmware error: {\"event\": \"error\", \"reason\": \"deterministic_exchange\"}')"
+}

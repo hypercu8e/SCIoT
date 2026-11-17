@@ -1,0 +1,7 @@
+{
+  "clients": 2,
+  "requests": 200,
+  "completed": 200,
+  "rejected": 0,
+  "scope": "Synthetic PC activations over real fragmented WebSocket messages"
+}

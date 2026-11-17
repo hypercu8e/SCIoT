@@ -1,0 +1,8 @@
+test_failed_run_is_not_promotable (test_analysis.AuditTests.test_failed_run_is_not_promotable) ... ok
+test_missing_recovery_rejected (test_analysis.AuditTests.test_missing_recovery_rejected) ... ok
+test_tampered_archive_rejected (test_analysis.AuditTests.test_tampered_archive_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.033s
+
+OK

@@ -1,0 +1,9 @@
+/results/
+/idf/.pio/
+/idf/components/
+/idf/sdkconfig*
+!/idf/sdkconfig.defaults
+__pycache__/
+/artifacts/
+/include/generated/
+/include/network.local.h

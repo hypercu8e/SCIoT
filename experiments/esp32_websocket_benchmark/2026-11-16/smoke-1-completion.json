@@ -1,0 +1,8 @@
+{
+  "measurements_complete": false,
+  "rounds_completed": 0,
+  "error": "RuntimeError('Firmware error: {\"event\": \"error\", \"reason\": \"deterministic_exchange\"}')",
+  "restore_error": null,
+  "original_boot_confirmed": true,
+  "board": "B"
+}
