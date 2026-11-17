@@ -1,0 +1,39 @@
+--- a/esp-nn/src/convolution/esp_nn_depthwise_conv_s8_esp32s3.c
++++ b/esp-nn/src/convolution/esp_nn_depthwise_conv_s8_esp32s3.c
+@@ -10,9 +10,20 @@
+ #include <common_functions.h>
+ #include <esp_nn_multicore.h>
+ 
++// Experiment only. Set before interpreter construction; 0 preserves the frozen path.
++static int sciot_strip_rows = 0;
++void sciot_set_strip_rows(int rows) { sciot_strip_rows = rows; }
++int sciot_get_strip_rows(void) { return sciot_strip_rows; }
++static int sciot_strip_effective = 0, sciot_strip_bytes = 0;
++int sciot_get_strip_effective(void) { return sciot_strip_effective; }
++int sciot_get_strip_bytes(void) { return sciot_strip_bytes; }
+ static int16_t *scratch_buffer = NULL;
+ static uint8_t *preferred_scratch_buffer = NULL;
+ static size_t preferred_scratch_size = 0;
++int sciot_scratch_configuration_safe(void) {
++    return preferred_scratch_buffer == NULL && !esp_nn_dual_core_active();
++}
++
+ 
+ extern void esp_nn_depthwise_conv_s16_mult8_3x3_esp32s3(const int16_t *input_data,
+                                                         const uint16_t input_wd,
+@@ -655,12 +666,15 @@
+                          * to one output row per assembly call. */
+                         int row_bytes = (input_wd + pad_width) * channels;
+                         int rows = (40 * 1024 - filter_size - 32) / row_bytes;
++                        if (sciot_strip_rows > 0 && rows > sciot_strip_rows) rows = sciot_strip_rows;
+                         if (rows < filter_ht) {
+                             rows = filter_ht;
+                         }
+                         if (rows > input_ht + pad_height) {
+                             rows = input_ht + pad_height;
+                         }
++                        sciot_strip_effective = rows;
++                        sciot_strip_bytes = filter_size + rows * row_bytes + 32;
+                         return filter_size + rows * row_bytes + 32;
+                     }
+                 } else {

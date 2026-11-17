@@ -1,0 +1,33 @@
+{
+  "completion": {
+    "measurements_complete": false,
+    "rounds_completed": 0,
+    "error": "RuntimeError('Firmware error: {\"event\": \"error\", \"reason\": \"internal_allocation\"}')",
+    "restore_error": null,
+    "original_boot_confirmed": true,
+    "board": "B"
+  },
+  "hardware": {
+    "mac": "24:ec:4a:0e:c3:14",
+    "port": "/dev/serial/by-id/usb-Espressif_USB_JTAG_serial_debug_unit_24:EC:4A:0E:C3:14-if00",
+    "flash_bytes": 8388608,
+    "backup_sha256": "e52c8682019a051ef18d3eff55ab942bf2d80559c75a66c7949ab739d64464fd",
+    "backup_verified": true,
+    "restored": true,
+    "installed_sha256": "5f8aec82076c1a5598651d750910d78642892cbe66da472f3b65acfe4f37bb8f",
+    "restored_digest_verified_before_boot": true
+  },
+  "run": "experiments/esp32_client_fit_benchmark/results/2026-11-16-B-01",
+  "analyzer_tests_passed": 14,
+  "build_success": true,
+  "files_sha256": {
+    "source-sha256.json": "a381c61b9d1b7f6b295246b34ef4f12f387fb21b5caadb885a182586b4f5dbbd",
+    "board/round-1.events.jsonl": "2c5d807c21315a2fe5c5149b79ab3a704c4758a51fc6b217b7124cb939403714",
+    "board/round-1.serial.log": "449c9888d7423de56af5c9ad28e2e9e006a36a0b5b9feb659dec7cc1700eae11",
+    "firmware/firmware.bin": "5f8aec82076c1a5598651d750910d78642892cbe66da472f3b65acfe4f37bb8f"
+  },
+  "measured_camera_frames": 0,
+  "attempted_boots": 1,
+  "completed_boots": 0,
+  "passed": false
+}

@@ -1,0 +1,4 @@
+{
+  "allocation_order": "early",
+  "build_flags": "-DBENCH_ESP_NN=1 -DFIT_EARLY_ARENA=1"
+}

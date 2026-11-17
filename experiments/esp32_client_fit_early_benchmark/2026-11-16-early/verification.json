@@ -1,0 +1,36 @@
+{
+  "run": "experiments/esp32_client_fit_benchmark/results/2026-11-16-B-02-early",
+  "completion": {
+    "measurements_complete": true,
+    "rounds_completed": 3,
+    "error": null,
+    "restore_error": null,
+    "original_boot_confirmed": true,
+    "board": "B"
+  },
+  "hardware": {
+    "mac": "24:ec:4a:0e:c3:14",
+    "port": "/dev/serial/by-id/usb-Espressif_USB_JTAG_serial_debug_unit_24:EC:4A:0E:C3:14-if00",
+    "flash_bytes": 8388608,
+    "backup_sha256": "e52c8682019a051ef18d3eff55ab942bf2d80559c75a66c7949ab739d64464fd",
+    "backup_verified": true,
+    "restored": true,
+    "installed_sha256": "40c421c7ea501971064144244b3413a01acc723b1030f65c98d04bb80c925470",
+    "restored_digest_verified_before_boot": true
+  },
+  "analyzer_tests_passed": 15,
+  "build_success": true,
+  "passed": true,
+  "allocation_order": "early",
+  "files_sha256": {
+    "source-sha256.json": "2b002672113fc59e2c5dd42aabb42429e5bd0897abb4575548d3288cbb76cf44",
+    "firmware/firmware.bin": "40c421c7ea501971064144244b3413a01acc723b1030f65c98d04bb80c925470",
+    "configuration.json": "bb096f2362bb9bf085f44dcbc87c464d96044d8c88bae4beb353403bc6fb9450",
+    "board/round-1.events.jsonl": "46967ea83c7ad9457a870c30ec8c51dcec5896e309a137898bde8bca99408ff7",
+    "board/round-1.serial.log": "c1e66d9e060420631209ed4ef51441e89c4d39b130acca72c93f309bc9f37e17",
+    "board/round-2.events.jsonl": "337a3ccd0c56f17c72256ae21fd21af15ea1be14143c49578b4d34ac3076bf2e",
+    "board/round-2.serial.log": "b7f2d8bd8dec16e33f10a21b089f5f09a38a3a398f6da426f03b4c2a0c22070d",
+    "board/round-3.events.jsonl": "3a1c63c1d989208c37a41714d3a3432e01332f5ada90a2349c88cd2207030b96",
+    "board/round-3.serial.log": "e40db08e3262d605e98a9faa911533a45e874d28aeb963f5796bc04f5ac232cc"
+  }
+}

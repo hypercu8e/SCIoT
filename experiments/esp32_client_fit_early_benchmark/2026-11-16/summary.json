@@ -1,0 +1,34 @@
+{
+  "passed": false,
+  "rounds": [
+    {
+      "passed": false,
+      "outcome": "internal_allocation_failed_after_services",
+      "round": 1,
+      "camera_frames": 0,
+      "requested_bytes_with_guards": 145824,
+      "internal_free_before_allocation": 219755,
+      "largest_block_before_allocation": 124928,
+      "measurement_phase_started": false,
+      "legacy_device_comparison": {
+        "archive": "experiments/esp32_input_camera_benchmark/results/2026-11-10-lut-hold-full-01/server/inference.bin",
+        "activation_sha256": {
+          "48": "ca31d893640364eb3a5ce1e11c6d3e60cc17c67daf7ae2bb1b7b3214a14b4843",
+          "96": "79469910971100f8831dafabdf781c3cae94a71cb843c58720e55b3fee98c8d1",
+          "145": "bbe58f0df99f25fe4c471c60add85f500bd416d78837b8c1b613b6b1ef74215b"
+        },
+        "manifest_sha256": "dcc2880e3503a774d4dfa336444351dc3095c8ef5f0afccf95dd7025cf0946dc",
+        "exact": true
+      }
+    }
+  ],
+  "total_camera_frames": 0,
+  "activation_bytes": 145760,
+  "reserve_bytes": 32768,
+  "original_flash_and_boot_verified": true,
+  "model_sha256": "43419ffa6fd970cf705ee730fce32a51436c32d0248254b34215a4ee07853b97",
+  "board": "B",
+  "http_tested": false,
+  "source_manifest_sha256": "a381c61b9d1b7f6b295246b34ef4f12f387fb21b5caadb885a182586b4f5dbbd",
+  "backup_sha256": "e52c8682019a051ef18d3eff55ab942bf2d80559c75a66c7949ab739d64464fd"
+}

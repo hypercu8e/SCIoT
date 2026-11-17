@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "allocation_order": "early",
+  "rounds": [
+    {
+      "passed": true,
+      "allocation_order": "early",
+      "camera_frames": 1000,
+      "activation_bytes": 145760,
+      "internal_min_free": 70347,
+      "largest_block_before_allocation": 208896,
+      "internal_free_end": 73943,
+      "invoke_us": {
+        "p50": 63202.0,
+        "p95": 64123.1
+      },
+      "acquisition_us": {
+        "p50": 75792.5,
+        "p95": 80341.45
+      },
+      "round": 1,
+      "legacy_device_comparison": {
+        "archive": "experiments/esp32_input_camera_benchmark/results/2026-11-10-lut-hold-full-01/server/inference.bin",
+        "activation_sha256": {
+          "48": "ca31d893640364eb3a5ce1e11c6d3e60cc17c67daf7ae2bb1b7b3214a14b4843",
+          "96": "79469910971100f8831dafabdf781c3cae94a71cb843c58720e55b3fee98c8d1",
+          "145": "bbe58f0df99f25fe4c471c60add85f500bd416d78837b8c1b613b6b1ef74215b"
+        },
+        "manifest_sha256": "dcc2880e3503a774d4dfa336444351dc3095c8ef5f0afccf95dd7025cf0946dc",
+        "exact": true
+      }
+    },
+    {
+      "passed": true,
+      "allocation_order": "early",
+      "camera_frames": 1000,
+      "activation_bytes": 145760,
+      "internal_min_free": 70155,
+      "largest_block_before_allocation": 208896,
+      "internal_free_end": 73751,
+      "invoke_us": {
+        "p50": 63209.5,
+        "p95": 64159.0
+      },
+      "acquisition_us": {
+        "p50": 75685.5,
+        "p95": 80242.7
+      },
+      "round": 2,
+      "legacy_device_comparison": {
+        "archive": "experiments/esp32_input_camera_benchmark/results/2026-11-10-lut-hold-full-01/server/inference.bin",
+        "activation_sha256": {
+          "48": "ca31d893640364eb3a5ce1e11c6d3e60cc17c67daf7ae2bb1b7b3214a14b4843",
+          "96": "79469910971100f8831dafabdf781c3cae94a71cb843c58720e55b3fee98c8d1",
+          "145": "bbe58f0df99f25fe4c471c60add85f500bd416d78837b8c1b613b6b1ef74215b"
+        },
+        "manifest_sha256": "dcc2880e3503a774d4dfa336444351dc3095c8ef5f0afccf95dd7025cf0946dc",
+        "exact": true
+      }
+    },
+    {
+      "passed": true,
+      "allocation_order": "early",
+      "camera_frames": 1000,
+      "activation_bytes": 145760,
+      "internal_min_free": 70263,
+      "largest_block_before_allocation": 208896,
+      "internal_free_end": 73947,
+      "invoke_us": {
+        "p50": 63200.5,
+        "p95": 64083.15
+      },
+      "acquisition_us": {
+        "p50": 75761.0,
+        "p95": 80312.6
+      },
+      "round": 3,
+      "legacy_device_comparison": {
+        "archive": "experiments/esp32_input_camera_benchmark/results/2026-11-10-lut-hold-full-01/server/inference.bin",
+        "activation_sha256": {
+          "48": "ca31d893640364eb3a5ce1e11c6d3e60cc17c67daf7ae2bb1b7b3214a14b4843",
+          "96": "79469910971100f8831dafabdf781c3cae94a71cb843c58720e55b3fee98c8d1",
+          "145": "bbe58f0df99f25fe4c471c60add85f500bd416d78837b8c1b613b6b1ef74215b"
+        },
+        "manifest_sha256": "dcc2880e3503a774d4dfa336444351dc3095c8ef5f0afccf95dd7025cf0946dc",
+        "exact": true
+      }
+    }
+  ],
+  "total_camera_frames": 3000,
+  "activation_bytes": 145760,
+  "reserve_bytes": 32768,
+  "original_flash_and_boot_verified": true,
+  "model_sha256": "43419ffa6fd970cf705ee730fce32a51436c32d0248254b34215a4ee07853b97",
+  "board": "B",
+  "http_tested": false,
+  "source_manifest_sha256": "2b002672113fc59e2c5dd42aabb42429e5bd0897abb4575548d3288cbb76cf44",
+  "backup_sha256": "e52c8682019a051ef18d3eff55ab942bf2d80559c75a66c7949ab739d64464fd"
+}
