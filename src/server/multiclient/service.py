@@ -21,6 +21,7 @@ class ServiceError(Exception):
 class Client:
     session: str
     touched: float
+    model_hash: str = ""
     sequence: int = -1
     pending: object = None
 
@@ -41,12 +42,15 @@ class Job:
 
 class Service:
     def __init__(self, factory, model_hash, *, max_clients=32, queue_size=8,
-                 max_receiving=8, timeout=10., idle=60., metrics=None, inference_workers=1):
+                 max_receiving=8, timeout=10., idle=60., metrics=None, inference_workers=1, accepted_models=None):
         if min(max_clients, queue_size, max_receiving, timeout, idle) <= 0:
             raise ValueError('Limits must be positive')
         if not isinstance(inference_workers, int) or isinstance(inference_workers, bool) or inference_workers < 1:
             raise ValueError('inference_workers must be a positive integer')
         self.factory, self.model_hash = factory, model_hash
+        self.accepted_models = frozenset(accepted_models or (model_hash,))
+        if model_hash not in self.accepted_models:
+            raise ValueError("Primary model must be accepted")
         self.max_clients, self.queue_size = max_clients, queue_size
         self.max_receiving, self.timeout, self.idle = max_receiving, timeout, idle
         self.clients, self.queue = {}, deque()
@@ -127,7 +131,7 @@ class Service:
         self.purge()
         if not isinstance(cid, str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,64}', cid):
             raise ServiceError(400, 'invalid_client_id')
-        if model_hash != self.model_hash:
+        if model_hash not in self.accepted_models:
             raise ServiceError(422, 'model_mismatch')
         if cid not in self.clients and len(self.clients) >= self.max_clients:
             raise ServiceError(429, 'client_capacity')
@@ -136,7 +140,7 @@ class Service:
         if pending:
             self.cancel(pending, 410, 'session_replaced')
         session = uuid.uuid4().hex
-        self.clients[cid] = Client(session, time.monotonic(),
+        self.clients[cid] = Client(session, time.monotonic(), model_hash=model_hash,
                                    pending=pending if pending and pending.state == 'running' else None)
         self.emit('registration', client_id=cid, session_id=session)
         return session
@@ -148,9 +152,9 @@ class Service:
         client = self.clients.get(cid)
         if client is None or client.session != session:
             raise ServiceError(410, 'invalid_session')
-        if model_hash != self.model_hash:
+        if model_hash != client.model_hash:
             raise ServiceError(422, 'model_mismatch')
-        if not isinstance(sequence, int) or not 0 <= sequence < 2**64:
+        if type(sequence) is not int or not 0 <= sequence < 2**64:
             raise ServiceError(400, 'invalid_request_id')
         if client.pending or sequence <= client.sequence:
             raise ServiceError(409, 'busy_or_duplicate')

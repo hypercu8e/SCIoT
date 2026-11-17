@@ -7,7 +7,8 @@ from pathlib import Path
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--http-v2', action='store_true')
+    parser.add_argument('--http-v2', '--multiclient-v2', action='store_true')
+    parser.add_argument('--model-registry', type=Path)
     parser.add_argument('--artifacts', type=Path, default=Path('experiments/esp32_representation_benchmark/artifacts'))
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--host', default='0.0.0.0')
@@ -27,6 +28,7 @@ def main():
         os.environ.setdefault(key, value)
     from .engine import Suffix
     from .http import create_app
+    from .model_registry import accepted_models
     import uvicorn
     manifest = json.loads((args.artifacts/'manifest.json').read_text())
     args.output.mkdir(parents=True, exist_ok=False)
@@ -36,8 +38,11 @@ def main():
         app = create_app(lambda: Suffix(args.artifacts, args.inference_threads), manifest['models']['int8']['prefix']['sha256'],
                          max_clients=args.max_clients, queue_size=args.queue_size,
                          max_receiving=args.max_receiving, timeout=args.timeout, idle=args.idle,
-                         metrics=metrics, inference_workers=args.inference_workers)
-        uvicorn.run(app, host=args.host, port=args.port, workers=1)
+                         metrics=metrics, inference_workers=args.inference_workers,
+                         accepted_models=accepted_models(args.artifacts, args.model_registry))
+        uvicorn.run(app, host=args.host, port=args.port, workers=1, ws='websockets',
+                    ws_max_size=4656, ws_max_queue=1, ws_per_message_deflate=False,
+                    ws_ping_interval=20, ws_ping_timeout=10)
 
 
 if __name__ == '__main__':

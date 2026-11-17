@@ -1,6 +1,6 @@
 import sys
 
-if __name__ == '__main__' and '--http-v2' in sys.argv:
+if __name__ == '__main__' and any(flag in sys.argv for flag in ('--http-v2', '--multiclient-v2')):
     from server.multiclient.run import main
     main()
     raise SystemExit(0)

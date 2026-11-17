@@ -47,7 +47,7 @@ def create_app(factory, model_hash, **limits):
             data = json.loads(body)
             session = service.register(data['client_id'], data['model_sha256'])
             return {'client_id': data['client_id'], 'session_id': session,
-                    'model_sha256': model_hash, 'split': 'block_2_add',
+                    'model_sha256': data['model_sha256'], 'split': 'block_2_add',
                     'dtype': 'int8', 'activation_bytes': 4608,
                     'request_deadline_ms': int(service.timeout*1000)}
         except ServiceError as error:
@@ -108,4 +108,6 @@ def create_app(factory, model_hash, **limits):
                          **{k.replace('x-', '').replace('-', '_'): v for k, v in headers.items()})
         return JSONResponse({'error': reason}, status_code=status, headers=headers)
 
+    from .websocket import install
+    install(app, service)
     return app

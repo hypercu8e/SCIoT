@@ -150,3 +150,7 @@ La campagna riproducibile è descritta in
 [server_parallelism](../../../experiments/server_parallelism/2026-11-01/README.md).
 
 Campagna completata: [risultati del parallelismo](../../../experiments/server_parallelism/2026-11-01/ac/README.md). 144 prove HTTP, 30 prove del motore, condizioni energetiche separate.
+
+## WebSocket v2 sperimentale
+
+La stessa applicazione espone `/api/v2/ws`, con coda, sessioni e worker condivisi con HTTP. [Contratto, preparazione e runner](../../../experiments/esp32_websocket_benchmark/README.md). [Prove del 16 novembre](../../../experiments/esp32_websocket_benchmark/2026-11-16/README.md): test PC superati, due timeout sulla B, nessuna promozione operativa. Il launcher accetta anche `--multiclient-v2`; `--model-registry` abilita prefissi aggiuntivi verificati e legati alla sessione.
