@@ -1,0 +1,38 @@
+test_desktop_and_external_power_allowed (test_benchmark.PowerPreflightTests.test_desktop_and_external_power_allowed) ... ok
+test_discharging_requires_explicit_battery_scope (test_benchmark.PowerPreflightTests.test_discharging_requires_explicit_battery_scope) ... ok
+test_energy_groups_distinguish_power_and_profile_transitions (test_benchmark.PowerPreflightTests.test_energy_groups_distinguish_power_and_profile_transitions) ... ok
+test_frequency_variation_allowed_but_energy_profile_change_rejected (test_benchmark.PowerPreflightTests.test_frequency_variation_allowed_but_energy_profile_change_rejected) ... ok
+test_scheduler_handles_deadline_crossing_without_negative_sleep (test_benchmark.PowerPreflightTests.test_scheduler_handles_deadline_crossing_without_negative_sleep) ... ok
+test_frozen_suffix_exact_and_fomo_decoder_matches (test_engine.EngineTests.test_frozen_suffix_exact_and_fomo_decoder_matches) ... ok
+test_concurrent_posts_correlate_and_reject_malformed (test_http.HTTPTests.test_concurrent_posts_correlate_and_reject_malformed) ... ok
+test_crc_rejects_corruption (test_http.HTTPTests.test_crc_rejects_corruption) ... ok
+test_two_workers_return_correlated_responses_out_of_order (test_http.HTTPTests.test_two_workers_return_correlated_responses_out_of_order) ... ok
+test_independent_owners_fifo_limit_and_shutdown (test_parallel.ParallelTests.test_independent_owners_fifo_limit_and_shutdown) ... ok
+test_late_requests_keep_slots_and_close_waits (test_parallel.ParallelTests.test_late_requests_keep_slots_and_close_waits) ... ok
+test_replacement_and_failure_do_not_block_other_worker (test_parallel.ParallelTests.test_replacement_and_failure_do_not_block_other_worker) ... ok
+test_start_failure_and_limits (test_parallel.ParallelTests.test_start_failure_and_limits) ... ok
+test_cancellation_removes_queued_request (test_service.ServiceTests.test_cancellation_removes_queued_request) ... ok
+test_duplicate_and_receiving_limits (test_service.ServiceTests.test_duplicate_and_receiving_limits) ... ok
+test_expired_client_can_reregister_and_restart_sequence (test_service.ServiceTests.test_expired_client_can_reregister_and_restart_sequence) ... ok
+test_failure_releases_slot_and_worker_survives (test_service.ServiceTests.test_failure_releases_slot_and_worker_survives) ... ok
+test_fifo_capacity_and_independent_identity (test_service.ServiceTests.test_fifo_capacity_and_independent_identity) ... ok
+test_idle_cleanup_and_client_limit (test_service.ServiceTests.test_idle_cleanup_and_client_limit) ... ok
+test_queued_expiration_does_not_invoke (test_service.ServiceTests.test_queued_expiration_does_not_invoke) ... ok
+test_replacement_during_running_keeps_physical_slot (test_service.ServiceTests.test_replacement_during_running_keeps_physical_slot) ... ok
+test_bad_crc_and_registration (test_websocket.WSTests.test_bad_crc_and_registration) ... ok
+test_disconnect_keeps_running_slot_across_registration (test_websocket.WSTests.test_disconnect_keeps_running_slot_across_registration) ... ok
+test_envelope_rejects_version_kind_and_size (test_websocket.WSTests.test_envelope_rejects_version_kind_and_size) ... ok
+test_success_and_consumed_sequence (test_websocket.WSTests.test_success_and_consumed_sequence) ... ok
+test_disconnect_releases_connection (test_ws_socket.RealSocketTests.test_disconnect_releases_connection) ... /home/gabriele/Desktop/github/SCIoT/.venv/lib/python3.11/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+  warnings.warn(  # deprecated in 14.0 - 2024-11-09
+/home/gabriele/Desktop/github/SCIoT/.venv/lib/python3.11/site-packages/uvicorn/protocols/websockets/websockets_impl.py:41: UvicornDeprecationWarning: The `websockets` implementation is deprecated, and `--ws websockets` will point at the `websockets-sansio` implementation in a future release. Use `--ws websockets-sansio` or `--ws auto` to switch now.
+  warnings.warn(
+/home/gabriele/Desktop/github/SCIoT/.venv/lib/python3.11/site-packages/websockets/legacy/server.py:1178: DeprecationWarning: remove second argument of ws_handler
+  warnings.warn("remove second argument of ws_handler", DeprecationWarning)
+ok
+test_fragmented_request_and_size_limit (test_ws_socket.RealSocketTests.test_fragmented_request_and_size_limit) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 3.787s
+
+OK

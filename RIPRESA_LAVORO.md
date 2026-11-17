@@ -1,6 +1,94 @@
-# Punto di ripresa SCIoT — aggiornamento del 12 novembre 2026 (sera)
+# Punto di ripresa SCIoT — aggiornamento del 17 novembre 2026
 
-## Da dove ricominciare (13 novembre)
+## Ripresa attuale: laptop e una sola ESP32 — 17 novembre
+
+Ripartire da [RIPRESA_WEBSOCKET_LAPTOP.md](RIPRESA_WEBSOCKET_LAPTOP.md): B sulla porta USB affidabile, vicino al router. Una scheda basta per il confronto sequenziale WS/HTTP persistente/HTTP close. Il timeout WS resta da diagnosticare: nessun vantaggio prestazionale dimostrato. Il pacchetto di ripristino dei sorgenti pubblici permette di ricreare sul laptop i componenti ignorati da Git; credenziali e backup restano locali. Le sezioni successive conservano la cronologia e le proposte precedenti.
+
+
+
+
+
+## Allocazione anticipata: capienza superata — 16 novembre 2026
+
+La variante `--allocation early` riserva **145.824 byte** (145.760 di arena
+più sentinelle) prima di camera/Wi-Fi. Campagna completata sulla B: **tre
+avvii indipendenti, 3.000 frame**, nessuna differenza numerica o disconnessione
+nella fase del candidato; sentinelle e heap integri. Minimi interni liberi:
+70.347 / 70.155 / 70.263 byte, tutti sopra i 32.768 richiesti. Il minimo è
+monitorato anche durante l'avvio dei servizi.
+
+Prefisso p50 63,202 / 63,209 / 63,200 ms. Modello, scratch da 3 righe, LUT e
+configurazione dei buffer di rete invariati. Massimo blocco iniziale
+208.896 byte; residuo a fine avvio 31.744 byte. Questo esito supera il limite
+della precedente allocazione tardiva nella configurazione provata.
+[Report completo e provenienza](experiments/esp32_client_fit_early_benchmark/2026-11-16-early/report.md).
+
+Backup e ripristino degli 8 MiB verificati, boot originale confermato; B
+scollegabile. Build riuscita, 15 test analizzatore superati. Credenziali solo
+nel file locale ignorato; nessuna modifica al client operativo, server HTTP,
+ADB o commit/push.
+
+**Prossimo passo proposto:** variante sperimentale del percorso HTTP con
+allocazione anticipata, verificando i picchi RAM reali durante le richieste.
+La capienza durante trasmissione e il ciclo completo non sono ancora provati.
+
+
+## Capienza con camera/Wi-Fi: limite contiguo — 16 novembre 2026
+
+Implementata e provata sulla B la [verifica di capienza](experiments/esp32_client_fit_early_benchmark/README.md).
+Wi-Fi connesso al router e camera inizializzata; l'allocazione dell'arena
+**dopo** i servizi fallisce. Totale interno libero **219.755 byte**, massimo
+blocco contiguo **124.928 byte**, richiesta **145.824 byte** incluse sentinelle.
+Il test si ferma al primo avvio, prima della validazione del candidato e dei
+1.000 frame: **zero frame misurati, nessuna stabilità su tre avvii dimostrata**.
+I tre canonici del riferimento PSRAM coincidono con il precedente archivio.
+
+Backup integrale e ripristino flash verificati, boot originale confermato;
+B scollegabile. 14 test analizzatore superati, build riuscita. Credenziali
+solo nel file locale ignorato, nessuna modifica al client operativo, nessun
+server HTTP/ADB né commit/push. [Report e provenienza](experiments/esp32_client_fit_early_benchmark/2026-11-16/report.md).
+
+**Prossimo esperimento proposto:** riservare l'arena interna prima di avviare
+camera e Wi-Fi (il client inizializza già l'interprete prima dei servizi),
+poi verificare avvio di entrambi e riserva di 32 KiB. Non è stato eseguito:
+l'esito attuale riguarda l'allocazione tardiva e non dimostra impossibilità
+con un altro ordine di inizializzazione. Scratch e buffer di rete invariati.
+
+
+## Buffer a strisce: obiettivo superato — 16 novembre 2026
+
+Campagna isolata completata sulla B: **3 righe selezionate**, picco delle
+attivazioni **145.760 byte** contro 178.688 (−32.928 byte, −18,4%).
+`Invoke()` in RAM interna 62,244 → 62,432 ms (+0,30%); p95 entro i criteri
+in tutti i round. Tutte le varianti ridotte rientrano nel budget, e la regola
+di parità entro l'1% preferisce quella che usa meno memoria.
+
+5.400 inferenze misurate, 900 warmup, confronti integrali su 35 input per
+variante/memoria: zero differenze, sentinelle integre, canonici identici al
+precedente firmware ESP32. Backup 8 MiB e ripristino verificati, boot
+originale confermato. Scheda scollegabile; nessun server/rete avviato.
+[Report completo](experiments/esp32_scratch_benchmark/2026-11-16/report.md).
+
+**Prossimo passo proposto, fuori dall'esperimento appena concluso:** prova
+di capienza nel client con camera e Wi-Fi attivi, misurando blocco interno
+contiguo e riserva. Solo dopo considerare integrazione del modello senza PAD,
+scratch da 3 righe, arena interna e LUT. Client operativo invariato;
+nessun commit/push in questa sessione.
+
+
+## Esperimento scratch preparato — 16 novembre 2026
+
+Implementato [il confronto dei buffer a strisce ESP-NN](experiments/esp32_scratch_benchmark/README.md):
+17 righe originali contro 3/5/7/9, PSRAM e RAM interna, arena minima con
+sentinelle, confronto integrale su 35 input, profiler e scelta automatica
+secondo budget/tempi concordati. Componenti privati verificati contro il
+run precedente; client e modelli operativi invariati. Build riuscita e
+11 test analizzatore superati. **Nessuna scheda collegata: nessuna misura
+fisica, variante selezionata o flash eseguita.** Riprendere con acquisizione
+sulla B seguendo il README; l’integrazione nel client resta successiva.
+
+
+## Cronologia precedente — punto di ripresa del 13 novembre
 
 **Situazione.** Il filone "attivazioni in RAM interna" è **chiuso**. È
 fattibile solo con i buffer Wi-Fi/lwIP in PSRAM, con 26,7 KB di margine
@@ -330,3 +418,7 @@ Ricostruzione dalle date dei log e del diario, non dalle sole date dei commit. O
 | 4 | 09/11/2026 | Validazione del sistema con due ESP32 e ottimizzazione della preparazione dell'input e dell'acquisizione immagini, con verifiche numeriche e misure delle latenze. |
 
 Fonti: [diario](DIARIO_TIROCINIO.md), [codec del 30 ottobre](experiments/esp32_lossless_codec_benchmark/report.md), [soglia Rice](experiments/esp32_rice_threshold_benchmark/sweep_2026-11-01/report.md), [parallelismo server](experiments/server_parallelism/2026-11-01/ac/README.md), [prove del 5 novembre](experiments/multiclient_hardware/2026-11-05/report.md), [diagnosi laptop/USB](RIPRESA_MULTICLIENT_LAPTOP.md), [multi-client del 9 novembre](experiments/multiclient_hardware/2026-11-09-pixel-adb-full/report.md), [ottimizzazioni del 9 novembre](experiments/esp32_input_camera_benchmark/2026-11-09/report.md).
+
+## WebSocket v2 — 16 novembre 2026
+
+Server condiviso HTTP/WS e firmware ESP-IDF sperimentale implementati. Due tentativi B: 78 e 97 richieste riuscite prima di timeout; entrambi ripristinati con verifica flash e boot. Nessuna promozione operativa. Prove PC: 27 test, 200/200 richieste con due client e 3088 corrette +112 rifiuti su 3200 con 32 client. [Report e ripresa](experiments/esp32_websocket_benchmark/2026-11-16/README.md).

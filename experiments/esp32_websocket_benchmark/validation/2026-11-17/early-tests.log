@@ -1,0 +1,20 @@
+test_allocation_failure (test_analysis.Analysis.test_allocation_failure) ... ok
+test_complete (test_analysis.Analysis.test_complete) ... ok
+test_early_reservation (test_analysis.Analysis.test_early_reservation) ... ok
+test_guards (test_analysis.Analysis.test_guards) ... ok
+test_late_canonical_mismatch (test_analysis.Analysis.test_late_canonical_mismatch) ... ok
+test_missing_memory_trace (test_analysis.Analysis.test_missing_memory_trace) ... ok
+test_missing_or_duplicate_frames (test_analysis.Analysis.test_missing_or_duplicate_frames) ... ok
+test_network_config (test_analysis.Analysis.test_network_config) ... ok
+test_placement (test_analysis.Analysis.test_placement) ... ok
+test_recovery (test_analysis.Analysis.test_recovery) ... ok
+test_reserve (test_analysis.Analysis.test_reserve) ... ok
+test_startup_disconnect_allowed (test_analysis.Analysis.test_startup_disconnect_allowed) ... ok
+test_validation (test_analysis.Analysis.test_validation) ... ok
+test_verified_negative_allocation (test_analysis.Analysis.test_verified_negative_allocation) ... ok
+test_wifi_disconnected (test_analysis.Analysis.test_wifi_disconnected) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.047s
+
+OK

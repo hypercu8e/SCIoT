@@ -1,5 +1,8 @@
 # Ripresa sul laptop — 5 novembre 2026
 
+**Aggiornamento 17 novembre 2026:** per il nuovo confronto HTTP/WebSocket con una sola B leggere [RIPRESA_WEBSOCKET_LAPTOP.md](RIPRESA_WEBSOCKET_LAPTOP.md). Le procedure a due schede qui sotto descrivono campagne precedenti e non sono necessarie per il confronto sequenziale attuale.
+
+
 ## Obiettivo e punto esatto
 
 Validare il servizio HTTP v2 con le **due ESP32-S3-EYE fisiche**, mantenendo

@@ -115,7 +115,12 @@ def audit(run,legacy_archive):
     if b'sciot_esp32_client' not in (run/'board/restored-boot.log').read_bytes():raise ValueError('Original boot unconfirmed')
     hashes=json.loads((run/'source-sha256.json').read_text())
     if any(Path(p).name=='network.local.h' for p in hashes):raise ValueError('Credentials must not be archived as sources')
-    previous=load_module('scratch_audit',ROOT/'experiments/esp32_scratch_benchmark/analyze.py');previous.verify_sources(run,hashes)
+    previous=load_module('scratch_audit',ROOT/'experiments/esp32_scratch_benchmark/analyze.py')
+    # Historical source snapshots retain their original paths. Only live
+    # component verification follows the relocated isolated experiment.
+    prefix='experiments/esp32_client_fit_benchmark/idf/components/'
+    relocated={('experiments/esp32_client_fit_early_benchmark/idf/components/'+path[len(prefix):] if path.startswith(prefix) else path):digest for path,digest in hashes.items()}
+    previous.verify_sources(run,relocated)
     legacy=load_module('legacy_audit',ROOT/'experiments/esp32_nopad_benchmark/analyze.py')
     rounds=[]
     for r in ((1,) if negative else (1,2,3)):

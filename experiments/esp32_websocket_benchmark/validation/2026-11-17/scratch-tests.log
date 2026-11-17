@@ -1,0 +1,17 @@
+test_audit_uses_captured_sources_and_firmware (test_analysis.Audit.test_audit_uses_captured_sources_and_firmware) ... ok
+test_budget_rejects_fastest (test_analysis.Audit.test_budget_rejects_fastest) ... ok
+test_duplicate_sample (test_analysis.Audit.test_duplicate_sample) ... ok
+test_fastest_within_budget (test_analysis.Audit.test_fastest_within_budget) ... ok
+test_mismatch_and_guard (test_analysis.Audit.test_mismatch_and_guard) ... ok
+test_missing_block_done (test_analysis.Audit.test_missing_block_done) ... ok
+test_missing_operator (test_analysis.Audit.test_missing_operator) ... ok
+test_missing_sample (test_analysis.Audit.test_missing_sample) ... ok
+test_recovery_failure (test_analysis.Audit.test_recovery_failure) ... ok
+test_slow_round_rejected (test_analysis.Audit.test_slow_round_rejected) ... ok
+test_tie_prefers_memory (test_analysis.Audit.test_tie_prefers_memory) ... ok
+test_wrong_variant (test_analysis.Audit.test_wrong_variant) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.606s
+
+OK
