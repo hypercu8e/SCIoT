@@ -1,11 +1,76 @@
 # Punto di ripresa SCIoT — aggiornamento del 17 novembre 2026
 
-## Ripresa attuale: laptop e una sola ESP32 — 17 novembre
+## Confronto completato sulla B — 18 novembre 2026
 
-Ripartire da [RIPRESA_WEBSOCKET_LAPTOP.md](RIPRESA_WEBSOCKET_LAPTOP.md): B sulla porta USB affidabile, vicino al router. Una scheda basta per il confronto sequenziale WS/HTTP persistente/HTTP close. Il timeout WS resta da diagnosticare: nessun vantaggio prestazionale dimostrato. Il pacchetto di ripristino dei sorgenti pubblici permette di ricreare sul laptop i componenti ignorati da Git; credenziali e backup restano locali. Le sezioni successive conservano la cronologia e le proposte precedenti.
+Nove avvii con gestione XCLK, **18.900/18.900 richieste**, 9.000 frame reali,
+zero timeout e disconnessioni durante la misura. Mediana del ciclo camera
+710 ms con HTTP persistente, 711 ms con WebSocket e 754 ms con HTTP
+con chiusura. HTTP persistente conserva 12.188 byte di RAM interna in più
+al minimo rispetto a WebSocket. È la scelta per questa configurazione.
+[Report per trasporto e per avvio](experiments/esp32_websocket_benchmark/2026-11-18-comparison/report.md).
 
+Flash originale ripristinata e verificata su tutti gli 8 MiB, boot
+confermato e server chiuso. B scollegabile.
 
+## Prove iniziali — HTTP e WebSocket superano lo smoke sulla B
 
+Con `--gate-camera` ciascun trasporto ha completato **2.100/2.100 richieste**,
+di cui **1.000 frame reali**, senza timeout o disconnessioni durante la misura.
+Stesso binario, stessa B e stessa porta USB. Il clock XCLK è acceso durante
+l'acquisizione e spento durante inferenza e invio. I controlli su timestamp,
+dimensioni, formato, hash del buffer e routing GPIO15 sono passati per tutti
+i frame. Il report contiene latenze e minimi di RAM per entrambi i trasporti.
+[Report delle prove](experiments/esp32_websocket_benchmark/2026-11-17-gated-camera/report.md).
+
+Flash originale ripristinata con digest degli 8 MiB e boot verificati dopo
+entrambi gli avvii. B scollegabile, server e seriale chiusi. La campagna successiva di nove avvii è riportata sopra.
+
+## Diagnostica precedente — fattore XCLK riprodotto il 17 novembre
+
+**Tre avvii, 1.500 ping: baseline senza camera 300/300 risposte; camera inizializzata
+con acquisizione ferma, XCLK ON 82/600 e XCLK OFF 600/600.** Riaccendere il clock
+riproduce il degrado, spegnerlo ripristina la rete in tutte le coppie, per router
+e laptop. GPIO15 realmente scollegato da `CAM_CLK_IDX` e portato basso; buffer
+camera trattenuti, RAM identica prima/dopo tutte le 12 commutazioni. Minimo interno
+55.895 B, heap/sentinelle integri, zero disconnessioni Wi-Fi.
+[Report e prove](experiments/esp32_websocket_benchmark/2026-11-17-xclk/report.md).
+
+Il fattore del collasso è l'attività del sensore pilotata da XCLK nelle condizioni
+provate; interferenza e carico elettrico non sono distinti. `cam_stop()` da solo
+non disabilita XCLK sul driver S3 congelato. Non è ancora una prova di stabilità
+HTTP/WS o del ciclo camera con clock gestito.
+
+Implementati comando `x`, `--xclk-diagnostic` e analizzatore; build e 12 test
+superati. Flash originale degli 8 MiB ripristinata e verificata, boot confermato,
+B scollegabile e seriale libera. Nessun server avviato per ICMP, nessun commit/push.
+La prova successiva del ciclo con clock gestito è riportata sopra.
+
+### Diagnostica precedente: porte, cavi e memoria
+
+Diagnostica sul laptop: **cambio porta e successivo cambio cavo non risolutivi**.
+La prova confermata del secondo cavo (`LAPTOP_B_HTTP_CABLE2_02`), su USB `1-1`
+e con lo stesso binario di USB1, completa 53 richieste poi fallisce sulla 54ª
+(request ID 53) con HTTP 408 `body_timeout`. Ancora nel warmup, zero frame camera
+misurati; camera accesa. Minimo interno 50.843 B, nessuna disconnessione Wi-Fi.
+
+Controlli precedenti: senza camera 1.100/1.100 richieste corrette; con camera HTTP
+e WS non superano lo smoke. Attivazioni in PSRAM e acquisizione sospesa non
+risolvono. Anche il client HTTP di riferimento completa 60 input e 3 frame
+camera, poi 408 sul quarto. **Causa non dimostrata:** restano possibili problemi
+software condivisi, effetti del sensore, alimentazione o radio; non è provato
+un guasto specifico della USB o del nuovo WS.
+
+Tutti i ripristini degli 8 MiB e i boot originali verificati; B scollegabile,
+server e seriale chiusi. Il tentativo prematuro `CABLE2_01` resta escluso;
+`CABLE2_02` è il controllo valido, avviato dopo conferma dell'utente.
+[Report e provenienza](experiments/esp32_websocket_benchmark/2026-11-17-laptop/report.md).
+
+Prossima indagine: traccia del corpo HTTP/TCP e clock sensore/percorso camera-rete.
+Un hub con alimentatore proprio sarebbe un controllo di alimentazione distinto,
+ancora non eseguito. Riprendere i nove avvii comparativi WS/HTTP solo dopo smoke
+stabili con camera. Nessun vantaggio WS dimostrato; nessun commit/push.
+[Ripresa dettagliata](RIPRESA_WEBSOCKET_LAPTOP.md). Le sezioni successive
+conservano la cronologia.
 
 
 ## Allocazione anticipata: capienza superata — 16 novembre 2026

@@ -1,5 +1,60 @@
 # Ripresa WebSocket sul laptop — 17 novembre 2026
 
+## Confronto completato sulla B — 18 novembre 2026
+
+Nove avvii con gestione XCLK, **18.900/18.900 richieste**, 9.000 frame reali,
+zero timeout e disconnessioni durante la misura. Mediana del ciclo camera
+710 ms con HTTP persistente, 711 ms con WebSocket e 754 ms con HTTP
+con chiusura. HTTP persistente conserva 12.188 byte di RAM interna in più
+al minimo rispetto a WebSocket. È la scelta per questa configurazione.
+[Report per trasporto e per avvio](experiments/esp32_websocket_benchmark/2026-11-18-comparison/report.md).
+
+Flash originale ripristinata e verificata su tutti gli 8 MiB, boot
+confermato e server chiuso. B scollegabile.
+
+## Prove iniziali — HTTP e WebSocket superano lo smoke sulla B
+
+Con `--gate-camera` ciascun trasporto ha completato **2.100/2.100 richieste**,
+di cui **1.000 frame reali**, senza timeout o disconnessioni durante la misura.
+Stesso binario, stessa B e stessa porta USB. Il clock XCLK è acceso durante
+l'acquisizione e spento durante inferenza e invio. I controlli su timestamp,
+dimensioni, formato, hash del buffer e routing GPIO15 sono passati per tutti
+i frame. Il report contiene latenze e minimi di RAM per entrambi i trasporti.
+[Report delle prove](experiments/esp32_websocket_benchmark/2026-11-17-gated-camera/report.md).
+
+Flash originale ripristinata con digest degli 8 MiB e boot verificati dopo
+entrambi gli avvii. B scollegabile, server e seriale chiusi. La campagna successiva di nove avvii è riportata sopra.
+
+## Diagnostica precedente — effetto XCLK riprodotto sulla B
+
+[Report XCLK](experiments/esp32_websocket_benchmark/2026-11-17-xclk/report.md):
+**tre avvii indipendenti, 1.500 ping; baseline 300/300, XCLK ON 82/600,
+XCLK OFF 600/600**. Acquisizione ferma e buffer camera trattenuti; le 12
+commutazioni GPIO15 hanno routing verificato e nessuna variazione immediata
+della RAM libera. Tutte le coppie ON/OFF soddisfano i criteri preregistrati per
+router e laptop. Minimo interno 55.895 B, heap/sentinelle integri, zero
+disconnessioni Wi-Fi. Non è una distinzione fra interferenza e alimentazione.
+
+Il comando `cam_stop()` non spegne XCLK nel driver S3 congelato. La diagnostica
+`x` lo scollega invece da `CAM_CLK_IDX`, imposta GPIO15 basso e ripristina il
+routing per riaccenderlo, mantenendo invariati clock-rate, buffer e rete.
+
+**Stato hardware:** B su USB `pci-0000:63:00.3-usb-0:1:1.0`, con secondo cavo
+confermato dall'utente. Firmware originale ripristinato, digest di tutti gli
+8 MiB e boot verificati; B scollegabile. Nessun server o monitor seriale attivo.
+
+**Implementazione disponibile:** `run.py --xclk-diagnostic --run NUOVA_DIRECTORY`
+seleziona tre boot `xxx`; non richiede server HTTP. Analisi con
+`analyze_xclk.py RUN --output NUOVA_DIRECTORY_REPORT`. Credenziali solo nell'header
+locale ignorato. Nessuna modifica al client operativo o promozione WS.
+
+La prova successiva del ciclo con clock gestito è riportata sopra.
+
+[Controlli precedenti su porte, cavi, memoria e client di riferimento](experiments/esp32_websocket_benchmark/2026-11-17-laptop/report.md).
+Il tentativo prematuro `CABLE2_01` resta escluso; `CABLE2_02` è la prova valida
+con secondo cavo (53 richieste corrette, poi 408). Log, firmware e backup restano
+in `results/`, ignorati da Git. Nessun commit/push.
+
 ## Obiettivo e limite del confronto
 
 Usare **soltanto B sulla porta USB affidabile**, vicino al router, per diagnosticare
@@ -16,8 +71,9 @@ I test WS sul fisso si sono interrotti dopo 78 e 97 richieste riuscite, prima
 delle misure complete. **Non è dimostrato che WS sia più veloce o più lento di
 HTTP. Non è dimostrato che la causa sia il Wi-Fi.** Il maggiore buffer non ha
 risolto il timeout. [Risultati](experiments/esp32_websocket_benchmark/2026-11-16/README.md).
-L'ultima revisione aggiunge confronti integrali dei punteggi canonici e backoff:
-build verificata, ma ancora da validare sulla B.
+La revisione successiva aggiunge confronti integrali dei punteggi canonici e
+backoff. È stata ora provata sul laptop con la diagnostica riportata sopra:
+non ha completato lo smoke con camera attiva.
 
 B: MAC `24:ec:4a:0e:c3:14`, collegamento Linux atteso
 `/dev/serial/by-id/usb-Espressif_USB_JTAG_serial_debug_unit_24:EC:4A:0E:C3:14-if00`.
@@ -89,7 +145,7 @@ PYTHONPATH=src .venv/bin/python -m server.multiclient.run --model-registry exper
 In un altro terminale, dopo avere identificato B sulla porta affidabile:
 
 ```sh
-experiments/esp32_deadzone_benchmark/results/build-tools/bin/python experiments/esp32_websocket_benchmark/run.py --smoke --run experiments/esp32_websocket_benchmark/results/LAPTOP_B_WS_01
+experiments/esp32_deadzone_benchmark/results/build-tools/bin/python experiments/esp32_websocket_benchmark/run.py --smoke --gate-camera --run experiments/esp32_websocket_benchmark/results/NUOVO_WS_GATED_RUN
 ```
 
 Le directory devono essere nuove. Il runner ricompila con la configurazione
@@ -119,7 +175,7 @@ ruotato: WS/HTTP persistente/HTTP close, HTTP persistente/HTTP close/WS,
 HTTP close/WS/HTTP persistente. Nessun requisito di collegare A.
 
 ```sh
-experiments/esp32_deadzone_benchmark/results/build-tools/bin/python experiments/esp32_websocket_benchmark/run.py --run experiments/esp32_websocket_benchmark/results/LAPTOP_B_COMPARE_01
+experiments/esp32_deadzone_benchmark/results/build-tools/bin/python experiments/esp32_websocket_benchmark/run.py --gate-camera --run experiments/esp32_websocket_benchmark/results/LAPTOP_B_COMPARE_01
 ```
 
 Ogni avvio: 35 confronti del prefisso, 100 richieste iniziali, 1.000 richieste
