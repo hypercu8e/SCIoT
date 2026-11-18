@@ -3,7 +3,6 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-import statistics
 
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -13,16 +12,26 @@ def percentile(values, q):
     return values[lo]+(values[hi]-values[lo])*(position-lo)
 
 
-def audit(run):
+def verify_recovery(run):
     run=Path(run);completion=json.loads((run/'completion.json').read_text())
     meta=json.loads((run/'board/hardware.json').read_text())
     if not (completion['original_boot_confirmed'] and completion['restore_error'] is None and meta['backup_verified'] and meta['restored'] and sha(run/'board/original-flash.bin')==meta['backup_sha256']):
         raise ValueError('Original firmware recovery not verified')
     snapshots=json.loads((run/'source-sha256.json').read_text())
     for name,digest in snapshots.items():
-        path=run/'sources'/name
+        source=Path(name)
+        if source.is_absolute() or source.parts[0]=='firmware':
+            path=run/'firmware'/source.name
+            if not path.is_file():raise ValueError('Firmware snapshot missing')
+        else:
+            path=run/'sources'/source
         if path.exists() and sha(path)!=digest:raise ValueError('Source snapshot mismatch')
     if sha(run/'firmware/firmware.bin')!=meta['installed_sha256']:raise ValueError('Installed binary mismatch')
+    return completion
+
+
+def audit(run):
+    run=Path(run);completion=verify_recovery(run)
     boots=[]
     for path in sorted((run/'board').glob('round-*.events.jsonl')):
         rows=[json.loads(line)['row'] for line in path.read_text().splitlines()]

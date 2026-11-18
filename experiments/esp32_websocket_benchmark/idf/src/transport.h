@@ -11,6 +11,7 @@ constexpr size_t requestBytes=4640,replyBytes=1760;
 char mode='w',cid[32],session[33],httpUrl[256],wsUrl[256];
 uint64_t sequence=0;
 int lastStatus=0;
+unsigned httpConnections=0;
 enum class State {Disconnected,Connecting,Registering,Ready,Waiting};
 State state=State::Disconnected;
 uint8_t *tx=nullptr,*rx=nullptr;
@@ -41,6 +42,7 @@ void wsEvent(void*,esp_event_base_t,int32_t id,void* value){
   if(e->fin&&frameReceived==size_t(e->payload_len)){fragmentOpcode=0;rx[received]=0;xEventGroupSetBits(events,DATA);}
 }
 esp_err_t httpEvent(esp_http_client_event_t* e){
+  if(e->event_id==HTTP_EVENT_ON_CONNECTED)++httpConnections;
   if(e->event_id==HTTP_EVENT_ON_DATA){
     if(e->data_len<0||received+e->data_len>replyBytes){return ESP_FAIL;}
     memcpy(rx+received,e->data,e->data_len);received+=e->data_len;rx[received]=0;
@@ -92,8 +94,10 @@ bool connect(int64_t deadline=0){
     esp_http_client_config_t c={};c.url=url;c.timeout_ms=int(remaining());c.event_handler=httpEvent;c.buffer_size=2048;c.buffer_size_tx=1024;
     http=esp_http_client_init(&c);if(!http)return false;
     esp_http_client_set_method(http,HTTP_METHOD_POST);esp_http_client_set_header(http,"Content-Type","application/json");esp_http_client_set_post_field(http,registration,strlen(registration));
-    if(esp_http_client_perform(http)!=ESP_OK)return false;
-    lastStatus=esp_http_client_get_status_code(http);if(lastStatus!=200)return false;
+    const esp_err_t result=esp_http_client_perform(http);
+    lastStatus=esp_http_client_get_status_code(http);
+    printf("{\"event\":\"http_registration_result\",\"esp_err\":%d,\"http_status\":%d,\"received_bytes\":%u,\"socket_errno\":%d}\n",int(result),lastStatus,unsigned(received),esp_http_client_get_errno(http));
+    if(result!=ESP_OK||lastStatus!=200)return false;
   }
   bool ok=jsonRegistration();
   if(ok)state=State::Ready;
