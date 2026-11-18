@@ -31,7 +31,9 @@ Usare una directory di output nuova: vi finiscono configurazione, manifest e
 metriche `server.jsonl`. Non avviare più processi Uvicorn per questa modalità.
 
 Opzioni: `--inference-workers 1`, `--inference-threads 1`, `--max-clients 32`, `--queue-size 8`, `--max-receiving 8`,
-`--timeout 10`, `--idle 60`, `--host`, `--port`, `--artifacts`, `--output`.
+`--timeout 10`, `--idle 60`, `--http-keep-alive 5`, `--host`, `--port`,
+`--artifacts`, `--output`. Il keep-alive riguarda la connessione HTTP e
+`--idle` imposta la scadenza della sessione applicativa.
 Il logger scrive record brevi in ordine, senza dump dei tensori. Le scritture
 sincrone delle metriche contribuiscono al costo complessivo del servizio.
 

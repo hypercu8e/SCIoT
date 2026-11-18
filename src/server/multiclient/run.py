@@ -18,11 +18,13 @@ def main():
     parser.add_argument('--max-receiving', type=int, default=8)
     parser.add_argument('--timeout', type=float, default=10.)
     parser.add_argument('--idle', type=float, default=60.)
+    parser.add_argument('--http-keep-alive', type=int, default=5,
+                        help='Seconds to keep an idle HTTP connection open')
     parser.add_argument('--inference-workers', type=int, default=1)
     parser.add_argument('--inference-threads', type=int, default=1)
     args = parser.parse_args()
-    if min(args.inference_workers, args.inference_threads) < 1:
-        parser.error('Inference workers and threads must be positive')
+    if min(args.inference_workers, args.inference_threads, args.http_keep_alive) < 1:
+        parser.error('Inference workers, threads and HTTP keep-alive must be positive')
     for key, value in {'CUDA_VISIBLE_DEVICES': '-1', 'TF_CPP_MIN_LOG_LEVEL': '3',
                        'TF_NUM_INTRAOP_THREADS': '1', 'TF_NUM_INTEROP_THREADS': '1'}.items():
         os.environ.setdefault(key, value)
@@ -41,6 +43,7 @@ def main():
                          metrics=metrics, inference_workers=args.inference_workers,
                          accepted_models=accepted_models(args.artifacts, args.model_registry))
         uvicorn.run(app, host=args.host, port=args.port, workers=1, ws='websockets',
+                    timeout_keep_alive=args.http_keep_alive,
                     ws_max_size=4656, ws_max_queue=1, ws_per_message_deflate=False,
                     ws_ping_interval=20, ws_ping_timeout=10)
 
