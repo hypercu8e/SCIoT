@@ -1,0 +1,586 @@
+{
+  "campaign_complete": true,
+  "restored": true,
+  "order": [
+    "w",
+    "h",
+    "c",
+    "h",
+    "c",
+    "w",
+    "c",
+    "w",
+    "h"
+  ],
+  "firmware_sha256": "a73cbe0ad2558c6f9f16cb48bd3f46b7d84a7cd8498b70168754ed1f686631b3",
+  "rounds": [
+    {
+      "mode": "w",
+      "complete": true,
+      "checks": {
+        "ordered_requests": true,
+        "ordered_camera_frames": true,
+        "frame_timestamps": true,
+        "gpio_routes": true,
+        "canonical_reference": true,
+        "heap_and_guards": true,
+        "ram_reserve": true,
+        "app_task_stack": true,
+        "firmware_success": true,
+        "server_request_ids": true
+      },
+      "attempted": 2100,
+      "requests_ok": 2100,
+      "camera_ok": 1000,
+      "camera_verified": 1000,
+      "distinct_frame_hashes": 1000,
+      "minimum_internal_free_bytes": 36535,
+      "minimum_app_stack_free_bytes": 13016,
+      "rssi_dbm": -55,
+      "channel": 6,
+      "wifi_disconnects_during_measurement": 0,
+      "server_statuses": {
+        "200": 2100
+      },
+      "camera_cycle_ms": {
+        "p50": 710.365,
+        "p95": 795.054,
+        "p99": 836.928
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.837,
+        "p95": 601.061,
+        "p99": 601.137
+      },
+      "camera_request_response_ms": {
+        "p50": 40.611,
+        "p95": 127.22,
+        "p99": 166.877
+      },
+      "deterministic_request_response_ms": {
+        "p50": 17.571,
+        "p95": 90.573,
+        "p99": 156.106
+      },
+      "errors": [],
+      "round": 1
+    },
+    {
+      "mode": "h",
+      "complete": true,
+      "checks": {
+        "ordered_requests": true,
+        "ordered_camera_frames": true,
+        "frame_timestamps": true,
+        "gpio_routes": true,
+        "canonical_reference": true,
+        "heap_and_guards": true,
+        "ram_reserve": true,
+        "app_task_stack": true,
+        "firmware_success": true,
+        "server_request_ids": true
+      },
+      "attempted": 2100,
+      "requests_ok": 2100,
+      "camera_ok": 1000,
+      "camera_verified": 1000,
+      "distinct_frame_hashes": 1000,
+      "minimum_internal_free_bytes": 48723,
+      "minimum_app_stack_free_bytes": 13080,
+      "rssi_dbm": -60,
+      "channel": 6,
+      "wifi_disconnects_during_measurement": 0,
+      "server_statuses": {
+        "200": 2100
+      },
+      "camera_cycle_ms": {
+        "p50": 710.88,
+        "p95": 796.153,
+        "p99": 1018.587
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.857,
+        "p95": 601.051,
+        "p99": 601.151
+      },
+      "camera_request_response_ms": {
+        "p50": 42.539,
+        "p95": 130.87,
+        "p99": 348.877
+      },
+      "deterministic_request_response_ms": {
+        "p50": 19.038,
+        "p95": 103.714,
+        "p99": 177.637
+      },
+      "errors": [],
+      "round": 2
+    },
+    {
+      "mode": "c",
+      "complete": true,
+      "checks": {
+        "ordered_requests": true,
+        "ordered_camera_frames": true,
+        "frame_timestamps": true,
+        "gpio_routes": true,
+        "canonical_reference": true,
+        "heap_and_guards": true,
+        "ram_reserve": true,
+        "app_task_stack": true,
+        "firmware_success": true,
+        "server_request_ids": true
+      },
+      "attempted": 2100,
+      "requests_ok": 2100,
+      "camera_ok": 1000,
+      "camera_verified": 1000,
+      "distinct_frame_hashes": 1000,
+      "minimum_internal_free_bytes": 50035,
+      "minimum_app_stack_free_bytes": 12952,
+      "rssi_dbm": -59,
+      "channel": 6,
+      "wifi_disconnects_during_measurement": 0,
+      "server_statuses": {
+        "200": 2100
+      },
+      "camera_cycle_ms": {
+        "p50": 754.32,
+        "p95": 821.522,
+        "p99": 833.127
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.824,
+        "p95": 601.022,
+        "p99": 601.073
+      },
+      "camera_request_response_ms": {
+        "p50": 89.904,
+        "p95": 151.402,
+        "p99": 165.353
+      },
+      "deterministic_request_response_ms": {
+        "p50": 32.069,
+        "p95": 180.699,
+        "p99": 222.806
+      },
+      "errors": [],
+      "round": 3
+    },
+    {
+      "mode": "h",
+      "complete": true,
+      "checks": {
+        "ordered_requests": true,
+        "ordered_camera_frames": true,
+        "frame_timestamps": true,
+        "gpio_routes": true,
+        "canonical_reference": true,
+        "heap_and_guards": true,
+        "ram_reserve": true,
+        "app_task_stack": true,
+        "firmware_success": true,
+        "server_request_ids": true
+      },
+      "attempted": 2100,
+      "requests_ok": 2100,
+      "camera_ok": 1000,
+      "camera_verified": 1000,
+      "distinct_frame_hashes": 1000,
+      "minimum_internal_free_bytes": 50183,
+      "minimum_app_stack_free_bytes": 13000,
+      "rssi_dbm": -52,
+      "channel": 6,
+      "wifi_disconnects_during_measurement": 0,
+      "server_statuses": {
+        "200": 2100
+      },
+      "camera_cycle_ms": {
+        "p50": 709.753,
+        "p95": 792.577,
+        "p99": 826.446
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.853,
+        "p95": 601.035,
+        "p99": 601.094
+      },
+      "camera_request_response_ms": {
+        "p50": 40.062,
+        "p95": 122.453,
+        "p99": 156.509
+      },
+      "deterministic_request_response_ms": {
+        "p50": 20.425,
+        "p95": 67.285,
+        "p99": 123.457
+      },
+      "errors": [],
+      "round": 4
+    },
+    {
+      "mode": "c",
+      "complete": true,
+      "checks": {
+        "ordered_requests": true,
+        "ordered_camera_frames": true,
+        "frame_timestamps": true,
+        "gpio_routes": true,
+        "canonical_reference": true,
+        "heap_and_guards": true,
+        "ram_reserve": true,
+        "app_task_stack": true,
+        "firmware_success": true,
+        "server_request_ids": true
+      },
+      "attempted": 2100,
+      "requests_ok": 2100,
+      "camera_ok": 1000,
+      "camera_verified": 1000,
+      "distinct_frame_hashes": 1000,
+      "minimum_internal_free_bytes": 50231,
+      "minimum_app_stack_free_bytes": 12952,
+      "rssi_dbm": -54,
+      "channel": 6,
+      "wifi_disconnects_during_measurement": 0,
+      "server_statuses": {
+        "200": 2100
+      },
+      "camera_cycle_ms": {
+        "p50": 744.495,
+        "p95": 819.664,
+        "p99": 843.871
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.823,
+        "p95": 601.025,
+        "p99": 601.08
+      },
+      "camera_request_response_ms": {
+        "p50": 76.672,
+        "p95": 149.571,
+        "p99": 173.224
+      },
+      "deterministic_request_response_ms": {
+        "p50": 31.068,
+        "p95": 156.889,
+        "p99": 184.416
+      },
+      "errors": [],
+      "round": 5
+    },
+    {
+      "mode": "w",
+      "complete": true,
+      "checks": {
+        "ordered_requests": true,
+        "ordered_camera_frames": true,
+        "frame_timestamps": true,
+        "gpio_routes": true,
+        "canonical_reference": true,
+        "heap_and_guards": true,
+        "ram_reserve": true,
+        "app_task_stack": true,
+        "firmware_success": true,
+        "server_request_ids": true
+      },
+      "attempted": 2100,
+      "requests_ok": 2100,
+      "camera_ok": 1000,
+      "camera_verified": 1000,
+      "distinct_frame_hashes": 1000,
+      "minimum_internal_free_bytes": 36759,
+      "minimum_app_stack_free_bytes": 12952,
+      "rssi_dbm": -75,
+      "channel": 6,
+      "wifi_disconnects_during_measurement": 0,
+      "server_statuses": {
+        "200": 2100
+      },
+      "camera_cycle_ms": {
+        "p50": 712.255,
+        "p95": 804.161,
+        "p99": 820.723
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.837,
+        "p95": 601.041,
+        "p99": 601.106
+      },
+      "camera_request_response_ms": {
+        "p50": 42.956,
+        "p95": 134.249,
+        "p99": 150.68
+      },
+      "deterministic_request_response_ms": {
+        "p50": 19.235,
+        "p95": 136.152,
+        "p99": 178.688
+      },
+      "errors": [],
+      "round": 6
+    },
+    {
+      "mode": "c",
+      "complete": true,
+      "checks": {
+        "ordered_requests": true,
+        "ordered_camera_frames": true,
+        "frame_timestamps": true,
+        "gpio_routes": true,
+        "canonical_reference": true,
+        "heap_and_guards": true,
+        "ram_reserve": true,
+        "app_task_stack": true,
+        "firmware_success": true,
+        "server_request_ids": true
+      },
+      "attempted": 2100,
+      "requests_ok": 2100,
+      "camera_ok": 1000,
+      "camera_verified": 1000,
+      "distinct_frame_hashes": 1000,
+      "minimum_internal_free_bytes": 50779,
+      "minimum_app_stack_free_bytes": 12952,
+      "rssi_dbm": -59,
+      "channel": 6,
+      "wifi_disconnects_during_measurement": 0,
+      "server_statuses": {
+        "200": 2100
+      },
+      "camera_cycle_ms": {
+        "p50": 803.488,
+        "p95": 820.456,
+        "p99": 829.224
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.814,
+        "p95": 601.013,
+        "p99": 601.076
+      },
+      "camera_request_response_ms": {
+        "p50": 133.317,
+        "p95": 150.456,
+        "p99": 159.328
+      },
+      "deterministic_request_response_ms": {
+        "p50": 30.486,
+        "p95": 40.598,
+        "p99": 50.627
+      },
+      "errors": [],
+      "round": 7
+    },
+    {
+      "mode": "w",
+      "complete": true,
+      "checks": {
+        "ordered_requests": true,
+        "ordered_camera_frames": true,
+        "frame_timestamps": true,
+        "gpio_routes": true,
+        "canonical_reference": true,
+        "heap_and_guards": true,
+        "ram_reserve": true,
+        "app_task_stack": true,
+        "firmware_success": true,
+        "server_request_ids": true
+      },
+      "attempted": 2100,
+      "requests_ok": 2100,
+      "camera_ok": 1000,
+      "camera_verified": 1000,
+      "distinct_frame_hashes": 1000,
+      "minimum_internal_free_bytes": 37155,
+      "minimum_app_stack_free_bytes": 12952,
+      "rssi_dbm": -60,
+      "channel": 6,
+      "wifi_disconnects_during_measurement": 0,
+      "server_statuses": {
+        "200": 2100
+      },
+      "camera_cycle_ms": {
+        "p50": 711.283,
+        "p95": 798.151,
+        "p99": 818.721
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.846,
+        "p95": 601.057,
+        "p99": 601.113
+      },
+      "camera_request_response_ms": {
+        "p50": 41.545,
+        "p95": 128.119,
+        "p99": 148.888
+      },
+      "deterministic_request_response_ms": {
+        "p50": 19.12,
+        "p95": 60.311,
+        "p99": 65.63
+      },
+      "errors": [],
+      "round": 8
+    },
+    {
+      "mode": "h",
+      "complete": true,
+      "checks": {
+        "ordered_requests": true,
+        "ordered_camera_frames": true,
+        "frame_timestamps": true,
+        "gpio_routes": true,
+        "canonical_reference": true,
+        "heap_and_guards": true,
+        "ram_reserve": true,
+        "app_task_stack": true,
+        "firmware_success": true,
+        "server_request_ids": true
+      },
+      "attempted": 2100,
+      "requests_ok": 2100,
+      "camera_ok": 1000,
+      "camera_verified": 1000,
+      "distinct_frame_hashes": 1000,
+      "minimum_internal_free_bytes": 50195,
+      "minimum_app_stack_free_bytes": 12952,
+      "rssi_dbm": -63,
+      "channel": 6,
+      "wifi_disconnects_during_measurement": 0,
+      "server_statuses": {
+        "200": 2100
+      },
+      "camera_cycle_ms": {
+        "p50": 698.642,
+        "p95": 785.229,
+        "p99": 810.909
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.87,
+        "p95": 601.048,
+        "p99": 601.138
+      },
+      "camera_request_response_ms": {
+        "p50": 29.185,
+        "p95": 118.214,
+        "p99": 142.692
+      },
+      "deterministic_request_response_ms": {
+        "p50": 18.562,
+        "p95": 58.465,
+        "p99": 66.772
+      },
+      "errors": [],
+      "round": 9
+    }
+  ],
+  "by_mode_median_of_boot_quantiles": {
+    "w": {
+      "camera_cycle_ms": {
+        "p50": 711.283,
+        "p95": 798.151,
+        "p99": 820.723
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.837,
+        "p95": 601.057,
+        "p99": 601.113
+      },
+      "camera_request_response_ms": {
+        "p50": 41.545,
+        "p95": 128.119,
+        "p99": 150.68
+      },
+      "deterministic_request_response_ms": {
+        "p50": 19.12,
+        "p95": 90.573,
+        "p99": 156.106
+      },
+      "complete_boots": 3,
+      "requests_ok": 6300,
+      "minimum_internal_free_bytes": 36535,
+      "minimum_app_stack_free_bytes": 12952
+    },
+    "h": {
+      "camera_cycle_ms": {
+        "p50": 709.753,
+        "p95": 792.577,
+        "p99": 826.446
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.857,
+        "p95": 601.048,
+        "p99": 601.138
+      },
+      "camera_request_response_ms": {
+        "p50": 40.062,
+        "p95": 122.453,
+        "p99": 156.509
+      },
+      "deterministic_request_response_ms": {
+        "p50": 19.038,
+        "p95": 67.285,
+        "p99": 123.457
+      },
+      "complete_boots": 3,
+      "requests_ok": 6300,
+      "minimum_internal_free_bytes": 48723,
+      "minimum_app_stack_free_bytes": 12952
+    },
+    "c": {
+      "camera_cycle_ms": {
+        "p50": 754.32,
+        "p95": 820.456,
+        "p99": 833.127
+      },
+      "camera_acquisition_ms": {
+        "p50": 600.823,
+        "p95": 601.022,
+        "p99": 601.076
+      },
+      "camera_request_response_ms": {
+        "p50": 89.904,
+        "p95": 150.456,
+        "p99": 165.353
+      },
+      "deterministic_request_response_ms": {
+        "p50": 31.068,
+        "p95": 156.889,
+        "p99": 184.416
+      },
+      "complete_boots": 3,
+      "requests_ok": 6300,
+      "minimum_internal_free_bytes": 50035,
+      "minimum_app_stack_free_bytes": 12952
+    }
+  },
+  "ws_http_by_group": [
+    {
+      "group": 1,
+      "ws_vs_http_cycle_pct": {
+        "p50": -0.072,
+        "p95": -0.138
+      },
+      "within_plus_5_pct": true
+    },
+    {
+      "group": 2,
+      "ws_vs_http_cycle_pct": {
+        "p50": 0.353,
+        "p95": 1.462
+      },
+      "within_plus_5_pct": true
+    },
+    {
+      "group": 3,
+      "ws_vs_http_cycle_pct": {
+        "p50": 1.809,
+        "p95": 1.646
+      },
+      "within_plus_5_pct": true
+    }
+  ],
+  "run_error": null,
+  "canonical_request_crc_consistent_across_boots": true,
+  "promotion_eligible": false
+}

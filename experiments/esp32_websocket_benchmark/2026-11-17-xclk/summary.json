@@ -1,0 +1,646 @@
+{
+  "campaign_complete": true,
+  "conclusion": "xclk_effect_reproduced",
+  "promotion_eligible": false,
+  "restored": true,
+  "boots": [
+    {
+      "complete": true,
+      "issues": [],
+      "phases": {
+        "baseline": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 1.0,
+            "p95_ms": 7.549999999999997,
+            "max_ms": 10,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 8.0,
+            "p95_ms": 112.04999999999997,
+            "max_ms": 124,
+            "local_send_failures": 0
+          }
+        },
+        "on_1": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 0,
+            "loss_pct": 100.0,
+            "p50_ms": null,
+            "p95_ms": null,
+            "max_ms": null,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 0,
+            "loss_pct": 100.0,
+            "p50_ms": null,
+            "p95_ms": null,
+            "max_ms": null,
+            "local_send_failures": 0
+          }
+        },
+        "off_1": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 1.0,
+            "p95_ms": 4.549999999999997,
+            "max_ms": 26,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 8.5,
+            "p95_ms": 105.59999999999997,
+            "max_ms": 114,
+            "local_send_failures": 0
+          }
+        },
+        "on_2": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 3,
+            "loss_pct": 94.0,
+            "p50_ms": 906.0,
+            "p95_ms": 933.9,
+            "max_ms": 937,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 5,
+            "loss_pct": 90.0,
+            "p50_ms": 253.0,
+            "p95_ms": 442.0,
+            "max_ms": 489,
+            "local_send_failures": 0
+          }
+        },
+        "off_2": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 1.0,
+            "p95_ms": 10.649999999999991,
+            "max_ms": 48,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 8.0,
+            "p95_ms": 102.1,
+            "max_ms": 116,
+            "local_send_failures": 0
+          }
+        }
+      },
+      "gate_checks": [
+        {
+          "event": "xclk_gate",
+          "phase": 1,
+          "enabled": true,
+          "gpio": 15,
+          "signal_index": 149,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 61555,
+          "internal_free_after": 61555,
+          "buffers_retained": true
+        },
+        {
+          "event": "xclk_gate",
+          "phase": 2,
+          "enabled": false,
+          "gpio": 15,
+          "signal_index": 256,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 62239,
+          "internal_free_after": 62239,
+          "buffers_retained": true
+        },
+        {
+          "event": "xclk_gate",
+          "phase": 3,
+          "enabled": true,
+          "gpio": 15,
+          "signal_index": 149,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 61575,
+          "internal_free_after": 61575,
+          "buffers_retained": true
+        },
+        {
+          "event": "xclk_gate",
+          "phase": 4,
+          "enabled": false,
+          "gpio": 15,
+          "signal_index": 256,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 61323,
+          "internal_free_after": 61323,
+          "buffers_retained": true
+        }
+      ],
+      "minimum_internal_free": 57519,
+      "effects": {
+        "gateway": {
+          "baseline_usable": true,
+          "pairs": [
+            {
+              "on": "on_1",
+              "off": "off_1",
+              "off_recovers": true,
+              "on_degrades": true
+            },
+            {
+              "on": "on_2",
+              "off": "off_2",
+              "off_recovers": true,
+              "on_degrades": true
+            }
+          ],
+          "reproduced": true
+        },
+        "laptop": {
+          "baseline_usable": true,
+          "pairs": [
+            {
+              "on": "on_1",
+              "off": "off_1",
+              "off_recovers": true,
+              "on_degrades": true
+            },
+            {
+              "on": "on_2",
+              "off": "off_2",
+              "off_recovers": true,
+              "on_degrades": true
+            }
+          ],
+          "reproduced": true
+        }
+      },
+      "wifi_disconnections": [],
+      "file": "round-1.events.jsonl"
+    },
+    {
+      "complete": true,
+      "issues": [],
+      "phases": {
+        "baseline": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 1.0,
+            "p95_ms": 7.0,
+            "max_ms": 9,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 8.0,
+            "p95_ms": 109.29999999999998,
+            "max_ms": 221,
+            "local_send_failures": 0
+          }
+        },
+        "on_1": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 18,
+            "loss_pct": 64.0,
+            "p50_ms": 564.5,
+            "p95_ms": 906.8499999999999,
+            "max_ms": 957,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 27,
+            "loss_pct": 46.0,
+            "p50_ms": 354.0,
+            "p95_ms": 766.9,
+            "max_ms": 1030,
+            "local_send_failures": 0
+          }
+        },
+        "off_1": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 1.0,
+            "p95_ms": 7.199999999999989,
+            "max_ms": 16,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 6.5,
+            "p95_ms": 87.24999999999996,
+            "max_ms": 119,
+            "local_send_failures": 0
+          }
+        },
+        "on_2": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 7,
+            "loss_pct": 86.0,
+            "p50_ms": 365.0,
+            "p95_ms": 892.4,
+            "max_ms": 899,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 0,
+            "loss_pct": 100.0,
+            "p50_ms": null,
+            "p95_ms": null,
+            "max_ms": null,
+            "local_send_failures": 0
+          }
+        },
+        "off_2": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 1.0,
+            "p95_ms": 9.649999999999991,
+            "max_ms": 27,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 5.0,
+            "p95_ms": 82.39999999999998,
+            "max_ms": 113,
+            "local_send_failures": 0
+          }
+        }
+      },
+      "gate_checks": [
+        {
+          "event": "xclk_gate",
+          "phase": 1,
+          "enabled": true,
+          "gpio": 15,
+          "signal_index": 149,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 61555,
+          "internal_free_after": 61555,
+          "buffers_retained": true
+        },
+        {
+          "event": "xclk_gate",
+          "phase": 2,
+          "enabled": false,
+          "gpio": 15,
+          "signal_index": 256,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 61367,
+          "internal_free_after": 61367,
+          "buffers_retained": true
+        },
+        {
+          "event": "xclk_gate",
+          "phase": 3,
+          "enabled": true,
+          "gpio": 15,
+          "signal_index": 149,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 61387,
+          "internal_free_after": 61387,
+          "buffers_retained": true
+        },
+        {
+          "event": "xclk_gate",
+          "phase": 4,
+          "enabled": false,
+          "gpio": 15,
+          "signal_index": 256,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 62059,
+          "internal_free_after": 62059,
+          "buffers_retained": true
+        }
+      ],
+      "minimum_internal_free": 55895,
+      "effects": {
+        "gateway": {
+          "baseline_usable": true,
+          "pairs": [
+            {
+              "on": "on_1",
+              "off": "off_1",
+              "off_recovers": true,
+              "on_degrades": true
+            },
+            {
+              "on": "on_2",
+              "off": "off_2",
+              "off_recovers": true,
+              "on_degrades": true
+            }
+          ],
+          "reproduced": true
+        },
+        "laptop": {
+          "baseline_usable": true,
+          "pairs": [
+            {
+              "on": "on_1",
+              "off": "off_1",
+              "off_recovers": true,
+              "on_degrades": true
+            },
+            {
+              "on": "on_2",
+              "off": "off_2",
+              "off_recovers": true,
+              "on_degrades": true
+            }
+          ],
+          "reproduced": true
+        }
+      },
+      "wifi_disconnections": [],
+      "file": "round-2.events.jsonl"
+    },
+    {
+      "complete": true,
+      "issues": [],
+      "phases": {
+        "baseline": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 1.0,
+            "p95_ms": 10.649999999999991,
+            "max_ms": 62,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 7.5,
+            "p95_ms": 98.29999999999998,
+            "max_ms": 122,
+            "local_send_failures": 0
+          }
+        },
+        "on_1": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 17,
+            "loss_pct": 66.0,
+            "p50_ms": 50.0,
+            "p95_ms": 867.5999999999999,
+            "max_ms": 982,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 2,
+            "loss_pct": 96.0,
+            "p50_ms": 467.0,
+            "p95_ms": 877.4,
+            "max_ms": 923,
+            "local_send_failures": 0
+          }
+        },
+        "off_1": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 1.0,
+            "p95_ms": 5.0,
+            "max_ms": 11,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 7.0,
+            "p95_ms": 93.14999999999996,
+            "max_ms": 408,
+            "local_send_failures": 0
+          }
+        },
+        "on_2": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 0,
+            "loss_pct": 100.0,
+            "p50_ms": null,
+            "p95_ms": null,
+            "max_ms": null,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 3,
+            "loss_pct": 94.0,
+            "p50_ms": 559.0,
+            "p95_ms": 886.5999999999999,
+            "max_ms": 923,
+            "local_send_failures": 0
+          }
+        },
+        "off_2": {
+          "gateway": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 7.0,
+            "p95_ms": 54.099999999999994,
+            "max_ms": 90,
+            "local_send_failures": 0
+          },
+          "laptop": {
+            "attempted": 50,
+            "sent": 50,
+            "received": 50,
+            "loss_pct": 0.0,
+            "p50_ms": 33.0,
+            "p95_ms": 141.29999999999998,
+            "max_ms": 396,
+            "local_send_failures": 0
+          }
+        }
+      },
+      "gate_checks": [
+        {
+          "event": "xclk_gate",
+          "phase": 1,
+          "enabled": true,
+          "gpio": 15,
+          "signal_index": 149,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 61555,
+          "internal_free_after": 61555,
+          "buffers_retained": true
+        },
+        {
+          "event": "xclk_gate",
+          "phase": 2,
+          "enabled": false,
+          "gpio": 15,
+          "signal_index": 256,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 61607,
+          "internal_free_after": 61607,
+          "buffers_retained": true
+        },
+        {
+          "event": "xclk_gate",
+          "phase": 3,
+          "enabled": true,
+          "gpio": 15,
+          "signal_index": 149,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 61575,
+          "internal_free_after": 61575,
+          "buffers_retained": true
+        },
+        {
+          "event": "xclk_gate",
+          "phase": 4,
+          "enabled": false,
+          "gpio": 15,
+          "signal_index": 256,
+          "output_latch_low": true,
+          "route_verified": true,
+          "internal_free_before": 61475,
+          "internal_free_after": 61475,
+          "buffers_retained": true
+        }
+      ],
+      "minimum_internal_free": 57439,
+      "effects": {
+        "gateway": {
+          "baseline_usable": true,
+          "pairs": [
+            {
+              "on": "on_1",
+              "off": "off_1",
+              "off_recovers": true,
+              "on_degrades": true
+            },
+            {
+              "on": "on_2",
+              "off": "off_2",
+              "off_recovers": true,
+              "on_degrades": true
+            }
+          ],
+          "reproduced": true
+        },
+        "laptop": {
+          "baseline_usable": true,
+          "pairs": [
+            {
+              "on": "on_1",
+              "off": "off_1",
+              "off_recovers": true,
+              "on_degrades": true
+            },
+            {
+              "on": "on_2",
+              "off": "off_2",
+              "off_recovers": true,
+              "on_degrades": true
+            }
+          ],
+          "reproduced": true
+        }
+      },
+      "wifi_disconnections": [],
+      "file": "round-3.events.jsonl"
+    }
+  ],
+  "error": null,
+  "firmware_sha256": "54d7335b2acb1fc795f47359a2e279fb815def272caad582ea0a13c5d52200a7",
+  "totals": {
+    "baseline": {
+      "attempted": 300,
+      "received": 300
+    },
+    "on": {
+      "attempted": 600,
+      "received": 82
+    },
+    "off": {
+      "attempted": 600,
+      "received": 600
+    }
+  },
+  "source_run": "../results/LAPTOP_B_XCLK_01"
+}

@@ -1,0 +1,642 @@
+{
+  "date": "2026-11-17",
+  "board": "B",
+  "usb_path": "pci-0000:63:00.3-usb-0:2:1.0",
+  "usb_tty": "/dev/ttyACM0",
+  "tests_passed": {
+    "multiclient": 27,
+    "analysis_restore": 5
+  },
+  "runs": [
+    {
+      "run": "LAPTOP_B_HTTP_01",
+      "camera_enabled": true,
+      "firmware_sha256": "5c54a222b7a8334c02c5d18b1101c6ca7d3c1e359bb19ce6eec3cd3cb85d81c8",
+      "backup_sha256": "f6225bb591970b0bc80ef997d420bae45efd94b05bf90d431b67846bc116e2ec",
+      "restored": true,
+      "original_boot_confirmed": true,
+      "inference_attempted": 0,
+      "inference_completed": 0,
+      "minimum_internal_free": 67843,
+      "camera_samples": 0,
+      "prefix_validation": [
+        {
+          "event": "validation",
+          "inputs": 35,
+          "exact": true,
+          "guards": true
+        }
+      ],
+      "wifi": [
+        {
+          "event": "wifi_connected",
+          "has_ip": true
+        }
+      ],
+      "wifi_disconnects": [],
+      "registration": [],
+      "errors": [
+        {
+          "event": "error",
+          "reason": "transport_connect"
+        }
+      ],
+      "phases": {
+        "deterministic": {
+          "completed": 0,
+          "request_response_ms": {}
+        },
+        "camera": {
+          "completed": 0,
+          "request_response_ms": {}
+        }
+      },
+      "completion": {
+        "measurements_complete": false,
+        "rounds_completed": 0,
+        "error": "RuntimeError('Firmware error: {\"event\": \"error\", \"reason\": \"transport_connect\"}')",
+        "restore_error": null,
+        "original_boot_confirmed": true,
+        "board": "B"
+      }
+    },
+    {
+      "run": "LAPTOP_B_HTTP_OFF_01",
+      "camera_enabled": false,
+      "firmware_sha256": "91fe0a8ed58084fdba22a5fbf5a96654bc782658764bb8925c29f2ad69e3103b",
+      "backup_sha256": "f6225bb591970b0bc80ef997d420bae45efd94b05bf90d431b67846bc116e2ec",
+      "restored": true,
+      "original_boot_confirmed": true,
+      "inference_attempted": 1100,
+      "inference_completed": 1100,
+      "minimum_internal_free": 81615,
+      "camera_samples": 0,
+      "prefix_validation": [
+        {
+          "event": "validation",
+          "inputs": 35,
+          "exact": true,
+          "guards": true
+        }
+      ],
+      "wifi": [
+        {
+          "event": "wifi_connected",
+          "has_ip": true,
+          "rssi_dbm": -62,
+          "channel": 6
+        }
+      ],
+      "wifi_disconnects": [],
+      "registration": [
+        {
+          "event": "http_registration_result",
+          "esp_err": 0,
+          "http_status": 200,
+          "received_bytes": 251,
+          "socket_errno": 0
+        },
+        {
+          "event": "transport_registration",
+          "mode": "h",
+          "ok": true
+        }
+      ],
+      "errors": [],
+      "phases": {
+        "deterministic": {
+          "completed": 1000,
+          "request_response_ms": {
+            "p50": 18.6505,
+            "p95": 150.66874999999996,
+            "p99": 189.5924
+          }
+        },
+        "camera": {
+          "completed": 0,
+          "request_response_ms": {}
+        }
+      },
+      "completion": {
+        "measurements_complete": true,
+        "rounds_completed": 1,
+        "error": null,
+        "restore_error": null,
+        "original_boot_confirmed": true,
+        "board": "B"
+      }
+    },
+    {
+      "run": "LAPTOP_B_HTTP_ON_02",
+      "camera_enabled": true,
+      "firmware_sha256": "91fe0a8ed58084fdba22a5fbf5a96654bc782658764bb8925c29f2ad69e3103b",
+      "backup_sha256": "f6225bb591970b0bc80ef997d420bae45efd94b05bf90d431b67846bc116e2ec",
+      "restored": true,
+      "original_boot_confirmed": true,
+      "inference_attempted": 1,
+      "inference_completed": 0,
+      "minimum_internal_free": 50959,
+      "camera_samples": 0,
+      "prefix_validation": [
+        {
+          "event": "validation",
+          "inputs": 35,
+          "exact": true,
+          "guards": true
+        }
+      ],
+      "wifi": [
+        {
+          "event": "wifi_connected",
+          "has_ip": true,
+          "rssi_dbm": -63,
+          "channel": 6
+        }
+      ],
+      "wifi_disconnects": [],
+      "registration": [
+        {
+          "event": "http_registration_result",
+          "esp_err": 0,
+          "http_status": 200,
+          "received_bytes": 251,
+          "socket_errno": 0
+        },
+        {
+          "event": "transport_registration",
+          "mode": "h",
+          "ok": true
+        }
+      ],
+      "errors": [
+        {
+          "event": "error",
+          "reason": "deterministic_exchange"
+        }
+      ],
+      "phases": {
+        "deterministic": {
+          "completed": 0,
+          "request_response_ms": {}
+        },
+        "camera": {
+          "completed": 0,
+          "request_response_ms": {}
+        }
+      },
+      "completion": {
+        "measurements_complete": false,
+        "rounds_completed": 0,
+        "error": "RuntimeError('Firmware error: {\"event\": \"error\", \"reason\": \"deterministic_exchange\"}')",
+        "restore_error": null,
+        "original_boot_confirmed": true,
+        "board": "B"
+      }
+    },
+    {
+      "run": "LAPTOP_B_WS_01",
+      "camera_enabled": true,
+      "firmware_sha256": "91fe0a8ed58084fdba22a5fbf5a96654bc782658764bb8925c29f2ad69e3103b",
+      "backup_sha256": "f6225bb591970b0bc80ef997d420bae45efd94b05bf90d431b67846bc116e2ec",
+      "restored": true,
+      "original_boot_confirmed": true,
+      "inference_attempted": 0,
+      "inference_completed": 0,
+      "minimum_internal_free": 71043,
+      "camera_samples": 0,
+      "prefix_validation": [
+        {
+          "event": "validation",
+          "inputs": 35,
+          "exact": true,
+          "guards": true
+        }
+      ],
+      "wifi": [
+        {
+          "event": "wifi_connected",
+          "has_ip": true,
+          "rssi_dbm": -58,
+          "channel": 6
+        }
+      ],
+      "wifi_disconnects": [],
+      "registration": [
+        {
+          "event": "transport_registration",
+          "mode": "w",
+          "ok": false
+        }
+      ],
+      "errors": [
+        {
+          "event": "error",
+          "reason": "transport_connect"
+        }
+      ],
+      "phases": {
+        "deterministic": {
+          "completed": 0,
+          "request_response_ms": {}
+        },
+        "camera": {
+          "completed": 0,
+          "request_response_ms": {}
+        }
+      },
+      "completion": {
+        "measurements_complete": false,
+        "rounds_completed": 0,
+        "error": "RuntimeError('Firmware error: {\"event\": \"error\", \"reason\": \"transport_connect\"}')",
+        "restore_error": null,
+        "original_boot_confirmed": true,
+        "board": "B"
+      }
+    },
+    {
+      "run": "LAPTOP_B_HTTP_USB1_01",
+      "usb_path": "pci-0000:63:00.3-usb-0:1:1.0",
+      "configuration": {
+        "allocation_order": "early",
+        "build_flags": "-DBENCH_ESP_NN=1 -DFIT_EARLY_ARENA=1",
+        "commands": "h",
+        "camera_enabled": true
+      },
+      "firmware_sha256": "91fe0a8ed58084fdba22a5fbf5a96654bc782658764bb8925c29f2ad69e3103b",
+      "backup_sha256": "f6225bb591970b0bc80ef997d420bae45efd94b05bf90d431b67846bc116e2ec",
+      "restored": true,
+      "original_boot_confirmed": true,
+      "inference_attempted": 0,
+      "inference_completed": 0,
+      "minimum_internal_free": 69539,
+      "camera_samples": 0,
+      "diagnostics": [
+        {
+          "event": "configuration",
+          "camera_enabled": true
+        },
+        {
+          "event": "wifi_connected",
+          "has_ip": true,
+          "rssi_dbm": -60,
+          "channel": 6
+        },
+        {
+          "event": "validation",
+          "inputs": 35,
+          "exact": true,
+          "guards": true
+        },
+        {
+          "event": "http_registration_result",
+          "esp_err": 0,
+          "http_status": 408,
+          "received_bytes": 24,
+          "socket_errno": 0
+        },
+        {
+          "event": "error",
+          "reason": "transport_connect"
+        }
+      ],
+      "successful_response_median_ms_including_warmup": null,
+      "completion": {
+        "measurements_complete": false,
+        "rounds_completed": 0,
+        "error": "RuntimeError('Firmware error: {\"event\": \"error\", \"reason\": \"transport_connect\"}')",
+        "restore_error": null,
+        "original_boot_confirmed": true,
+        "board": "B"
+      }
+    },
+    {
+      "run": "LAPTOP_B_HTTP_PSRAM_01",
+      "usb_path": "pci-0000:63:00.3-usb-0:1:1.0",
+      "configuration": {
+        "allocation_order": "early",
+        "build_flags": "-DBENCH_ESP_NN=1 -DFIT_EARLY_ARENA=1",
+        "commands": "r",
+        "camera_enabled": true,
+        "activation_memory": "psram"
+      },
+      "firmware_sha256": "01378d3b2a3e9e835921abb805d0cccd0df20041850f522c91da52788e875e56",
+      "backup_sha256": "f6225bb591970b0bc80ef997d420bae45efd94b05bf90d431b67846bc116e2ec",
+      "restored": true,
+      "original_boot_confirmed": true,
+      "inference_attempted": 0,
+      "inference_completed": 0,
+      "minimum_internal_free": 213419,
+      "camera_samples": 0,
+      "diagnostics": [
+        {
+          "event": "configuration",
+          "camera_enabled": true,
+          "activation_memory": "psram"
+        },
+        {
+          "event": "wifi_connected",
+          "has_ip": true,
+          "rssi_dbm": -58,
+          "channel": 6
+        },
+        {
+          "event": "validation",
+          "inputs": 35,
+          "exact": true,
+          "guards": true
+        },
+        {
+          "event": "http_registration_result",
+          "esp_err": 28674,
+          "http_status": 0,
+          "received_bytes": 0,
+          "socket_errno": 0
+        },
+        {
+          "event": "error",
+          "reason": "transport_connect"
+        }
+      ],
+      "successful_response_median_ms_including_warmup": null,
+      "completion": {
+        "measurements_complete": false,
+        "rounds_completed": 0,
+        "error": "RuntimeError('Firmware error: {\"event\": \"error\", \"reason\": \"transport_connect\"}')",
+        "restore_error": null,
+        "original_boot_confirmed": true,
+        "board": "B"
+      }
+    },
+    {
+      "run": "LAPTOP_B_HTTP_PAUSED_01",
+      "usb_path": "pci-0000:63:00.3-usb-0:1:1.0",
+      "configuration": {
+        "allocation_order": "early",
+        "build_flags": "-DBENCH_ESP_NN=1 -DFIT_EARLY_ARENA=1",
+        "commands": "p",
+        "camera_enabled": true,
+        "camera_paused": true,
+        "activation_memory": "internal"
+      },
+      "firmware_sha256": "732655e55a5fac7cd3613c52b285caa52f745951cadd177c33f6cc6f6339a79e",
+      "backup_sha256": "f6225bb591970b0bc80ef997d420bae45efd94b05bf90d431b67846bc116e2ec",
+      "restored": true,
+      "original_boot_confirmed": true,
+      "inference_attempted": 112,
+      "inference_completed": 111,
+      "minimum_internal_free": 47651,
+      "camera_samples": 0,
+      "diagnostics": [
+        {
+          "event": "configuration",
+          "camera_enabled": true,
+          "camera_paused": true,
+          "activation_memory": "internal"
+        },
+        {
+          "event": "wifi_connected",
+          "has_ip": true,
+          "rssi_dbm": -57,
+          "channel": 6
+        },
+        {
+          "event": "validation",
+          "inputs": 35,
+          "exact": true,
+          "guards": true
+        },
+        {
+          "event": "camera_paused",
+          "buffers_retained": true,
+          "clock_not_disabled": true,
+          "internal_free_before": 71411,
+          "internal_free_after": 71411
+        },
+        {
+          "event": "http_registration_result",
+          "esp_err": 0,
+          "http_status": 200,
+          "received_bytes": 251,
+          "socket_errno": 0
+        },
+        {
+          "event": "error",
+          "reason": "deterministic_exchange"
+        }
+      ],
+      "successful_response_median_ms_including_warmup": 620.372,
+      "completion": {
+        "measurements_complete": false,
+        "rounds_completed": 0,
+        "error": "RuntimeError('Firmware error: {\"event\": \"error\", \"reason\": \"deterministic_exchange\"}')",
+        "restore_error": null,
+        "original_boot_confirmed": true,
+        "board": "B"
+      }
+    },
+    {
+      "run": "LAPTOP_B_HTTP_CABLE2_02",
+      "usb_path": "pci-0000:63:00.3-usb-0:1:1.0",
+      "replacement_cable_confirmed_by_user": true,
+      "firmware_origin": "LAPTOP_B_HTTP_USB1_01",
+      "firmware_sha256": "91fe0a8ed58084fdba22a5fbf5a96654bc782658764bb8925c29f2ad69e3103b",
+      "backup_sha256": "5ccd5fb1767f699cdc8a9a8251fdce24c1027e5064346dbf96b27adf7033854b",
+      "restored": true,
+      "original_boot_confirmed": true,
+      "inference_attempted": 54,
+      "inference_completed": 53,
+      "minimum_internal_free": 50843,
+      "camera_samples": 0,
+      "diagnostics": [
+        {
+          "event": "wifi_connected",
+          "has_ip": true,
+          "rssi_dbm": -57,
+          "channel": 6
+        },
+        {
+          "event": "validation",
+          "inputs": 35,
+          "exact": true,
+          "guards": true
+        },
+        {
+          "event": "http_registration_result",
+          "esp_err": 0,
+          "http_status": 200,
+          "received_bytes": 251,
+          "socket_errno": 0
+        },
+        {
+          "event": "error",
+          "reason": "deterministic_exchange"
+        }
+      ],
+      "successful_response_median_ms_including_warmup": 196.31,
+      "last_exchange": {
+        "event": "exchange",
+        "mode": "h",
+        "request_id": 53,
+        "frame": 2,
+        "iteration": 53,
+        "ok": false,
+        "request_response_us": 3081742,
+        "activation_crc": 2503431248,
+        "scores_crc": 1082110507,
+        "internal_min_free": 50843,
+        "stack_free": 13072
+      },
+      "server_failure": {
+        "request_id": 53,
+        "status": 408,
+        "reason": "body_timeout",
+        "elapsed_us": 3000788
+      },
+      "completion": {
+        "measurements_complete": false,
+        "rounds_completed": 0,
+        "error": "RuntimeError('Firmware error: {\"event\": \"error\", \"reason\": \"deterministic_exchange\"}')",
+        "restore_error": null,
+        "original_boot_confirmed": true,
+        "board": "B"
+      }
+    }
+  ],
+  "comparison_complete": false,
+  "promotion_eligible": false,
+  "latest_usb_path": "pci-0000:63:00.3-usb-0:1:1.0",
+  "conclusion": "Changing USB port and cable does not resolve the observed camera/network instability; activation PSRAM and capture pause also failed. Reference HTTP client fails with camera. Root cause remains unproven.",
+  "reference_run": {
+    "run": "LAPTOP_B_REFERENCE_01",
+    "usb_path": "pci-0000:63:00.3-usb-0:1:1.0",
+    "firmware_sha256": "3ae278adbf4f6c8dccc1e39373ee0c2345a7bf472c5885cb9002bca92ebdd13f",
+    "backup_sha256": "f6225bb591970b0bc80ef997d420bae45efd94b05bf90d431b67846bc116e2ec",
+    "embedded_completed": 60,
+    "camera_completed": 3,
+    "first_error_camera_attempt": 4,
+    "memory": [
+      {
+        "event": "memory",
+        "uptime_us": 33063484,
+        "internal_free": 217583,
+        "internal_min_free": 217495,
+        "psram_free": 7276272,
+        "psram_min_free": 7276272
+      }
+    ],
+    "camera_network_ms": [
+      1061.88,
+      910.225,
+      3705.325
+    ],
+    "startup_wifi_disconnects": [
+      {
+        "event": "wifi_disconnected",
+        "reason": 201
+      },
+      {
+        "event": "wifi_disconnected",
+        "reason": 201
+      },
+      {
+        "event": "wifi_disconnected",
+        "reason": 201
+      },
+      {
+        "event": "wifi_disconnected",
+        "reason": 201
+      },
+      {
+        "event": "wifi_disconnected",
+        "reason": 201
+      },
+      {
+        "event": "wifi_disconnected",
+        "reason": 2
+      },
+      {
+        "event": "wifi_disconnected",
+        "reason": 205
+      }
+    ],
+    "after_ready_wifi_disconnects": [],
+    "errors": [
+      {
+        "event": "error",
+        "reason": "http_response",
+        "code": 0,
+        "http_status": 408,
+        "received": 0,
+        "length": 24
+      }
+    ],
+    "restored": true,
+    "original_boot_confirmed": true,
+    "completion": {
+      "measurements_complete": false,
+      "error": "RuntimeError('Reference error: {\"event\": \"error\", \"reason\": \"http_response\", \"code\": 0, \"http_status\": 408, \"received\": 0, \"length\": 24}')",
+      "restore_error": null,
+      "original_boot_confirmed": true,
+      "snapshot": {
+        "counts": {
+          "boot": 1,
+          "allocated": 1,
+          "kernel_check": 1,
+          "wifi_disconnected": 7,
+          "ready": 1,
+          "registration": 1,
+          "correlation": 63,
+          "sample": 63,
+          "camera_init": 1,
+          "memory": 1,
+          "error": 1
+        },
+        "errors": [
+          {
+            "event": "error",
+            "reason": "http_response",
+            "code": 0,
+            "http_status": 408,
+            "received": 0,
+            "length": 24
+          }
+        ],
+        "last_sample": 42200.55537545,
+        "done": false,
+        "done_row": null
+      },
+      "board": "B"
+    }
+  },
+  "excluded_unconfirmed_cable_trial": {
+    "run": "LAPTOP_B_HTTP_CABLE2_01",
+    "reason": "Started before user confirmed cable replacement; interrupted without recording a valid cable comparison",
+    "original_boot_confirmed": true,
+    "restored": true,
+    "backup_sha256": "bb45245d26fa3a53e01e8cb4ca2ee3a165544250c76c05b3ea9e62ae4af3474f",
+    "completion": {
+      "measurements_complete": false,
+      "rounds_completed": 0,
+      "error": "KeyboardInterrupt('Interrupted; recovering saved binary trial')",
+      "restore_error": null,
+      "original_boot_confirmed": true,
+      "board": "B"
+    }
+  },
+  "cable_replacement_confirmed": true,
+  "excluded_attempt": {
+    "run": "LAPTOP_B_HTTP_CABLE2_01",
+    "reason": "Interrupted before cable replacement was confirmed; excluded from cable comparison",
+    "backup_sha256": "bb45245d26fa3a53e01e8cb4ca2ee3a165544250c76c05b3ea9e62ae4af3474f",
+    "restored": true,
+    "original_boot_confirmed": true,
+    "completion": {
+      "measurements_complete": false,
+      "rounds_completed": 0,
+      "error": "KeyboardInterrupt('Interrupted; recovering saved binary trial')",
+      "restore_error": null,
+      "original_boot_confirmed": true,
+      "board": "B"
+    }
+  }
+}

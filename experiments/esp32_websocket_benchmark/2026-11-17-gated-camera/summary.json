@@ -1,0 +1,106 @@
+{
+  "HTTP": {
+    "complete": true,
+    "restored": true,
+    "firmware_sha256": "a73cbe0ad2558c6f9f16cb48bd3f46b7d84a7cd8498b70168754ed1f686631b3",
+    "requests_attempted": 2100,
+    "requests_ok": 2100,
+    "deterministic_ok": 1100,
+    "camera_ok": 1000,
+    "camera_verified": 1000,
+    "camera_frame_hashes_distinct": 1000,
+    "minimum_internal_free": 50227,
+    "wifi_disconnects_during_measurement": 0,
+    "gates_verified": 2001,
+    "server_statuses": {
+      "200": 2100
+    },
+    "camera_rtt_ms": {
+      "p50": 41.853,
+      "p95": 138.82,
+      "p99": 146.194
+    },
+    "deterministic_rtt_ms": {
+      "p50": 19.77,
+      "p95": 37.193,
+      "p99": 66.315
+    },
+    "camera_full_cycle_ms": {
+      "p50": 711.065,
+      "p95": 808.642,
+      "p99": 816.072
+    },
+    "camera_acquisition_ms": {
+      "p50": 600.829,
+      "p95": 601.02,
+      "p99": 601.083
+    },
+    "errors": [],
+    "run_error": null,
+    "done": [
+      {
+        "event": "done",
+        "camera_completed": 1000,
+        "validation_inputs": 35,
+        "canonical_checks": 10,
+        "all_exact": true,
+        "guards": true,
+        "wifi_disconnections": 0,
+        "heap_integrity": true,
+        "response_buffer_bytes": 1760
+      }
+    ]
+  },
+  "WS": {
+    "complete": true,
+    "restored": true,
+    "firmware_sha256": "a73cbe0ad2558c6f9f16cb48bd3f46b7d84a7cd8498b70168754ed1f686631b3",
+    "requests_attempted": 2100,
+    "requests_ok": 2100,
+    "deterministic_ok": 1100,
+    "camera_ok": 1000,
+    "camera_verified": 1000,
+    "camera_frame_hashes_distinct": 1000,
+    "minimum_internal_free": 35487,
+    "wifi_disconnects_during_measurement": 0,
+    "gates_verified": 2001,
+    "server_statuses": {
+      "200": 2100
+    },
+    "camera_rtt_ms": {
+      "p50": 32.886,
+      "p95": 112.236,
+      "p99": 142.534
+    },
+    "deterministic_rtt_ms": {
+      "p50": 18.933,
+      "p95": 56.536,
+      "p99": 91.698
+    },
+    "camera_full_cycle_ms": {
+      "p50": 702.082,
+      "p95": 780.933,
+      "p99": 811.858
+    },
+    "camera_acquisition_ms": {
+      "p50": 600.835,
+      "p95": 601.043,
+      "p99": 601.136
+    },
+    "errors": [],
+    "run_error": null,
+    "done": [
+      {
+        "event": "done",
+        "camera_completed": 1000,
+        "validation_inputs": 35,
+        "canonical_checks": 10,
+        "all_exact": true,
+        "guards": true,
+        "wifi_disconnections": 0,
+        "heap_integrity": true,
+        "response_buffer_bytes": 1760
+      }
+    ]
+  }
+}

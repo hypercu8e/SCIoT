@@ -1,0 +1,19 @@
+{
+  "board": "B",
+  "mac": "24:ec:4a:0e:c3:14",
+  "flash_bytes": 8388608,
+  "backup_sha256": "c5d1f87e36fd1ee357d04f825bd60c382beeda3e0382ab944f7c6733d11c9afc",
+  "backup_verified": true,
+  "restored": true,
+  "restored_digest_verified_before_boot": true,
+  "original_boot_confirmed": true,
+  "firmware_sha256": "54d7335b2acb1fc795f47359a2e279fb815def272caad582ea0a13c5d52200a7",
+  "source_manifest_sha256": "2592e1e18c5eb71e1b3f120e9bbb261c538bfb225adf3d1c92e7fc54fb6d922f",
+  "rounds_completed": 3,
+  "measurements_complete": true,
+  "error": null,
+  "restore_error": null,
+  "tests_passed": 12,
+  "raw_data_public": false,
+  "operational_promotion": false
+}
